@@ -1,5 +1,6 @@
 import { Command, Flags } from "@oclif/core";
 
+import { createGeneratorAuditEvent, formatAuditEventAsJson } from "../../generation/audit.js";
 import { createGeneratorPlan } from "../../generation/planner.js";
 import { listGenerators, requireGeneratorById } from "../../generation/registry.js";
 import type { GeneratorInputValues, GeneratorPlan } from "../../generation/types.js";
@@ -10,8 +11,8 @@ export default class Generate extends Command {
   static override description = `
 Generate project artifacts through the governed Foundry scaffolding system.
 
-This command currently supports registry listing and dry-run planning only.
-It does not write files yet.
+This command currently supports registry listing, dry-run planning, and audit
+event preview only. It does not write scaffolded files yet.
 `;
 
   static override examples = [
@@ -31,10 +32,18 @@ It does not write files yet.
     {
       description: "Print the dry-run plan as JSON.",
       command: '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --json'
+    },
+    {
+      description: "Print a structured audit event for the dry-run plan.",
+      command: '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --audit-event'
     }
   ];
 
   static override flags = {
+    "audit-event": Flags.boolean({
+      default: false,
+      description: "Print a structured audit event for the generated dry-run plan."
+    }),
     contract: Flags.string({
       description: "Contract path for contract-derived generators."
     }),
@@ -71,7 +80,7 @@ It does not write files yet.
   };
 
   async run(): Promise<void> {
-    const { flags } = await this.parse(Generate);
+    const { argv, flags } = await this.parse(Generate);
 
     if (flags.list) {
       this.printGeneratorList();
@@ -90,6 +99,16 @@ It does not write files yet.
       generator,
       values
     });
+
+    if (flags["audit-event"]) {
+      const event = createGeneratorAuditEvent({
+        plan,
+        command: buildCommandString(argv)
+      });
+
+      this.log(formatAuditEventAsJson(event));
+      return;
+    }
 
     if (flags.json) {
       this.log(JSON.stringify(plan, null, 2));
@@ -160,4 +179,16 @@ It does not write files yet.
     this.log("");
     this.log("No files were written. File writing will be added in a later generator-engine slice.");
   }
+}
+
+function buildCommandString(argv: readonly string[]): string {
+  const escapedArgs = argv.map((arg) => {
+    if (/^[a-zA-Z0-9:./=_-]+$/.test(arg)) {
+      return arg;
+    }
+
+    return JSON.stringify(arg);
+  });
+
+  return ["foundry", "generate", ...escapedArgs].join(" ");
 }
