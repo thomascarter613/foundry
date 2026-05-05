@@ -1,0 +1,17 @@
+{
+  "name": "myapp",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "foundry": "cd packages/cli && bun run foundry",
+    "foundry:build": "cd packages/cli && bun run build",
+    "foundry:typecheck": "cd packages/cli && bun run typecheck"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

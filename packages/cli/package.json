@@ -1,0 +1,32 @@
+{
+  "name": "@repo/foundry-cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project-local scaffolding and generation CLI.",
+  "type": "module",
+  "bin": {
+    "foundry": "./bin/run.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "foundry": "bun run build && node ./bin/run.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "oclif": {
+    "bin": "foundry",
+    "dirname": "foundry",
+    "commands": "./dist/commands",
+    "topicSeparator": " "
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
