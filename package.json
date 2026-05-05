@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "verify": "bash tools/scripts/verify.sh",
     "foundry": "cd packages/cli && bun run foundry",
     "foundry:build": "cd packages/cli && bun run build",
     "foundry:typecheck": "cd packages/cli && bun run typecheck"
