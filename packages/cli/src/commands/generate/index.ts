@@ -1,6 +1,7 @@
 import { Command, Flags } from "@oclif/core";
 
-import { createGeneratorAuditEvent, formatAuditEventAsJson } from "../../generation/audit.js";
+import { createGeneratorAuditEvent, formatAuditEventAsJson, type GeneratorAuditEvent } from "../../generation/audit.js";
+import { writeGeneratorAuditLog, type AuditLogWriteResult } from "../../generation/audit-log-writer.js";
 import { createGeneratorPlan } from "../../generation/planner.js";
 import { listGenerators, requireGeneratorById } from "../../generation/registry.js";
 import type { GeneratorInputValues, GeneratorPlan } from "../../generation/types.js";
@@ -11,8 +12,8 @@ export default class Generate extends Command {
   static override description = `
 Generate project artifacts through the governed Foundry scaffolding system.
 
-This command currently supports registry listing, dry-run planning, and audit
-event preview only. It does not write scaffolded files yet.
+This command currently supports registry listing, dry-run planning, audit event
+preview, and explicit audit-log persistence. It does not scaffold project files yet.
 `;
 
   static override examples = [
@@ -36,6 +37,11 @@ event preview only. It does not write scaffolded files yet.
     {
       description: "Print a structured audit event for the dry-run plan.",
       command: '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --audit-event'
+    },
+    {
+      description: "Persist an audit log for the dry-run plan.",
+      command:
+        '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --write-audit-log'
     }
   ];
 
@@ -43,6 +49,10 @@ event preview only. It does not write scaffolded files yet.
     "audit-event": Flags.boolean({
       default: false,
       description: "Print a structured audit event for the generated dry-run plan."
+    }),
+    "audit-log-dir": Flags.string({
+      default: ".artifacts/foundry/audit",
+      description: "Repository-relative directory where audit logs are written."
     }),
     contract: Flags.string({
       description: "Contract path for contract-derived generators."
@@ -76,6 +86,10 @@ event preview only. It does not write scaffolded files yet.
     }),
     status: Flags.string({
       description: "Artifact status, when supported by the generator."
+    }),
+    "write-audit-log": Flags.boolean({
+      default: false,
+      description: "Persist a structured audit event under the audit log directory."
     })
   };
 
@@ -100,13 +114,33 @@ event preview only. It does not write scaffolded files yet.
       values
     });
 
-    if (flags["audit-event"]) {
-      const event = createGeneratorAuditEvent({
+    let auditEvent: GeneratorAuditEvent | undefined;
+    let auditLogResult: AuditLogWriteResult | undefined;
+
+    if (flags["audit-event"] || flags["write-audit-log"]) {
+      auditEvent = createGeneratorAuditEvent({
         plan,
         command: buildCommandString(argv)
       });
+    }
 
-      this.log(formatAuditEventAsJson(event));
+    if (flags["write-audit-log"]) {
+      if (!auditEvent) {
+        throw new Error("Cannot write audit log without an audit event.");
+      }
+
+      auditLogResult = await writeGeneratorAuditLog({
+        auditRoot: flags["audit-log-dir"],
+        event: auditEvent
+      });
+    }
+
+    if (flags["audit-event"]) {
+      if (!auditEvent) {
+        throw new Error("Cannot print audit event because no audit event was created.");
+      }
+
+      this.log(formatAuditEventAsJson(auditEvent));
       return;
     }
 
@@ -115,7 +149,7 @@ event preview only. It does not write scaffolded files yet.
       return;
     }
 
-    this.printPlan(plan);
+    this.printPlan(plan, auditLogResult);
   }
 
   private printGeneratorList(): void {
@@ -138,7 +172,7 @@ event preview only. It does not write scaffolded files yet.
     this.log("  foundry generate --generator governance-artifact:adr --identifier ADR-0002 --name \"Example decision\"");
   }
 
-  private printPlan(plan: GeneratorPlan): void {
+  private printPlan(plan: GeneratorPlan, auditLogResult?: AuditLogWriteResult): void {
     this.log(`Generator: ${plan.generatorId}`);
     this.log(`Name: ${plan.generatorName}`);
     this.log(`Engine: ${plan.engine}`);
@@ -176,8 +210,15 @@ event preview only. It does not write scaffolded files yet.
       }
     }
 
+    if (auditLogResult) {
+      this.log("");
+      this.log("Audit log written:");
+      this.log(`- ${auditLogResult.relativePath}`);
+      this.log(`- ${auditLogResult.bytesWritten} bytes`);
+    }
+
     this.log("");
-    this.log("No files were written. File writing will be added in a later generator-engine slice.");
+    this.log("No scaffolded project files were written. Only the audit log is persisted when --write-audit-log is used.");
   }
 }
 
