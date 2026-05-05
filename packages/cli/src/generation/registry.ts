@@ -8,7 +8,7 @@ export const generatorRegistry: GeneratorRegistry = {
       name: "Architecture Decision Record",
       description: "Create a governed Architecture Decision Record document.",
       engine: "scaffdog",
-      status: "planned",
+      status: "available",
       inputSchema: [
         {
           name: "identifier",
@@ -46,7 +46,7 @@ export const generatorRegistry: GeneratorRegistry = {
       name: "Work Packet",
       description: "Create a governed work packet document.",
       engine: "scaffdog",
-      status: "planned",
+      status: "available",
       inputSchema: [
         {
           name: "identifier",

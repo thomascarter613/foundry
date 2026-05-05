@@ -9,7 +9,8 @@
     "foundry:typecheck": "cd packages/cli && bun run typecheck"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "scaffdog": "^4.1.0"
   },
   "peerDependencies": {
     "typescript": "^5"
