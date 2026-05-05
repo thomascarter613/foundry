@@ -3,9 +3,20 @@ import { Command, Flags } from "@oclif/core";
 import { createGeneratorAuditEvent, formatAuditEventAsJson, type GeneratorAuditEvent } from "../../generation/audit.js";
 import { writeGeneratorAuditLog, type AuditLogWriteResult } from "../../generation/audit-log-writer.js";
 import { createGeneratorPlan } from "../../generation/planner.js";
+import { runPlopGenerator, type PlopRunResult } from "../../generation/plop-runner.js";
 import { runScaffdogGenerator, type ScaffdogRunResult } from "../../generation/scaffdog-runner.js";
 import { listGenerators, requireGeneratorById } from "../../generation/registry.js";
 import type { GeneratorInputValues, GeneratorPlan } from "../../generation/types.js";
+
+type BackendRunResult =
+  | {
+      readonly kind: "scaffdog";
+      readonly result: ScaffdogRunResult;
+    }
+  | {
+      readonly kind: "plop";
+      readonly result: PlopRunResult;
+    };
 
 export default class Generate extends Command {
   static override summary = "Generate project artifacts.";
@@ -14,8 +25,8 @@ export default class Generate extends Command {
 Generate project artifacts through the governed Foundry scaffolding system.
 
 By default, this command only previews generator plans. Use --execute to invoke
-an available backend generator. The first supported execution backend is Scaffdog
-for ADR and work-packet documents.
+an available backend generator. The currently supported execution backends are
+Scaffdog for governance documents and Plop for TypeScript library packages.
 `;
 
   static override examples = [
@@ -39,9 +50,13 @@ for ADR and work-packet documents.
         '<%= config.bin %> <%= command.id %> --generator governance-artifact:work-packet --identifier WP-0001 --name "Add Scaffdog governance generator" --execute'
     },
     {
-      description: "Persist an audit log for the dry-run plan.",
+      description: "Execute a TypeScript library package generator run.",
+      command: '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --execute'
+    },
+    {
+      description: "Persist an audit log for a package generator run.",
       command:
-        '<%= config.bin %> <%= command.id %> --generator governance-artifact:adr --identifier ADR-0002 --name "Select package generator engine" --write-audit-log'
+        '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --execute --write-audit-log'
     }
   ];
 
@@ -98,7 +113,8 @@ for ADR and work-packet documents.
   };
 
   async run(): Promise<void> {
-    const { argv, flags } = await this.parse(Generate);
+    const { argv: rawArgv, flags } = await this.parse(Generate);
+    const argv = rawArgv.map((arg) => String(arg));
 
     if (flags.list) {
       this.printGeneratorList();
@@ -121,15 +137,63 @@ for ADR and work-packet documents.
     if (flags.execute) {
       this.assertPlanIsExecutable(plan);
 
-      if (generator.engine !== "scaffdog") {
-        this.error(
-          `Generator "${generator.id}" uses engine "${generator.engine}", but only Scaffdog execution is implemented in this slice.`,
-          { exit: 1 }
+      const backendRunResult = await this.executeBackend(plan);
+
+      const auditLogResult = await this.maybeWriteAuditLog(
+        flags["write-audit-log"],
+        flags["audit-log-dir"],
+        plan,
+        argv
+      );
+
+      if (flags.json) {
+        this.log(
+          JSON.stringify(
+            {
+              plan,
+              backend: backendRunResult,
+              auditLog: auditLogResult
+            },
+            null,
+            2
+          )
         );
+        return;
       }
 
+      this.printPlan(plan, auditLogResult, backendRunResult);
+      return;
+    }
+
+    const auditLogResult = await this.maybeWriteAuditLog(
+      flags["write-audit-log"],
+      flags["audit-log-dir"],
+      plan,
+      argv
+    );
+
+    if (flags["audit-event"]) {
+      const auditEvent = createGeneratorAuditEvent({
+        plan,
+        command: buildCommandString(argv)
+      });
+
+      this.log(formatAuditEventAsJson(auditEvent));
+      return;
+    }
+
+    if (flags.json) {
+      this.log(JSON.stringify(plan, null, 2));
+      return;
+    }
+
+    this.printPlan(plan, auditLogResult);
+  }
+
+  private async executeBackend(plan: GeneratorPlan): Promise<BackendRunResult> {
+    if (plan.engine === "scaffdog") {
       const scaffdogResult = await runScaffdogGenerator({
-        generatorId: generator.id,
+        generatorId: plan.generatorId,
         inputs: plan.resolvedInputs
       });
 
@@ -151,45 +215,46 @@ for ADR and work-packet documents.
         );
       }
 
-      const auditLogResult = await this.maybeWriteAuditLog(flags["write-audit-log"], flags["audit-log-dir"], plan, argv);
-
-      if (flags.json) {
-        this.log(
-          JSON.stringify(
-            {
-              plan,
-              scaffdog: scaffdogResult,
-              auditLog: auditLogResult
-            },
-            null,
-            2
-          )
-        );
-        return;
-      }
-
-      this.printPlan(plan, auditLogResult, scaffdogResult);
-      return;
+      return {
+        kind: "scaffdog",
+        result: scaffdogResult
+      };
     }
 
-    const auditLogResult = await this.maybeWriteAuditLog(flags["write-audit-log"], flags["audit-log-dir"], plan, argv);
-
-    if (flags["audit-event"]) {
-      const auditEvent = createGeneratorAuditEvent({
-        plan,
-        command: buildCommandString(argv)
+    if (plan.engine === "plop") {
+      const plopResult = await runPlopGenerator({
+        generatorId: plan.generatorId,
+        inputs: plan.resolvedInputs
       });
 
-      this.log(formatAuditEventAsJson(auditEvent));
-      return;
+      if (plopResult.exitCode !== 0) {
+        this.error(
+          [
+            `Plop generator failed with exit code ${plopResult.exitCode}.`,
+            "",
+            "Command:",
+            plopResult.command,
+            "",
+            "stderr:",
+            plopResult.stderr || "(empty)",
+            "",
+            "stdout:",
+            plopResult.stdout || "(empty)"
+          ].join("\n"),
+          { exit: plopResult.exitCode }
+        );
+      }
+
+      return {
+        kind: "plop",
+        result: plopResult
+      };
     }
 
-    if (flags.json) {
-      this.log(JSON.stringify(plan, null, 2));
-      return;
-    }
-
-    this.printPlan(plan, auditLogResult);
+    this.error(
+      `Generator "${plan.generatorId}" uses engine "${plan.engine}", but that execution backend is not implemented yet.`,
+      { exit: 1 }
+    );
   }
 
   private assertPlanIsExecutable(plan: GeneratorPlan): void {
@@ -254,18 +319,18 @@ for ADR and work-packet documents.
     this.log("  foundry generate --generator governance-artifact:adr --identifier ADR-0002 --name \"Example decision\"");
     this.log("");
     this.log("Execute an available generator:");
-    this.log("  foundry generate --generator governance-artifact:adr --identifier ADR-0002 --name \"Example decision\" --execute");
+    this.log("  foundry generate --generator package:typescript-library --name \"logger\" --execute");
   }
 
   private printPlan(
     plan: GeneratorPlan,
     auditLogResult?: AuditLogWriteResult,
-    scaffdogResult?: ScaffdogRunResult
+    backendRunResult?: BackendRunResult
   ): void {
     this.log(`Generator: ${plan.generatorId}`);
     this.log(`Name: ${plan.generatorName}`);
     this.log(`Engine: ${plan.engine}`);
-    this.log(`Dry run: ${scaffdogResult ? "no" : "yes"}`);
+    this.log(`Dry run: ${backendRunResult ? "no" : "yes"}`);
     this.log("");
     this.log(plan.summary);
     this.log("");
@@ -283,18 +348,8 @@ for ADR and work-packet documents.
       this.log(`  ${operation.description}`);
     }
 
-    if (scaffdogResult) {
-      this.log("");
-      this.log("Scaffdog execution:");
-      this.log(`- document: ${scaffdogResult.documentName}`);
-      this.log(`- command: ${scaffdogResult.command}`);
-      this.log("- result: succeeded");
-
-      const trimmedStdout = scaffdogResult.stdout.trim();
-      if (trimmedStdout.length > 0) {
-        this.log("");
-        this.log(trimmedStdout);
-      }
+    if (backendRunResult) {
+      this.printBackendRunResult(backendRunResult);
     }
 
     if (plan.validationCommands.length > 0) {
@@ -322,12 +377,42 @@ for ADR and work-packet documents.
 
     this.log("");
 
-    if (scaffdogResult) {
-      this.log("Scaffolded project files were written by Scaffdog.");
+    if (backendRunResult) {
+      this.log("Scaffolded project files were written by the selected backend.");
       return;
     }
 
     this.log("No scaffolded project files were written. Pass --execute to run an available backend generator.");
+  }
+
+  private printBackendRunResult(backendRunResult: BackendRunResult): void {
+    this.log("");
+
+    if (backendRunResult.kind === "scaffdog") {
+      this.log("Scaffdog execution:");
+      this.log(`- document: ${backendRunResult.result.documentName}`);
+      this.log(`- command: ${backendRunResult.result.command}`);
+      this.log("- result: succeeded");
+
+      const trimmedStdout = backendRunResult.result.stdout.trim();
+      if (trimmedStdout.length > 0) {
+        this.log("");
+        this.log(trimmedStdout);
+      }
+
+      return;
+    }
+
+    this.log("Plop execution:");
+    this.log(`- generator: ${backendRunResult.result.generatorName}`);
+    this.log(`- command: ${backendRunResult.result.command}`);
+    this.log("- result: succeeded");
+
+    const trimmedStdout = backendRunResult.result.stdout.trim();
+    if (trimmedStdout.length > 0) {
+      this.log("");
+      this.log(trimmedStdout);
+    }
   }
 }
 
