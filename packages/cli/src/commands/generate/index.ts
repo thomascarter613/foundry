@@ -1,9 +1,21 @@
 import { Command, Flags } from "@oclif/core";
 
-import { createGeneratorAuditEvent, formatAuditEventAsJson, type GeneratorAuditEvent } from "../../generation/audit.js";
+import {
+  createGeneratorAuditEvent,
+  formatAuditEventAsJson,
+  type AuditBackendExecution,
+  type AuditEventResult,
+  type AuditPreflight,
+  type GeneratorAuditEvent
+} from "../../generation/audit.js";
 import { writeGeneratorAuditLog, type AuditLogWriteResult } from "../../generation/audit-log-writer.js";
 import { createGeneratorPlan } from "../../generation/planner.js";
 import { runPlopGenerator, type PlopRunResult } from "../../generation/plop-runner.js";
+import {
+  formatPreflightFailure,
+  runExecutionPreflight,
+  type PreflightCheckResult
+} from "../../generation/preflight.js";
 import { runScaffdogGenerator, type ScaffdogRunResult } from "../../generation/scaffdog-runner.js";
 import { listGenerators, requireGeneratorById } from "../../generation/registry.js";
 import type { GeneratorInputValues, GeneratorPlan } from "../../generation/types.js";
@@ -25,8 +37,8 @@ export default class Generate extends Command {
 Generate project artifacts through the governed Foundry scaffolding system.
 
 By default, this command only previews generator plans. Use --execute to invoke
-an available backend generator. The currently supported execution backends are
-Scaffdog for governance documents and Plop for TypeScript library packages.
+an available backend generator. Execution audit logs distinguish planned,
+blocked, succeeded, and failed runs.
 `;
 
   static override examples = [
@@ -45,16 +57,11 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
         '<%= config.bin %> <%= command.id %> --generator governance-artifact:adr --identifier ADR-0002 --name "Select package generator engine" --execute'
     },
     {
-      description: "Execute a work-packet generator run.",
-      command:
-        '<%= config.bin %> <%= command.id %> --generator governance-artifact:work-packet --identifier WP-0001 --name "Add Scaffdog governance generator" --execute'
-    },
-    {
       description: "Execute a TypeScript library package generator run.",
       command: '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --execute'
     },
     {
-      description: "Persist an audit log for a package generator run.",
+      description: "Persist an execution audit log for a package generator run.",
       command:
         '<%= config.bin %> <%= command.id %> --generator package:typescript-library --name "logger" --execute --write-audit-log'
     }
@@ -63,7 +70,7 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
   static override flags = {
     "audit-event": Flags.boolean({
       default: false,
-      description: "Print a structured audit event for the generated dry-run plan."
+      description: "Print a structured audit event for the generated dry-run plan or execution result."
     }),
     "audit-log-dir": Flags.string({
       default: ".artifacts/foundry/audit",
@@ -92,7 +99,7 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
     }),
     json: Flags.boolean({
       default: false,
-      description: "Print the plan as JSON."
+      description: "Print the plan or execution result as JSON."
     }),
     list: Flags.boolean({
       char: "l",
@@ -135,23 +142,152 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
     });
 
     if (flags.execute) {
-      this.assertPlanIsExecutable(plan);
+      if (plan.issues.length > 0) {
+        const auditLogResult = await this.maybeWriteAuditLog({
+          shouldWriteAuditLog: flags["write-audit-log"],
+          auditLogDir: flags["audit-log-dir"],
+          plan,
+          argv,
+          result: "blocked"
+        });
+
+        const auditEvent = this.createAuditEventForOutput({
+          plan,
+          argv,
+          result: "blocked"
+        });
+
+        if (flags["audit-event"]) {
+          this.log(formatAuditEventAsJson(auditEvent));
+          return;
+        }
+
+        if (flags.json) {
+          this.log(
+            JSON.stringify(
+              {
+                plan,
+                auditEvent,
+                auditLog: auditLogResult
+              },
+              null,
+              2
+            )
+          );
+          return;
+        }
+
+        this.error(formatPlanIssueFailure(plan, auditLogResult), { exit: 1 });
+      }
+
+      const preflightResult = await runExecutionPreflight(plan);
+
+      if (!preflightResult.ok) {
+        const auditPreflight = auditPreflightFromPreflightResult(preflightResult);
+
+        const auditLogResult = await this.maybeWriteAuditLog({
+          shouldWriteAuditLog: flags["write-audit-log"],
+          auditLogDir: flags["audit-log-dir"],
+          plan,
+          argv,
+          result: "blocked",
+          preflight: auditPreflight
+        });
+
+        const auditEvent = this.createAuditEventForOutput({
+          plan,
+          argv,
+          result: "blocked",
+          preflight: auditPreflight
+        });
+
+        if (flags["audit-event"]) {
+          this.log(formatAuditEventAsJson(auditEvent));
+          return;
+        }
+
+        if (flags.json) {
+          this.log(
+            JSON.stringify(
+              {
+                plan,
+                preflight: preflightResult,
+                auditEvent,
+                auditLog: auditLogResult
+              },
+              null,
+              2
+            )
+          );
+          return;
+        }
+
+        this.error(formatPreflightFailureWithAuditLog(preflightResult, auditLogResult), { exit: 1 });
+      }
 
       const backendRunResult = await this.executeBackend(plan);
+      const backendAudit = auditBackendFromBackendRunResult(backendRunResult);
+      const executionResult: AuditEventResult = backendAudit.exitCode === 0 ? "succeeded" : "failed";
 
-      const auditLogResult = await this.maybeWriteAuditLog(
-        flags["write-audit-log"],
-        flags["audit-log-dir"],
+      const auditLogResult = await this.maybeWriteAuditLog({
+        shouldWriteAuditLog: flags["write-audit-log"],
+        auditLogDir: flags["audit-log-dir"],
         plan,
-        argv
-      );
+        argv,
+        result: executionResult,
+        preflight: auditPreflightFromPreflightResult(preflightResult),
+        backend: backendAudit
+      });
+
+      const auditEvent = this.createAuditEventForOutput({
+        plan,
+        argv,
+        result: executionResult,
+        preflight: auditPreflightFromPreflightResult(preflightResult),
+        backend: backendAudit
+      });
+
+      if (backendAudit.exitCode !== 0) {
+        if (flags["audit-event"]) {
+          this.log(formatAuditEventAsJson(auditEvent));
+          return;
+        }
+
+        if (flags.json) {
+          this.log(
+            JSON.stringify(
+              {
+                plan,
+                preflight: preflightResult,
+                backend: backendRunResult,
+                auditEvent,
+                auditLog: auditLogResult
+              },
+              null,
+              2
+            )
+          );
+          return;
+        }
+
+        this.error(formatBackendFailure(backendRunResult, auditLogResult), {
+          exit: backendAudit.exitCode || 1
+        });
+      }
+
+      if (flags["audit-event"]) {
+        this.log(formatAuditEventAsJson(auditEvent));
+        return;
+      }
 
       if (flags.json) {
         this.log(
           JSON.stringify(
             {
               plan,
+              preflight: preflightResult,
               backend: backendRunResult,
+              auditEvent,
               auditLog: auditLogResult
             },
             null,
@@ -161,23 +297,25 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
         return;
       }
 
-      this.printPlan(plan, auditLogResult, backendRunResult);
+      this.printPlan(plan, auditLogResult, backendRunResult, preflightResult);
       return;
     }
 
-    const auditLogResult = await this.maybeWriteAuditLog(
-      flags["write-audit-log"],
-      flags["audit-log-dir"],
+    const auditLogResult = await this.maybeWriteAuditLog({
+      shouldWriteAuditLog: flags["write-audit-log"],
+      auditLogDir: flags["audit-log-dir"],
       plan,
-      argv
-    );
+      argv,
+      result: "planned"
+    });
+
+    const auditEvent = this.createAuditEventForOutput({
+      plan,
+      argv,
+      result: "planned"
+    });
 
     if (flags["audit-event"]) {
-      const auditEvent = createGeneratorAuditEvent({
-        plan,
-        command: buildCommandString(argv)
-      });
-
       this.log(formatAuditEventAsJson(auditEvent));
       return;
     }
@@ -197,24 +335,6 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
         inputs: plan.resolvedInputs
       });
 
-      if (scaffdogResult.exitCode !== 0) {
-        this.error(
-          [
-            `Scaffdog generator failed with exit code ${scaffdogResult.exitCode}.`,
-            "",
-            "Command:",
-            scaffdogResult.command,
-            "",
-            "stderr:",
-            scaffdogResult.stderr || "(empty)",
-            "",
-            "stdout:",
-            scaffdogResult.stdout || "(empty)"
-          ].join("\n"),
-          { exit: scaffdogResult.exitCode }
-        );
-      }
-
       return {
         kind: "scaffdog",
         result: scaffdogResult
@@ -226,24 +346,6 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
         generatorId: plan.generatorId,
         inputs: plan.resolvedInputs
       });
-
-      if (plopResult.exitCode !== 0) {
-        this.error(
-          [
-            `Plop generator failed with exit code ${plopResult.exitCode}.`,
-            "",
-            "Command:",
-            plopResult.command,
-            "",
-            "stderr:",
-            plopResult.stderr || "(empty)",
-            "",
-            "stdout:",
-            plopResult.stdout || "(empty)"
-          ].join("\n"),
-          { exit: plopResult.exitCode }
-        );
-      }
 
       return {
         kind: "plop",
@@ -257,45 +359,40 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
     );
   }
 
-  private assertPlanIsExecutable(plan: GeneratorPlan): void {
-    if (plan.issues.length === 0) {
-      return;
-    }
-
-    const issueSummary = plan.issues
-      .map((issue) => `- ${issue.level}: ${issue.message}`)
-      .join("\n");
-
-    this.error(
-      [
-        "Generator execution was blocked because the plan has unresolved issues.",
-        "",
-        issueSummary,
-        "",
-        "Run the command again with the required inputs."
-      ].join("\n"),
-      { exit: 1 }
-    );
-  }
-
-  private async maybeWriteAuditLog(
-    shouldWriteAuditLog: boolean,
-    auditLogDir: string,
-    plan: GeneratorPlan,
-    argv: readonly string[]
-  ): Promise<AuditLogWriteResult | undefined> {
-    if (!shouldWriteAuditLog) {
+  private async maybeWriteAuditLog(options: {
+    readonly shouldWriteAuditLog: boolean;
+    readonly auditLogDir: string;
+    readonly plan: GeneratorPlan;
+    readonly argv: readonly string[];
+    readonly result: AuditEventResult;
+    readonly preflight?: AuditPreflight;
+    readonly backend?: AuditBackendExecution;
+  }): Promise<AuditLogWriteResult | undefined> {
+    if (!options.shouldWriteAuditLog) {
       return undefined;
     }
 
-    const auditEvent: GeneratorAuditEvent = createGeneratorAuditEvent({
-      plan,
-      command: buildCommandString(argv)
-    });
+    const auditEvent: GeneratorAuditEvent = this.createAuditEventForOutput(options);
 
     return await writeGeneratorAuditLog({
-      auditRoot: auditLogDir,
+      auditRoot: options.auditLogDir,
       event: auditEvent
+    });
+  }
+
+  private createAuditEventForOutput(options: {
+    readonly plan: GeneratorPlan;
+    readonly argv: readonly string[];
+    readonly result: AuditEventResult;
+    readonly preflight?: AuditPreflight;
+    readonly backend?: AuditBackendExecution;
+  }): GeneratorAuditEvent {
+    return createGeneratorAuditEvent({
+      plan: options.plan,
+      command: buildCommandString(options.argv),
+      result: options.result,
+      ...(options.preflight ? { preflight: options.preflight } : {}),
+      ...(options.backend ? { backend: options.backend } : {})
     });
   }
 
@@ -325,7 +422,8 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
   private printPlan(
     plan: GeneratorPlan,
     auditLogResult?: AuditLogWriteResult,
-    backendRunResult?: BackendRunResult
+    backendRunResult?: BackendRunResult,
+    preflightResult?: PreflightCheckResult
   ): void {
     this.log(`Generator: ${plan.generatorId}`);
     this.log(`Name: ${plan.generatorName}`);
@@ -346,6 +444,21 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
       this.log(`- ${operation.action}: ${operation.path}`);
       this.log(`  overwrite policy: ${operation.overwritePolicy}`);
       this.log(`  ${operation.description}`);
+    }
+
+    if (preflightResult) {
+      this.log("");
+      this.log("Execution preflight:");
+      this.log(`- result: ${preflightResult.ok ? "passed" : "blocked"}`);
+      this.log(`- checked paths: ${preflightResult.checkedPaths.length}`);
+
+      if (preflightResult.issues.length > 0) {
+        this.log("- issues:");
+        for (const issue of preflightResult.issues) {
+          this.log(`  - ${issue.code}: ${issue.path}`);
+          this.log(`    ${issue.message}`);
+        }
+      }
     }
 
     if (backendRunResult) {
@@ -392,7 +505,7 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
       this.log("Scaffdog execution:");
       this.log(`- document: ${backendRunResult.result.documentName}`);
       this.log(`- command: ${backendRunResult.result.command}`);
-      this.log("- result: succeeded");
+      this.log(`- result: ${backendRunResult.result.exitCode === 0 ? "succeeded" : "failed"}`);
 
       const trimmedStdout = backendRunResult.result.stdout.trim();
       if (trimmedStdout.length > 0) {
@@ -406,7 +519,7 @@ Scaffdog for governance documents and Plop for TypeScript library packages.
     this.log("Plop execution:");
     this.log(`- generator: ${backendRunResult.result.generatorName}`);
     this.log(`- command: ${backendRunResult.result.command}`);
-    this.log("- result: succeeded");
+    this.log(`- result: ${backendRunResult.result.exitCode === 0 ? "succeeded" : "failed"}`);
 
     const trimmedStdout = backendRunResult.result.stdout.trim();
     if (trimmedStdout.length > 0) {
@@ -426,4 +539,109 @@ function buildCommandString(argv: readonly string[]): string {
   });
 
   return ["foundry", "generate", ...escapedArgs].join(" ");
+}
+
+function auditPreflightFromPreflightResult(preflightResult: PreflightCheckResult): AuditPreflight {
+  return {
+    ok: preflightResult.ok,
+    checkedPaths: preflightResult.checkedPaths,
+    issues: preflightResult.issues.map((issue) => ({
+      code: issue.code,
+      path: issue.path,
+      message: issue.message
+    }))
+  };
+}
+
+function auditBackendFromBackendRunResult(backendRunResult: BackendRunResult): AuditBackendExecution {
+  if (backendRunResult.kind === "scaffdog") {
+    return {
+      kind: "scaffdog",
+      command: backendRunResult.result.command,
+      exitCode: backendRunResult.result.exitCode,
+      stdoutPreview: backendRunResult.result.stdout,
+      stderrPreview: backendRunResult.result.stderr,
+      documentName: backendRunResult.result.documentName
+    };
+  }
+
+  return {
+    kind: "plop",
+    command: backendRunResult.result.command,
+    exitCode: backendRunResult.result.exitCode,
+    stdoutPreview: backendRunResult.result.stdout,
+    stderrPreview: backendRunResult.result.stderr,
+    generatorName: backendRunResult.result.generatorName
+  };
+}
+
+function formatPlanIssueFailure(plan: GeneratorPlan, auditLogResult?: AuditLogWriteResult): string {
+  const issueSummary = plan.issues
+    .map((issue) => `- ${issue.level}: ${issue.message}`)
+    .join("\n");
+
+  return [
+    "Generator execution was blocked because the plan has unresolved issues.",
+    "",
+    issueSummary,
+    "",
+    ...(auditLogResult
+      ? [
+          "Audit log written:",
+          `- ${auditLogResult.relativePath}`,
+          `- ${auditLogResult.bytesWritten} bytes`,
+          ""
+        ]
+      : []),
+    "Run the command again with the required inputs."
+  ].join("\n");
+}
+
+function formatPreflightFailureWithAuditLog(
+  preflightResult: PreflightCheckResult,
+  auditLogResult?: AuditLogWriteResult
+): string {
+  return [
+    formatPreflightFailure(preflightResult),
+    ...(auditLogResult
+      ? [
+          "",
+          "Audit log written:",
+          `- ${auditLogResult.relativePath}`,
+          `- ${auditLogResult.bytesWritten} bytes`
+        ]
+      : [])
+  ].join("\n");
+}
+
+function formatBackendFailure(
+  backendRunResult: BackendRunResult,
+  auditLogResult?: AuditLogWriteResult
+): string {
+  const backendName = backendRunResult.kind === "scaffdog" ? "Scaffdog" : "Plop";
+  const command = backendRunResult.result.command;
+  const exitCode = backendRunResult.result.exitCode;
+  const stderr = backendRunResult.result.stderr || "(empty)";
+  const stdout = backendRunResult.result.stdout || "(empty)";
+
+  return [
+    `${backendName} generator failed with exit code ${exitCode}.`,
+    "",
+    "Command:",
+    command,
+    "",
+    "stderr:",
+    stderr,
+    "",
+    "stdout:",
+    stdout,
+    ...(auditLogResult
+      ? [
+          "",
+          "Audit log written:",
+          `- ${auditLogResult.relativePath}`,
+          `- ${auditLogResult.bytesWritten} bytes`
+        ]
+      : [])
+  ].join("\n");
 }
