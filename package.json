@@ -12,17 +12,20 @@
     "docs/*"
   ],
   "scripts": {
+    "build": "bun run --cwd packages/cli build",
     "foundry": "bash tools/scripts/foundry.sh",
     "foundry:build": "cd packages/cli && bun run build",
     "foundry:typecheck": "cd packages/cli && bun run typecheck",
-    "verify": "bash tools/scripts/verify.sh",
+    "typecheck": "bun run --cwd packages/cli typecheck",
+    "verify": "bun run typecheck && bun run build && bun run verify:docs && bash tools/scripts/verify.sh",
     "verify:contracts": "bash tools/scripts/verify-contracts.sh",
+    "verify:docs": "bun run tools/scripts/verify-docs.ts",
     "verify:generated": "bash tools/scripts/verify-generated.sh",
-    "verify:generators": "bash tools/scripts/verify-generators.sh",
     "verify:generator-manifest": "bash tools/scripts/verify-generator-manifest.sh",
+    "verify:generators": "bash tools/scripts/verify-generators.sh",
     "verify:init": "bash tools/scripts/verify-init.sh",
-    "verify:init-provider-plugins": "bash tools/scripts/verify-init-provider-plugins.sh",
     "verify:init-external-provider-plugins": "bash tools/scripts/verify-init-external-provider-plugins.sh",
+    "verify:init-provider-plugins": "bash tools/scripts/verify-init-provider-plugins.sh",
     "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh"
   },
   "devDependencies": {
