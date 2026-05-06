@@ -1,75 +1,113 @@
 ---
 title: "Foundry CLI"
-status: "draft"
+status: "accepted"
 version: "0.1.0"
 created: "2026-05-05"
-updated: "2026-05-05"
+updated: "2026-05-06"
 owner: "Project Maintainer"
 classification: "internal"
 ---
 
 # Foundry CLI
 
-The Foundry CLI is the project-local command interface for governed scaffolding, generation, validation, and automation workflows.
+The Foundry CLI is the repository-local command interface for governed scaffolding, generation, validation, and automation workflows.
 
 ## Purpose
 
 The CLI provides one stable user-facing command surface over multiple internal generator engines.
 
-Users should eventually run commands such as:
+The CLI currently supports:
 
-```bash
-bun run foundry generate adr
-bun run foundry generate work-packet
-bun run foundry init app
-bun run foundry init package
-bun run foundry init service
+```text
+foundry generate
 ```
 
-Current Status
-This package currently provides the first oclif command shell.
-
-Implemented:
+Current Generator Backends
+Backend	Purpose
+Scaffdog	Governance and Markdown document generation
+Plop	Small local package/file scaffolds
+Copier	Larger golden-template scaffolds
+Orval	OpenAPI-derived TypeScript client generation
+￼
+Usage
+From this package:
 
 Bash
 ￼
-foundry generate
-Not yet implemented:
-
-Bash
-￼
-foundry init app
-foundry init package
-foundry init service
-foundry generate adr
-foundry generate work-packet
-foundry generate openapi-client
-Local Usage
+bun run typecheck
+bun run build
+node ./bin/run.js generate --help
 From the repository root:
 
 Bash
 ￼
-cd packages/cli
-bun install
-bun run foundry --help
-bun run foundry generate --help
-bun run foundry generate --dry-run
-Design Rules
-The CLI is the only normal user-facing entry point for scaffolding.
+bun run verify
+List Generators
+Bash
+￼
+node ./bin/run.js generate --list
+Preview a Generator
+Bash
+￼
+node ./bin/run.js generate \
+  --generator package:typescript-library \
+  --name "logger"
+Preview mode writes no scaffolded project files.
 
-Generator engines are internal implementation details.
+Execute a Generator
+Bash
+￼
+node ./bin/run.js generate \
+  --generator package:typescript-library \
+  --name "logger" \
+  --execute
+Persist an Audit Log
+Bash
+￼
+node ./bin/run.js generate \
+  --generator package:typescript-library \
+  --name "logger" \
+  --execute \
+  --write-audit-log
+Audit logs are written under:
 
-Commands must support dry-run before destructive writes.
+￼
+.artifacts/foundry/audit/
+The .artifacts/ directory is local-only and must not be committed by default.
 
-Commands must eventually emit audit-log events.
+Available MVP Generators
+Generator ID	Backend	Output
+governance-artifact:adr	Scaffdog	docs/adr/*.md
+governance-artifact:work-packet	Scaffdog	docs/work-packets/*.md
+package:typescript-library	Plop	packages/*
+service:hono-api	Copier	services/*
+contract-artifact:openapi-typescript-client	Orval	generated/clients/*
+￼
+Safety Rules
+Preview is the default.
 
-Commands must not silently overwrite files.
+File writes require --execute.
 
-Commands must print verification guidance after generation.
+Audit logs require --write-audit-log.
 
-Related Documents
-docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md
+Existing output paths block execution.
 
+Invalid inputs block execution.
+
+Unsafe paths block execution.
+
+Generated clients are derived from OpenAPI contracts.
+
+Local tool state under .artifacts/ is not committed.
+
+Documentation
+See:
+
+￼
+docs/scaffolding/cli/foundry-cli-usage.md
 docs/scaffolding/scaffolding-strategy.md
-
 docs/scaffolding/generator-taxonomy.md
+docs/scaffolding/generated-artifact-hygiene.md
+docs/scaffolding/contract-verification.md
+docs/scaffolding/generator-smoke-tests.md
+docs/scaffolding/ci-verification.md
