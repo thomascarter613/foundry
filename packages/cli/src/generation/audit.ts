@@ -5,7 +5,11 @@ import type { GeneratorEngine, GeneratorPlan, OverwritePolicy, PlanOperationActi
 
 export type AuditEventSchemaVersion = "foundry.audit-event.v1";
 
-export type AuditEventType = "generator.plan.created";
+export type AuditEventType =
+  | "generator.plan.created"
+  | "generator.execution.blocked"
+  | "generator.execution.succeeded"
+  | "generator.execution.failed";
 
 export type AuditEventResult = "planned" | "blocked" | "failed" | "succeeded";
 
@@ -35,6 +39,28 @@ export interface AuditIssue {
   readonly message: string;
 }
 
+export interface AuditPreflightIssue {
+  readonly code: string;
+  readonly path: string;
+  readonly message: string;
+}
+
+export interface AuditPreflight {
+  readonly ok: boolean;
+  readonly checkedPaths: readonly string[];
+  readonly issues: readonly AuditPreflightIssue[];
+}
+
+export interface AuditBackendExecution {
+  readonly kind: "scaffdog" | "plop" | "copier" | "orval";
+  readonly command: string;
+  readonly exitCode: number;
+  readonly stdoutPreview?: string;
+  readonly stderrPreview?: string;
+  readonly documentName?: string;
+  readonly generatorName?: string;
+}
+
 export interface AuditRuntimeMetadata {
   readonly nodeVersion: string;
   readonly platform: NodeJS.Platform;
@@ -56,6 +82,8 @@ export interface GeneratorAuditEvent {
   readonly operations: readonly AuditOperation[];
   readonly validationCommands: readonly string[];
   readonly issues: readonly AuditIssue[];
+  readonly preflight?: AuditPreflight;
+  readonly backend?: AuditBackendExecution;
   readonly metadata: AuditRuntimeMetadata;
 }
 
@@ -64,15 +92,21 @@ export interface CreateGeneratorAuditEventOptions {
   readonly command: string;
   readonly occurredAt?: Date;
   readonly eventId?: string;
+  readonly result?: AuditEventResult;
+  readonly eventType?: AuditEventType;
+  readonly preflight?: AuditPreflight;
+  readonly backend?: AuditBackendExecution;
 }
 
 export function createGeneratorAuditEvent(options: CreateGeneratorAuditEventOptions): GeneratorAuditEvent {
   const occurredAt = options.occurredAt ?? new Date();
+  const result = options.result ?? determineAuditResult(options.plan);
+  const eventType = options.eventType ?? eventTypeForResult(result);
 
   return {
     schemaVersion: "foundry.audit-event.v1",
     eventId: options.eventId ?? randomUUID(),
-    eventType: "generator.plan.created",
+    eventType,
     occurredAt: occurredAt.toISOString(),
     actor: {
       kind: "cli",
@@ -84,8 +118,8 @@ export function createGeneratorAuditEvent(options: CreateGeneratorAuditEventOpti
       name: options.plan.generatorName,
       engine: options.plan.engine
     },
-    dryRun: options.plan.dryRun,
-    result: determineAuditResult(options.plan),
+    dryRun: result === "planned",
+    result,
     summary: options.plan.summary,
     inputs: redactSensitiveInputs(options.plan.resolvedInputs),
     operations: options.plan.operations.map((operation) => ({
@@ -99,6 +133,8 @@ export function createGeneratorAuditEvent(options: CreateGeneratorAuditEventOpti
       level: issue.level,
       message: issue.message
     })),
+    ...(options.preflight ? { preflight: options.preflight } : {}),
+    ...(options.backend ? { backend: sanitizeBackendExecution(options.backend) } : {}),
     metadata: {
       nodeVersion: process.version,
       platform: process.platform,
@@ -120,6 +156,45 @@ function determineAuditResult(plan: GeneratorPlan): AuditEventResult {
   }
 
   return "planned";
+}
+
+function eventTypeForResult(result: AuditEventResult): AuditEventType {
+  switch (result) {
+    case "blocked":
+      return "generator.execution.blocked";
+
+    case "failed":
+      return "generator.execution.failed";
+
+    case "succeeded":
+      return "generator.execution.succeeded";
+
+    case "planned":
+      return "generator.plan.created";
+  }
+}
+
+function sanitizeBackendExecution(backend: AuditBackendExecution): AuditBackendExecution {
+  return {
+    kind: backend.kind,
+    command: backend.command,
+    exitCode: backend.exitCode,
+    ...(backend.stdoutPreview ? { stdoutPreview: truncateAuditText(backend.stdoutPreview) } : {}),
+    ...(backend.stderrPreview ? { stderrPreview: truncateAuditText(backend.stderrPreview) } : {}),
+    ...(backend.documentName ? { documentName: backend.documentName } : {}),
+    ...(backend.generatorName ? { generatorName: backend.generatorName } : {})
+  };
+}
+
+function truncateAuditText(value: string): string {
+  const maxLength = 2_000;
+  const normalized = value.trim();
+
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  return `${normalized.slice(0, maxLength)}…[truncated]`;
 }
 
 function redactSensitiveInputs(

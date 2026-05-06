@@ -1,3 +1,5 @@
+import { runOrvalGenerator, type OrvalRunResult } from "../../generation/orval-runner.js";
+import { runCopierGenerator, type CopierRunResult } from "../../generation/copier-runner.js";
 import { Command, Flags } from "@oclif/core";
 
 import {
@@ -28,6 +30,14 @@ type BackendRunResult =
   | {
       readonly kind: "plop";
       readonly result: PlopRunResult;
+    }
+  | {
+      readonly kind: "copier";
+      readonly result: CopierRunResult;
+    }
+  | {
+      readonly kind: "orval";
+      readonly result: OrvalRunResult;
     };
 
 export default class Generate extends Command {
@@ -353,6 +363,30 @@ blocked, succeeded, and failed runs.
       };
     }
 
+    if (plan.engine === "copier") {
+      const copierResult = await runCopierGenerator({
+        generatorId: plan.generatorId,
+        inputs: plan.resolvedInputs
+      });
+
+      return {
+        kind: "copier",
+        result: copierResult
+      };
+    }
+
+    if (plan.engine === "orval") {
+      const orvalResult = await runOrvalGenerator({
+        generatorId: plan.generatorId,
+        inputs: plan.resolvedInputs
+      });
+
+      return {
+        kind: "orval",
+        result: orvalResult
+      };
+    }
+
     this.error(
       `Generator "${plan.generatorId}" uses engine "${plan.engine}", but that execution backend is not implemented yet.`,
       { exit: 1 }
@@ -501,9 +535,43 @@ blocked, succeeded, and failed runs.
   private printBackendRunResult(backendRunResult: BackendRunResult): void {
     this.log("");
 
+    if (backendRunResult.kind === "copier") {
+      this.log("Copier execution:");
+      this.log(`- template: ${backendRunResult.result.templatePath}`);
+      this.log(`- destination: ${backendRunResult.result.destinationPath}`);
+      this.log(`- command: ${backendRunResult.result.command}`);
+      this.log(`- result: ${backendRunResult.result.exitCode === 0 ? "succeeded" : "failed"}`);
+
+      const trimmedStdout = backendRunResult.result.stdout.trim();
+      if (trimmedStdout.length > 0) {
+        this.log("");
+        this.log(trimmedStdout);
+      }
+
+      return;
+    }
+
     if (backendRunResult.kind === "scaffdog") {
       this.log("Scaffdog execution:");
       this.log(`- document: ${backendRunResult.result.documentName}`);
+      this.log(`- command: ${backendRunResult.result.command}`);
+      this.log(`- result: ${backendRunResult.result.exitCode === 0 ? "succeeded" : "failed"}`);
+
+      const trimmedStdout = backendRunResult.result.stdout.trim();
+      if (trimmedStdout.length > 0) {
+        this.log("");
+        this.log(trimmedStdout);
+      }
+
+      return;
+    }
+
+    if (backendRunResult.kind === "orval") {
+      this.log("Orval execution:");
+      this.log(`- contract: ${backendRunResult.result.contractPath}`);
+      this.log(`- target: ${backendRunResult.result.targetPath}`);
+      this.log(`- schemas: ${backendRunResult.result.schemasPath}`);
+      this.log(`- config: ${backendRunResult.result.configPath}`);
       this.log(`- command: ${backendRunResult.result.command}`);
       this.log(`- result: ${backendRunResult.result.exitCode === 0 ? "succeeded" : "failed"}`);
 
@@ -554,6 +622,17 @@ function auditPreflightFromPreflightResult(preflightResult: PreflightCheckResult
 }
 
 function auditBackendFromBackendRunResult(backendRunResult: BackendRunResult): AuditBackendExecution {
+  if (backendRunResult.kind === "copier") {
+    return {
+      kind: "copier",
+      command: backendRunResult.result.command,
+      exitCode: backendRunResult.result.exitCode,
+      stdoutPreview: backendRunResult.result.stdout,
+      stderrPreview: backendRunResult.result.stderr,
+      generatorName: backendRunResult.result.templatePath
+    };
+  }
+
   if (backendRunResult.kind === "scaffdog") {
     return {
       kind: "scaffdog",
@@ -562,6 +641,18 @@ function auditBackendFromBackendRunResult(backendRunResult: BackendRunResult): A
       stdoutPreview: backendRunResult.result.stdout,
       stderrPreview: backendRunResult.result.stderr,
       documentName: backendRunResult.result.documentName
+    };
+  }
+
+
+  if (backendRunResult.kind === "orval") {
+    return {
+      kind: "orval",
+      command: backendRunResult.result.command,
+      exitCode: backendRunResult.result.exitCode,
+      stdoutPreview: backendRunResult.result.stdout,
+      stderrPreview: backendRunResult.result.stderr,
+      generatorName: backendRunResult.result.targetPath
     };
   }
 
@@ -618,7 +709,14 @@ function formatBackendFailure(
   backendRunResult: BackendRunResult,
   auditLogResult?: AuditLogWriteResult
 ): string {
-  const backendName = backendRunResult.kind === "scaffdog" ? "Scaffdog" : "Plop";
+  const backendName =
+    backendRunResult.kind === "scaffdog"
+      ? "Scaffdog"
+      : backendRunResult.kind === "copier"
+        ? "Copier"
+        : backendRunResult.kind === "orval"
+          ? "Orval"
+          : "Plop";
   const command = backendRunResult.result.command;
   const exitCode = backendRunResult.result.exitCode;
   const stderr = backendRunResult.result.stderr || "(empty)";

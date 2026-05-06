@@ -114,8 +114,8 @@ export const generatorRegistry: GeneratorRegistry = {
       category: "package",
       name: "TypeScript Library Package",
       description: "Create a reusable internal TypeScript package.",
-      engine: "turbo-gen",
-      status: "planned",
+      engine: "plop",
+      status: "available",
       inputSchema: [
         {
           name: "name",
@@ -129,12 +129,13 @@ export const generatorRegistry: GeneratorRegistry = {
         "packages/{{slug}}/package.json",
         "packages/{{slug}}/tsconfig.json",
         "packages/{{slug}}/src/index.ts",
+        "packages/{{slug}}/src/index.test.ts",
         "packages/{{slug}}/README.md"
       ],
       supportsDryRun: true,
       supportsAuditLog: true,
       overwritePolicy: "fail",
-      validationCommands: ["bun run typecheck", "bun run verify"],
+      validationCommands: ["bun run typecheck", "bun run test", "bun run verify"],
       tags: ["typescript", "package", "library"]
     },
     {
@@ -197,9 +198,9 @@ export const generatorRegistry: GeneratorRegistry = {
       id: "contract-artifact:openapi-typescript-client",
       category: "contract-artifact",
       name: "OpenAPI TypeScript Client",
-      description: "Generate a TypeScript client from an OpenAPI contract.",
+      description: "Generate a TypeScript fetch client from an OpenAPI contract.",
       engine: "orval",
-      status: "planned",
+      status: "available",
       inputSchema: [
         {
           name: "name",
@@ -216,12 +217,15 @@ export const generatorRegistry: GeneratorRegistry = {
           example: "contracts/openapi/gov-api.yaml"
         }
       ],
-      outputPaths: ["generated/clients/{{slug}}"],
+      outputPaths: [
+        "generated/clients/{{slug}}/index.ts",
+        "generated/clients/{{slug}}/model"
+      ],
       supportsDryRun: true,
       supportsAuditLog: true,
       overwritePolicy: "fail",
       validationCommands: ["bun run verify"],
-      tags: ["openapi", "client", "typescript"]
+      tags: ["openapi", "client", "typescript", "fetch"]
     },
     {
       id: "cli-command:oclif-command",
