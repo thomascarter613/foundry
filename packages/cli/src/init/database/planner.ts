@@ -1,140 +1,175 @@
-import { findDatabaseProvider } from "./registry.js";
-import type { DatabaseEnvVarDefinition, DatabaseProviderDefinition } from "./types.js";
-import type {
-  InitDatabaseOption,
-  InitPlanDatabaseConnection,
-  InitPlanDependency,
-  InitPlanDirectory,
-  InitPlanEnvVar,
-  InitPlanFile,
-  InitPlanScript
-} from "../types.js";
+import {
+  listInitDatabaseProviderIds,
+  maybeGetInitDatabaseProvider,
+  type InitDatabaseProviderDefinition
+} from "./registry.js";
 
-export interface DatabaseWorkspacePlan {
-  readonly connections: readonly InitPlanDatabaseConnection[];
-  readonly directories: readonly InitPlanDirectory[];
-  readonly files: readonly InitPlanFile[];
-  readonly scripts: readonly InitPlanScript[];
-  readonly dependencies: readonly InitPlanDependency[];
-  readonly devDependencies: readonly InitPlanDependency[];
-  readonly envVars: readonly InitPlanEnvVar[];
-  readonly warnings: readonly string[];
+export interface InitDatabaseOption {
+  readonly id?: string;
+  readonly name?: string;
+  readonly provider?: string;
+  readonly providerId?: string;
+  readonly databaseProvider?: string;
+  readonly databaseProviderId?: string;
 }
 
-export function createDatabaseWorkspacePlan(databases: readonly InitDatabaseOption[]): DatabaseWorkspacePlan {
-  if (databases.length === 0) {
-    return {
-      connections: [],
-      directories: [],
-      files: [],
-      scripts: [],
-      dependencies: [],
-      devDependencies: [],
-      envVars: [],
-      warnings: []
-    };
-  }
+export interface InitDatabaseConnectionPlan {
+  readonly name: string;
+  readonly providerId: string;
+  readonly label: string;
+  readonly description: string;
+}
 
-  const selectedProviders = databases
-    .map((database) => ({
-      database,
-      provider: findDatabaseProvider(database.providerId)
-    }))
-    .filter((entry): entry is { readonly database: InitDatabaseOption; readonly provider: DatabaseProviderDefinition } => {
-      return entry.provider !== undefined;
-    });
+export interface InitDatabaseDirectoryPlan {
+  readonly path: string;
+  readonly description: string;
+}
+
+export interface InitDatabaseFilePlan {
+  readonly path: string;
+  readonly description: string;
+}
+
+export interface InitDatabaseScriptPlan {
+  readonly name: string;
+  readonly command: string;
+  readonly description: string;
+}
+
+export interface InitDatabaseEnvVarPlan {
+  readonly name: string;
+  readonly description: string;
+  readonly required: boolean;
+  readonly example: string | undefined;
+}
+
+export interface InitDatabaseGeneratedFilePatternPlan {
+  readonly pattern: string;
+  readonly description: string;
+}
+
+export interface InitDatabaseWarningPlan {
+  readonly code: string;
+  readonly message: string;
+}
+
+export interface InitDatabasePlan {
+  readonly enabled: boolean;
+  readonly providerIds: readonly string[];
+  readonly connections: readonly InitDatabaseConnectionPlan[];
+  readonly directories: readonly InitDatabaseDirectoryPlan[];
+  readonly files: readonly InitDatabaseFilePlan[];
+  readonly scripts: readonly InitDatabaseScriptPlan[];
+  readonly generatedFilePatterns: readonly InitDatabaseGeneratedFilePatternPlan[];
+  readonly envVars: readonly InitDatabaseEnvVarPlan[];
+  readonly warnings: readonly InitDatabaseWarningPlan[];
+}
+
+interface SelectedProvider {
+  readonly database: InitDatabaseOption;
+  readonly provider: InitDatabaseProviderDefinition;
+}
+
+export function createInitDatabasePlan(
+  databases: readonly InitDatabaseOption[] | undefined
+): InitDatabasePlan {
+  const selectedProviders = selectDatabaseProviders(databases);
 
   return {
+    enabled: selectedProviders.length > 0,
+    providerIds: selectedProviders.map((entry) => entry.provider.id),
     connections: createConnectionPlans(selectedProviders),
     directories: createDatabaseDirectoryPlan(selectedProviders),
     files: createDatabaseFilePlan(selectedProviders),
     scripts: createDatabaseScriptPlan(selectedProviders),
-    dependencies: createDependencyPlan(
-      selectedProviders,
-      (provider) => provider.requiredDependencies
-    ),
-    devDependencies: createDependencyPlan(
-      selectedProviders,
-      (provider) => provider.requiredDevDependencies
-    ),
+    generatedFilePatterns: createGeneratedFilePatternPlan(selectedProviders),
     envVars: createEnvVarPlan(selectedProviders),
     warnings: createDatabaseWarnings(selectedProviders)
   };
 }
 
+export function createDatabasePlan(
+  databases: readonly InitDatabaseOption[] | undefined
+): InitDatabasePlan {
+  return createInitDatabasePlan(databases);
+}
+
+export function planInitDatabases(
+  databases: readonly InitDatabaseOption[] | undefined
+): InitDatabasePlan {
+  return createInitDatabasePlan(databases);
+}
+
+export function listPlannableDatabaseProviderIds(): readonly string[] {
+  return listInitDatabaseProviderIds();
+}
+
+function selectDatabaseProviders(
+  databases: readonly InitDatabaseOption[] | undefined
+): readonly SelectedProvider[] {
+  if (!databases || databases.length === 0) {
+    return [];
+  }
+
+  return databases
+    .map((database): SelectedProvider | undefined => {
+      const providerId = getProviderId(database);
+      const provider = maybeGetInitDatabaseProvider(providerId);
+
+      if (!provider) {
+        return undefined;
+      }
+
+      return {
+        database,
+        provider
+      };
+    })
+    .filter((entry): entry is SelectedProvider => entry !== undefined);
+}
+
 function createConnectionPlans(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): InitPlanDatabaseConnection[] {
-  return selectedProviders.map(({ database, provider }) => ({
-    connectionName: database.connectionName,
-    providerId: provider.id,
-    providerDisplayName: provider.displayName,
-    database: provider.database,
-    toolkit: provider.toolkit,
-    supportsMigrations: provider.supportsMigrations,
-    supportsSeeding: provider.supportsSeeding,
-    supportsRollback: provider.supportsRollback,
-    supportsDockerCompose: provider.supportsDockerCompose,
-    supportsSupabaseLocalStack: provider.supportsSupabaseLocalStack,
-    supportsHostedConnection: provider.supportsHostedConnection,
-    generatedFilePatterns: provider.generatedFilePatterns.map((filePattern) =>
-      renderConnectionPattern(filePattern, database.connectionName)
-    ),
-    notes: provider.notes
-  }));
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseConnectionPlan[] {
+  return selectedProviders.map(({ database, provider }) => {
+    return {
+      name: database.name ?? database.id ?? provider.id,
+      providerId: provider.id,
+      label: provider.label,
+      description: provider.description
+    };
+  });
 }
 
 function createDatabaseDirectoryPlan(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): InitPlanDirectory[] {
-  const directories = new Map<string, InitPlanDirectory>();
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseDirectoryPlan[] {
+  const directories = new Map<string, InitDatabaseDirectoryPlan>();
 
-  addDirectory(directories, "config/database", "Database connection manifest directory.");
-  addDirectory(directories, "db", "Database schemas, migrations, seeds, rollbacks, and provider files.");
+  for (const { provider } of selectedProviders) {
+    addDirectory(directories, "db", "Database provider files.");
+    addDirectory(directories, "tools/scripts", "Database helper scripts.");
 
-  for (const { database, provider } of selectedProviders) {
-    addDirectory(directories, `db/${database.connectionName}`, `Database workspace for ${database.connectionName}.`);
-    addDirectory(directories, `db/${database.connectionName}/schema`, `Schema files for ${database.connectionName}.`);
-    addDirectory(
-      directories,
-      `db/${database.connectionName}/migrations`,
-      `Migration files for ${database.connectionName}.`
-    );
-    addDirectory(
-      directories,
-      `db/${database.connectionName}/rollbacks`,
-      `Rollback files for ${database.connectionName}.`
-    );
-    addDirectory(directories, `db/${database.connectionName}/seeds`, `Seed files for ${database.connectionName}.`);
-
-    if (provider.database === "supabase") {
-      addDirectory(directories, "supabase", "Supabase local project root.");
-      addDirectory(directories, "supabase/migrations", "Supabase SQL migrations.");
-      addDirectory(directories, "supabase/functions", "Supabase Edge Functions.");
-      addDirectory(
-        directories,
-        `db/${database.connectionName}/policies`,
-        `Supabase policy organization for ${database.connectionName}.`
-      );
+    if (provider.adapter === "drizzle") {
+      addDirectory(directories, "db/migrations", "Drizzle migrations.");
     }
 
-    if (provider.toolkit === "prisma") {
-      addDirectory(
-        directories,
-        `prisma/${database.connectionName}`,
-        `Prisma schema directory for ${database.connectionName}.`
-      );
+    if (provider.adapter === "prisma") {
+      addDirectory(directories, "prisma", "Prisma schema and migrations.");
+      addDirectory(directories, "prisma/migrations", "Prisma migrations.");
     }
 
-    if (provider.id === "supabase:client") {
-      addDirectory(directories, "packages/supabase-client", "Supabase client package.");
-      addDirectory(directories, "packages/supabase-client/src", "Supabase client package source.");
+    if (provider.family === "sqlite") {
+      addDirectory(directories, "data", "Local SQLite database files.");
+    }
+
+    if (provider.family === "supabase") {
+      addDirectory(directories, "supabase", "Supabase provider files.");
+      addDirectory(
+        directories,
+        "supabase/migrations",
+        "Supabase SQL migrations."
+      );
     }
   }
 
@@ -142,32 +177,56 @@ function createDatabaseDirectoryPlan(
 }
 
 function createDatabaseFilePlan(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): InitPlanFile[] {
-  const files = new Map<string, InitPlanFile>();
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseFilePlan[] {
+  const files = new Map<string, InitDatabaseFilePlan>();
 
-  addFile(files, ".env.example", "Environment variable template for selected database providers.");
-  addFile(files, "config/database/connections.json", "Database connection manifest.");
-  addFile(files, "db/README.md", "Database workspace documentation.");
-  addFile(files, "db/registry.ts", "Generated database connection registry.");
-  addFile(files, "tools/scripts/db.ts", "Unified database lifecycle dispatcher.");
+  for (const { provider } of selectedProviders) {
+    addFile(files, "db/provider.json", "Selected database provider metadata.");
+    addFile(files, "db/README.md", "Database workspace README.");
+    addFile(files, ".env.example", "Database environment variable examples.");
+    addFile(files, "tools/scripts/db-validate.sh", "Database validation script.");
+    addFile(files, "tools/scripts/db-start.sh", "Database start script.");
+    addFile(files, "tools/scripts/db-stop.sh", "Database stop script.");
 
-  if (selectedProviders.some(({ provider }) => provider.supportsDockerCompose)) {
-    addFile(files, "docker-compose.yml", "Local database service definitions.");
-  }
+    if (provider.localService) {
+      addFile(files, "docker-compose.yml", "Local database Docker Compose service.");
+    }
 
-  for (const { database, provider } of selectedProviders) {
-    for (const filePattern of provider.generatedFilePatterns) {
-      const renderedPath = renderConnectionPattern(filePattern, database.connectionName);
+    if (provider.adapter === "drizzle") {
+      addFile(files, "drizzle.config.ts", "Drizzle Kit configuration.");
+      addFile(files, "db/schema.ts", "Drizzle schema.");
+      addFile(files, "db/client.ts", "Drizzle database client.");
+      addFile(files, "db/migrations/.gitkeep", "Drizzle migrations placeholder.");
+    }
 
-      if (renderedPath === "not-yet-implemented") {
-        continue;
-      }
+    if (provider.adapter === "prisma") {
+      addFile(files, "prisma/schema.prisma", "Prisma schema.");
+      addFile(files, "db/client.ts", "Prisma database client.");
+      addFile(files, "prisma/migrations/.gitkeep", "Prisma migrations placeholder.");
+    }
 
-      addFile(files, renderedPath, `${provider.displayName} generated file.`);
+    if (provider.family === "mongodb") {
+      addFile(files, "db/client.ts", "MongoDB native database client.");
+      addFile(files, "db/indexes.ts", "MongoDB index bootstrap.");
+    }
+
+    if (provider.family === "sqlite") {
+      addFile(files, "data/.gitkeep", "SQLite data directory placeholder.");
+    }
+
+    if (provider.family === "supabase") {
+      addFile(files, "supabase/README.md", "Supabase provider README.");
+      addFile(
+        files,
+        "supabase/migrations/0001_initial.sql",
+        "Initial Supabase SQL migration."
+      );
+      addFile(files, "db/client.ts", "Supabase-compatible database client.");
+    }
+
+    if (provider.adapter === "sql" || provider.adapter === "client") {
+      addFile(files, "db/client.ts", "Supabase client facade.");
     }
   }
 
@@ -175,219 +234,240 @@ function createDatabaseFilePlan(
 }
 
 function createDatabaseScriptPlan(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): InitPlanScript[] {
-  const scripts = new Map<string, InitPlanScript>();
-
-  addScript(scripts, {
-    name: "db:check",
-    command: "bun run tools/scripts/db.ts check",
-    description: "Validate configured database connections."
-  });
-
-  addScript(scripts, {
-    name: "db:up",
-    command: "bun run tools/scripts/db.ts up",
-    description: "Start local database services when supported."
-  });
-
-  addScript(scripts, {
-    name: "db:down",
-    command: "bun run tools/scripts/db.ts down",
-    description: "Stop local database services when supported."
-  });
-
-  addScript(scripts, {
-    name: "db:migrate",
-    command: "bun run tools/scripts/db.ts migrate",
-    description: "Run provider-specific migrations."
-  });
-
-  addScript(scripts, {
-    name: "db:seed",
-    command: "bun run tools/scripts/db.ts seed",
-    description: "Run provider-specific seed workflows."
-  });
-
-  addScript(scripts, {
-    name: "db:rollback",
-    command: "bun run tools/scripts/db.ts rollback",
-    description: "Run provider-defined rollback workflows."
-  });
-
-  addScript(scripts, {
-    name: "db:reset",
-    command: "bun run tools/scripts/db.ts reset",
-    description: "Reset local database state when supported."
-  });
-
-  for (const { database, provider } of selectedProviders) {
-    for (const providerScript of provider.scripts) {
-      const scriptName = normalizeProviderScriptName(providerScript.name, database.connectionName);
-      const command = providerScript.command.replaceAll("<connection>", database.connectionName);
-
-      addScript(scripts, {
-        name: scriptName,
-        command,
-        description: providerScript.description
-      });
-    }
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseScriptPlan[] {
+  if (selectedProviders.length === 0) {
+    return [];
   }
 
-  return [...scripts.values()];
+  return [
+    {
+      name: "db:validate",
+      command: "bash tools/scripts/db-validate.sh",
+      description: "Validate configured database files and environment hints."
+    },
+    {
+      name: "db:start",
+      command: "bash tools/scripts/db-start.sh",
+      description: "Start local database services when supported."
+    },
+    {
+      name: "db:stop",
+      command: "bash tools/scripts/db-stop.sh",
+      description: "Stop local database services when supported."
+    }
+  ];
 }
 
-function createDependencyPlan(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[],
-  selector: (provider: DatabaseProviderDefinition) => readonly string[]
-): InitPlanDependency[] {
-  const requestedByByDependency = new Map<string, Set<string>>();
+function createGeneratedFilePatternPlan(
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseGeneratedFilePatternPlan[] {
+  const patterns = new Map<string, InitDatabaseGeneratedFilePatternPlan>();
 
   for (const { provider } of selectedProviders) {
-    for (const dependency of selector(provider)) {
-      const existing = requestedByByDependency.get(dependency) ?? new Set<string>();
-      existing.add(provider.id);
-      requestedByByDependency.set(dependency, existing);
+    addGeneratedPattern(
+      patterns,
+      "db/provider.json",
+      "Database provider metadata."
+    );
+
+    if (provider.adapter === "drizzle") {
+      addGeneratedPattern(patterns, "drizzle.config.ts", "Drizzle configuration.");
+      addGeneratedPattern(patterns, "db/schema.ts", "Drizzle schema.");
+      addGeneratedPattern(patterns, "db/client.ts", "Drizzle client.");
+      addGeneratedPattern(patterns, "db/migrations/**", "Drizzle migrations.");
+    }
+
+    if (provider.adapter === "prisma") {
+      addGeneratedPattern(patterns, "prisma/schema.prisma", "Prisma schema.");
+      addGeneratedPattern(patterns, "db/client.ts", "Prisma client.");
+      addGeneratedPattern(patterns, "prisma/migrations/**", "Prisma migrations.");
+    }
+
+    if (provider.family === "mongodb") {
+      addGeneratedPattern(patterns, "db/client.ts", "MongoDB client.");
+      addGeneratedPattern(patterns, "db/indexes.ts", "MongoDB indexes.");
+    }
+
+    if (provider.family === "supabase") {
+      addGeneratedPattern(patterns, "supabase/**", "Supabase provider files.");
+    }
+
+    if (provider.localService) {
+      addGeneratedPattern(patterns, "docker-compose.yml", "Local service compose file.");
     }
   }
 
-  return [...requestedByByDependency.entries()]
-    .sort(([left], [right]) => left.localeCompare(right))
-    .map(([name, requestedBy]) => ({
-      name,
-      requestedBy: [...requestedBy].sort()
-    }));
+  return [...patterns.values()];
 }
 
 function createEnvVarPlan(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): InitPlanEnvVar[] {
-  const envVarsByName = new Map<
-    string,
-    {
-      readonly definition: DatabaseEnvVarDefinition;
-      readonly requestedBy: Set<string>;
-    }
-  >();
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseEnvVarPlan[] {
+  const envVars = new Map<string, InitDatabaseEnvVarPlan>();
 
   for (const { provider } of selectedProviders) {
-    for (const envVar of provider.envVars) {
-      const existing = envVarsByName.get(envVar.name);
-
-      if (existing) {
-        existing.requestedBy.add(provider.id);
-        continue;
-      }
-
-      envVarsByName.set(envVar.name, {
-        definition: envVar,
-        requestedBy: new Set([provider.id])
+    if (provider.family === "postgres") {
+      addEnvVar(envVars, {
+        name: "DATABASE_URL",
+        description: "Primary PostgreSQL database connection string.",
+        required: true,
+        example: "postgres://foundry:foundry@localhost:5432/foundry"
       });
+    }
+
+    if (provider.family === "sqlite") {
+      addEnvVar(envVars, {
+        name: "DATABASE_URL",
+        description: "SQLite database URL.",
+        required: true,
+        example: "file:./data/dev.db"
+      });
+    }
+
+    if (provider.family === "mongodb") {
+      addEnvVar(envVars, {
+        name: "MONGODB_URI",
+        description: "MongoDB connection string.",
+        required: true,
+        example:
+          "mongodb://foundry:foundry@localhost:27017/foundry?authSource=admin"
+      });
+
+      addEnvVar(envVars, {
+        name: "MONGODB_DATABASE",
+        description: "MongoDB database name.",
+        required: true,
+        example: "foundry"
+      });
+    }
+
+    if (provider.family === "supabase") {
+      addEnvVar(envVars, {
+        name: "SUPABASE_URL",
+        description: "Supabase project URL.",
+        required: true,
+        example: "https://example.supabase.co"
+      });
+
+      addEnvVar(envVars, {
+        name: "SUPABASE_ANON_KEY",
+        description: "Supabase anonymous API key.",
+        required: true,
+        example: "replace-me"
+      });
+
+      addEnvVar(envVars, {
+        name: "SUPABASE_SERVICE_ROLE_KEY",
+        description: "Supabase service role key.",
+        required: true,
+        example: "replace-me"
+      });
+
+      if (provider.adapter === "drizzle" || provider.adapter === "prisma") {
+        addEnvVar(envVars, {
+          name: "DATABASE_URL",
+          description: "Supabase PostgreSQL connection string.",
+          required: true,
+          example:
+            "postgresql://postgres:replace-me@db.example.supabase.co:5432/postgres"
+        });
+      }
     }
   }
 
-  return [...envVarsByName.entries()]
-    .sort(([left], [right]) => left.localeCompare(right))
-    .map(([_name, value]) => ({
-      name: value.definition.name,
-      description: value.definition.description,
-      required: value.definition.required,
-      secret: value.definition.secret,
-      requestedBy: [...value.requestedBy].sort(),
-      ...(value.definition.example === undefined ? {} : { example: value.definition.example })
-    }));
+  return [...envVars.values()];
 }
 
 function createDatabaseWarnings(
-  selectedProviders: readonly {
-    readonly database: InitDatabaseOption;
-    readonly provider: DatabaseProviderDefinition;
-  }[]
-): string[] {
-  const warnings: string[] = [];
+  selectedProviders: readonly SelectedProvider[]
+): readonly InitDatabaseWarningPlan[] {
+  const warnings: InitDatabaseWarningPlan[] = [];
 
-  if (selectedProviders.some(({ provider }) => provider.supportsDockerCompose)) {
-    warnings.push("One or more selected database providers may require Docker for local database workflows.");
-  }
+  for (const { provider } of selectedProviders) {
+    if (provider.firstClassSupabase) {
+      warnings.push({
+        code: "supabase-first-class-provider",
+        message:
+          "Supabase is modeled as a first-class provider family, not merely plain PostgreSQL."
+      });
+    }
 
-  if (selectedProviders.some(({ provider }) => provider.supportsSupabaseLocalStack)) {
-    warnings.push("Supabase local workflows require the Supabase CLI and Docker.");
-  }
-
-  const prismaProviders = selectedProviders.filter(({ provider }) => provider.toolkit === "prisma");
-
-  if (prismaProviders.length > 1) {
-    warnings.push("Multiple Prisma-backed connections require namespaced Prisma schema directories.");
-  }
-
-  const supabaseClientOnly =
-    selectedProviders.some(({ provider }) => provider.id === "supabase:client") &&
-    !selectedProviders.some(({ provider }) =>
-      ["supabase:sql", "supabase:drizzle", "supabase:prisma"].includes(provider.id)
-    );
-
-  if (supabaseClientOnly) {
-    warnings.push("supabase:client without a Supabase runtime provider relies on hosted Supabase environment variables.");
+    if (!provider.localService) {
+      warnings.push({
+        code: "database-no-local-service",
+        message: `${provider.id} does not require a local Docker database service.`
+      });
+    }
   }
 
   return warnings;
 }
 
-function normalizeProviderScriptName(scriptName: string, connectionName: string): string {
-  if (scriptName.startsWith("supabase:")) {
-    return scriptName;
-  }
-
-  if (scriptName.startsWith("db:")) {
-    return `db:${connectionName}:${scriptName.slice("db:".length)}`;
-  }
-
-  return `db:${connectionName}:${scriptName}`;
-}
-
-function renderConnectionPattern(pattern: string, connectionName: string): string {
-  return pattern.replaceAll("<connection>", connectionName);
+function getProviderId(database: InitDatabaseOption): string | undefined {
+  return (
+    normalizeString(database.provider) ??
+    normalizeString(database.providerId) ??
+    normalizeString(database.databaseProvider) ??
+    normalizeString(database.databaseProviderId) ??
+    normalizeString(database.id)
+  );
 }
 
 function addDirectory(
-  directories: Map<string, InitPlanDirectory>,
+  directories: Map<string, InitDatabaseDirectoryPlan>,
   directoryPath: string,
   description: string
 ): void {
-  if (directories.has(directoryPath)) {
-    return;
+  if (!directories.has(directoryPath)) {
+    directories.set(directoryPath, {
+      path: directoryPath,
+      description
+    });
   }
-
-  directories.set(directoryPath, {
-    path: directoryPath,
-    description
-  });
 }
 
-function addFile(files: Map<string, InitPlanFile>, filePath: string, description: string): void {
-  if (files.has(filePath)) {
-    return;
+function addFile(
+  files: Map<string, InitDatabaseFilePlan>,
+  filePath: string,
+  description: string
+): void {
+  if (!files.has(filePath)) {
+    files.set(filePath, {
+      path: filePath,
+      description
+    });
   }
-
-  files.set(filePath, {
-    path: filePath,
-    description
-  });
 }
 
-function addScript(scripts: Map<string, InitPlanScript>, script: InitPlanScript): void {
-  if (scripts.has(script.name)) {
-    return;
+function addGeneratedPattern(
+  patterns: Map<string, InitDatabaseGeneratedFilePatternPlan>,
+  pattern: string,
+  description: string
+): void {
+  if (!patterns.has(pattern)) {
+    patterns.set(pattern, {
+      pattern,
+      description
+    });
+  }
+}
+
+function addEnvVar(
+  envVars: Map<string, InitDatabaseEnvVarPlan>,
+  envVar: InitDatabaseEnvVarPlan
+): void {
+  if (!envVars.has(envVar.name)) {
+    envVars.set(envVar.name, envVar);
+  }
+}
+
+function normalizeString(value: string | undefined): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
   }
 
-  scripts.set(script.name, script);
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
 }

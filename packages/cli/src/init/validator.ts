@@ -1,302 +1,392 @@
+import { readdir, stat } from "node:fs/promises";
+import path from "node:path";
+
 import {
-  formatAvailableDatabaseProviderIds,
-  lookupDatabaseProvider,
-  normalizeProviderId
+  isSupportedInitDatabaseProviderId,
+  listInitDatabaseProviderIds
 } from "./database/registry.js";
-import type {
-  InitConfig,
-  InitDatabaseOption,
-  InitValidationIssue,
-  InitValidationResult
-} from "./types.js";
 
-const RESERVED_NAMES = new Set([
-  ".",
-  "..",
-  "aux",
-  "com1",
-  "com2",
-  "com3",
-  "com4",
-  "com5",
-  "com6",
-  "com7",
-  "com8",
-  "com9",
-  "con",
-  "lpt1",
-  "lpt2",
-  "lpt3",
-  "lpt4",
-  "lpt5",
-  "lpt6",
-  "lpt7",
-  "lpt8",
-  "lpt9",
-  "nul",
-  "prn"
-]);
+export type InitValidationSeverity = "error";
 
-export function validateInitConfig(config: InitConfig): InitValidationResult {
-  const issues: InitValidationIssue[] = [
-    ...validateProjectName(config.projectName),
-    ...validatePackageScope(config.packageScope),
-    ...validateDatabaseOptions(config.databases)
-  ];
+export interface InitValidationIssue {
+  readonly severity: InitValidationSeverity;
+  readonly code: string;
+  readonly message: string;
+}
+
+export interface InitValidationResult {
+  readonly valid: boolean;
+  readonly issues: readonly InitValidationIssue[];
+}
+
+export interface InitValidationInput {
+  readonly destination?: string;
+  readonly workspaceName?: string;
+  readonly includeDatabase?: boolean;
+  readonly databaseProvider?: string;
+  readonly databaseProviderId?: string;
+  readonly providerId?: string;
+  readonly database?: unknown;
+  readonly databases?: readonly unknown[];
+}
+
+interface NormalizedInitValidationInput {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider: string | undefined;
+}
+
+export async function validateInitConfig(
+  input: InitValidationInput
+): Promise<readonly InitValidationIssue[]> {
+  const config = normalizeValidationInput(input);
+  const issues: InitValidationIssue[] = [];
+
+  issues.push(...validateDestination(config.destination));
+  issues.push(...validateWorkspaceName(config.workspaceName));
+  issues.push(...validateDatabaseProvider(config));
+
+  const destinationIssues = issues.filter((issue) => {
+    return [
+      "destination-empty",
+      "destination-absolute",
+      "destination-reserved",
+      "destination-path-separator",
+      "destination-outside-cwd"
+    ].includes(issue.code);
+  });
+
+  if (destinationIssues.length === 0) {
+    issues.push(...(await validateDestinationState(config.destination)));
+  }
+
+  return issues;
+}
+
+export async function validateInitRequest(
+  input: InitValidationInput
+): Promise<InitValidationResult> {
+  const issues = await validateInitConfig(input);
 
   return {
-    ok: !issues.some((issue) => issue.level === "error"),
+    valid: issues.length === 0,
     issues
   };
 }
 
-export function formatInitValidationFailure(issues: readonly InitValidationIssue[]): string {
-  const issueLines = issues.map((issue) => {
-    return `- ${issue.level}: ${issue.code}\n  ${issue.message}`;
-  });
-
-  return [
-    "Foundry init was blocked because the initialization request is invalid.",
-    "",
-    "Issues:",
-    ...issueLines,
-    "",
-    "Fix the inputs and run the command again."
-  ].join("\n");
+export async function validateInitOptions(
+  input: InitValidationInput
+): Promise<readonly InitValidationIssue[]> {
+  return validateInitConfig(input);
 }
 
-function validateProjectName(projectName: string): InitValidationIssue[] {
-  const issues: InitValidationIssue[] = [];
-  const trimmed = projectName.trim();
+export async function validateInitConfiguration(
+  input: InitValidationInput
+): Promise<readonly InitValidationIssue[]> {
+  return validateInitConfig(input);
+}
 
-  if (trimmed.length === 0) {
+function normalizeValidationInput(
+  input: InitValidationInput
+): NormalizedInitValidationInput {
+  const destination = normalizeString(input.destination) ?? "myapp";
+  const workspaceName =
+    normalizeString(input.workspaceName) ?? path.basename(destination);
+
+  const directProvider =
+    normalizeString(input.databaseProvider) ??
+    normalizeString(input.databaseProviderId) ??
+    normalizeString(input.providerId) ??
+    getDatabaseProviderFromDatabaseValue(input.database) ??
+    getDatabaseProviderFromDatabaseList(input.databases);
+
+  const includeDatabase =
+    input.includeDatabase ??
+    inferIncludeDatabase(input.database, input.databases, directProvider);
+
+  return {
+    destination,
+    workspaceName,
+    includeDatabase,
+    databaseProvider: directProvider
+  };
+}
+
+function validateDestination(
+  destination: string
+): readonly InitValidationIssue[] {
+  const issues: InitValidationIssue[] = [];
+
+  if (destination.trim().length === 0) {
     issues.push({
-      level: "error",
-      code: "project-name-empty",
-      message: "Project name must not be empty."
+      severity: "error",
+      code: "destination-empty",
+      message: "Destination must not be empty."
     });
 
     return issues;
   }
 
-  if (trimmed.length > 80) {
+  if (path.isAbsolute(destination)) {
     issues.push({
-      level: "error",
-      code: "project-name-too-long",
-      message: "Project name must be 80 characters or fewer."
+      severity: "error",
+      code: "destination-absolute",
+      message: "Destination must be repository-relative for this initializer slice."
     });
   }
 
-  if (/[\u0000-\u001f\u007f]/u.test(trimmed)) {
+  if (destination === "." || destination === "..") {
     issues.push({
-      level: "error",
-      code: "project-name-control-character",
-      message: "Project name must not contain control characters."
+      severity: "error",
+      code: "destination-reserved",
+      message: "Destination must not be . or ..."
     });
   }
 
-  if (trimmed.includes("/") || trimmed.includes("\\")) {
+  if (containsPathSeparator(destination)) {
     issues.push({
-      level: "error",
+      severity: "error",
+      code: "destination-path-separator",
+      message: "Destination must be a single repository-relative directory name."
+    });
+  }
+
+  const resolvedDestination = path.resolve(getInvocationCwd(), destination);
+
+  if (!isPathInside(getInvocationCwd(), resolvedDestination)) {
+    issues.push({
+      severity: "error",
+      code: "destination-outside-cwd",
+      message: "Destination resolves outside the current working directory."
+    });
+  }
+
+  return issues;
+}
+
+function validateWorkspaceName(
+  workspaceName: string
+): readonly InitValidationIssue[] {
+  const issues: InitValidationIssue[] = [];
+
+  if (workspaceName.trim().length === 0) {
+    issues.push({
+      severity: "error",
+      code: "workspace-name-empty",
+      message: "Workspace name must not be empty."
+    });
+  }
+
+  if (containsPathSeparator(workspaceName)) {
+    issues.push({
+      severity: "error",
       code: "project-name-path-separator",
       message: "Project name must not contain path separators."
     });
   }
 
-  if (trimmed.includes("..")) {
-    issues.push({
-      level: "error",
-      code: "project-name-path-traversal",
-      message: "Project name must not contain '..'."
-    });
-  }
-
-  const slug = slugify(trimmed);
-
-  if (slug.length === 0) {
-    issues.push({
-      level: "error",
-      code: "project-name-empty-slug",
-      message: "Project name must contain at least one letter or number."
-    });
-  }
-
-  if (RESERVED_NAMES.has(slug.toLowerCase())) {
-    issues.push({
-      level: "error",
-      code: "project-name-reserved",
-      message: `Project name "${trimmed}" resolves to reserved name "${slug}".`
-    });
-  }
-
-  if (!/^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$/u.test(slug)) {
-    issues.push({
-      level: "error",
-      code: "project-name-invalid-slug",
-      message: `Project name "${trimmed}" resolves to invalid slug "${slug}".`
-    });
-  }
-
   return issues;
 }
 
-function validatePackageScope(packageScope: string): InitValidationIssue[] {
-  const issues: InitValidationIssue[] = [];
-  const trimmed = packageScope.trim();
-
-  if (trimmed.length === 0) {
-    issues.push({
-      level: "error",
-      code: "package-scope-empty",
-      message: "Package scope must not be empty."
-    });
-
-    return issues;
-  }
-
-  if (!/^@[a-z0-9][a-z0-9-]*$/u.test(trimmed)) {
-    issues.push({
-      level: "error",
-      code: "package-scope-invalid",
-      message: `Package scope "${packageScope}" is invalid. Expected a scope like "@repo" or "@my-org".`
-    });
-  }
-
-  return issues;
-}
-
-function validateDatabaseOptions(databases: readonly InitDatabaseOption[]): InitValidationIssue[] {
-  const issues: InitValidationIssue[] = [];
-  const seenConnectionNames = new Set<string>();
-
-  for (const database of databases) {
-    const normalizedConnectionName = database.connectionName.trim().toLowerCase();
-
-    if (normalizedConnectionName.length === 0) {
-      issues.push({
-        level: "error",
-        code: "database-connection-name-empty",
-        message: "Database connection name must not be empty."
-      });
-    }
-
-    if (!/^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$/u.test(normalizedConnectionName)) {
-      issues.push({
-        level: "error",
-        code: "database-connection-name-invalid",
-        message: `Database connection name "${database.connectionName}" must use lowercase letters, numbers, and hyphens.`
-      });
-    }
-
-    if (seenConnectionNames.has(normalizedConnectionName)) {
-      issues.push({
-        level: "error",
-        code: "database-connection-name-duplicate",
-        message: `Database connection name "${database.connectionName}" is used more than once.`
-      });
-    }
-
-    seenConnectionNames.add(normalizedConnectionName);
-
-    issues.push(...validateProviderId(database.providerId));
-  }
-
-  issues.push(...validateProviderCombinations(databases));
-
-  return issues;
-}
-
-function validateProviderId(providerId: string): InitValidationIssue[] {
-  const normalizedProviderId = normalizeProviderId(providerId);
-
-  if (normalizedProviderId.length === 0) {
-    return [
-      {
-        level: "error",
-        code: "database-provider-empty",
-        message: "Database provider ID must not be empty."
-      }
-    ];
-  }
-
-  if (!/^[a-z0-9-]+:[a-z0-9-]+$/u.test(normalizedProviderId)) {
-    return [
-      {
-        level: "error",
-        code: "database-provider-format-invalid",
-        message: `Database provider ID "${providerId}" is invalid. Expected format "<target>:<toolkit>", such as "supabase:drizzle".`
-      }
-    ];
-  }
-
-  const lookup = lookupDatabaseProvider(normalizedProviderId);
-
-  if (lookup.status === "available") {
+function validateDatabaseProvider(
+  config: NormalizedInitValidationInput
+): readonly InitValidationIssue[] {
+  if (!config.includeDatabase) {
     return [];
   }
 
-  if (lookup.status === "planned" || lookup.status === "deferred") {
-    return [
-      {
-        level: "error",
-        code: "database-provider-not-implemented",
-        message: `Database provider "${providerId}" is ${lookup.status} but not implemented in the current init slice.`
-      }
-    ];
+  const providerId = config.databaseProvider ?? "postgres:drizzle";
+  const normalizedProviderId = providerId.trim().toLowerCase();
+
+  if (isSupportedInitDatabaseProviderId(normalizedProviderId)) {
+    return [];
   }
 
   return [
     {
-      level: "error",
-      code: "database-provider-unknown",
-      message: [
-        `Database provider "${providerId}" is not recognized.`,
-        "",
-        "Available providers:",
-        formatAvailableDatabaseProviderIds()
-      ].join("\n")
+      severity: "error",
+      code: "database-provider-unsupported",
+      message: `Unsupported database provider "${providerId}". Available providers: ${formatAvailableInitDatabaseProviderIds()}`
     }
   ];
 }
 
-function validateProviderCombinations(databases: readonly InitDatabaseOption[]): InitValidationIssue[] {
-  const issues: InitValidationIssue[] = [];
+async function validateDestinationState(
+  destination: string
+): Promise<readonly InitValidationIssue[]> {
+  const resolvedDestination = path.resolve(getInvocationCwd(), destination);
+  const state = await inspectDestination(resolvedDestination);
 
-  const providerIds = databases.map((database) => normalizeProviderId(database.providerId));
-  const hasSupabaseClient = providerIds.includes("supabase:client");
-  const hasSupabaseRuntime =
-    providerIds.includes("supabase:sql") ||
-    providerIds.includes("supabase:drizzle") ||
-    providerIds.includes("supabase:prisma");
-
-  if (hasSupabaseClient && !hasSupabaseRuntime) {
-    issues.push({
-      level: "warning",
-      code: "supabase-client-without-runtime",
-      message:
-        "supabase:client was selected without supabase:sql, supabase:drizzle, or supabase:prisma. This is allowed, but the generated repo will rely on hosted Supabase environment variables."
-    });
+  if (state === "file") {
+    return [
+      {
+        severity: "error",
+        code: "destination-file",
+        message: `Destination already exists and is a file: ${destination}`
+      }
+    ];
   }
 
-  const prismaConnections = providerIds.filter((providerId) => providerId.endsWith(":prisma"));
-
-  if (prismaConnections.length > 1) {
-    issues.push({
-      level: "warning",
-      code: "multiple-prisma-connections",
-      message:
-        "Multiple Prisma-backed database connections require namespaced Prisma schema directories. The provider registry must preserve that rule."
-    });
+  if (state === "non-empty-directory") {
+    return [
+      {
+        severity: "error",
+        code: "destination-not-empty",
+        message: `Destination already exists and is not empty: ${destination}`
+      }
+    ];
   }
 
-  return issues;
+  return [];
 }
 
-function slugify(value: string): string {
-  return value
-    .trim()
-    .toLowerCase()
-    .replaceAll(/['"]/g, "")
-    .replaceAll(/[^a-z0-9]+/g, "-")
-    .replaceAll(/^-+|-+$/g, "");
+async function inspectDestination(
+  destination: string
+): Promise<"missing" | "empty-directory" | "non-empty-directory" | "file"> {
+  try {
+    const destinationStat = await stat(destination);
+
+    if (!destinationStat.isDirectory()) {
+      return "file";
+    }
+
+    const entries = await readdir(destination);
+
+    return entries.length === 0 ? "empty-directory" : "non-empty-directory";
+  } catch (error) {
+    if (isNodeErrorWithCode(error, "ENOENT")) {
+      return "missing";
+    }
+
+    throw error;
+  }
+}
+
+function inferIncludeDatabase(
+  database: unknown,
+  databases: readonly unknown[] | undefined,
+  providerId: string | undefined
+): boolean {
+  if (providerId) {
+    return true;
+  }
+
+  if (Array.isArray(databases) && databases.length > 0) {
+    return true;
+  }
+
+  if (database === true) {
+    return true;
+  }
+
+  if (database === false || database === null || database === undefined) {
+    return false;
+  }
+
+  if (typeof database === "object" && !Array.isArray(database)) {
+    return true;
+  }
+
+  return false;
+}
+
+function getDatabaseProviderFromDatabaseValue(
+  database: unknown
+): string | undefined {
+  if (database === null || database === undefined) {
+    return undefined;
+  }
+
+  if (typeof database !== "object" || Array.isArray(database)) {
+    return undefined;
+  }
+
+  const record = database as Record<string, unknown>;
+
+  return (
+    getString(record, "provider") ??
+    getString(record, "providerId") ??
+    getString(record, "id") ??
+    getString(record, "databaseProvider") ??
+    getString(record, "databaseProviderId")
+  );
+}
+
+function getDatabaseProviderFromDatabaseList(
+  databases: readonly unknown[] | undefined
+): string | undefined {
+  if (!Array.isArray(databases)) {
+    return undefined;
+  }
+
+  for (const database of databases) {
+    const provider = getDatabaseProviderFromDatabaseValue(database);
+
+    if (provider) {
+      return provider;
+    }
+  }
+
+  return undefined;
+}
+
+function formatAvailableInitDatabaseProviderIds(): string {
+  return listInitDatabaseProviderIds().join(", ");
+}
+
+function getInvocationCwd(): string {
+  const invocationCwd = process.env.FOUNDRY_INVOCATION_CWD;
+
+  if (typeof invocationCwd === "string" && invocationCwd.trim().length > 0) {
+    return path.resolve(invocationCwd);
+  }
+
+  return process.cwd();
+}
+
+function containsPathSeparator(value: string): boolean {
+  return value.includes("/") || value.includes("\\");
+}
+
+function isPathInside(parentPath: string, childPath: string): boolean {
+  const relativePath = path.relative(parentPath, childPath);
+
+  return (
+    relativePath.length === 0 ||
+    (!relativePath.startsWith("..") && !path.isAbsolute(relativePath))
+  );
+}
+
+function normalizeString(value: string | undefined): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function getString(
+  record: Record<string, unknown>,
+  key: string
+): string | undefined {
+  const value = record[key];
+
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function isNodeErrorWithCode(error: unknown, code: string): boolean {
+  return (
+    error instanceof Error &&
+    "code" in error &&
+    (error as { readonly code?: unknown }).code === code
+  );
 }

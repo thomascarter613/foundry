@@ -1,274 +1,226 @@
-import { createDatabaseWorkspacePlan, type DatabaseWorkspacePlan } from "./database/planner.js";
-import type { InitConfig, InitPlan, InitPlanDirectory, InitPlanFile, InitPlanScript } from "./types.js";
+import {
+  createInitDatabasePlan,
+  type InitDatabaseOption,
+  type InitDatabasePlan
+} from "./database/planner.js";
 
-export function createInitPlan(config: InitConfig): InitPlan {
-  const databasePlan = createDatabaseWorkspacePlan(config.databases);
-  const directories = createDirectoryPlan(config, databasePlan);
-  const files = createFilePlan(config, databasePlan);
-  const scripts = createScriptPlan(databasePlan);
-  const postInitCommands = createPostInitCommands(config);
-  const warnings = createWarnings(config, databasePlan);
+export interface InitPlanInput {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider: string | undefined;
+  readonly installDependencies: boolean;
+}
+
+export interface InitPlanDirectory {
+  readonly path: string;
+  readonly description: string;
+}
+
+export interface InitPlanFile {
+  readonly path: string;
+  readonly description: string;
+}
+
+export interface InitPlanScript {
+  readonly name: string;
+  readonly command: string;
+  readonly description: string;
+}
+
+export interface InitPlan {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider: string | undefined;
+  readonly installDependencies: boolean;
+  readonly directories: readonly InitPlanDirectory[];
+  readonly files: readonly InitPlanFile[];
+  readonly scripts: readonly InitPlanScript[];
+  readonly database: InitDatabasePlan;
+}
+
+export function createInitPlan(input: InitPlanInput): InitPlan {
+  const databaseOptions = createDatabaseOptions(input);
+  const databasePlan = createInitDatabasePlan(databaseOptions);
 
   return {
-    projectName: config.projectName,
-    destination: config.destination,
-    dryRun: true,
-    summary: `Preview workspace initialization for "${config.projectName}".`,
-    directories,
-    files,
-    scripts,
-    databases: config.databases,
-    databaseConnections: databasePlan.connections,
-    dependencies: databasePlan.dependencies,
-    devDependencies: databasePlan.devDependencies,
-    envVars: databasePlan.envVars,
-    postInitCommands,
-    warnings
+    destination: input.destination,
+    workspaceName: input.workspaceName,
+    includeDatabase: input.includeDatabase,
+    databaseProvider: input.databaseProvider,
+    installDependencies: input.installDependencies,
+    directories: createDirectoryPlan(input, databasePlan),
+    files: createFilePlan(input, databasePlan),
+    scripts: createScriptPlan(input, databasePlan),
+    database: databasePlan
   };
 }
 
-function createDirectoryPlan(config: InitConfig, databasePlan: DatabaseWorkspacePlan): InitPlanDirectory[] {
-  const directories: InitPlanDirectory[] = [
+export function planInitWorkspace(input: InitPlanInput): InitPlan {
+  return createInitPlan(input);
+}
+
+export function createWorkspaceInitPlan(input: InitPlanInput): InitPlan {
+  return createInitPlan(input);
+}
+
+function createDatabaseOptions(
+  input: InitPlanInput
+): readonly InitDatabaseOption[] {
+  if (!input.includeDatabase) {
+    return [];
+  }
+
+  return [
     {
-      path: config.destination,
-      description: "Workspace root."
+      provider: input.databaseProvider ?? "postgres:drizzle"
     }
   ];
+}
 
-  if (config.includeApps) {
-    directories.push({
-      path: `${config.destination}/apps`,
-      description: "Application workspaces."
-    });
-  }
+function createDirectoryPlan(
+  input: InitPlanInput,
+  databasePlan: InitDatabasePlan
+): readonly InitPlanDirectory[] {
+  const directories = new Map<string, InitPlanDirectory>();
 
-  if (config.includePackages) {
-    directories.push({
-      path: `${config.destination}/packages`,
-      description: "Shared package workspaces."
-    });
-  }
-
-  if (config.includeFoundryCli) {
-    directories.push({
-      path: `${config.destination}/packages/cli`,
-      description: "Embedded Foundry CLI package."
-    });
-  }
-
-  if (config.includeServices) {
-    directories.push({
-      path: `${config.destination}/services`,
-      description: "Service workspaces."
-    });
-  }
-
-  if (config.includeTools) {
-    directories.push({
-      path: `${config.destination}/tools/scripts`,
-      description: "Repository scripts and automation."
-    });
-  }
-
-  if (config.includeDocs) {
-    directories.push({
-      path: `${config.destination}/docs`,
-      description: "Documentation."
-    });
-  }
-
-  if (config.includeContracts) {
-    directories.push({
-      path: `${config.destination}/contracts/openapi`,
-      description: "OpenAPI contracts."
-    });
-  }
-
-  if (config.includeGenerated) {
-    directories.push({
-      path: `${config.destination}/generated/clients`,
-      description: "Generated API clients."
-    });
-  }
-
-  directories.push(
-    {
-      path: `${config.destination}/config/foundry`,
-      description: "Foundry configuration."
-    },
-    {
-      path: `${config.destination}/templates`,
-      description: "Generator templates."
-    },
-    {
-      path: `${config.destination}/.scaffdog`,
-      description: "Scaffdog document templates."
-    },
-    {
-      path: `${config.destination}/.github/workflows`,
-      description: "GitHub Actions workflows."
-    }
+  addDirectory(directories, input.destination, "Workspace root.");
+  addDirectory(directories, `${input.destination}/apps`, "Application surfaces.");
+  addDirectory(
+    directories,
+    `${input.destination}/services`,
+    "Backend services and workers."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/packages`,
+    "Shared internal packages."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/docs`,
+    "Workspace documentation."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/tools/scripts`,
+    "Repository-local scripts."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/contracts/openapi`,
+    "OpenAPI contracts."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/generated/clients`,
+    "Generated clients."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/config/foundry`,
+    "Foundry configuration."
+  );
+  addDirectory(
+    directories,
+    `${input.destination}/templates`,
+    "Scaffolding templates."
   );
 
   for (const directory of databasePlan.directories) {
-    directories.push({
-      path: `${config.destination}/${directory.path}`,
-      description: directory.description
-    });
+    addDirectory(
+      directories,
+      `${input.destination}/${directory.path}`,
+      directory.description
+    );
   }
 
-  return directories;
+  return [...directories.values()];
 }
 
-function createFilePlan(config: InitConfig, databasePlan: DatabaseWorkspacePlan): InitPlanFile[] {
-  const files: InitPlanFile[] = [
-    {
-      path: `${config.destination}/package.json`,
-      description: "Root package manifest with Bun workspaces."
-    },
-    {
-      path: `${config.destination}/README.md`,
-      description: "Workspace README."
-    },
-    {
-      path: `${config.destination}/.gitignore`,
-      description: "Git ignore rules."
-    },
-    {
-      path: `${config.destination}/tsconfig.base.json`,
-      description: "Shared TypeScript base config."
-    },
-    {
-      path: `${config.destination}/turbo.json`,
-      description: "Task orchestration config."
-    },
-    {
-      path: `${config.destination}/tools/scripts/foundry.sh`,
-      description: "Root Foundry CLI wrapper."
-    },
-    {
-      path: `${config.destination}/tools/scripts/verify.sh`,
-      description: "Root verification script."
-    },
-    {
-      path: `${config.destination}/packages/cli/bin/run.js`,
-      description: "Embedded Foundry CLI executable."
-    },
-    {
-      path: `${config.destination}/docs/README.md`,
-      description: "Documentation directory README."
-    },
-    {
-      path: `${config.destination}/apps/README.md`,
-      description: "Applications directory README."
-    },
-    {
-      path: `${config.destination}/services/README.md`,
-      description: "Services directory README."
-    },
-    {
-      path: `${config.destination}/packages/README.md`,
-      description: "Packages directory README."
-    },
-    {
-      path: `${config.destination}/tools/README.md`,
-      description: "Tools directory README."
-    },
-    {
-      path: `${config.destination}/contracts/openapi/README.md`,
-      description: "OpenAPI contracts README."
-    },
-    {
-      path: `${config.destination}/generated/README.md`,
-      description: "Generated artifacts README."
-    },
-    {
-      path: `${config.destination}/generated/clients/README.md`,
-      description: "Generated API clients README."
-    },
-    {
-      path: `${config.destination}/config/foundry/generator-manifest.json`,
-      description: "Generated Foundry generator manifest."
-    },
-    {
-      path: `${config.destination}/.scaffdog/config.js`,
-      description: "Scaffdog configuration."
-    },
-    {
-      path: `${config.destination}/templates/README.md`,
-      description: "Templates directory README."
-    }
-  ];
+function createFilePlan(
+  input: InitPlanInput,
+  databasePlan: InitDatabasePlan
+): readonly InitPlanFile[] {
+  const files = new Map<string, InitPlanFile>();
 
-  if (config.includeCi) {
-    files.push({
-      path: `${config.destination}/.github/workflows/ci.yml`,
-      description: "CI workflow running repository verification."
-    });
-  }
-
-  if (config.includeFoundryCli) {
-    files.push({
-      path: `${config.destination}/packages/cli/package.json`,
-      description: "Embedded Foundry CLI package manifest."
-    });
-  }
+  addFile(files, `${input.destination}/package.json`, "Root Bun workspace package manifest.");
+  addFile(files, `${input.destination}/bunfig.toml`, "Bun workspace configuration.");
+  addFile(files, `${input.destination}/README.md`, "Root workspace README.");
+  addFile(files, `${input.destination}/.gitignore`, "Default Git ignore rules.");
+  addFile(files, `${input.destination}/tsconfig.base.json`, "Shared TypeScript configuration.");
+  addFile(files, `${input.destination}/turbo.json`, "Turbo task graph.");
+  addFile(files, `${input.destination}/.github/workflows/ci.yml`, "GitHub Actions CI workflow.");
+  addFile(files, `${input.destination}/tools/scripts/foundry.sh`, "Root Foundry CLI wrapper.");
+  addFile(files, `${input.destination}/tools/scripts/verify.sh`, "Root verification script.");
+  addFile(files, `${input.destination}/packages/cli/src/index.ts`, "Embedded minimal Foundry CLI entrypoint.");
+  addFile(files, `${input.destination}/config/foundry/generator-manifest.json`, "Foundry generator manifest.");
+  addFile(files, `${input.destination}/.scaffdog/config.js`, "Scaffdog configuration placeholder.");
 
   for (const file of databasePlan.files) {
-    files.push({
-      path: `${config.destination}/${file.path}`,
-      description: file.description
-    });
+    addFile(files, `${input.destination}/${file.path}`, file.description);
   }
 
-  return files;
+  return [...files.values()];
 }
 
-function createScriptPlan(databasePlan: DatabaseWorkspacePlan): InitPlanScript[] {
-  const scripts: InitPlanScript[] = [
-    {
-      name: "foundry",
-      command: "bash tools/scripts/foundry.sh",
-      description: "Run the embedded Foundry CLI from the repository root."
-    },
-    {
-      name: "verify",
-      command: "bash tools/scripts/verify.sh",
-      description: "Run full repository verification."
-    }
-  ];
+function createScriptPlan(
+  input: InitPlanInput,
+  databasePlan: InitDatabasePlan
+): readonly InitPlanScript[] {
+  const scripts = new Map<string, InitPlanScript>();
+
+  addScript(scripts, {
+    name: "foundry",
+    command: "bash tools/scripts/foundry.sh",
+    description: "Run the embedded Foundry CLI from the repository root."
+  });
+
+  addScript(scripts, {
+    name: "verify",
+    command: "bash tools/scripts/verify.sh",
+    description: "Run full repository verification."
+  });
 
   for (const script of databasePlan.scripts) {
-    scripts.push(script);
+    addScript(scripts, script);
   }
 
-  return scripts;
+  return [...scripts.values()];
 }
 
-function createPostInitCommands(config: InitConfig): string[] {
-  const commands = [`cd ${config.destination}`];
-
-  if (config.installDependencies) {
-    commands.push("bun install");
+function addDirectory(
+  directories: Map<string, InitPlanDirectory>,
+  directoryPath: string,
+  description: string
+): void {
+  if (!directories.has(directoryPath)) {
+    directories.set(directoryPath, {
+      path: directoryPath,
+      description
+    });
   }
-
-  commands.push("bun run foundry -- generate --list");
-
-  if (config.runVerification) {
-    commands.push("bun run verify");
-  }
-
-  return commands;
 }
 
-function createWarnings(config: InitConfig, databasePlan: DatabaseWorkspacePlan): string[] {
-  const warnings: string[] = [];
-
-  if (config.databases.length > 0) {
-    warnings.push("Database provider files are planned but not written in this slice.");
+function addFile(
+  files: Map<string, InitPlanFile>,
+  filePath: string,
+  description: string
+): void {
+  if (!files.has(filePath)) {
+    files.set(filePath, {
+      path: filePath,
+      description
+    });
   }
+}
 
-  warnings.push(...databasePlan.warnings);
-
-  return warnings;
+function addScript(
+  scripts: Map<string, InitPlanScript>,
+  script: InitPlanScript
+): void {
+  if (!scripts.has(script.name)) {
+    scripts.set(script.name, script);
+  }
 }

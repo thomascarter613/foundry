@@ -201,6 +201,22 @@ export function maybeGetInitDatabaseProvider(
   return getInitDatabaseProvider(providerId);
 }
 
+export function formatAvailableInitDatabaseProviderIds(): string {
+  return listInitDatabaseProviderIds().join(", ");
+}
+
+export function validateInitDatabaseProviderId(
+  providerId: string
+): InitDatabaseProviderDefinition | undefined {
+  const normalizedProviderId = normalizeProviderId(providerId);
+
+  if (!isInitDatabaseProviderId(normalizedProviderId)) {
+    return undefined;
+  }
+
+  return getInitDatabaseProvider(normalizedProviderId);
+}
+
 /**
  * Legacy compatibility adapter.
  *
