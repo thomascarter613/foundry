@@ -50,6 +50,193 @@ data/*.sqlite
 `
     },
     {
+      relativePath: ".gitattributes",
+      description: "Git attributes for normalized text handling.",
+      contents: `* text=auto eol=lf
+
+*.sh text eol=lf
+*.md text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+`
+    },
+    {
+      relativePath: ".editorconfig",
+      description: "EditorConfig baseline for generated workspaces.",
+      contents: `root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+`
+    },
+    {
+      relativePath: "CONTRIBUTING.md",
+      description: "Generated workspace contribution guide.",
+      contents: `# Contributing
+
+This workspace was initialized with Foundry.
+
+## Local verification
+
+Run the standard verification gate before committing changes:
+
+\`\`\`bash
+bun run verify
+\`\`\`
+
+## Foundry generation
+
+List available generators:
+
+\`\`\`bash
+bun run foundry -- generate --list
+\`\`\`
+
+## Commit convention
+
+Use Conventional Commits.
+
+Examples:
+
+\`\`\`text
+feat(api): add health endpoint
+fix(db): correct migration ordering
+docs(readme): clarify local setup
+test(init): cover generated workspace shape
+\`\`\`
+
+## Generated files
+
+Generated files should remain inspectable, reproducible, and documented.
+
+Do not commit secrets. Use \`.env.example\` for required environment variable names.
+`
+    },
+    {
+      relativePath: "SECURITY.md",
+      description: "Generated workspace security policy.",
+      contents: `# Security
+
+## Supported security posture
+
+This workspace is generated as a local development baseline.
+
+Before production use, review:
+
+- dependency updates;
+- secrets management;
+- authentication and authorization boundaries;
+- database access controls;
+- CI permissions;
+- deployment environment configuration.
+
+## Reporting security issues
+
+Do not disclose security issues publicly until they are triaged.
+
+For a private project, report issues to the repository owner or security maintainer.
+
+## Secrets policy
+
+Do not commit secrets.
+
+Use:
+
+- \`.env.example\` for documented variable names;
+- local \`.env\` files for development values;
+- a dedicated secret manager for shared or production environments.
+`
+    },
+    {
+      relativePath: ".github/pull_request_template.md",
+      description: "Pull request checklist for generated workspaces.",
+      contents: `## Summary
+
+Describe the change.
+
+## Verification
+
+- [ ] \`bun run verify\`
+- [ ] Generated files were reviewed, if applicable.
+- [ ] Documentation was updated, if applicable.
+- [ ] No secrets were committed.
+
+## Notes
+
+Add migration, deployment, or follow-up notes here.
+`
+    },
+    {
+      relativePath: "docs/ai/BOOTSTRAP_PROMPT.md",
+      description: "AI handoff bootstrap prompt for generated workspaces.",
+      contents: `# Bootstrap Prompt
+
+You are continuing work inside this Foundry-generated workspace.
+
+Treat the repository as the source of truth.
+
+Start by reading:
+
+1. \`README.md\`
+2. \`.foundry/README.md\`
+3. \`.foundry/init/provenance.json\`
+4. \`docs/ai/CURRENT_STATE.md\`
+5. \`config/foundry/generator-manifest.json\`
+
+Operate as a principal-level software engineering partner.
+
+Use Bun.
+
+Do not use Bazel.
+
+Prefer concrete implementation, verification, and atomic Conventional Commits.
+`
+    },
+    {
+      relativePath: "docs/ai/CURRENT_STATE.md",
+      description: "Current state note for generated workspace continuity.",
+      contents: `# Current State
+
+This workspace was initialized with Foundry.
+
+## Status
+
+The workspace baseline has been generated.
+
+## Verification
+
+Run:
+
+\`\`\`bash
+bun run foundry -- generate --list
+bun run verify
+\`\`\`
+
+## Provenance
+
+Initialization metadata is available at:
+
+\`\`\`text
+.foundry/init/provenance.json
+.foundry/init/audit.ndjson
+\`\`\`
+
+## Next recommended action
+
+Review the generated workspace structure, commit the baseline, then generate the first app, service, package, document, contract, or database-specific artifact needed by the project.
+`
+    },
+    {
       relativePath: "tsconfig.base.json",
       description: "Shared TypeScript compiler configuration.",
       contents: json({
@@ -151,7 +338,41 @@ ROOT_DIR="$(cd "$(dirname "\${BASH_SOURCE[0]}")/../.." && pwd)"
 
 cd "$ROOT_DIR"
 
+test -f package.json
+test -f README.md
+test -f CONTRIBUTING.md
+test -f SECURITY.md
+test -f .editorconfig
+test -f .gitattributes
+test -f .github/workflows/ci.yml
+test -f .github/pull_request_template.md
+test -f .foundry/README.md
+test -f .foundry/init/provenance.json
+test -f .foundry/init/audit.ndjson
+test -f docs/ai/BOOTSTRAP_PROMPT.md
+test -f docs/ai/CURRENT_STATE.md
+test -f config/foundry/generator-manifest.json
+
 bun run foundry -- generate --list >/dev/null
+
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+provenance = json.loads(Path(".foundry/init/provenance.json").read_text())
+audit_lines = Path(".foundry/init/audit.ndjson").read_text().splitlines()
+
+assert provenance["schemaVersion"] == 1
+assert provenance["generatedBy"]["command"] == "foundry init"
+assert provenance["workspace"]["name"]
+assert len(provenance["generatedFiles"]) > 0
+assert len(audit_lines) >= 1
+
+for line in audit_lines:
+    event = json.loads(line)
+    assert event["schemaVersion"] == 1
+    assert event["type"] == "foundry.init.workspace_created"
+PY
 
 echo "verify: ok"
 `
@@ -312,7 +533,20 @@ bun run verify
 - \`generated/\` — generated clients and artifacts
 - \`tools/\` — local repository tooling
 - \`templates/\` — scaffolding templates
-- \`config/foundry/\` — Foundry configuration${databaseSection}
+- \`config/foundry/\` — Foundry configuration
+- \`docs/ai/\` — AI continuity and bootstrap notes
+- \`.foundry/\` — generated workspace provenance and audit metadata${databaseSection}
+
+## Generated workspace quality baseline
+
+This workspace includes:
+
+- repository hygiene files: \`.editorconfig\`, \`.gitattributes\`, \`.gitignore\`;
+- contribution and security docs: \`CONTRIBUTING.md\`, \`SECURITY.md\`;
+- CI starter workflow: \`.github/workflows/ci.yml\`;
+- PR template: \`.github/pull_request_template.md\`;
+- AI continuity anchors: \`docs/ai/BOOTSTRAP_PROMPT.md\`, \`docs/ai/CURRENT_STATE.md\`;
+- Foundry provenance: \`.foundry/init/provenance.json\`, \`.foundry/init/audit.ndjson\`.
 `;
 }
 
