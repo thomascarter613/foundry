@@ -56,19 +56,24 @@ const databaseProviders = supportedInitWizardDatabaseProviders();
 
 export default class Init extends Command {
   static override readonly description =
-    "Initialize a new Foundry workspace.";
+    "Initialize a new Foundry workspace with optional database provider templates.";
 
   static override readonly examples = [
     "<%= config.bin %> <%= command.id %>",
     "<%= config.bin %> <%= command.id %> myapp",
+    "<%= config.bin %> <%= command.id %> myapp --dry-run",
     "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install",
     "<%= config.bin %> <%= command.id %> myapp --database-provider postgres:drizzle --yes --no-install",
+    "<%= config.bin %> <%= command.id %> myapp --database-provider postgres:prisma --yes --no-install",
+    "<%= config.bin %> <%= command.id %> myapp --database-provider sqlite:drizzle --yes --no-install",
+    "<%= config.bin %> <%= command.id %> myapp --database-provider mongodb:native --yes --no-install",
     "<%= config.bin %> <%= command.id %> myapp --database-provider supabase:client --yes --no-install"
   ];
 
   static override readonly args = {
     destination: Args.string({
-      description: "Repository-relative workspace directory to create.",
+      description:
+        "Repository-relative workspace directory to create. Defaults to myapp.",
       required: false
     })
   };
@@ -84,24 +89,24 @@ export default class Init extends Command {
     "dry-run": Flags.boolean({
       default: false,
       description:
-        "Print the initialization plan without writing any files."
+        "Print the initialization plan without writing files."
     }),
 
     "no-install": Flags.boolean({
       default: false,
       description:
-        "Do not install dependencies after writing the workspace."
+        "Do not install dependencies after writing workspace files."
     }),
 
     "no-database": Flags.boolean({
       default: false,
       description:
-        "Initialize the workspace without database provider files."
+        "Initialize without database provider files."
     }),
 
     "database-provider": Flags.string({
       description:
-        "Database provider to configure for the initialized workspace.",
+        "Database provider to configure. Supported Tier 1 providers include postgres:drizzle, postgres:prisma, sqlite:drizzle, sqlite:prisma, mongodb:native, supabase:sql, supabase:drizzle, supabase:prisma, and supabase:client.",
       options: [...databaseProviders]
     })
   };
