@@ -8,6 +8,7 @@ import {
   normalizeDatabaseTemplateProviderId,
   type DatabaseTemplateProviderId
 } from "./database/templates.js";
+import { buildInitProvenanceFiles } from "./provenance.js";
 import {
   buildBaseWorkspaceTemplateFiles,
   type WorkspaceTemplateFile
@@ -44,7 +45,7 @@ export async function writeInitWorkspace(
   input: WriteInitWorkspaceInput
 ): Promise<WriteInitWorkspaceResult> {
   const config = normalizeInitWriterConfig(input);
-  const files = buildWorkspaceFiles(config);
+  const files = buildWorkspaceFiles(config, input);
   const directories = new Set<string>();
 
   for (const file of files) {
@@ -142,7 +143,8 @@ function normalizeInitWriterConfig(
 }
 
 function buildWorkspaceFiles(
-  config: NormalizedInitWriterConfig
+  config: NormalizedInitWriterConfig,
+  input: WriteInitWorkspaceInput
 ): readonly WorkspaceTemplateFile[] {
   const databasePackageAdditions = config.databaseProvider
     ? getDatabasePackageAdditions(config.databaseProvider)
@@ -162,7 +164,17 @@ function buildWorkspaceFiles(
     ? buildDatabaseTemplateFiles(config.databaseProvider)
     : [];
 
-  return [...baselineFiles, ...databaseFiles];
+  const filesBeforeProvenance = [...baselineFiles, ...databaseFiles];
+
+  const provenanceFiles = buildInitProvenanceFiles({
+    workspaceName: config.workspaceName,
+    databaseProvider: config.databaseProvider,
+    installDependencies: input.installDependencies ?? false,
+    plan: input.plan,
+    files: filesBeforeProvenance
+  });
+
+  return [...filesBeforeProvenance, ...provenanceFiles];
 }
 
 function toRecord(value: unknown, label: string): Record<string, unknown> {

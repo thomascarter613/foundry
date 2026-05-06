@@ -66,6 +66,10 @@ verify_workspace_baseline() {
   assert_file "$workspace/config/foundry/generator-manifest.json"
   assert_file "$workspace/.scaffdog/config.js"
 
+  assert_file "$workspace/.foundry/README.md"
+  assert_file "$workspace/.foundry/init/provenance.json"
+  assert_file "$workspace/.foundry/init/audit.ndjson"
+
   assert_dir "$workspace/apps"
   assert_dir "$workspace/services"
   assert_dir "$workspace/packages"
@@ -76,8 +80,39 @@ verify_workspace_baseline() {
   assert_dir "$workspace/templates"
 }
 
+verify_provenance() {
+  local workspace="$1"
+
+  python3 - "$workspace" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+workspace = Path(sys.argv[1])
+provenance_path = workspace / ".foundry/init/provenance.json"
+audit_path = workspace / ".foundry/init/audit.ndjson"
+
+provenance = json.loads(provenance_path.read_text())
+audit_lines = audit_path.read_text().splitlines()
+
+assert provenance["schemaVersion"] == 1
+assert provenance["generatedBy"]["command"] == "foundry init"
+assert provenance["workspace"]["name"]
+assert isinstance(provenance["generatedFiles"], list)
+assert len(provenance["generatedFiles"]) > 0
+assert len(audit_lines) >= 1
+
+for line in audit_lines:
+    event = json.loads(line)
+    assert event["schemaVersion"] == 1
+    assert event["type"] == "foundry.init.workspace_created"
+PY
+}
+
 verify_embedded_cli() {
   local workspace="$1"
+
+  verify_provenance "$workspace"
 
   (
     cd "$workspace"
@@ -116,6 +151,8 @@ verify_postgres_drizzle() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/drizzle.config.ts"
@@ -136,6 +173,8 @@ verify_postgres_prisma() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/prisma/schema.prisma"
@@ -152,6 +191,8 @@ verify_sqlite_drizzle() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/drizzle.config.ts"
@@ -169,6 +210,8 @@ verify_sqlite_prisma() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/prisma/schema.prisma"
@@ -185,6 +228,8 @@ verify_mongodb_native() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/db/client.ts"
@@ -201,6 +246,8 @@ verify_supabase_sql() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/supabase/README.md"
@@ -217,6 +264,8 @@ verify_supabase_drizzle() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/supabase/README.md"
@@ -235,6 +284,8 @@ verify_supabase_prisma() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/supabase/README.md"
@@ -252,6 +303,8 @@ verify_supabase_client() {
     --no-install
 
   verify_workspace_baseline "$workspace"
+  verify_provenance "$workspace"
+
   assert_file "$workspace/db/provider.json"
   assert_file "$workspace/.env.example"
   assert_file "$workspace/supabase/README.md"
