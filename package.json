@@ -3,6 +3,14 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*",
+    "tools/*",
+    "templates/*",
+    "docs/*",
+  ],
   "scripts": {
     "verify": "bash tools/scripts/verify.sh",
     "foundry": "cd packages/cli && bun run foundry",
