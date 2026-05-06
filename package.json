@@ -22,7 +22,8 @@
     "verify:generator-manifest": "bash tools/scripts/verify-generator-manifest.sh",
     "verify:init": "bash tools/scripts/verify-init.sh",
     "verify:init-provider-plugins": "bash tools/scripts/verify-init-provider-plugins.sh",
-    "verify:init-external-provider-plugins": "bash tools/scripts/verify-init-external-provider-plugins.sh"
+    "verify:init-external-provider-plugins": "bash tools/scripts/verify-init-external-provider-plugins.sh",
+    "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
