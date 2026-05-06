@@ -1,322 +1,603 @@
 import { Args, Command, Flags } from "@oclif/core";
+import { readdir, stat } from "node:fs/promises";
+import path from "node:path";
 
-import { createDefaultInitConfig } from "../../init/defaults.js";
-import { createInitPlan } from "../../init/planner.js";
-import { validateDestination } from "../../init/path-safety.js";
-import type { InitDatabaseOption, InitPlan, InitValidationIssue } from "../../init/types.js";
-import { formatInitValidationFailure, validateInitConfig } from "../../init/validator.js";
+import {
+  runInitWizard,
+  supportedInitWizardDatabaseProviders,
+  type InitWizardDatabaseProviderId
+} from "../../init/wizard.js";
 import { writeInitWorkspace } from "../../init/writer.js";
 
+type InitDatabaseProviderId = InitWizardDatabaseProviderId;
+
+interface InitConfig {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider: InitDatabaseProviderId | undefined;
+  readonly installDependencies: boolean;
+}
+
+interface InitValidationIssue {
+  readonly severity: "error";
+  readonly code: string;
+  readonly message: string;
+}
+
+interface InitPlanDirectory {
+  readonly path: string;
+  readonly description: string;
+}
+
+interface InitPlanFile {
+  readonly path: string;
+  readonly description: string;
+}
+
+interface InitPlanScript {
+  readonly name: string;
+  readonly command: string;
+  readonly description: string;
+}
+
+interface InitPlan {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider: InitDatabaseProviderId | undefined;
+  readonly installDependencies: boolean;
+  readonly directories: readonly InitPlanDirectory[];
+  readonly files: readonly InitPlanFile[];
+  readonly scripts: readonly InitPlanScript[];
+}
+
+const databaseProviders = supportedInitWizardDatabaseProviders();
+
 export default class Init extends Command {
-  static override summary = "Initialize a new Foundry monorepo workspace.";
+  static override readonly description =
+    "Initialize a new Foundry workspace.";
 
-  static override description = `
-Initialize a new, tested, monorepo-ready workspace with an embedded Foundry CLI.
-
-Database-enabled workspaces are currently dry-run only. No-database workspaces
-can be written with --yes and without --dry-run.
-`;
-
-  static override examples = [
-    {
-      description: "Preview a no-database workspace.",
-      command: "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install --dry-run"
-    },
-    {
-      description: "Create a no-database workspace.",
-      command: "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install"
-    },
-    {
-      description: "Preview a Supabase + Drizzle workspace.",
-      command: "<%= config.bin %> <%= command.id %> myapp --db primary=supabase:drizzle --yes --no-install --dry-run"
-    },
-    {
-      description: "Preview a Supabase + MongoDB multi-database workspace.",
-      command:
-        "<%= config.bin %> <%= command.id %> myapp --db primary=supabase:drizzle --db documents=mongodb:native --yes --no-install --dry-run"
-    }
+  static override readonly examples = [
+    "<%= config.bin %> <%= command.id %>",
+    "<%= config.bin %> <%= command.id %> myapp",
+    "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install",
+    "<%= config.bin %> <%= command.id %> myapp --database-provider postgres:drizzle --yes --no-install",
+    "<%= config.bin %> <%= command.id %> myapp --database-provider supabase:client --yes --no-install"
   ];
 
-  static override args = {
-    name: Args.string({
-      description: "Project directory name to initialize.",
+  static override readonly args = {
+    destination: Args.string({
+      description: "Repository-relative workspace directory to create.",
       required: false
     })
   };
 
-  static override flags = {
-    db: Flags.string({
-      description: "Database provider selection, e.g. primary=supabase:drizzle or mongodb:native.",
-      multiple: true
-    }),
-    "dry-run": Flags.boolean({
-      default: false,
-      description: "Preview the workspace initialization plan without writing files."
-    }),
-    "no-database": Flags.boolean({
-      default: false,
-      description: "Disable database scaffolding."
-    }),
-    "no-install": Flags.boolean({
-      default: false,
-      description: "Do not install dependencies after writing files."
-    }),
-    "no-verify": Flags.boolean({
-      default: false,
-      description: "Do not run verification after initialization."
-    }),
-    scope: Flags.string({
-      default: "@repo",
-      description: "Workspace package scope."
-    }),
+  static override readonly flags = {
     yes: Flags.boolean({
       char: "y",
       default: false,
-      description: "Use defaults and do not prompt interactively."
+      description:
+        "Skip the interactive wizard and write the workspace immediately."
+    }),
+
+    "dry-run": Flags.boolean({
+      default: false,
+      description:
+        "Print the initialization plan without writing any files."
+    }),
+
+    "no-install": Flags.boolean({
+      default: false,
+      description:
+        "Do not install dependencies after writing the workspace."
+    }),
+
+    "no-database": Flags.boolean({
+      default: false,
+      description:
+        "Initialize the workspace without database provider files."
+    }),
+
+    "database-provider": Flags.string({
+      description:
+        "Database provider to configure for the initialized workspace.",
+      options: [...databaseProviders]
     })
   };
 
   async run(): Promise<void> {
     const { args, flags } = await this.parse(Init);
 
-    const projectName = args.name ?? "my-foundry-app";
-    const databases = flags["no-database"] ? [] : parseDatabaseFlags(flags.db);
-
-    const config = createDefaultInitConfig({
-      projectName,
-      packageScope: flags.scope,
-      installDependencies: !flags["no-install"],
-      runVerification: !flags["no-verify"],
-      databases
+    let config = buildInitialConfig({
+      destination: args.destination,
+      noDatabase: flags["no-database"],
+      databaseProvider: flags["database-provider"],
+      noInstall: flags["no-install"]
     });
 
-    const configValidation = validateInitConfig(config);
-    const destinationValidation = await validateDestination({
-      destination: config.destination
-    });
+    let confirmedByWizard = false;
 
-    const allIssues: InitValidationIssue[] = [
-      ...configValidation.issues,
-      ...destinationValidation.issues
-    ];
+    const shouldRunWizard =
+      !flags.yes && !flags["dry-run"] && process.stdin.isTTY;
 
-    const hasErrors = allIssues.some((issue) => issue.level === "error");
+    if (shouldRunWizard) {
+      const wizardAnswers = await runInitWizard({
+        destination: config.destination,
+        includeDatabase: config.includeDatabase,
+        databaseProvider: config.databaseProvider,
+        installDependencies: config.installDependencies
+      });
 
-    if (hasErrors) {
-      this.error(formatInitValidationFailure(allIssues), { exit: 1 });
+      if (!wizardAnswers.confirmed) {
+        this.log("Foundry init cancelled.");
+        return;
+      }
+
+      config = {
+        destination: wizardAnswers.destination,
+        workspaceName: inferWorkspaceName(wizardAnswers.destination),
+        includeDatabase: wizardAnswers.includeDatabase,
+        databaseProvider: wizardAnswers.includeDatabase
+          ? wizardAnswers.databaseProvider ?? "postgres:drizzle"
+          : undefined,
+        installDependencies: wizardAnswers.installDependencies
+      };
+
+      confirmedByWizard = true;
+    }
+
+    const issues = await validateInitConfig(config);
+
+    if (issues.length > 0) {
+      this.error(formatValidationFailure(issues), { exit: 1 });
     }
 
     const plan = createInitPlan(config);
 
-    if (flags["dry-run"]) {
-      this.printPlan(plan, allIssues);
+    if (flags["dry-run"] || (!flags.yes && !confirmedByWizard)) {
+      printPlan(this, plan);
+
       this.log("");
-      this.log("No files were written because --dry-run was provided.");
+      this.log("No files were written.");
+      this.log("Re-run with --yes to write the workspace non-interactively.");
       return;
     }
 
-    if (!flags.yes) {
-      this.error(
-        [
-          "Interactive prompts are not implemented yet.",
-          "",
-          "Use --yes for non-interactive workspace initialization, or use --dry-run to preview."
-        ].join("\n"),
-        { exit: 1 }
-      );
-    }
+    printPlan(this, plan);
 
-    if (config.databases.length > 0) {
-      this.printPlan(plan, allIssues);
-      this.log("");
-      this.error(
-        "Database-enabled workspace writing is not implemented in this slice. Use --dry-run or --no-database.",
-        { exit: 1 }
-      );
-    }
+    const writeConfig: InitConfig = {
+      ...config,
+      destination: resolveInitDestination(config.destination)
+    };
 
     const result = await writeInitWorkspace({
-      config,
+      config: writeConfig,
+      installDependencies: config.installDependencies,
       plan
     });
 
-    this.log(`Initialized Foundry workspace: ${result.destination}`);
     this.log("");
+    this.log(`Initialized Foundry workspace: ${result.destination}`);
     this.log(`Directories created: ${result.directoriesCreated}`);
     this.log(`Files written: ${result.filesWritten}`);
-    this.log("");
 
-    this.log("Written files:");
-    for (const file of result.files) {
-      this.log(`- ${file}`);
+    if (config.installDependencies) {
+      this.log("");
+      this.log(
+        "Dependency installation was requested. If dependencies were not installed by this slice, run:"
+      );
+      this.log(`- cd ${result.destination}`);
+      this.log("- bun install");
     }
 
     this.log("");
     this.log("Next steps:");
     this.log(`- cd ${result.destination}`);
-
-    if (config.installDependencies) {
-      this.log("- bun install");
-    }
-
     this.log("- bun run foundry -- generate --list");
-
-    if (config.runVerification) {
-      this.log("- bun run verify");
-    }
-  }
-
-  private printPlan(plan: InitPlan, issues: readonly InitValidationIssue[]): void {
-    this.log(`Project: ${plan.projectName}`);
-    this.log(`Destination: ${plan.destination}`);
-    this.log(`Dry run: ${plan.dryRun ? "yes" : "no"}`);
-    this.log("");
-    this.log(plan.summary);
-    this.log("");
-
-    this.log("Planned directories:");
-    for (const directory of plan.directories) {
-      this.log(`- ${directory.path}`);
-      this.log(`  ${directory.description}`);
-    }
-
-    this.log("");
-    this.log("Planned files:");
-    for (const file of plan.files) {
-      this.log(`- ${file.path}`);
-      this.log(`  ${file.description}`);
-    }
-
-    this.log("");
-    this.log("Planned scripts:");
-    for (const script of plan.scripts) {
-      this.log(`- ${script.name}: ${script.command}`);
-      this.log(`  ${script.description}`);
-    }
-
-    if (plan.databaseConnections.length > 0) {
-      this.log("");
-      this.log("Planned database connections:");
-      for (const database of plan.databaseConnections) {
-        this.log(`- ${database.connectionName}: ${database.providerId}`);
-        this.log(`  provider: ${database.providerDisplayName}`);
-        this.log(`  database: ${database.database}`);
-        this.log(`  toolkit: ${database.toolkit}`);
-        this.log(`  migrations: ${database.supportsMigrations ? "yes" : "no"}`);
-        this.log(`  seeding: ${database.supportsSeeding ? "yes" : "no"}`);
-        this.log(`  rollback: ${database.supportsRollback}`);
-        this.log(`  docker compose: ${database.supportsDockerCompose ? "yes" : "no"}`);
-        this.log(`  supabase local stack: ${database.supportsSupabaseLocalStack ? "yes" : "no"}`);
-
-        if (database.generatedFilePatterns.length > 0) {
-          this.log("  provider file patterns:");
-          for (const filePattern of database.generatedFilePatterns) {
-            this.log(`  - ${filePattern}`);
-          }
-        }
-
-        if (database.notes.length > 0) {
-          this.log("  notes:");
-          for (const note of database.notes) {
-            this.log(`  - ${note}`);
-          }
-        }
-      }
-    } else {
-      this.log("");
-      this.log("Planned database connections: none");
-    }
-
-    if (plan.dependencies.length > 0) {
-      this.log("");
-      this.log("Planned dependencies:");
-      for (const dependency of plan.dependencies) {
-        this.log(`- ${dependency.name}`);
-        this.log(`  requested by: ${dependency.requestedBy.join(", ")}`);
-      }
-    }
-
-    if (plan.devDependencies.length > 0) {
-      this.log("");
-      this.log("Planned dev dependencies:");
-      for (const dependency of plan.devDependencies) {
-        this.log(`- ${dependency.name}`);
-        this.log(`  requested by: ${dependency.requestedBy.join(", ")}`);
-      }
-    }
-
-    if (plan.envVars.length > 0) {
-      this.log("");
-      this.log("Planned environment variables:");
-      for (const envVar of plan.envVars) {
-        this.log(`- ${envVar.name}`);
-        this.log(`  required: ${envVar.required ? "yes" : "no"}`);
-        this.log(`  secret: ${envVar.secret ? "yes" : "no"}`);
-        this.log(`  ${envVar.description}`);
-        if (envVar.example) {
-          this.log(`  example: ${envVar.example}`);
-        }
-
-        this.log(`  requested by: ${envVar.requestedBy.join(", ")}`);
-      }
-    }
-
-    const warnings = [
-      ...plan.warnings,
-      ...issues.filter((issue) => issue.level === "warning").map((issue) => `${issue.code}: ${issue.message}`)
-    ];
-
-    if (warnings.length > 0) {
-      this.log("");
-      this.log("Warnings:");
-      for (const warning of warnings) {
-        this.log(`- ${warning}`);
-      }
-    }
-
-    this.log("");
-    this.log("Post-init commands:");
-    for (const command of plan.postInitCommands) {
-      this.log(`- ${command}`);
-    }
+    this.log("- bun run verify");
   }
 }
 
-function parseDatabaseFlags(rawValues: string[] | undefined): InitDatabaseOption[] {
-  if (!rawValues || rawValues.length === 0) {
-    return [
-      {
-        connectionName: "primary",
-        providerId: "supabase:drizzle"
-      }
-    ];
-  }
-
-  return rawValues.map((rawValue, index) => parseDatabaseFlag(rawValue, index));
-}
-
-function parseDatabaseFlag(rawValue: string, index: number): InitDatabaseOption {
-  const [maybeName, maybeProvider] = rawValue.split("=");
-
-  if (maybeProvider) {
-    return {
-      connectionName: normalizeConnectionName(maybeName),
-      providerId: maybeProvider.trim().toLowerCase()
-    };
-  }
+function buildInitialConfig(input: {
+  readonly destination: string | undefined;
+  readonly noDatabase: boolean;
+  readonly databaseProvider: string | undefined;
+  readonly noInstall: boolean;
+}): InitConfig {
+  const destination = input.destination ?? "myapp";
+  const includeDatabase =
+    input.noDatabase ? false : input.databaseProvider !== undefined;
 
   return {
-    connectionName: index === 0 ? "primary" : `connection${index + 1}`,
-    providerId: rawValue.trim().toLowerCase()
+    destination,
+    workspaceName: inferWorkspaceName(destination),
+    includeDatabase,
+    databaseProvider: includeDatabase
+      ? normalizeDatabaseProvider(input.databaseProvider ?? "postgres:drizzle")
+      : undefined,
+    installDependencies: !input.noInstall
   };
 }
 
-function normalizeConnectionName(value: string | undefined): string {
-  const normalized = String(value ?? "")
-    .trim()
-    .toLowerCase()
-    .replaceAll(/[^a-z0-9]+/g, "-")
-    .replaceAll(/^-+|-+$/g, "");
+async function validateInitConfig(
+  config: InitConfig
+): Promise<readonly InitValidationIssue[]> {
+  const issues: InitValidationIssue[] = [];
 
-  return normalized.length > 0 ? normalized : "primary";
+  if (config.destination.trim().length === 0) {
+    issues.push({
+      severity: "error",
+      code: "destination-empty",
+      message: "Destination must not be empty."
+    });
+  }
+
+  if (path.isAbsolute(config.destination)) {
+    issues.push({
+      severity: "error",
+      code: "destination-absolute",
+      message: "Destination must be repository-relative for this initializer slice."
+    });
+  }
+
+  if (containsPathSeparator(config.destination)) {
+    issues.push({
+      severity: "error",
+      code: "project-name-path-separator",
+      message: "Project name must not contain path separators."
+    });
+  }
+
+  if (config.destination === "." || config.destination === "..") {
+    issues.push({
+      severity: "error",
+      code: "destination-reserved",
+      message: "Destination must not be . or ..."
+    });
+  }
+
+  const resolvedDestination = resolveInitDestination(config.destination);
+
+  if (!isPathInside(getInvocationCwd(), resolvedDestination)) {
+    issues.push({
+      severity: "error",
+      code: "destination-outside-cwd",
+      message: "Destination resolves outside the current working directory."
+    });
+  }
+
+  if (
+    config.includeDatabase &&
+    config.databaseProvider !== undefined &&
+    !isDatabaseProvider(config.databaseProvider)
+  ) {
+    issues.push({
+      severity: "error",
+      code: "database-provider-unsupported",
+      message: `Unsupported database provider: ${config.databaseProvider}. Supported providers: ${databaseProviders.join(", ")}`
+    });
+  }
+
+  const destinationState = await inspectDestination(resolvedDestination);
+
+  if (destinationState === "file") {
+    issues.push({
+      severity: "error",
+      code: "destination-file",
+      message: `Destination already exists and is a file: ${config.destination}`
+    });
+  }
+
+  if (destinationState === "non-empty-directory") {
+    issues.push({
+      severity: "error",
+      code: "destination-not-empty",
+      message: `Destination already exists and is not empty: ${config.destination}`
+    });
+  }
+
+  return issues;
+}
+
+async function inspectDestination(
+  destination: string
+): Promise<"missing" | "empty-directory" | "non-empty-directory" | "file"> {
+  try {
+    const destinationStat = await stat(destination);
+
+    if (!destinationStat.isDirectory()) {
+      return "file";
+    }
+
+    const entries = await readdir(destination);
+
+    return entries.length === 0 ? "empty-directory" : "non-empty-directory";
+  } catch (error) {
+    if (isNodeError(error) && error.code === "ENOENT") {
+      return "missing";
+    }
+
+    throw error;
+  }
+}
+
+function createInitPlan(config: InitConfig): InitPlan {
+  const directories: InitPlanDirectory[] = [
+    {
+      path: config.destination,
+      description: "Workspace root."
+    },
+    {
+      path: `${config.destination}/apps`,
+      description: "Application surfaces."
+    },
+    {
+      path: `${config.destination}/services`,
+      description: "Backend services and workers."
+    },
+    {
+      path: `${config.destination}/packages`,
+      description: "Shared internal packages."
+    },
+    {
+      path: `${config.destination}/docs`,
+      description: "Workspace documentation."
+    },
+    {
+      path: `${config.destination}/tools/scripts`,
+      description: "Repository-local scripts."
+    },
+    {
+      path: `${config.destination}/contracts/openapi`,
+      description: "OpenAPI contracts."
+    },
+    {
+      path: `${config.destination}/generated/clients`,
+      description: "Generated clients."
+    },
+    {
+      path: `${config.destination}/config/foundry`,
+      description: "Foundry configuration."
+    },
+    {
+      path: `${config.destination}/templates`,
+      description: "Scaffolding templates."
+    }
+  ];
+
+  const files: InitPlanFile[] = [
+    {
+      path: `${config.destination}/package.json`,
+      description: "Root Bun workspace package manifest."
+    },
+    {
+      path: `${config.destination}/bunfig.toml`,
+      description: "Bun workspace configuration."
+    },
+    {
+      path: `${config.destination}/README.md`,
+      description: "Root workspace README."
+    },
+    {
+      path: `${config.destination}/.gitignore`,
+      description: "Default Git ignore rules."
+    },
+    {
+      path: `${config.destination}/tsconfig.base.json`,
+      description: "Shared TypeScript configuration."
+    },
+    {
+      path: `${config.destination}/turbo.json`,
+      description: "Turbo task graph."
+    },
+    {
+      path: `${config.destination}/.github/workflows/ci.yml`,
+      description: "GitHub Actions CI workflow."
+    },
+    {
+      path: `${config.destination}/tools/scripts/foundry.sh`,
+      description: "Root Foundry CLI wrapper."
+    },
+    {
+      path: `${config.destination}/tools/scripts/verify.sh`,
+      description: "Root verification script."
+    },
+    {
+      path: `${config.destination}/packages/cli/src/index.ts`,
+      description: "Embedded minimal Foundry CLI entrypoint."
+    },
+    {
+      path: `${config.destination}/config/foundry/generator-manifest.json`,
+      description: "Foundry generator manifest."
+    },
+    {
+      path: `${config.destination}/.scaffdog/config.js`,
+      description: "Scaffdog configuration placeholder."
+    }
+  ];
+
+  if (config.includeDatabase) {
+    directories.push({
+      path: `${config.destination}/db`,
+      description: "Database provider files."
+    });
+
+    files.push({
+      path: `${config.destination}/db/provider.json`,
+      description: `Database provider metadata for ${config.databaseProvider ?? "postgres:drizzle"}.`
+    });
+
+    files.push({
+      path: `${config.destination}/.env.example`,
+      description: "Database environment variable example file."
+    });
+
+    files.push({
+      path: `${config.destination}/tools/scripts/db-validate.sh`,
+      description: "Database validation script."
+    });
+
+    files.push({
+      path: `${config.destination}/tools/scripts/db-start.sh`,
+      description: "Database local service start script."
+    });
+
+    files.push({
+      path: `${config.destination}/tools/scripts/db-stop.sh`,
+      description: "Database local service stop script."
+    });
+  }
+
+  return {
+    destination: config.destination,
+    workspaceName: config.workspaceName,
+    includeDatabase: config.includeDatabase,
+    databaseProvider: config.databaseProvider,
+    installDependencies: config.installDependencies,
+    directories,
+    files,
+    scripts: createPlanScripts(config)
+  };
+}
+
+function createPlanScripts(config: InitConfig): readonly InitPlanScript[] {
+  const scripts: InitPlanScript[] = [
+    {
+      name: "foundry",
+      command: "bash tools/scripts/foundry.sh",
+      description: "Run the embedded Foundry CLI from the repository root."
+    },
+    {
+      name: "verify",
+      command: "bash tools/scripts/verify.sh",
+      description: "Run full repository verification."
+    }
+  ];
+
+  if (config.includeDatabase) {
+    scripts.push(
+      {
+        name: "db:validate",
+        command: "bash tools/scripts/db-validate.sh",
+        description: "Validate configured database files and environment hints."
+      },
+      {
+        name: "db:start",
+        command: "bash tools/scripts/db-start.sh",
+        description: "Start local database services when supported."
+      },
+      {
+        name: "db:stop",
+        command: "bash tools/scripts/db-stop.sh",
+        description: "Stop local database services when supported."
+      }
+    );
+  }
+
+  return scripts;
+}
+
+function printPlan(command: Command, plan: InitPlan): void {
+  command.log("");
+  command.log("Foundry init plan");
+  command.log("");
+  command.log(`Workspace: ${plan.workspaceName}`);
+  command.log(`Destination: ${plan.destination}`);
+  command.log(
+    `Database provider: ${plan.databaseProvider ?? "none / no database"}`
+  );
+  command.log(
+    `Install dependencies: ${plan.installDependencies ? "yes" : "no"}`
+  );
+
+  command.log("");
+  command.log("Directories:");
+  for (const directory of plan.directories) {
+    command.log(`- ${directory.path}`);
+    command.log(`  ${directory.description}`);
+  }
+
+  command.log("");
+  command.log("Files:");
+  for (const file of plan.files) {
+    command.log(`- ${file.path}`);
+    command.log(`  ${file.description}`);
+  }
+
+  command.log("");
+  command.log("Scripts:");
+  for (const script of plan.scripts) {
+    command.log(`- ${script.name}: ${script.command}`);
+    command.log(`  ${script.description}`);
+  }
+}
+
+function formatValidationFailure(
+  issues: readonly InitValidationIssue[]
+): string {
+  const formattedIssues = issues
+    .map((issue) => {
+      return `- ${issue.severity}: ${issue.code}
+  ${issue.message}`;
+    })
+    .join("\n");
+
+  return `Foundry init was blocked because the initialization request is invalid.
+
+Issues:
+${formattedIssues}
+
+Fix the inputs and run the command again.`;
+}
+
+function inferWorkspaceName(destination: string): string {
+  return path.basename(destination);
+}
+
+function containsPathSeparator(value: string): boolean {
+  return value.includes("/") || value.includes("\\");
+}
+
+function isPathInside(parentPath: string, childPath: string): boolean {
+  const relativePath = path.relative(parentPath, childPath);
+
+  return (
+    relativePath.length === 0 ||
+    (!relativePath.startsWith("..") && !path.isAbsolute(relativePath))
+  );
+}
+
+function normalizeDatabaseProvider(
+  provider: string
+): InitDatabaseProviderId {
+  if (isDatabaseProvider(provider)) {
+    return provider;
+  }
+
+  throw new Error(
+    `Unsupported database provider: ${provider}. Supported providers: ${databaseProviders.join(", ")}`
+  );
+}
+
+function isDatabaseProvider(value: string): value is InitDatabaseProviderId {
+  return databaseProviders.includes(value as InitDatabaseProviderId);
+}
+
+function getInvocationCwd(): string {
+  const invocationCwd = process.env.FOUNDRY_INVOCATION_CWD;
+
+  if (typeof invocationCwd === "string" && invocationCwd.trim().length > 0) {
+    return path.resolve(invocationCwd);
+  }
+
+  return process.cwd();
+}
+
+function resolveInitDestination(destination: string): string {
+  return path.resolve(getInvocationCwd(), destination);
+}
+
+function isNodeError(error: unknown): error is NodeJS.ErrnoException {
+  return error instanceof Error && "code" in error;
 }
