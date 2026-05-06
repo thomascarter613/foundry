@@ -94,3 +94,5 @@ else
   echo "verify: init smoke tests skipped because FOUNDRY_SKIP_INIT_VERIFY=1"
 fi
 # END foundry init smoke verification
+
+bash "$ROOT_DIR/tools/scripts/verify-init-provider-plugins.sh"
