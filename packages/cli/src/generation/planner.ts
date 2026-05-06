@@ -1,9 +1,9 @@
+import { validateGeneratorInputs } from "./validation.js";
 import type {
   GeneratorDefinition,
   GeneratorInputDefinition,
   GeneratorInputValues,
   GeneratorPlan,
-  GeneratorPlanIssue,
   PlanOperation
 } from "./types.js";
 
@@ -14,7 +14,11 @@ export interface CreateGeneratorPlanOptions {
 
 export function createGeneratorPlan(options: CreateGeneratorPlanOptions): GeneratorPlan {
   const resolvedInputs = resolveInputs(options.generator.inputSchema, options.values);
-  const issues = collectInputIssues(options.generator.inputSchema, options.values);
+  const issues = validateGeneratorInputs({
+    generator: options.generator,
+    values: options.values,
+    resolvedInputs
+  });
   const operations = options.generator.outputPaths.map((outputPath) =>
     createPlanOperation(options.generator, outputPath, resolvedInputs)
   );
@@ -81,37 +85,6 @@ function resolveInputs(
   }
 
   return resolved;
-}
-
-function collectInputIssues(
-  inputSchema: readonly GeneratorInputDefinition[],
-  values: GeneratorInputValues
-): GeneratorPlanIssue[] {
-  const issues: GeneratorPlanIssue[] = [];
-
-  for (const input of inputSchema) {
-    const value = values[input.name];
-
-    if (input.required && (value === undefined || value === "")) {
-      issues.push({
-        level: "warning",
-        message: `Required input "${input.name}" was not provided. The dry-run plan used a placeholder value.`
-      });
-    }
-
-    if (input.allowedValues && value !== undefined && value !== "") {
-      const normalizedValue = String(value);
-
-      if (!input.allowedValues.includes(normalizedValue)) {
-        issues.push({
-          level: "error",
-          message: `Input "${input.name}" must be one of: ${input.allowedValues.join(", ")}.`
-        });
-      }
-    }
-  }
-
-  return issues;
 }
 
 function createPlanOperation(

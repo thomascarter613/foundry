@@ -1,23 +1,23 @@
 {
-  "name": "@repo/{{dashCase name}}",
+  "name": "{{ package_name }}",
   "version": "0.1.0",
   "private": true,
-  "description": "Internal TypeScript library package.",
+  "description": "{{ service_name }} Hono API service.",
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist",
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
     "test": "bun test",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
   "devDependencies": {
     "@types/bun": "^1.2.0",
+    "@types/node": "^22.0.0",
     "typescript": "^5.0.0"
   }
 }

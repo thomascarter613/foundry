@@ -1,0 +1,47 @@
+import { Hono } from "hono";
+
+export interface ServiceDescriptor {
+  readonly name: string;
+  readonly packageName: string;
+  readonly status: "ok";
+}
+
+export function createServiceDescriptor(): ServiceDescriptor {
+  return {
+    name: "{{ service_slug }}",
+    packageName: "{{ package_name }}",
+    status: "ok"
+  };
+}
+
+export function createApp(): Hono {
+  const app = new Hono();
+
+  app.get("/", (context) => {
+    return context.json(createServiceDescriptor());
+  });
+
+  app.get("/healthz", (context) => {
+    return context.json({
+      status: "ok",
+      service: "{{ service_slug }}"
+    });
+  });
+
+  return app;
+}
+
+const app = createApp();
+
+export default app;
+
+if (import.meta.main) {
+  const port = Number(Bun.env.PORT ?? "3000");
+
+  Bun.serve({
+    port,
+    fetch: app.fetch
+  });
+
+  console.log(`{{ service_name }} listening on http://localhost:${port}`);
+}

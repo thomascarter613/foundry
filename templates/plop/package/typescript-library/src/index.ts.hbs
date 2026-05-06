@@ -1,0 +1,11 @@
+export interface {{pascalCase name}}Descriptor {
+  readonly name: string;
+  readonly packageName: string;
+}
+
+export function create{{pascalCase name}}Descriptor(): {{pascalCase name}}Descriptor {
+  return {
+    name: "{{dashCase name}}",
+    packageName: "@repo/{{dashCase name}}"
+  };
+}

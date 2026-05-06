@@ -1,0 +1,15 @@
+_subdirectory: .
+_templates_suffix: .jinja
+_answers_file: .copier-answers.yml
+
+service_name:
+  type: str
+  help: Service display name.
+
+service_slug:
+  type: str
+  help: Service directory slug.
+
+package_name:
+  type: str
+  help: Workspace package name.
