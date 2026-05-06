@@ -1,6 +1,7 @@
 import { chmod, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { installWorkspaceDependencies } from "./dependencies.js";
 import {
   buildDatabaseTemplateFiles,
   getDatabasePackageAdditions,
@@ -28,6 +29,8 @@ export interface WriteInitWorkspaceResult {
   readonly directoriesCreated: number;
   readonly filesWritten: number;
   readonly files: readonly WrittenInitFile[];
+  readonly dependenciesInstalled: boolean;
+  readonly installCommand: string | undefined;
 }
 
 interface NormalizedInitWriterConfig {
@@ -58,6 +61,12 @@ export async function writeInitWorkspace(
     }
   }
 
+  const installResult = input.installDependencies
+    ? await installWorkspaceDependencies({
+        destination: config.destination
+      })
+    : undefined;
+
   return {
     destination: config.destination,
     directoriesCreated: directories.size,
@@ -65,7 +74,9 @@ export async function writeInitWorkspace(
     files: files.map((file) => ({
       path: file.relativePath,
       description: file.description
-    }))
+    })),
+    dependenciesInstalled: installResult?.installed ?? false,
+    installCommand: installResult?.command
   };
 }
 

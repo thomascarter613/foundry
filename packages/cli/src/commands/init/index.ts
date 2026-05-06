@@ -187,13 +187,17 @@ export default class Init extends Command {
     this.log(`Directories created: ${result.directoriesCreated}`);
     this.log(`Files written: ${result.filesWritten}`);
 
-    if (config.installDependencies) {
-      this.log("");
-      this.log(
-        "Dependency installation was requested. If dependencies were not installed by this slice, run:"
-      );
+    this.log("");
+
+    if (result.dependenciesInstalled) {
+      this.log(`Dependencies installed: yes (${result.installCommand ?? "bun install"})`);
+    } else if (config.installDependencies) {
+      this.log("Dependencies installed: no");
+      this.log("Run this manually if installation did not complete:");
       this.log(`- cd ${result.destination}`);
       this.log("- bun install");
+    } else {
+      this.log("Dependencies installed: skipped by --no-install");
     }
 
     this.log("");
