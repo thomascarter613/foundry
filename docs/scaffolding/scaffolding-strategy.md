@@ -1,9 +1,3 @@
-
----
-
-## File 2: `docs/scaffolding/scaffolding-strategy.md`
-
-```markdown
 ---
 title: "Scaffolding Strategy"
 status: "accepted"

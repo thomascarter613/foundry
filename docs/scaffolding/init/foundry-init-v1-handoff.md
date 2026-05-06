@@ -257,3 +257,21 @@ cd ..
 rm -rf tmp-foundry-init-v1-install-test
 
 If all commands pass, foundry init v1 is complete.
+
+## Post-v1 upgrade workflow
+
+Post-v1 workspace upgrade planning is documented in:
+
+```text
+docs/scaffolding/init/workspace-upgrade-planning.md
+docs/scaffolding/init/workspace-upgrade-workflow.md
+The current upgrade command is read-only:
+
+Bash
+￼
+bun run foundry -- init upgrade myapp
+The current verification command is:
+
+Bash
+￼
+bun run verify:init-upgrade

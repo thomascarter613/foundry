@@ -8,6 +8,7 @@
     "foundry": "./bin/run.js"
   },
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist",
     "foundry": "bun run build && node ./bin/run.js",
