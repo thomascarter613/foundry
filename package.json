@@ -9,7 +9,7 @@
     "services/*",
     "tools/*",
     "templates/*",
-    "docs/*",
+    "docs/*"
   ],
   "scripts": {
     "verify": "bash tools/scripts/verify.sh",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "orval": "^8.9.1",
     "plop": "^4.0.5",
     "scaffdog": "^4.1.0"
   },

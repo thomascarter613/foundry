@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Gov API
+  version: 0.1.0
+  description: Generated starter OpenAPI contract for the gov-api service.
+servers:
+  - url: http://localhost:3000
+paths:
+  /:
+    get:
+      operationId: getServiceDescriptor
+      summary: Get service descriptor
+      tags:
+        - service
+      responses:
+        "200":
+          description: Service descriptor response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDescriptor"
+  /healthz:
+    get:
+      operationId: getHealth
+      summary: Get service health
+      tags:
+        - health
+      responses:
+        "200":
+          description: Health check response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+components:
+  schemas:
+    ServiceDescriptor:
+      type: object
+      required:
+        - name
+        - packageName
+        - status
+      properties:
+        name:
+          type: string
+        packageName:
+          type: string
+        status:
+          type: string
+          enum:
+            - ok
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - service
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+        service:
+          type: string
