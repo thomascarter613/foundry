@@ -2,7 +2,9 @@ import { Args, Command, Flags } from "@oclif/core";
 
 import { createDefaultInitConfig } from "../../init/defaults.js";
 import { createInitPlan } from "../../init/planner.js";
-import type { InitDatabaseOption, InitPlan } from "../../init/types.js";
+import { validateDestination } from "../../init/path-safety.js";
+import type { InitDatabaseOption, InitPlan, InitValidationIssue } from "../../init/types.js";
+import { formatInitValidationFailure, validateInitConfig } from "../../init/validator.js";
 
 export default class Init extends Command {
   static override summary = "Initialize a new Foundry monorepo workspace.";
@@ -10,8 +12,8 @@ export default class Init extends Command {
   static override description = `
 Initialize a new, tested, monorepo-ready workspace with an embedded Foundry CLI.
 
-This command is currently in dry-run planning mode only. It prints the workspace,
-database, script, and post-init plan without writing files.
+This command is currently in dry-run planning mode only. It validates inputs and
+prints the workspace, database, script, and post-init plan without writing files.
 `;
 
   static override examples = [
@@ -27,6 +29,10 @@ database, script, and post-init plan without writing files.
       description: "Preview a Supabase + MongoDB multi-database workspace.",
       command:
         "<%= config.bin %> <%= command.id %> myapp --db primary=supabase:drizzle --db documents=mongodb:native --yes --no-install --dry-run"
+    },
+    {
+      description: "Verify invalid provider handling.",
+      command: "<%= config.bin %> <%= command.id %> myapp --db primary=unknown:provider --yes --dry-run"
     }
   ];
 
@@ -83,9 +89,25 @@ database, script, and post-init plan without writing files.
       databases
     });
 
+    const configValidation = validateInitConfig(config);
+    const destinationValidation = await validateDestination({
+      destination: config.destination
+    });
+
+    const allIssues: InitValidationIssue[] = [
+      ...configValidation.issues,
+      ...destinationValidation.issues
+    ];
+
+    const hasErrors = allIssues.some((issue) => issue.level === "error");
+
+    if (hasErrors) {
+      this.error(formatInitValidationFailure(allIssues), { exit: 1 });
+    }
+
     const plan = createInitPlan(config);
 
-    this.printPlan(plan);
+    this.printPlan(plan, allIssues);
 
     this.log("");
     this.log("No files were written. File writing will be added in the template-writer slice.");
@@ -96,7 +118,7 @@ database, script, and post-init plan without writing files.
     }
   }
 
-  private printPlan(plan: InitPlan): void {
+  private printPlan(plan: InitPlan, issues: readonly InitValidationIssue[]): void {
     this.log(`Project: ${plan.projectName}`);
     this.log(`Destination: ${plan.destination}`);
     this.log(`Dry run: ${plan.dryRun ? "yes" : "no"}`);
@@ -134,10 +156,15 @@ database, script, and post-init plan without writing files.
       this.log("Planned database connections: none");
     }
 
-    if (plan.warnings.length > 0) {
+    const warnings = [
+      ...plan.warnings,
+      ...issues.filter((issue) => issue.level === "warning").map((issue) => `${issue.code}: ${issue.message}`)
+    ];
+
+    if (warnings.length > 0) {
       this.log("");
       this.log("Warnings:");
-      for (const warning of plan.warnings) {
+      for (const warning of warnings) {
         this.log(`- ${warning}`);
       }
     }
@@ -169,13 +196,13 @@ function parseDatabaseFlag(rawValue: string, index: number): InitDatabaseOption 
   if (maybeProvider) {
     return {
       connectionName: normalizeConnectionName(maybeName),
-      providerId: maybeProvider
+      providerId: maybeProvider.trim().toLowerCase()
     };
   }
 
   return {
     connectionName: index === 0 ? "primary" : `connection${index + 1}`,
-    providerId: rawValue
+    providerId: rawValue.trim().toLowerCase()
   };
 }
 

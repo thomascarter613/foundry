@@ -1,5 +1,7 @@
 export type InitDatabaseSelectionMode = "none" | "one" | "multiple";
 
+export type InitValidationIssueLevel = "warning" | "error";
+
 export interface InitDatabaseOption {
   readonly connectionName: string;
   readonly providerId: string;
@@ -54,4 +56,15 @@ export interface InitPlan {
   readonly databases: readonly InitDatabaseOption[];
   readonly postInitCommands: readonly string[];
   readonly warnings: readonly string[];
+}
+
+export interface InitValidationIssue {
+  readonly level: InitValidationIssueLevel;
+  readonly code: string;
+  readonly message: string;
+}
+
+export interface InitValidationResult {
+  readonly ok: boolean;
+  readonly issues: readonly InitValidationIssue[];
 }
