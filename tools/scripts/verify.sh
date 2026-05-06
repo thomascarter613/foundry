@@ -16,6 +16,8 @@ if [[ -d "packages/cli" ]]; then
   )
 fi
 
+bash tools/scripts/verify-generator-manifest.sh
+
 echo "==> Verifying root Foundry command"
 bun run foundry -- generate --list >/dev/null
 

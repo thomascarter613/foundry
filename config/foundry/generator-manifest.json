@@ -1,0 +1,304 @@
+{
+  "manifestVersion": "foundry.generator-manifest.v1",
+  "updated": "2026-05-06",
+  "owner": "Project Maintainer",
+  "classification": "internal",
+  "description": "Machine-readable manifest for Foundry generator provenance, ownership, source inputs, output paths, and verification commands.",
+  "rules": {
+    "previewDefault": true,
+    "executionRequiresFlag": "--execute",
+    "auditLogRequiresFlag": "--write-audit-log",
+    "localArtifactRoot": ".artifacts/",
+    "localArtifactRootTracked": false,
+    "generatedArtifactsAreSourceOfTruth": false
+  },
+  "generators": [
+    {
+      "id": "governance-artifact:adr",
+      "status": "available",
+      "category": "governance-artifact",
+      "backend": "scaffdog",
+      "description": "Creates Architecture Decision Record documents.",
+      "sourcePaths": [
+        ".scaffdog/config.js",
+        ".scaffdog/adr.md",
+        "packages/cli/src/generation/scaffdog-runner.ts",
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "docs/adr/{{identifier}}-{{slug}}.md"
+      ],
+      "canonicalInputs": [
+        "identifier",
+        "name",
+        "status"
+      ],
+      "derivedArtifacts": [
+        "docs/adr/*.md"
+      ],
+      "verificationCommands": [
+        "bun run verify:generators",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": ".scaffdog/adr.md",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    },
+    {
+      "id": "governance-artifact:work-packet",
+      "status": "available",
+      "category": "governance-artifact",
+      "backend": "scaffdog",
+      "description": "Creates governed work-packet documents.",
+      "sourcePaths": [
+        ".scaffdog/config.js",
+        ".scaffdog/work-packet.md",
+        "packages/cli/src/generation/scaffdog-runner.ts",
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "docs/work-packets/{{identifier}}-{{slug}}.md"
+      ],
+      "canonicalInputs": [
+        "identifier",
+        "name",
+        "status"
+      ],
+      "derivedArtifacts": [
+        "docs/work-packets/*.md"
+      ],
+      "verificationCommands": [
+        "bun run verify:generators",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": ".scaffdog/work-packet.md",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    },
+    {
+      "id": "package:typescript-library",
+      "status": "available",
+      "category": "package",
+      "backend": "plop",
+      "description": "Creates reusable internal TypeScript library packages.",
+      "sourcePaths": [
+        "plopfile.mjs",
+        "templates/plop/package/typescript-library/package.json.hbs",
+        "templates/plop/package/typescript-library/tsconfig.json.hbs",
+        "templates/plop/package/typescript-library/README.md.hbs",
+        "templates/plop/package/typescript-library/src/index.ts.hbs",
+        "templates/plop/package/typescript-library/src/index.test.ts.hbs",
+        "packages/cli/src/generation/plop-runner.ts",
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "packages/{{slug}}/package.json",
+        "packages/{{slug}}/tsconfig.json",
+        "packages/{{slug}}/README.md",
+        "packages/{{slug}}/src/index.ts",
+        "packages/{{slug}}/src/index.test.ts"
+      ],
+      "canonicalInputs": [
+        "name"
+      ],
+      "derivedArtifacts": [
+        "packages/*"
+      ],
+      "verificationCommands": [
+        "cd packages/<generated-package> && bun run typecheck",
+        "cd packages/<generated-package> && bun run test",
+        "cd packages/<generated-package> && bun run build",
+        "bun run verify:generators",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "templates/plop/package/typescript-library",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    },
+    {
+      "id": "service:hono-api",
+      "status": "available",
+      "category": "service",
+      "backend": "copier",
+      "description": "Creates Hono API service packages.",
+      "sourcePaths": [
+        "tools/scripts/copier.sh",
+        "templates/copier/service-hono-api/copier.yml",
+        "templates/copier/service-hono-api/package.json.jinja",
+        "templates/copier/service-hono-api/tsconfig.json.jinja",
+        "templates/copier/service-hono-api/README.md.jinja",
+        "templates/copier/service-hono-api/src/index.ts.jinja",
+        "templates/copier/service-hono-api/src/index.test.ts.jinja",
+        "packages/cli/src/generation/copier-runner.ts",
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "services/{{slug}}/package.json",
+        "services/{{slug}}/tsconfig.json",
+        "services/{{slug}}/README.md",
+        "services/{{slug}}/src/index.ts",
+        "services/{{slug}}/src/index.test.ts"
+      ],
+      "canonicalInputs": [
+        "name"
+      ],
+      "derivedArtifacts": [
+        "services/*"
+      ],
+      "verificationCommands": [
+        "cd services/<generated-service> && bun run typecheck",
+        "cd services/<generated-service> && bun run test",
+        "cd services/<generated-service> && bun run build",
+        "bun run verify:generators",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "templates/copier/service-hono-api",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": [
+          ".artifacts/foundry/tools/copier-venv"
+        ]
+      }
+    },
+    {
+      "id": "contract-artifact:openapi-typescript-client",
+      "status": "available",
+      "category": "contract-artifact",
+      "backend": "orval",
+      "description": "Generates TypeScript fetch clients from OpenAPI contracts.",
+      "sourcePaths": [
+        "contracts/openapi/gov-api.yaml",
+        "redocly.yaml",
+        "packages/cli/src/generation/orval-runner.ts",
+        "packages/cli/src/generation/registry.ts",
+        "tools/scripts/verify-contracts.sh",
+        "tools/scripts/verify-generated.sh"
+      ],
+      "outputPathPatterns": [
+        "generated/clients/{{slug}}/index.ts",
+        "generated/clients/{{slug}}/model"
+      ],
+      "canonicalInputs": [
+        "name",
+        "contract"
+      ],
+      "derivedArtifacts": [
+        "generated/clients/*"
+      ],
+      "verificationCommands": [
+        "bun run verify:contracts",
+        "bun run verify:generated",
+        "bun run verify:generators",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "contracts/openapi/gov-api.yaml",
+        "generatedOutputIsEditable": false,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": [
+          ".artifacts/foundry/orval"
+        ]
+      }
+    },
+    {
+      "id": "document:runbook",
+      "status": "planned",
+      "category": "document",
+      "backend": "scaffdog",
+      "description": "Planned generator for operational runbook documents.",
+      "sourcePaths": [
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "docs/runbooks/{{slug}}.md"
+      ],
+      "canonicalInputs": [
+        "name",
+        "area"
+      ],
+      "derivedArtifacts": [
+        "docs/runbooks/*.md"
+      ],
+      "verificationCommands": [
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "not-yet-implemented",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    },
+    {
+      "id": "app:solid-start",
+      "status": "planned",
+      "category": "app",
+      "backend": "copier",
+      "description": "Planned generator for SolidStart applications.",
+      "sourcePaths": [
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "apps/{{slug}}/package.json",
+        "apps/{{slug}}/tsconfig.json",
+        "apps/{{slug}}/src/app.tsx",
+        "apps/{{slug}}/README.md"
+      ],
+      "canonicalInputs": [
+        "name"
+      ],
+      "derivedArtifacts": [
+        "apps/*"
+      ],
+      "verificationCommands": [
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "not-yet-implemented",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    },
+    {
+      "id": "cli-command:oclif-command",
+      "status": "planned",
+      "category": "cli-command",
+      "backend": "oclif",
+      "description": "Planned generator for new Foundry CLI commands.",
+      "sourcePaths": [
+        "packages/cli/src/generation/registry.ts"
+      ],
+      "outputPathPatterns": [
+        "packages/cli/src/commands/{{commandPath}}.ts"
+      ],
+      "canonicalInputs": [
+        "name"
+      ],
+      "derivedArtifacts": [
+        "packages/cli/src/commands/*.ts"
+      ],
+      "verificationCommands": [
+        "cd packages/cli && bun run typecheck",
+        "cd packages/cli && bun run build",
+        "bun run verify"
+      ],
+      "provenance": {
+        "sourceOfTruth": "not-yet-implemented",
+        "generatedOutputIsEditable": true,
+        "generatedOutputRequiresReview": true,
+        "localStatePaths": []
+      }
+    }
+  ]
+}
