@@ -26,7 +26,8 @@
     "verify:init": "bash tools/scripts/verify-init.sh",
     "verify:init-external-provider-plugins": "bash tools/scripts/verify-init-external-provider-plugins.sh",
     "verify:init-provider-plugins": "bash tools/scripts/verify-init-provider-plugins.sh",
-    "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh"
+    "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh",
+    "verify:manifest": "bash tools/scripts/verify-manifest.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
