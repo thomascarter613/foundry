@@ -1,14 +1,14 @@
 import {
+  listBuiltInInitDatabaseProviderPlugins
+} from "./builtin-plugins.js";
+import {
   isInitDatabaseProviderId,
   normalizeInitDatabaseProviderId,
   supportedInitDatabaseProviders,
   type InitDatabaseProviderId
 } from "./providers.js";
-import type {
-  DatabaseProviderDefinition as LegacyDatabaseProviderDefinition
-} from "./types.js";
 
-export type DatabaseProviderDefinition = LegacyDatabaseProviderDefinition;
+export type DatabaseProviderDefinition = InitDatabaseProviderDefinition;
 
 export type InitDatabaseProviderFamily =
   | "postgres"
@@ -21,9 +21,8 @@ export type InitDatabaseProviderAdapter =
   | "prisma"
   | "native"
   | "sql"
-  | "client";
-
-export type InitDatabaseProviderStatus = "available" | "planned" | "deferred";
+  | "client"
+  | "supabase-client";
 
 export interface InitDatabaseProviderDefinition {
   readonly id: InitDatabaseProviderId;
@@ -39,123 +38,22 @@ export interface InitDatabaseProviderDefinition {
 }
 
 export const initDatabaseProviderRegistry: readonly InitDatabaseProviderDefinition[] =
-  [
-    {
-      id: "postgres:drizzle",
-      family: "postgres",
-      adapter: "drizzle",
-      label: "PostgreSQL + Drizzle",
-      description:
-        "Local PostgreSQL service with Drizzle ORM and Drizzle Kit.",
+  listBuiltInInitDatabaseProviderPlugins().map((plugin) => {
+    const providerId = normalizeInitDatabaseProviderId(plugin.metadata.id);
+
+    return {
+      id: providerId,
+      family: normalizeFamily(plugin.metadata.family),
+      adapter: normalizeAdapter(plugin.metadata.adapter),
+      label: plugin.metadata.label,
+      description: plugin.metadata.description,
       tier: 1,
       status: "available",
-      localService: true,
-      firstClassSupabase: false,
+      localService: plugin.metadata.capabilities.includes("local-service"),
+      firstClassSupabase: plugin.metadata.firstClassSupabase,
       planned: false
-    },
-    {
-      id: "postgres:prisma",
-      family: "postgres",
-      adapter: "prisma",
-      label: "PostgreSQL + Prisma",
-      description:
-        "Local PostgreSQL service with Prisma Client and Prisma schema.",
-      tier: 1,
-      status: "available",
-      localService: true,
-      firstClassSupabase: false,
-      planned: false
-    },
-    {
-      id: "sqlite:drizzle",
-      family: "sqlite",
-      adapter: "drizzle",
-      label: "SQLite + Drizzle",
-      description: "Local SQLite database with Drizzle ORM and Drizzle Kit.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: false,
-      planned: false
-    },
-    {
-      id: "sqlite:prisma",
-      family: "sqlite",
-      adapter: "prisma",
-      label: "SQLite + Prisma",
-      description: "Local SQLite database with Prisma Client and Prisma schema.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: false,
-      planned: false
-    },
-    {
-      id: "mongodb:native",
-      family: "mongodb",
-      adapter: "native",
-      label: "MongoDB Native Driver",
-      description:
-        "Local MongoDB service using the official native MongoDB driver.",
-      tier: 1,
-      status: "available",
-      localService: true,
-      firstClassSupabase: false,
-      planned: false
-    },
-    {
-      id: "supabase:sql",
-      family: "supabase",
-      adapter: "sql",
-      label: "Supabase SQL",
-      description:
-        "First-class Supabase provider using SQL migrations and Supabase client configuration.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: true,
-      planned: false
-    },
-    {
-      id: "supabase:drizzle",
-      family: "supabase",
-      adapter: "drizzle",
-      label: "Supabase + Drizzle",
-      description:
-        "First-class Supabase provider using Drizzle with Supabase-compatible PostgreSQL.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: true,
-      planned: false
-    },
-    {
-      id: "supabase:prisma",
-      family: "supabase",
-      adapter: "prisma",
-      label: "Supabase + Prisma",
-      description:
-        "First-class Supabase provider using Prisma with Supabase-compatible PostgreSQL.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: true,
-      planned: false
-    },
-    {
-      id: "supabase:client",
-      family: "supabase",
-      adapter: "client",
-      label: "Supabase Client",
-      description:
-        "First-class Supabase client-only provider for API-first Supabase usage.",
-      tier: 1,
-      status: "available",
-      localService: false,
-      firstClassSupabase: true,
-      planned: false
-    }
-  ];
+    };
+  });
 
 export function listInitDatabaseProviders(): readonly InitDatabaseProviderDefinition[] {
   return initDatabaseProviderRegistry;
@@ -194,11 +92,17 @@ export function getInitDatabaseProvider(
 export function maybeGetInitDatabaseProvider(
   providerId: string | undefined
 ): InitDatabaseProviderDefinition | undefined {
-  if (!providerId || !isInitDatabaseProviderId(providerId)) {
+  if (!providerId) {
     return undefined;
   }
 
-  return getInitDatabaseProvider(providerId);
+  const normalizedProviderId = providerId.trim().toLowerCase();
+
+  if (!isInitDatabaseProviderId(normalizedProviderId)) {
+    return undefined;
+  }
+
+  return getInitDatabaseProvider(normalizedProviderId);
 }
 
 export function formatAvailableInitDatabaseProviderIds(): string {
@@ -208,7 +112,7 @@ export function formatAvailableInitDatabaseProviderIds(): string {
 export function validateInitDatabaseProviderId(
   providerId: string
 ): InitDatabaseProviderDefinition | undefined {
-  const normalizedProviderId = normalizeProviderId(providerId);
+  const normalizedProviderId = providerId.trim().toLowerCase();
 
   if (!isInitDatabaseProviderId(normalizedProviderId)) {
     return undefined;
@@ -217,71 +121,30 @@ export function validateInitDatabaseProviderId(
   return getInitDatabaseProvider(normalizedProviderId);
 }
 
-/**
- * Legacy compatibility adapter.
- *
- * Slice 14 centralizes provider IDs, but planner/validator still consume the
- * older DatabaseProviderDefinition shape. Slice 15 should migrate those
- * consumers to InitDatabaseProviderDefinition and then remove these aliases.
- */
-export function findDatabaseProvider(
-  providerId: string | undefined
-): LegacyDatabaseProviderDefinition | undefined {
-  const normalizedProviderId =
-    typeof providerId === "string" ? normalizeProviderId(providerId) : undefined;
+function normalizeFamily(family: string): InitDatabaseProviderFamily {
+  switch (family) {
+    case "postgres":
+    case "sqlite":
+    case "mongodb":
+    case "supabase":
+      return family;
 
-  const provider = maybeGetInitDatabaseProvider(normalizedProviderId);
-
-  return provider ? toLegacyProviderDefinition(provider) : undefined;
-}
-
-export function lookupDatabaseProvider(
-  providerId: string | undefined
-): LegacyDatabaseProviderDefinition {
-  const found = findDatabaseProvider(providerId);
-
-  if (found) {
-    return found;
+    default:
+      throw new Error(`Unsupported built-in database provider family: ${family}`);
   }
-
-  return toLegacyUnknownProviderDefinition(providerId);
 }
 
-export function normalizeProviderId(value: string): string {
-  return value.trim().toLowerCase();
-}
+function normalizeAdapter(adapter: string): InitDatabaseProviderAdapter {
+  switch (adapter) {
+    case "drizzle":
+    case "prisma":
+    case "native":
+    case "sql":
+    case "client":
+    case "supabase-client":
+      return adapter;
 
-export function formatAvailableDatabaseProviderIds(): string {
-  return listInitDatabaseProviderIds().join(", ");
-}
-
-function toLegacyProviderDefinition(
-  provider: InitDatabaseProviderDefinition
-): LegacyDatabaseProviderDefinition {
-  return {
-    ...provider,
-    status: "available"
-  } as unknown as LegacyDatabaseProviderDefinition;
-}
-
-function toLegacyUnknownProviderDefinition(
-  providerId: string | undefined
-): LegacyDatabaseProviderDefinition {
-  const id =
-    typeof providerId === "string" && providerId.trim().length > 0
-      ? normalizeProviderId(providerId)
-      : "unknown";
-
-  return {
-    id,
-    family: "custom",
-    adapter: "plugin",
-    label: id,
-    description: `Unsupported or unavailable database provider: ${id}`,
-    tier: 1,
-    status: "deferred",
-    localService: false,
-    firstClassSupabase: false,
-    planned: true
-  } as unknown as LegacyDatabaseProviderDefinition;
+    default:
+      throw new Error(`Unsupported built-in database provider adapter: ${adapter}`);
+  }
 }
