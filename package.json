@@ -12,13 +12,13 @@
     "docs/*"
   ],
   "scripts": {
+    "foundry": "bash tools/scripts/foundry.sh",
+    "foundry:build": "cd packages/cli && bun run build",
+    "foundry:typecheck": "cd packages/cli && bun run typecheck",
     "verify": "bash tools/scripts/verify.sh",
     "verify:contracts": "bash tools/scripts/verify-contracts.sh",
     "verify:generated": "bash tools/scripts/verify-generated.sh",
-    "verify:generators": "bash tools/scripts/verify-generators.sh",
-    "foundry": "cd packages/cli && bun run foundry",
-    "foundry:build": "cd packages/cli && bun run build",
-    "foundry:typecheck": "cd packages/cli && bun run typecheck"
+    "verify:generators": "bash tools/scripts/verify-generators.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",

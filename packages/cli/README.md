@@ -29,50 +29,87 @@ Plop	Small local package/file scaffolds
 Copier	Larger golden-template scaffolds
 Orval	OpenAPI-derived TypeScript client generation
 ￼
-Usage
+## Usage
+
+## Preferred Root Usage
+
+From the repository root:
+
+```bash
+bun run foundry -- generate --help
+bun run foundry -- generate --list
+```
+
+Preview a generator:
+
+```bash
+bun run foundry -- generate \
+  --generator package:typescript-library \
+  --name "logger"
+```
+
+Execute a generator:
+
+```bash
+bun run foundry -- generate \
+  --generator package:typescript-library \
+  --name "logger" \
+  --execute
+```
+
 From this package:
 
-Bash
-￼
+```Bash
 bun run typecheck
 bun run build
 node ./bin/run.js generate --help
+```
+
 From the repository root:
 
-Bash
-￼
+```Bash
 bun run verify
+```
+
 List Generators
-Bash
-￼
+
+```Bash
 node ./bin/run.js generate --list
+```
+
 Preview a Generator
-Bash
-￼
+
+```Bash
 node ./bin/run.js generate \
   --generator package:typescript-library \
   --name "logger"
+```
+
 Preview mode writes no scaffolded project files.
 
 Execute a Generator
-Bash
-￼
+
+```Bash
 node ./bin/run.js generate \
   --generator package:typescript-library \
   --name "logger" \
   --execute
+```
+
 Persist an Audit Log
-Bash
-￼
+```Bash
 node ./bin/run.js generate \
   --generator package:typescript-library \
   --name "logger" \
   --execute \
   --write-audit-log
+```
+
 Audit logs are written under:
 
 ￼
 .artifacts/foundry/audit/
+
 The .artifacts/ directory is local-only and must not be committed by default.
 
 Available MVP Generators

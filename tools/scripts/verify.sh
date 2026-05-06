@@ -16,6 +16,9 @@ if [[ -d "packages/cli" ]]; then
   )
 fi
 
+echo "==> Verifying root Foundry command"
+bun run foundry -- generate --list >/dev/null
+
 echo "==> Verifying workspace packages"
 if [[ -d "packages" ]]; then
   for package_dir in packages/*; do

@@ -31,18 +31,57 @@ The current MVP command is:
 foundry generate
 ```
 
+## Preferred Root Usage
+
+The preferred post-v1 invocation style is from the repository root:
+
+```bash
+bun run foundry -- generate --help
+bun run foundry -- generate --list
+```
+
+## Examples:
+
+```Bash
+bun run foundry -- generate \
+  --generator package:typescript-library \
+  --name "logger"
+```
+
+```Bash
+bun run foundry -- generate \
+  --generator package:typescript-library \
+  --name "logger" \
+  --execute
+```
+
+The -- separator ensures arguments after foundry are passed through to the CLI.
+
+￼
+
+
+
+
+
+
+
+
+
 From the repository root, run it through the CLI package:
 
 Bash
-￼
+```￼
 cd packages/cli
 node ./bin/run.js generate --help
 cd ../..
+```
+
 If the root package script is configured, use:
 
-Bash
-￼
+```Bash
 bun run foundry -- generate --help
+```
+
 Safety Model
 The CLI follows a conservative safety model.
 
@@ -50,14 +89,16 @@ By default, generator commands only preview planned operations.
 
 Files are written only when this flag is present:
 
-Bash
-￼
+```Bash
 --execute
+```
+
 Audit logs are written only when this flag is present:
 
-Bash
-￼
+```Bash
 --write-audit-log
+```
+
 The CLI blocks execution when:
 
 required inputs are missing;
@@ -97,6 +138,7 @@ node ./bin/run.js generate \
   --name "logger" \
   --execute
 cd ../..
+
 Execution performs:
 
 input validation;
