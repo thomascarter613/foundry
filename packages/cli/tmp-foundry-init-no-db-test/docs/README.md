@@ -1,3 +1,0 @@
-# docs
-
-Documentation lives here.
