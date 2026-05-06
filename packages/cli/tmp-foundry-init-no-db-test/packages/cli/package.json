@@ -1,0 +1,14 @@
+{
+  "name": "@foundry/workspace-cli",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.0.34"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}
