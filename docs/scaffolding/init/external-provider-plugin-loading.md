@@ -116,3 +116,11 @@ Only load provider plugins from trusted project dependencies or trusted local fi
 Do not load provider plugins from unreviewed sources.
 
 Do not allow provider plugins to generate secrets.
+
+## Related documentation
+
+See also:
+
+- `provider-plugin-interface.md` — provider plugin contract.
+- `provider-plugin-packages.md` — provider package authoring and loading guide.
+
