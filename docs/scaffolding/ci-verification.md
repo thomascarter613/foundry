@@ -1,0 +1,78 @@
+---
+title: "CI Verification"
+status: "accepted"
+version: "0.1.0"
+created: "2026-05-06"
+updated: "2026-05-06"
+owner: "Project Maintainer"
+classification: "internal"
+---
+
+# CI Verification
+
+## Purpose
+
+This document defines the initial continuous integration workflow for the repository.
+
+## Workflow
+
+The initial workflow is:
+
+```text
+.github/workflows/ci.yml
+```
+
+Trigger Policy
+CI runs on:
+
+￼
+pull_request
+push to main
+Permission Policy
+The workflow uses read-only repository contents permissions:
+
+YAML
+￼
+permissions:
+  contents: read
+Verification Command
+CI runs the same verification command used locally:
+
+Bash
+￼
+bun run verify
+CI Steps
+The workflow performs the following steps:
+
+checks out the repository;
+
+installs Bun;
+
+prints tool versions;
+
+installs dependencies using the lockfile;
+
+runs repository verification;
+
+confirms .artifacts/ is not tracked.
+
+Local Parity Rule
+If CI fails, reproduce locally with:
+
+Bash
+￼
+bun install
+bun run verify
+If the failure is lockfile-related, run:
+
+Bash
+￼
+bun install
+bun run verify
+git status --short
+Then commit the corrected lockfile if dependency metadata changed.
+
+Artifact Rule
+The .artifacts/ directory is local-only.
+
+CI may create .artifacts/ during generator smoke tests, but those files must not be tracked by Git.
