@@ -133,6 +133,10 @@ const requiredV1Files: readonly InitWorkspaceRequiredFile[] = [
     description: "Foundry metadata README."
   },
   {
+    path: ".foundry/manifest.json",
+    description: "Foundry lifecycle manifest."
+  },
+  {
     path: ".foundry/init/provenance.json",
     description: "Foundry init provenance metadata."
   },

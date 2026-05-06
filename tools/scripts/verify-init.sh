@@ -67,6 +67,7 @@ verify_workspace_baseline() {
   assert_file "$workspace/.scaffdog/config.js"
 
   assert_file "$workspace/.foundry/README.md"
+  assert_file "$workspace/.foundry/manifest.json"
   assert_file "$workspace/.foundry/init/provenance.json"
   assert_file "$workspace/.foundry/init/audit.ndjson"
 
@@ -89,11 +90,19 @@ import sys
 from pathlib import Path
 
 workspace = Path(sys.argv[1])
+manifest_path = workspace / ".foundry/manifest.json"
 provenance_path = workspace / ".foundry/init/provenance.json"
 audit_path = workspace / ".foundry/init/audit.ndjson"
 
+manifest = json.loads(manifest_path.read_text())
 provenance = json.loads(provenance_path.read_text())
 audit_lines = audit_path.read_text().splitlines()
+
+assert manifest["schemaVersion"] == 1
+assert manifest["workspace"]["name"]
+assert manifest["workspace"]["packageManager"] == "bun"
+assert manifest["lifecycle"]["model"] == "inspect-resolve-plan-apply-verify-document-audit-handoff"
+assert manifest["ai"]["providerRequired"] is False
 
 assert provenance["schemaVersion"] == 1
 assert provenance["generatedBy"]["command"] == "foundry init"

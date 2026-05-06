@@ -1,3 +1,5 @@
+import { createDefaultFoundryManifest } from "../manifest/defaults.js";
+
 export interface WorkspaceTemplateFile {
   readonly relativePath: string;
   readonly description: string;
@@ -347,6 +349,7 @@ test -f .gitattributes
 test -f .github/workflows/ci.yml
 test -f .github/pull_request_template.md
 test -f .foundry/README.md
+test -f .foundry/manifest.json
 test -f .foundry/init/provenance.json
 test -f .foundry/init/audit.ndjson
 test -f docs/ai/BOOTSTRAP_PROMPT.md
@@ -436,6 +439,11 @@ console.log("  generate --list");
     directoryReadme("contracts/openapi/README.md", "OpenAPI contracts live here."),
     directoryReadme("generated/README.md", "Generated artifacts live here."),
     directoryReadme("generated/clients/README.md", "Generated API clients live here."),
+    {
+      relativePath: ".foundry/manifest.json",
+      description: "Foundry lifecycle manifest.",
+      contents: buildFoundryManifest(input)
+    },
     {
       relativePath: "config/foundry/generator-manifest.json",
       description: "Foundry generator manifest.",
@@ -548,6 +556,19 @@ This workspace includes:
 - AI continuity anchors: \`docs/ai/BOOTSTRAP_PROMPT.md\`, \`docs/ai/CURRENT_STATE.md\`;
 - Foundry provenance: \`.foundry/init/provenance.json\`, \`.foundry/init/audit.ndjson\`.
 `;
+}
+
+function buildFoundryManifest(input: BaseWorkspaceTemplateInput): string {
+  const manifestInput = input.databaseProvider
+    ? {
+        workspaceName: input.workspaceName,
+        databaseProviderId: input.databaseProvider
+      }
+    : {
+        workspaceName: input.workspaceName
+      };
+
+  return json(createDefaultFoundryManifest(manifestInput));
 }
 
 function buildGeneratorManifest(databaseProvider: string | undefined): string {

@@ -48,7 +48,7 @@ export function createDefaultFoundryManifest(
     input.databaseProviderId
   );
 
-  return {
+  const manifestBase = {
     schemaVersion: 1,
     foundryVersion: "1.0.0",
     workspace: {
@@ -109,13 +109,18 @@ export function createDefaultFoundryManifest(
           required: false
         }
       ]
-    },
-    providers:
-      databaseProviders.length > 0
-        ? {
-            database: databaseProviders
-          }
-        : undefined
+    }
+  } satisfies Omit<FoundryManifest, "providers">;
+
+  if (databaseProviders.length === 0) {
+    return manifestBase;
+  }
+
+  return {
+    ...manifestBase,
+    providers: {
+      database: databaseProviders
+    }
   };
 }
 

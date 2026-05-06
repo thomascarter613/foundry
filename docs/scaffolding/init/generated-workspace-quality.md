@@ -26,6 +26,7 @@ SECURITY.md
 docs/ai/BOOTSTRAP_PROMPT.md
 docs/ai/CURRENT_STATE.md
 .foundry/README.md
+.foundry/manifest.json
 .foundry/init/provenance.json
 .foundry/init/audit.ndjson
 Verification

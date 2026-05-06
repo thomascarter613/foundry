@@ -94,6 +94,7 @@ config/foundry/generator-manifest.json
 .scaffdog/config.js
 templates/README.md
 .foundry/README.md
+.foundry/manifest.json
 .foundry/init/provenance.json
 .foundry/init/audit.ndjson
 
