@@ -85,3 +85,12 @@ bash tools/scripts/verify-generated.sh
 bash tools/scripts/verify-generators.sh
 
 echo "==> Verification complete"
+
+# BEGIN foundry init smoke verification
+if [[ "${FOUNDRY_SKIP_INIT_VERIFY:-0}" != "1" ]]; then
+  echo "verify: init smoke tests"
+  bash "$ROOT_DIR/tools/scripts/verify-init.sh"
+else
+  echo "verify: init smoke tests skipped because FOUNDRY_SKIP_INIT_VERIFY=1"
+fi
+# END foundry init smoke verification
