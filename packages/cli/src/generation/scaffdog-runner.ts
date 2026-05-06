@@ -22,14 +22,13 @@ export async function runScaffdogGenerator(
 ): Promise<ScaffdogRunResult> {
   const repositoryRoot = await findRepositoryRoot(options.cwd ?? process.cwd());
   const documentName = resolveScaffdogDocumentName(options.generatorId);
-
   const args = [
     "x",
     "scaffdog",
     "generate",
     documentName,
     "--project",
-    repositoryRoot,
+    path.join(repositoryRoot, ".scaffdog"),
     "--output",
     ".",
     "--force",
