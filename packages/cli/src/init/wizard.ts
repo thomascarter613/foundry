@@ -1,16 +1,13 @@
 import { stdin as input, stdout as output } from "node:process";
 import { createInterface } from "node:readline/promises";
 
-export type InitWizardDatabaseProviderId =
-  | "postgres:drizzle"
-  | "postgres:prisma"
-  | "sqlite:drizzle"
-  | "sqlite:prisma"
-  | "mongodb:native"
-  | "supabase:sql"
-  | "supabase:drizzle"
-  | "supabase:prisma"
-  | "supabase:client";
+import {
+  isInitDatabaseProviderId,
+  supportedInitDatabaseProviders,
+  type InitDatabaseProviderId
+} from "./database/providers.js";
+
+export type InitWizardDatabaseProviderId = InitDatabaseProviderId;
 
 export interface InitWizardSeed {
   readonly destination: string | undefined;
@@ -27,17 +24,7 @@ export interface InitWizardAnswers {
   readonly confirmed: boolean;
 }
 
-const databaseProviders: readonly InitWizardDatabaseProviderId[] = [
-  "postgres:drizzle",
-  "postgres:prisma",
-  "sqlite:drizzle",
-  "sqlite:prisma",
-  "mongodb:native",
-  "supabase:sql",
-  "supabase:drizzle",
-  "supabase:prisma",
-  "supabase:client"
-];
+const databaseProviders = supportedInitDatabaseProviders();
 
 export async function runInitWizard(
   seed: InitWizardSeed
@@ -101,7 +88,7 @@ export async function runInitWizard(
 export function isInitWizardDatabaseProviderId(
   value: string
 ): value is InitWizardDatabaseProviderId {
-  return databaseProviders.includes(value as InitWizardDatabaseProviderId);
+  return isInitDatabaseProviderId(value);
 }
 
 export function supportedInitWizardDatabaseProviders(): readonly InitWizardDatabaseProviderId[] {
@@ -178,7 +165,7 @@ async function askDatabaseProvider(
       return databaseProviders[byNumber - 1]!;
     }
 
-    if (isInitWizardDatabaseProviderId(answer)) {
+    if (isInitDatabaseProviderId(answer)) {
       return answer;
     }
 
@@ -191,7 +178,7 @@ async function askDatabaseProvider(
 function normalizeSeededProvider(
   provider: string | undefined
 ): InitWizardDatabaseProviderId {
-  if (provider && isInitWizardDatabaseProviderId(provider)) {
+  if (provider && isInitDatabaseProviderId(provider)) {
     return provider;
   }
 

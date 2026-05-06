@@ -1,13 +1,11 @@
-export type DatabaseTemplateProviderId =
-  | "postgres:drizzle"
-  | "postgres:prisma"
-  | "sqlite:drizzle"
-  | "sqlite:prisma"
-  | "mongodb:native"
-  | "supabase:sql"
-  | "supabase:drizzle"
-  | "supabase:prisma"
-  | "supabase:client";
+import {
+  normalizeInitDatabaseProviderId,
+  isInitDatabaseProviderId,
+  supportedInitDatabaseProviders,
+  type InitDatabaseProviderId
+} from "./providers.js";
+
+export type DatabaseTemplateProviderId = InitDatabaseProviderId;
 
 export interface DatabaseTemplateFile {
   readonly relativePath: string;
@@ -30,41 +28,13 @@ export interface DatabaseProviderMetadata {
   readonly firstClassSupabase: boolean;
 }
 
-const databaseProviders: readonly DatabaseTemplateProviderId[] = [
-  "postgres:drizzle",
-  "postgres:prisma",
-  "sqlite:drizzle",
-  "sqlite:prisma",
-  "mongodb:native",
-  "supabase:sql",
-  "supabase:drizzle",
-  "supabase:prisma",
-  "supabase:client"
-];
+export const supportedDatabaseTemplateProviders =
+  supportedInitDatabaseProviders;
 
-export function supportedDatabaseTemplateProviders(): readonly DatabaseTemplateProviderId[] {
-  return databaseProviders;
-}
+export const isDatabaseTemplateProviderId = isInitDatabaseProviderId;
 
-export function isDatabaseTemplateProviderId(
-  value: string
-): value is DatabaseTemplateProviderId {
-  return databaseProviders.includes(value as DatabaseTemplateProviderId);
-}
-
-export function normalizeDatabaseTemplateProviderId(
-  rawProvider: string
-): DatabaseTemplateProviderId {
-  const provider = rawProvider.trim();
-
-  if (isDatabaseTemplateProviderId(provider)) {
-    return provider;
-  }
-
-  throw new Error(
-    `Unsupported database provider: ${rawProvider}. Supported providers: ${databaseProviders.join(", ")}`
-  );
-}
+export const normalizeDatabaseTemplateProviderId =
+  normalizeInitDatabaseProviderId;
 
 export function getDatabaseProviderMetadata(
   provider: DatabaseTemplateProviderId
