@@ -1,3 +1,8 @@
+import {
+  formatAvailableDatabaseProviderIds,
+  lookupDatabaseProvider,
+  normalizeProviderId
+} from "./database/registry.js";
 import type {
   InitConfig,
   InitDatabaseOption,
@@ -30,36 +35,6 @@ const RESERVED_NAMES = new Set([
   "lpt9",
   "nul",
   "prn"
-]);
-
-const AVAILABLE_PROVIDER_IDS = new Set([
-  "postgres:drizzle",
-  "postgres:prisma",
-  "sqlite:drizzle",
-  "sqlite:prisma",
-  "mongodb:native",
-  "supabase:sql",
-  "supabase:drizzle",
-  "supabase:prisma",
-  "supabase:client"
-]);
-
-const PLANNED_PROVIDER_IDS = new Set([
-  "mysql:drizzle",
-  "mysql:prisma",
-  "mariadb:drizzle",
-  "mariadb:prisma",
-  "mongodb:prisma",
-  "neon:drizzle",
-  "neon:prisma",
-  "turso:drizzle",
-  "libsql:drizzle",
-  "cloudflare-d1:drizzle",
-  "cockroachdb:prisma",
-  "sqlserver:prisma",
-  "singlestore:drizzle",
-  "planetscale:drizzle",
-  "custom:plugin"
 ]);
 
 export function validateInitConfig(config: InitConfig): InitValidationResult {
@@ -232,7 +207,7 @@ function validateDatabaseOptions(databases: readonly InitDatabaseOption[]): Init
 }
 
 function validateProviderId(providerId: string): InitValidationIssue[] {
-  const normalizedProviderId = providerId.trim().toLowerCase();
+  const normalizedProviderId = normalizeProviderId(providerId);
 
   if (normalizedProviderId.length === 0) {
     return [
@@ -254,16 +229,18 @@ function validateProviderId(providerId: string): InitValidationIssue[] {
     ];
   }
 
-  if (AVAILABLE_PROVIDER_IDS.has(normalizedProviderId)) {
+  const lookup = lookupDatabaseProvider(normalizedProviderId);
+
+  if (lookup.status === "available") {
     return [];
   }
 
-  if (PLANNED_PROVIDER_IDS.has(normalizedProviderId)) {
+  if (lookup.status === "planned" || lookup.status === "deferred") {
     return [
       {
         level: "error",
-        code: "database-provider-planned-not-implemented",
-        message: `Database provider "${providerId}" is planned but not implemented in the current init slice.`
+        code: "database-provider-not-implemented",
+        message: `Database provider "${providerId}" is ${lookup.status} but not implemented in the current init slice.`
       }
     ];
   }
@@ -272,7 +249,12 @@ function validateProviderId(providerId: string): InitValidationIssue[] {
     {
       level: "error",
       code: "database-provider-unknown",
-      message: `Database provider "${providerId}" is not recognized.`
+      message: [
+        `Database provider "${providerId}" is not recognized.`,
+        "",
+        "Available providers:",
+        formatAvailableDatabaseProviderIds()
+      ].join("\n")
     }
   ];
 }
@@ -280,13 +262,12 @@ function validateProviderId(providerId: string): InitValidationIssue[] {
 function validateProviderCombinations(databases: readonly InitDatabaseOption[]): InitValidationIssue[] {
   const issues: InitValidationIssue[] = [];
 
-  const hasSupabaseClient = databases.some((database) => database.providerId === "supabase:client");
-  const hasSupabaseRuntime = databases.some(
-    (database) =>
-      database.providerId === "supabase:sql" ||
-      database.providerId === "supabase:drizzle" ||
-      database.providerId === "supabase:prisma"
-  );
+  const providerIds = databases.map((database) => normalizeProviderId(database.providerId));
+  const hasSupabaseClient = providerIds.includes("supabase:client");
+  const hasSupabaseRuntime =
+    providerIds.includes("supabase:sql") ||
+    providerIds.includes("supabase:drizzle") ||
+    providerIds.includes("supabase:prisma");
 
   if (hasSupabaseClient && !hasSupabaseRuntime) {
     issues.push({
@@ -297,7 +278,7 @@ function validateProviderCombinations(databases: readonly InitDatabaseOption[]):
     });
   }
 
-  const prismaConnections = databases.filter((database) => database.providerId.endsWith(":prisma"));
+  const prismaConnections = providerIds.filter((providerId) => providerId.endsWith(":prisma"));
 
   if (prismaConnections.length > 1) {
     issues.push({
