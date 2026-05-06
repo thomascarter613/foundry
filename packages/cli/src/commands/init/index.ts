@@ -13,7 +13,8 @@ export default class Init extends Command {
 Initialize a new, tested, monorepo-ready workspace with an embedded Foundry CLI.
 
 This command is currently in dry-run planning mode only. It validates inputs and
-prints the workspace, database, script, and post-init plan without writing files.
+prints the workspace, database, dependency, script, and post-init plan without
+writing files.
 `;
 
   static override examples = [
@@ -143,17 +144,74 @@ prints the workspace, database, script, and post-init plan without writing files
     this.log("Planned scripts:");
     for (const script of plan.scripts) {
       this.log(`- ${script.name}: ${script.command}`);
+      this.log(`  ${script.description}`);
     }
 
-    if (plan.databases.length > 0) {
+    if (plan.databaseConnections.length > 0) {
       this.log("");
       this.log("Planned database connections:");
-      for (const database of plan.databases) {
+      for (const database of plan.databaseConnections) {
         this.log(`- ${database.connectionName}: ${database.providerId}`);
+        this.log(`  provider: ${database.providerDisplayName}`);
+        this.log(`  database: ${database.database}`);
+        this.log(`  toolkit: ${database.toolkit}`);
+        this.log(`  migrations: ${database.supportsMigrations ? "yes" : "no"}`);
+        this.log(`  seeding: ${database.supportsSeeding ? "yes" : "no"}`);
+        this.log(`  rollback: ${database.supportsRollback}`);
+        this.log(`  docker compose: ${database.supportsDockerCompose ? "yes" : "no"}`);
+        this.log(`  supabase local stack: ${database.supportsSupabaseLocalStack ? "yes" : "no"}`);
+
+        if (database.generatedFilePatterns.length > 0) {
+          this.log("  provider file patterns:");
+          for (const filePattern of database.generatedFilePatterns) {
+            this.log(`  - ${filePattern}`);
+          }
+        }
+
+        if (database.notes.length > 0) {
+          this.log("  notes:");
+          for (const note of database.notes) {
+            this.log(`  - ${note}`);
+          }
+        }
       }
     } else {
       this.log("");
       this.log("Planned database connections: none");
+    }
+
+    if (plan.dependencies.length > 0) {
+      this.log("");
+      this.log("Planned dependencies:");
+      for (const dependency of plan.dependencies) {
+        this.log(`- ${dependency.name}`);
+        this.log(`  requested by: ${dependency.requestedBy.join(", ")}`);
+      }
+    }
+
+    if (plan.devDependencies.length > 0) {
+      this.log("");
+      this.log("Planned dev dependencies:");
+      for (const dependency of plan.devDependencies) {
+        this.log(`- ${dependency.name}`);
+        this.log(`  requested by: ${dependency.requestedBy.join(", ")}`);
+      }
+    }
+
+    if (plan.envVars.length > 0) {
+      this.log("");
+      this.log("Planned environment variables:");
+      for (const envVar of plan.envVars) {
+        this.log(`- ${envVar.name}`);
+        this.log(`  required: ${envVar.required ? "yes" : "no"}`);
+        this.log(`  secret: ${envVar.secret ? "yes" : "no"}`);
+        this.log(`  ${envVar.description}`);
+        if (envVar.example) {
+          this.log(`  example: ${envVar.example}`);
+        }
+
+        this.log(`  requested by: ${envVar.requestedBy.join(", ")}`);
+      }
     }
 
     const warnings = [

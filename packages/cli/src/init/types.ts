@@ -1,3 +1,9 @@
+import type {
+  DatabaseKind,
+  DatabaseRollbackSupport,
+  DatabaseToolkit
+} from "./database/types.js";
+
 export type InitDatabaseSelectionMode = "none" | "one" | "multiple";
 
 export type InitValidationIssueLevel = "warning" | "error";
@@ -43,6 +49,37 @@ export interface InitPlanDirectory {
 export interface InitPlanScript {
   readonly name: string;
   readonly command: string;
+  readonly description: string;
+}
+
+export interface InitPlanDependency {
+  readonly name: string;
+  readonly requestedBy: readonly string[];
+}
+
+export interface InitPlanEnvVar {
+  readonly name: string;
+  readonly description: string;
+  readonly required: boolean;
+  readonly secret: boolean;
+  readonly requestedBy: readonly string[];
+  readonly example?: string;
+}
+
+export interface InitPlanDatabaseConnection {
+  readonly connectionName: string;
+  readonly providerId: string;
+  readonly providerDisplayName: string;
+  readonly database: DatabaseKind;
+  readonly toolkit: DatabaseToolkit;
+  readonly supportsMigrations: boolean;
+  readonly supportsSeeding: boolean;
+  readonly supportsRollback: DatabaseRollbackSupport;
+  readonly supportsDockerCompose: boolean;
+  readonly supportsSupabaseLocalStack: boolean;
+  readonly supportsHostedConnection: boolean;
+  readonly generatedFilePatterns: readonly string[];
+  readonly notes: readonly string[];
 }
 
 export interface InitPlan {
@@ -54,6 +91,10 @@ export interface InitPlan {
   readonly files: readonly InitPlanFile[];
   readonly scripts: readonly InitPlanScript[];
   readonly databases: readonly InitDatabaseOption[];
+  readonly databaseConnections: readonly InitPlanDatabaseConnection[];
+  readonly dependencies: readonly InitPlanDependency[];
+  readonly devDependencies: readonly InitPlanDependency[];
+  readonly envVars: readonly InitPlanEnvVar[];
   readonly postInitCommands: readonly string[];
   readonly warnings: readonly string[];
 }

@@ -1,11 +1,13 @@
+import { createDatabaseWorkspacePlan, type DatabaseWorkspacePlan } from "./database/planner.js";
 import type { InitConfig, InitPlan, InitPlanDirectory, InitPlanFile, InitPlanScript } from "./types.js";
 
 export function createInitPlan(config: InitConfig): InitPlan {
-  const directories = createDirectoryPlan(config);
-  const files = createFilePlan(config);
-  const scripts = createScriptPlan(config);
+  const databasePlan = createDatabaseWorkspacePlan(config.databases);
+  const directories = createDirectoryPlan(config, databasePlan);
+  const files = createFilePlan(config, databasePlan);
+  const scripts = createScriptPlan(databasePlan);
   const postInitCommands = createPostInitCommands(config);
-  const warnings = createWarnings(config);
+  const warnings = createWarnings(config, databasePlan);
 
   return {
     projectName: config.projectName,
@@ -16,12 +18,16 @@ export function createInitPlan(config: InitConfig): InitPlan {
     files,
     scripts,
     databases: config.databases,
+    databaseConnections: databasePlan.connections,
+    dependencies: databasePlan.dependencies,
+    devDependencies: databasePlan.devDependencies,
+    envVars: databasePlan.envVars,
     postInitCommands,
     warnings
   };
 }
 
-function createDirectoryPlan(config: InitConfig): InitPlanDirectory[] {
+function createDirectoryPlan(config: InitConfig, databasePlan: DatabaseWorkspacePlan): InitPlanDirectory[] {
   const directories: InitPlanDirectory[] = [
     {
       path: config.destination,
@@ -104,64 +110,17 @@ function createDirectoryPlan(config: InitConfig): InitPlanDirectory[] {
     }
   );
 
-  if (config.databases.length > 0) {
-    directories.push(
-      {
-        path: `${config.destination}/config/database`,
-        description: "Database connection manifest."
-      },
-      {
-        path: `${config.destination}/db`,
-        description: "Database schemas, migrations, seeds, rollbacks, and provider files."
-      }
-    );
-
-    for (const database of config.databases) {
-      directories.push(
-        {
-          path: `${config.destination}/db/${database.connectionName}/schema`,
-          description: `Schema files for ${database.connectionName}.`
-        },
-        {
-          path: `${config.destination}/db/${database.connectionName}/migrations`,
-          description: `Migration files for ${database.connectionName}.`
-        },
-        {
-          path: `${config.destination}/db/${database.connectionName}/rollbacks`,
-          description: `Rollback files for ${database.connectionName}.`
-        },
-        {
-          path: `${config.destination}/db/${database.connectionName}/seeds`,
-          description: `Seed files for ${database.connectionName}.`
-        }
-      );
-
-      if (database.providerId.startsWith("supabase:")) {
-        directories.push(
-          {
-            path: `${config.destination}/supabase/migrations`,
-            description: "Supabase SQL migrations."
-          },
-          {
-            path: `${config.destination}/supabase/functions`,
-            description: "Supabase Edge Functions."
-          }
-        );
-      }
-
-      if (database.providerId.endsWith(":prisma")) {
-        directories.push({
-          path: `${config.destination}/prisma/${database.connectionName}`,
-          description: `Prisma schema directory for ${database.connectionName}.`
-        });
-      }
-    }
+  for (const directory of databasePlan.directories) {
+    directories.push({
+      path: `${config.destination}/${directory.path}`,
+      description: directory.description
+    });
   }
 
   return directories;
 }
 
-function createFilePlan(config: InitConfig): InitPlanFile[] {
+function createFilePlan(config: InitConfig, databasePlan: DatabaseWorkspacePlan): InitPlanFile[] {
   const files: InitPlanFile[] = [
     {
       path: `${config.destination}/package.json`,
@@ -199,112 +158,32 @@ function createFilePlan(config: InitConfig): InitPlanFile[] {
     });
   }
 
-  if (config.databases.length > 0) {
-    files.push(
-      {
-        path: `${config.destination}/.env.example`,
-        description: "Database environment variable template."
-      },
-      {
-        path: `${config.destination}/config/database/connections.json`,
-        description: "Database connection manifest."
-      },
-      {
-        path: `${config.destination}/tools/scripts/db.ts`,
-        description: "Unified database lifecycle dispatcher."
-      }
-    );
-
-    for (const database of config.databases) {
-      if (database.providerId.startsWith("supabase:")) {
-        files.push(
-          {
-            path: `${config.destination}/supabase/config.toml`,
-            description: "Supabase local project config."
-          },
-          {
-            path: `${config.destination}/supabase/seed.sql`,
-            description: "Supabase seed SQL."
-          }
-        );
-      }
-
-      if (database.providerId.endsWith(":prisma")) {
-        files.push({
-          path: `${config.destination}/prisma/${database.connectionName}/schema.prisma`,
-          description: `Prisma schema for ${database.connectionName}.`
-        });
-      }
-    }
+  for (const file of databasePlan.files) {
+    files.push({
+      path: `${config.destination}/${file.path}`,
+      description: file.description
+    });
   }
 
   return files;
 }
 
-function createScriptPlan(config: InitConfig): InitPlanScript[] {
+function createScriptPlan(databasePlan: DatabaseWorkspacePlan): InitPlanScript[] {
   const scripts: InitPlanScript[] = [
     {
       name: "foundry",
-      command: "bash tools/scripts/foundry.sh"
+      command: "bash tools/scripts/foundry.sh",
+      description: "Run the embedded Foundry CLI from the repository root."
     },
     {
       name: "verify",
-      command: "bash tools/scripts/verify.sh"
+      command: "bash tools/scripts/verify.sh",
+      description: "Run full repository verification."
     }
   ];
 
-  if (config.databases.length > 0) {
-    scripts.push(
-      {
-        name: "db:check",
-        command: "bun run tools/scripts/db.ts check"
-      },
-      {
-        name: "db:up",
-        command: "bun run tools/scripts/db.ts up"
-      },
-      {
-        name: "db:down",
-        command: "bun run tools/scripts/db.ts down"
-      },
-      {
-        name: "db:migrate",
-        command: "bun run tools/scripts/db.ts migrate"
-      },
-      {
-        name: "db:seed",
-        command: "bun run tools/scripts/db.ts seed"
-      },
-      {
-        name: "db:rollback",
-        command: "bun run tools/scripts/db.ts rollback"
-      },
-      {
-        name: "db:reset",
-        command: "bun run tools/scripts/db.ts reset"
-      }
-    );
-
-    if (config.databases.some((database) => database.providerId.startsWith("supabase:"))) {
-      scripts.push(
-        {
-          name: "supabase:start",
-          command: "supabase start"
-        },
-        {
-          name: "supabase:stop",
-          command: "supabase stop"
-        },
-        {
-          name: "supabase:status",
-          command: "supabase status"
-        },
-        {
-          name: "supabase:reset",
-          command: "supabase db reset"
-        }
-      );
-    }
+  for (const script of databasePlan.scripts) {
+    scripts.push(script);
   }
 
   return scripts;
@@ -326,16 +205,14 @@ function createPostInitCommands(config: InitConfig): string[] {
   return commands;
 }
 
-function createWarnings(config: InitConfig): string[] {
+function createWarnings(config: InitConfig, databasePlan: DatabaseWorkspacePlan): string[] {
   const warnings: string[] = [];
 
   if (config.databases.length > 0) {
-    warnings.push("Database files are planned but not written in this slice.");
+    warnings.push("Database provider files are planned but not written in this slice.");
   }
 
-  if (config.databases.some((database) => database.providerId.startsWith("supabase:"))) {
-    warnings.push("Supabase providers may require the Supabase CLI and Docker for local runtime workflows.");
-  }
+  warnings.push(...databasePlan.warnings);
 
   return warnings;
 }
