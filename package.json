@@ -19,7 +19,8 @@
     "verify:contracts": "bash tools/scripts/verify-contracts.sh",
     "verify:generated": "bash tools/scripts/verify-generated.sh",
     "verify:generators": "bash tools/scripts/verify-generators.sh",
-    "verify:generator-manifest": "bash tools/scripts/verify-generator-manifest.sh"
+    "verify:generator-manifest": "bash tools/scripts/verify-generator-manifest.sh",
+    "verify:init": "bash tools/scripts/verify-init.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
