@@ -141,6 +141,62 @@ function createFilePlan(config: InitConfig, databasePlan: DatabaseWorkspacePlan)
     {
       path: `${config.destination}/turbo.json`,
       description: "Task orchestration config."
+    },
+    {
+      path: `${config.destination}/tools/scripts/foundry.sh`,
+      description: "Root Foundry CLI wrapper."
+    },
+    {
+      path: `${config.destination}/tools/scripts/verify.sh`,
+      description: "Root verification script."
+    },
+    {
+      path: `${config.destination}/packages/cli/bin/run.js`,
+      description: "Embedded Foundry CLI executable."
+    },
+    {
+      path: `${config.destination}/docs/README.md`,
+      description: "Documentation directory README."
+    },
+    {
+      path: `${config.destination}/apps/README.md`,
+      description: "Applications directory README."
+    },
+    {
+      path: `${config.destination}/services/README.md`,
+      description: "Services directory README."
+    },
+    {
+      path: `${config.destination}/packages/README.md`,
+      description: "Packages directory README."
+    },
+    {
+      path: `${config.destination}/tools/README.md`,
+      description: "Tools directory README."
+    },
+    {
+      path: `${config.destination}/contracts/openapi/README.md`,
+      description: "OpenAPI contracts README."
+    },
+    {
+      path: `${config.destination}/generated/README.md`,
+      description: "Generated artifacts README."
+    },
+    {
+      path: `${config.destination}/generated/clients/README.md`,
+      description: "Generated API clients README."
+    },
+    {
+      path: `${config.destination}/config/foundry/generator-manifest.json`,
+      description: "Generated Foundry generator manifest."
+    },
+    {
+      path: `${config.destination}/.scaffdog/config.js`,
+      description: "Scaffdog configuration."
+    },
+    {
+      path: `${config.destination}/templates/README.md`,
+      description: "Templates directory README."
     }
   ];
 

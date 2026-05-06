@@ -5,6 +5,7 @@ import { createInitPlan } from "../../init/planner.js";
 import { validateDestination } from "../../init/path-safety.js";
 import type { InitDatabaseOption, InitPlan, InitValidationIssue } from "../../init/types.js";
 import { formatInitValidationFailure, validateInitConfig } from "../../init/validator.js";
+import { writeInitWorkspace } from "../../init/writer.js";
 
 export default class Init extends Command {
   static override summary = "Initialize a new Foundry monorepo workspace.";
@@ -12,15 +13,18 @@ export default class Init extends Command {
   static override description = `
 Initialize a new, tested, monorepo-ready workspace with an embedded Foundry CLI.
 
-This command is currently in dry-run planning mode only. It validates inputs and
-prints the workspace, database, dependency, script, and post-init plan without
-writing files.
+Database-enabled workspaces are currently dry-run only. No-database workspaces
+can be written with --yes and without --dry-run.
 `;
 
   static override examples = [
     {
       description: "Preview a no-database workspace.",
       command: "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install --dry-run"
+    },
+    {
+      description: "Create a no-database workspace.",
+      command: "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install"
     },
     {
       description: "Preview a Supabase + Drizzle workspace.",
@@ -30,10 +34,6 @@ writing files.
       description: "Preview a Supabase + MongoDB multi-database workspace.",
       command:
         "<%= config.bin %> <%= command.id %> myapp --db primary=supabase:drizzle --db documents=mongodb:native --yes --no-install --dry-run"
-    },
-    {
-      description: "Verify invalid provider handling.",
-      command: "<%= config.bin %> <%= command.id %> myapp --db primary=unknown:provider --yes --dry-run"
     }
   ];
 
@@ -50,7 +50,7 @@ writing files.
       multiple: true
     }),
     "dry-run": Flags.boolean({
-      default: true,
+      default: false,
       description: "Preview the workspace initialization plan without writing files."
     }),
     "no-database": Flags.boolean({
@@ -108,14 +108,61 @@ writing files.
 
     const plan = createInitPlan(config);
 
-    this.printPlan(plan, allIssues);
-
-    this.log("");
-    this.log("No files were written. File writing will be added in the template-writer slice.");
-    this.log("");
+    if (flags["dry-run"]) {
+      this.printPlan(plan, allIssues);
+      this.log("");
+      this.log("No files were written because --dry-run was provided.");
+      return;
+    }
 
     if (!flags.yes) {
-      this.log("Interactive prompts are not implemented yet. Use --yes for non-interactive dry-run previews.");
+      this.error(
+        [
+          "Interactive prompts are not implemented yet.",
+          "",
+          "Use --yes for non-interactive workspace initialization, or use --dry-run to preview."
+        ].join("\n"),
+        { exit: 1 }
+      );
+    }
+
+    if (config.databases.length > 0) {
+      this.printPlan(plan, allIssues);
+      this.log("");
+      this.error(
+        "Database-enabled workspace writing is not implemented in this slice. Use --dry-run or --no-database.",
+        { exit: 1 }
+      );
+    }
+
+    const result = await writeInitWorkspace({
+      config,
+      plan
+    });
+
+    this.log(`Initialized Foundry workspace: ${result.destination}`);
+    this.log("");
+    this.log(`Directories created: ${result.directoriesCreated}`);
+    this.log(`Files written: ${result.filesWritten}`);
+    this.log("");
+
+    this.log("Written files:");
+    for (const file of result.files) {
+      this.log(`- ${file}`);
+    }
+
+    this.log("");
+    this.log("Next steps:");
+    this.log(`- cd ${result.destination}`);
+
+    if (config.installDependencies) {
+      this.log("- bun install");
+    }
+
+    this.log("- bun run foundry -- generate --list");
+
+    if (config.runVerification) {
+      this.log("- bun run verify");
     }
   }
 
