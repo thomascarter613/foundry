@@ -96,3 +96,5 @@ fi
 # END foundry init smoke verification
 
 bash "$ROOT_DIR/tools/scripts/verify-init-provider-plugins.sh"
+
+bash "$ROOT_DIR/tools/scripts/verify-init-external-provider-plugins.sh"
