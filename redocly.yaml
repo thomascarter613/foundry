@@ -1,0 +1,13 @@
+apis:
+  gov-api:
+    root: contracts/openapi/gov-api.yaml
+
+extends:
+  - recommended
+
+rules:
+  no-unused-components: warn
+  operation-operationId: error
+  operation-summary: error
+  operation-2xx-response: error
+  security-defined: off

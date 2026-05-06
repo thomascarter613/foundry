@@ -18,6 +18,7 @@
     "foundry:typecheck": "cd packages/cli && bun run typecheck"
   },
   "devDependencies": {
+    "@redocly/cli": "^2.30.3",
     "@types/bun": "latest",
     "orval": "^8.9.1",
     "plop": "^4.0.5",

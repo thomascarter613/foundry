@@ -75,6 +75,7 @@ if [[ -d "services" ]]; then
   done
 fi
 
+bash tools/scripts/verify-contracts.sh
 bash tools/scripts/verify-generated.sh
 
 echo "==> Verification complete"
