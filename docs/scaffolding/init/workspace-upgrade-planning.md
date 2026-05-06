@@ -94,3 +94,33 @@ Policy
 Upgrade planning must remain safe by default.
 
 Read-only planning should be available before mutating upgrades.
+
+## Command
+
+The read-only upgrade command is:
+
+```bash
+bun run foundry -- init upgrade
+To inspect a specific workspace:
+
+Bash
+￼
+bun run foundry -- init upgrade myapp
+To print JSON:
+
+Bash
+￼
+bun run foundry -- init upgrade myapp --json
+To use the command as a CI check:
+
+Bash
+￼
+bun run foundry -- init upgrade myapp --check
+--check exits successfully only when the workspace status is current.
+
+Mutation policy
+The current command is read-only.
+
+It does not create, edit, remove, or overwrite files.
+
+A future mutating upgrade command must require explicit execution and must preserve or audit user-edited files.
