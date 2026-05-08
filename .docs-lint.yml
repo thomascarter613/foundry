@@ -1,0 +1,38 @@
+version: 1
+mode: bootstrap
+
+roots:
+  docs: docs
+
+documentTypes:
+  Planning: docs/planning
+  Governance: docs/governance
+  Architecture: docs/architecture
+  Lifecycle: docs/lifecycle
+  Standard: docs/standards
+  Platform: docs/platform
+  Onboarding: docs/onboarding
+  ChangePlan: docs/changeplans
+
+rules:
+  requireFrontmatter: true
+  rejectContentReferenceArtifacts: true
+  rejectMergeConflictMarkers: true
+  requireCanonicalDocumentTypeDirectories: false
+  requireUpstreamDownstreamLinks: false
+  requireGovernanceLinks: false
+  requireAdrLinks: false
+  requireGlossaryTerms: false
+  validateGraph: false
+  validateDrift: false
+  metadata:
+    required: true
+  forbiddenArtifacts:
+    - contentReference[oaicite:
+  mergeConflictMarkers:
+    enabled: true
+  graph:
+    enabled: false
+  drift:
+    enabled: false
+
