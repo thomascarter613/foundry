@@ -1,3 +1,17 @@
+---
+title: "Adrlinks"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 adrlinks.md
 Below is the **complete, governed, canonical definition of ADR Links** — the link type that gives your architecture **lineage**, **memory**, **traceability**, and **machine‑actionable authority**.
 

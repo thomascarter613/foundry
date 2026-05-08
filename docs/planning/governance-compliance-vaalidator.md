@@ -1,3 +1,17 @@
+---
+title: "Governance Compliance Validator"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governance-compliance-vaalidator.md
 Below is the **complete, governed, canonical specification** for the **Governance Compliance Validator** — the subsystem that ensures *every document, every dependency, every rule, every ADR, every glossary term, every diagram, and every structural element* complies with the **governance model** of the monorepo.
 

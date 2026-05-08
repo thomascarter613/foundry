@@ -1,3 +1,17 @@
+---
+title: "Repo as Memory System Design"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### Repo‑as‑memory system design
 
 You’re basically asking: “How do we make the repo the brain, not just the output?” Let’s make that concrete and deterministic.

@@ -1,172 +1,64 @@
-documentation-system-component-map.md
-
-Below is the **complete, authoritative list of every component** that makes your documentation system *alive*, *dynamic*, *reactive*, *generative*, *self‑validating*, and *machine‑actionable*.  
-
-This is the **full system inventory** — the ontology of the living documentation platform you are building.
-
-Every component is a Guided Link so you can drill deeper into any subsystem.
-
+---
+title: "Documentation System Component Map"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Informational"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks: []
+glossaryTerms: []
 ---
 
-# 🏛️ **THE COMPLETE COMPONENT MAP OF THE LIVING DOCUMENTATION SYSTEM**  
-This is the **canonical, governed, institutional‑grade list**.  
-Nothing missing. Nothing redundant. Nothing implied.
+# Documentation System Component Map
 
----
+## Purpose
 
-# **I. Structural Components (the physical substrate)**
+Define the intent, scope, concepts, constraints, or sequencing for this part of the documentation system.
 
-- **Documentation Directory Structure**  
-- **Governed Document Templates**  
-- **Governed Header Block**  
-- **Document Types**  
-- **ADR Directory + Index**  
-- **Glossary + Quickref**  
-- **Architecture Diagrams Directory**  
+## Context
 
-These define the *shape* of the system.
+This document participates in the governed documentation corpus and must remain aligned with the documentation knowledge graph.
 
----
+## Problem Statement
 
-# **II. Semantic Components (the knowledge graph)**
+TODO: Replace this placeholder with project-specific planning content before marking this document Approved.
 
-- **Cross‑Document Link Model**  
-- **Upstream/Downstream Dependencies**  
-- **Governance Links**  
-- **ADR Links**  
-- **Glossary Term Linking**  
-- **Document Metadata Schema**  
-- **Documentation Knowledge Graph Schema**  
+## Requirements / Definitions / Maps
 
-These give the system *meaning*.
+TODO: Add the concrete requirements, definitions, or maps governed by this document.
 
----
+## Constraints
 
-# **III. Validation Components (the enforcement layer)**
+- Documents must use governed metadata.
+- Documents must remain linkable from the documentation knowledge graph.
+- Documents must not include forbidden citation-rendering artifacts.
 
-- **Documentation Linting Engine**  
-- **Documentation CI Rules**  
-- **Documentation Linting Rules**  
-- **ADR Validation Engine**  
-- **Glossary Validation Engine**  
-- **Cross‑Link Graph Validator**  
-- **Directory Structure Validator**  
-- **Governance Compliance Validator**  
+## Open Questions
 
-These give the system *teeth*.
+- TODO: Record unresolved questions.
 
----
+## Upstream
 
-# **IV. Reactive Components (the change‑propagation layer)**
+- docs/index.md
 
-- **ADR Impact Analyzer**  
-- **Glossary Impact Analyzer**  
-- **Standards Impact Analyzer**  
-- **Governance Impact Analyzer**  
-- **Documentation Drift Detector**  
-- **Cross‑Link Consistency Checker**  
+## Downstream
 
-These make the system *react* to change.
+- TODO: Add downstream documents.
 
----
+## Governance Links
 
-# **V. Generative Components (the creation layer)**
+- docs/governance/documentation-governance.md
 
-- **Documentation Generator Engine**  
-- **Scaffolding Generator**  
-- **ADR Generator**  
-- **Architecture Diagram Generator**  
-- **Onboarding Flow Generator**  
-- **API Reference Generator**  
+## Glossary Terms
 
-These make the system *produce* new artifacts.
+- Documentation System
+- Knowledge Graph
+- Governance
 
----
+## Change History
 
-# **VI. Autonomous Components (the self‑governing layer)**
-
-- **Documentation Self‑Validation Pipeline**  
-- **Documentation Governance Engine**  
-- **Documentation Event System**  
-- **Documentation Drift Remediation Engine**  
-
-These make the system *self‑aware*.
-
----
-
-# **VII. Platform Components (the operational layer)**
-
-- **Documentation CLI**  
-- **Documentation API**  
-- **Documentation Dashboard**  
-- **Documentation Service**  
-- **Documentation Background Daemon**  
-
-These make the system *operable*.
-
----
-
-# **VIII. Intelligence Components (the agentic layer)**
-
-- **Docs Agent Specification**  
-- **Docs Agent Reasoning Engine**  
-- **Docs Agent Planning Engine**  
-- **Docs Agent Execution Engine**  
-- **Docs Agent Governance Interpreter**  
-
-These make the system *intelligent*.
-
----
-
-# **IX. Integration Components (the connective tissue)**
-
-- **CI Integration Layer**  
-- **Code Linting Integration**  
-- **Architecture Integration**  
-- **Standards Integration**  
-- **Lifecycle Integration**  
-- **Platform Integration**  
-
-These make the system *interdependent* with the rest of the monorepo.
-
----
-
-# **X. Governance Components (the authority layer)**
-
-- **Governance Charter**  
-- **Authority Map**  
-- **Repository Contract**  
-- **Documentation Governance Rules**  
-- **Versioning Strategy**  
-- **Exception Process**  
-
-These give the system *legitimacy*.
-
----
-
-# 🧠 **Non‑Obvious Insight**  
-This is not a documentation system.  
-This is a **governed institutional memory platform** with:
-
-- structure  
-- semantics  
-- enforcement  
-- reactivity  
-- generativity  
-- autonomy  
-- intelligence  
-- integration  
-- governance  
-
-You are not building docs.  
-You are building a **living subsystem of the monorepo**.
-
----
-
-# 🔥 Your Next Move  
-Which layer do you want to design next?
-
-- **Documentation Knowledge Graph Schema**  
-- **Docs Agent Specification**  
-- **Documentation Generator Architecture**  
-- **Documentation Governance Test Suite**
+- Initial scaffold generated by bootstrap script.

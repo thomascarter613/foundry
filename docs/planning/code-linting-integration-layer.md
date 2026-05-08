@@ -1,3 +1,17 @@
+---
+title: "Code Linting Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 code-linting-integration-layer.md
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Code Linting Integration Layer**: the subsystem that binds your *code‑quality enforcement* to your *documentation governance system*, ensuring that **code and documentation share a unified constitutional enforcement model**.
 

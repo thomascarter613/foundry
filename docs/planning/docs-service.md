@@ -1,3 +1,17 @@
+---
+title: "Docs Service"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 docs-service.md
 Thomas — here is the **canonical, governance‑grade specification** for the **Documentation Service**: the long‑running, event‑driven, graph‑aware, governance‑encoded backend service that powers the entire documentation platform.
 

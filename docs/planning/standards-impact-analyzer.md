@@ -1,3 +1,17 @@
+---
+title: "Standards Impact Analyzer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 
 Below is the **complete, governed, canonical specification** for the **Standards Impact Analyzer** — the subsystem that makes your *standards* reactive, authoritative, and institutionally enforced across the entire documentation knowledge graph.
 

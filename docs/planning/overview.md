@@ -1,3 +1,17 @@
+---
+title: "Overview"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### Overview
 
 The documentation linting engine is the **governance-grade validator** for your docs corpus: it parses documents, builds the knowledge graph, and enforces structure, semantics, and authority—deterministically.

@@ -1,3 +1,17 @@
+---
+title: "Architecture Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 architecture-integration-layer.md
 
 Thomas — let’s wire the architecture into the constitution.

@@ -1,3 +1,17 @@
+---
+title: "Glossary Impact Analyzer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 glossary-impact-analyzer.md
 Below is the **complete, governed, canonical specification** for the **Glossary Impact Analyzer** — the subsystem that makes your glossary *reactive*, *semantic*, and *institutionally enforced* across the entire documentation knowledge graph.
 

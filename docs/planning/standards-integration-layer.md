@@ -1,3 +1,17 @@
+---
+title: "Standards Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 standards-integration-layer.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Standards Integration Layer**.  

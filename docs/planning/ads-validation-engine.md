@@ -1,3 +1,17 @@
+---
+title: "Ads Validation Engine"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ads-validation-engine.md
 Below is the **complete, governed, canonical specification** for the **ADR Validation Engine** — the subsystem that ensures your Architecture Decision Records are **structurally valid**, **semantically valid**, **lineage‑correct**, **graph‑consistent**, and **governance‑enforced**.
 

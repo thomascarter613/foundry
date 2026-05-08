@@ -1,3 +1,17 @@
+---
+title: "Docs Agent Reasoning Engine"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 docs-agent-reaasoning-engine.md
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Docs Agent Reasoning Engine**.  
 This is the *cognitive core* of the Docs Agent: the deterministic, policy‑encoded, graph‑aware reasoning system that transforms a DelegationRequest into a governed, reproducible ChangePlanFragment.

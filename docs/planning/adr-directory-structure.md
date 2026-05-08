@@ -1,3 +1,17 @@
+---
+title: "ADR Directory Structure"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 adr-directory-structure.md
 Below is the **complete, governed, canonical definition of the ADR Directory + Index** — not just the files, but the *institutional logic*, *governance rules*, *machine‑actionable semantics*, and *knowledge‑graph behavior* that make your ADR system the backbone of architectural truth in the monorepo.
 

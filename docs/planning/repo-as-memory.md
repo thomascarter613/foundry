@@ -1,3 +1,17 @@
+---
+title: "Repo as Memory"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### Repo-as-memory system design
 
 You’re basically turning the repo into the *brain* of the system—everything else (LLM, agents, vector DB) is just ways of reading and writing that brain. Let’s make that explicit and deterministic.

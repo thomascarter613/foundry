@@ -1,3 +1,17 @@
+---
+title: "Multi Agent Architecture"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### Multi‑agent architecture for the AI‑native scaffolder
 
 ---

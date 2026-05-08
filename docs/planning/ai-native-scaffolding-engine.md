@@ -1,3 +1,17 @@
+---
+title: "Ai Native Scaffolding Engine"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ## **AI‑Native Scaffolding Engine — Full Explanation**  
 
 **Takeaway:**  

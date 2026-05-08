@@ -1,3 +1,17 @@
+---
+title: "PEA Design"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### PEA Design
 
 Below is the **principal engineer agent (PEA) design** — the brain of your AI‑native scaffolder.  

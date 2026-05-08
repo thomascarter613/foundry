@@ -1,3 +1,17 @@
+---
+title: "Governance Enforcement Engine"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governance-enforcement-engine.md
 
 ---

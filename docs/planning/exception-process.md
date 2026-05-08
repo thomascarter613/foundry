@@ -1,3 +1,17 @@
+---
+title: "Exception Process"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 exception-process.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Exception Process**: the formal, constitutional mechanism that allows *temporary, explicit, auditable, time‑boxed deviations* from governance rules, standards, architecture boundaries, lifecycle rules, platform rules, and documentation requirements.

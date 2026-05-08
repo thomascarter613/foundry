@@ -1,3 +1,17 @@
+---
+title: "CP-0005: Platform Capability Seed"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 CP-0005_platform.json_Platform Capability Seed.md
 # CP-0005 — platform.json & Platform Capability Seed
 

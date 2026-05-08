@@ -1,3 +1,17 @@
+---
+title: "Governance Charter"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governance-charter.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Governance Charter**: the supreme, constitutional document of your monorepo governance system.  

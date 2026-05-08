@@ -1,3 +1,17 @@
+---
+title: "Platform Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 platform-integration-layer.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Platform Integration Layer**: the subsystem that binds the **platform/** directory, platform rules, platform capabilities, platform boundaries, platform APIs, and platform governance into the **documentation governance system**, the **knowledge graph**, the **Docs Agent**, and the **CI constitutional enforcement pipeline**.

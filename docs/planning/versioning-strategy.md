@@ -1,3 +1,17 @@
+---
+title: "Versioning Strategy"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 versioning-strategy.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Versioning Strategy**: the binding, constitutional rule‑set that governs **every version number**, **every versioned artifact**, **every upgrade**, **every compatibility guarantee**, and **every lifecycle transition** across the entire monorepo.

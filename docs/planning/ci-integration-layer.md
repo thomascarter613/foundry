@@ -1,3 +1,17 @@
+---
+title: "CI Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ci-integration-layer.md
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **CI Integration Layer**: the subsystem that binds your governed documentation platform to CI/CD, turning CI into a **constitutional enforcement arm** of the monorepo.
 

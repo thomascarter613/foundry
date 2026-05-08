@@ -1,3 +1,17 @@
+---
+title: "Architecture Diagrams Directory"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 architecture-diagrams-directory.md
 Below is the **complete, governed, canonical specification** for the **Architecture Diagrams Directory** — the subsystem that makes your architecture *visual*, *machine‑validated*, *CI‑enforced*, and *knowledge‑graph compatible*.  
 This is not “a folder for pictures.”  

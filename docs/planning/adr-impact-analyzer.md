@@ -1,3 +1,17 @@
+---
+title: "ADR Impact Analyzer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 adr-impact-analyzer.md
 Below is the **complete, governed, canonical specification** for the **ADR Impact Analyzer** — the subsystem that makes your ADR framework *reactive*, *intelligent*, and *institutionally enforceable*.  
 If the **ADR Validation Engine** ensures ADRs are *correct*, the **ADR Impact Analyzer** ensures ADRs are *consequential*.

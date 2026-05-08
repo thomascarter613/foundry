@@ -1,3 +1,17 @@
+---
+title: "Onboarding Flow Generator"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 onboarding-flow-geneator.md
 Below is the **canonical, governance‑grade specification** for the **Onboarding Flow Generator** — the subsystem that produces **deterministic, governed, role‑aware onboarding flows** for engineers entering the hybrid‑grade monorepo.
 

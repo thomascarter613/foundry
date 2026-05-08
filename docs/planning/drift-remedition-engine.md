@@ -1,3 +1,17 @@
+---
+title: "Drift Remediation Engine"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 drift-remedition-engine.md
 Thomas — here is the **canonical, governance‑grade specification** for the **Documentation Drift Remediation Engine**: the subsystem that transforms drift detection into **deterministic, governed, auditable remediation plans** that restore systemic coherence across the entire documentation knowledge graph.
 

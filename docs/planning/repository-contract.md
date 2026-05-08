@@ -1,3 +1,17 @@
+---
+title: "Repository Contract"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 repository-contract.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Repository Contract**: the *foundational constitutional artifact* that defines what the repository **is**, what it **is not**, what it **must contain**, what it **must never contain**, and the **rules, invariants, and obligations** that govern every contributor, agent, subsystem, and artifact.

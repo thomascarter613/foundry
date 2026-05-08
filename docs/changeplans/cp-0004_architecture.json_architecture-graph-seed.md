@@ -1,3 +1,17 @@
+---
+title: "CP-0004: Architecture JSON Architecture Graph Seed"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 cp-0004_architecture.json_architecture-graph-seed.md
 
 # CP-0004 — architecture.json & Architecture Graph Seed

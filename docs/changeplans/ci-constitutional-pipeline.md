@@ -1,3 +1,17 @@
+---
+title: "CI Constitutional Pipeline"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ci-constitutional-pipeline.md
 ---
 

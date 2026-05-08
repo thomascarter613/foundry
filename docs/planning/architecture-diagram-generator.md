@@ -1,3 +1,17 @@
+---
+title: "Architecture Diagram Generator"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 architecture-diagram-generator.md
 Thomas — here is the **canonical, governance‑grade specification** for the **Architecture Diagram Generator**: the subsystem that produces **deterministic, governed, lineage‑aware architectural diagrams** that integrate directly into the documentation knowledge graph, ADR lineage, glossary semantics, and governance rules.
 

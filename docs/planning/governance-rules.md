@@ -1,3 +1,17 @@
+---
+title: "Governance Rules"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governance-rules.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Documentation Governance Rules**: the binding, constitutional rule‑set that governs *every* documentation artifact, *every* documentation change, *every* Docs Agent action, and *every* CI enforcement step across the monorepo.

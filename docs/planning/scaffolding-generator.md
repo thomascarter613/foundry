@@ -1,3 +1,17 @@
+---
+title: "Scaffolding Generator"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 scaffolding-generator.md
 Thomas, here is the **canonical, governance‑grade definition** of the **Scaffolding Generator** — the institutional engine that produces deterministic, reproducible, policy‑encoded project structures in your hybrid‑grade monorepo.
 

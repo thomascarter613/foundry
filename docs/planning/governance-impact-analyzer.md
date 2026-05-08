@@ -1,3 +1,17 @@
+---
+title: "Governance Impact Analyzer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governance-impact-analyzer.md
 Below is the **complete, governed, canonical specification** for the **Governance Impact Analyzer** — the subsystem that makes your governance framework *reactive*, *authoritative*, and *institutionally enforced* across the entire documentation knowledge graph.
 

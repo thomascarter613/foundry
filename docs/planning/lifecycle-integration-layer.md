@@ -1,3 +1,17 @@
+---
+title: "Lifecycle Integration Layer"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 lifecycle-integration-layer.md
 
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Lifecycle Integration Layer**: the subsystem that binds **lifecycle rules**, **CI/CD**, **standards**, **governance**, **architecture**, **documentation**, and the **knowledge graph** into a single, deterministic, enforceable institutional lifecycle.

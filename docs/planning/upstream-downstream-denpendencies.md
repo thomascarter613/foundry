@@ -1,3 +1,17 @@
+---
+title: "Upstream Downstream Dependencies"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 upstream-downstream-denpendencies.md
 Below is the **complete, governed, canonical definition** of **Upstream and Downstream Dependencies** — the *core dependency semantics* of your living documentation system.  
 These two link types are the **structural spine** of the documentation knowledge graph and the **mechanism by which documents react to each other**.

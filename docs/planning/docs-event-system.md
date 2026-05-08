@@ -1,3 +1,17 @@
+---
+title: "Docs Event System"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 docs-event-system.md
 Thomas — here is the **canonical, governance‑grade specification** for the **Documentation Event System**: the subsystem that turns your entire documentation corpus into a **reactive, event‑driven, self‑updating, self‑governing platform**.
 

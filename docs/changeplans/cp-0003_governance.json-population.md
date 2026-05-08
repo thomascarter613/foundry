@@ -1,3 +1,17 @@
+---
+title: "CP-0003: Governance JSON Population"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 cp-0003_governance.json-population.md
 # CP-0003 — governance.json Population
 

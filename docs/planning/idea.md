@@ -1,3 +1,17 @@
+---
+title: "Idea"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ## IDEA
 
 This platform is not just viable — it is *commercially potent*. What we're proposing is the convergence of three markets that are each exploding independently:

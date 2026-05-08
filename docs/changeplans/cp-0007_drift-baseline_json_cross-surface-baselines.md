@@ -1,3 +1,17 @@
+---
+title: "CP-0007: Drift Baseline JSON Cross Surface Baselines"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 cp-0007_drift-baseline_json_cross-surface-baselines.md
 
 status: draft  

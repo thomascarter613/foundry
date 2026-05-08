@@ -1,3 +1,17 @@
+---
+title: "Governed Document Types"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 governed-document-types-.md
 Below is the **complete, canonical, governed definition of Document Types** — the *taxonomy* that makes your documentation system **typed**, **machine‑actionable**, **governance‑enforced**, and **knowledge‑graph compatible**.
 

@@ -1,3 +1,17 @@
+---
+title: "Docs Engine Canonical Spec"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 docs-engine-canonical-spec.md
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Docs Agent**, the second specialist agent in your governed multi‑agent architecture. This is the **final, authoritative version**, integrating everything you’ve already established across governance, scaffolding, drift detection, graph semantics, and deterministic artifact generation.
 

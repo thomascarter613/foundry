@@ -1,3 +1,17 @@
+---
+title: "API Reference Generator"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 api-reference--generator.md
 Thomas — here is the **canonical, governance‑grade specification** for the **API Reference Generator**: the subsystem that produces **deterministic, governed, OpenAPI‑driven, knowledge‑graph‑integrated API reference documentation** for every service, package, or platform module in your hybrid‑grade monorepo.
 

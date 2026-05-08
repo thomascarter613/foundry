@@ -1,3 +1,17 @@
+---
+title: "SAAS Business Model"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ## **SaaS Business Model for the AI‑Native Scaffolder Platform**  
 
 **Takeaway:**  

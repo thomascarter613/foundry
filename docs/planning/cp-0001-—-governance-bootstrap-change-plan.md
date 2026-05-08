@@ -1,3 +1,17 @@
+---
+title: "CP-0001: Governance Bootstrap Change Plan"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 cp-0001-—-governance-bootstrap-change-plan.md
 # CP-0001 — Governance Bootstrap ChangePlan
 

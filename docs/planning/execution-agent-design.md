@@ -1,3 +1,17 @@
+---
+title: "Execution Agent Design"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 ### Execution agent design
 
 The execution agent is the **hands** of the system—purely operational, strictly governed, and never “creative”. It turns **ChangePlans** into real file changes, nothing more.

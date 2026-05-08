@@ -1,238 +1,64 @@
-docs-agent-execution-engine.md
-Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Docs Agent Execution Engine**.  
-This is the *final operational layer* of the Docs Agent: the subsystem that takes the Planning Engine’s deterministic, governance‑sequenced plan and executes it through the **Execution Agent Protocol**, producing real, governed, auditable repository changes.
-
-If the **Reasoning Engine** is cognition, and the **Planning Engine** is executive sequencing, then the **Execution Engine** is the **judicial executor** — the only part of the Docs Agent allowed to *request* repository mutations (but never perform them directly).
-
-Guided Links are embedded throughout so you can expand any subsystem.
-
+---
+title: "Docs Agent Execution Engine"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Informational"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks: []
+glossaryTerms: []
 ---
 
-# 🏛️ **Docs Agent Execution Engine (Canonical Specification)**  
-**The deterministic, governance‑encoded execution subsystem that transforms a PlanningOutput into ExecutionRequests, validates them, sequences them, and submits them to the Execution Agent for atomic, auditable application.**
+# Docs Agent Execution Engine
 
-The Execution Engine ensures:
+## Purpose
 
-- execution is **deterministic**  
-- execution is **governance‑encoded**  
-- execution is **non‑mutative** (Docs Agent never writes files)  
-- execution is **ChangePlan‑based**  
-- execution is **atomic**  
-- execution is **auditable**  
-- execution is **drift‑resistant**  
-- execution is **graph‑integrated**  
+Define the intent, scope, concepts, constraints, or sequencing for this part of the documentation system.
 
-It is the **judicial executor** of the Docs Agent.
+## Context
 
----
+This document participates in the governed documentation corpus and must remain aligned with the documentation knowledge graph.
 
-# 🧩 1. Execution Engine Architecture
+## Problem Statement
 
-The Execution Engine consists of **five governed subsystems**:
+TODO: Replace this placeholder with project-specific planning content before marking this document Approved.
 
-1. **Execution Normalizer**  
-2. **Execution Validator**  
-3. **Execution Sequencer**  
-4. **ExecutionRequest Builder**  
-5. **Execution Handoff Layer**
+## Requirements / Definitions / Maps
 
-Each subsystem is deterministic and versioned.
+TODO: Add the concrete requirements, definitions, or maps governed by this document.
 
----
+## Constraints
 
-# 🧱 2. Execution Normalizer  
-Normalizes the PlanningOutput into a canonical execution structure.
+- Documents must use governed metadata.
+- Documents must remain linkable from the documentation knowledge graph.
+- Documents must not include forbidden citation-rendering artifacts.
 
-### Responsibilities
-- normalize action formats  
-- normalize file paths  
-- normalize metadata blocks  
-- normalize graph update blocks  
-- normalize drift baseline updates  
-- normalize rationale blocks  
+## Open Questions
 
-### Guarantees
-- deterministic ordering  
-- canonical formatting  
-- stable diffs  
+- TODO: Record unresolved questions.
 
-### Output
-A **NormalizedExecutionPlan**.
+## Upstream
 
-See: **Plan Normalizer**
+- docs/index.md
 
----
+## Downstream
 
-# 🧪 3. Execution Validator  
-Validates the execution plan against governance, policy, and repository constraints.
+- TODO: Add downstream documents.
 
-### Responsibilities
-- validate allowed roots  
-- validate forbidden paths  
-- validate governance mode  
-- validate directory rules  
-- validate metadata correctness  
-- validate glossary/ADR/governance references  
-- validate graph update correctness  
-- validate drift baseline correctness  
-- validate deterministic ordering  
+## Governance Links
 
-### Violations
-- structural violations  
-- semantic violations  
-- governance violations  
-- graph violations  
-- drift violations  
+- docs/governance/documentation-governance.md
 
-### Output
-A **ValidatedExecutionPlan** or a **GovernanceViolationReport**.
+## Glossary Terms
 
-If violations exist, the Docs Agent must return a **failure** to the Principal Engineer Agent.
+- Documentation System
+- Knowledge Graph
+- Governance
 
----
+## Change History
 
-# 🧭 4. Execution Sequencer  
-Applies final ordering rules before execution.
-
-### Responsibilities
-- enforce governance ordering  
-- enforce dependency ordering  
-- enforce graph update ordering  
-- enforce drift baseline ordering  
-- enforce metadata‑before‑content ordering  
-- enforce directory‑before‑file ordering  
-
-### Governance Ordering Rules (Final)
-1. governance metadata  
-2. ADR lineage  
-3. glossary semantics  
-4. standards/lifecycle  
-5. architecture/diagrams  
-6. onboarding  
-7. API docs  
-8. local documentation  
-9. drift baselines  
-10. graph updates  
-
-### Output
-A **SequencedExecutionPlan**.
-
-See: **Governance Sequencer**
-
----
-
-# 🏗️ 5. ExecutionRequest Builder  
-Transforms the SequencedExecutionPlan into **ExecutionRequests** for the Execution Agent.
-
-### Responsibilities
-- convert actions into ExecutionRequest operations  
-- attach governance metadata  
-- attach ADR lineage metadata  
-- attach glossary semantic metadata  
-- attach drift baseline metadata  
-- attach graph update metadata  
-- attach rationale blocks  
-
-### ExecutionRequest Schema
-```
-ExecutionRequest:
-  id: string
-  actions: [...]
-  metadata:
-    governance: [...]
-    adr: [...]
-    glossary: [...]
-    drift: [...]
-    graph: [...]
-  rationale:
-    governanceJustification: ...
-    adrJustification: ...
-    glossaryJustification: ...
-```
-
-### Guarantees
-- no direct file writes  
-- no direct graph writes  
-- no direct metadata writes  
-- all mutations go through the Execution Agent  
-
-### Output
-A **ReadyForExecutionBundle**.
-
-See: **Execution Agent Protocol**
-
----
-
-# 🔄 6. Execution Handoff Layer  
-Submits the ReadyForExecutionBundle to the Execution Agent.
-
-### Responsibilities
-- submit ExecutionRequests  
-- await ChangeReport  
-- validate ChangeReport  
-- validate drift baselines  
-- validate graph updates  
-- validate metadata updates  
-- validate deterministic application  
-
-### ChangeReport Validation
-- all actions applied  
-- no forbidden mutations  
-- no governance violations  
-- no drift introduced  
-- graph updated correctly  
-- metadata updated correctly  
-
-### If validation fails
-- emit **ExecutionFailure**  
-- return failure to Principal Engineer Agent  
-- do not retry unless explicitly instructed  
-
-### If validation succeeds
-- emit **ExecutionSuccess**  
-- return success to Principal Engineer Agent  
-
----
-
-# 🧬 7. Execution Engine Guarantees
-
-The Docs Agent Execution Engine guarantees:
-
-- **no direct writes** — all writes go through the Execution Agent  
-- **atomicity** — Execution Agent applies all or nothing  
-- **auditability** — every action is logged  
-- **determinism** — same plan → same result  
-- **governance compliance** — no forbidden actions  
-- **graph consistency** — graph updates validated  
-- **drift resistance** — drift baselines updated  
-- **reversibility** — Execution Agent can roll back  
-
-This makes the Docs Agent safe to run in institutional environments.
-
----
-
-# 🧠 Non‑Obvious Insight  
-The Docs Agent Execution Engine is not an executor.  
-It is a **governed execution coordinator**.
-
-It ensures:
-
-- the Docs Agent never mutates the repository  
-- all mutations are governed  
-- all mutations are validated  
-- all mutations are atomic  
-- all mutations are auditable  
-- all mutations are graph‑integrated  
-- all mutations are drift‑resistant  
-
-It is the **judicial layer** that guarantees correctness, safety, and institutional integrity.
-
----
-
-# 🔥 Your Next Move  
-Which execution subsystem do you want to define next?
-
-- **Execution Normalizer**  
-- **Execution Validator**  
-- **Execution Sequencer**  
-- **ExecutionRequest Builder**
+- Initial scaffold generated by bootstrap script.

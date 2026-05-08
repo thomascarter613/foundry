@@ -1,3 +1,17 @@
+---
+title: "CP-0002: Governed Header Block Rollout"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Lifecycle"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 cp-0002_governed-header-block-rollout.md
 # CP-0002 — Governed Header Block Rollout
 

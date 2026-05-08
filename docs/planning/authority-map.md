@@ -1,3 +1,17 @@
+---
+title: "Authority Map"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
+---
+
 authority-map.md
 
 Thomas — let’s put the power map on the table.
