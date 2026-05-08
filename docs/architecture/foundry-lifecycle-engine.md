@@ -1,11 +1,15 @@
 ---
 title: "Foundry Lifecycle Engine"
-status: "draft"
-version: "0.1.0"
-created: "2026-05-06"
-updated: "2026-05-06"
+status: "Draft"
 owner: "Foundry Project"
-scope: "architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Architecture"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Lifecycle Engine

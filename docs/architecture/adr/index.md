@@ -7,11 +7,9 @@ governanceLevel: "Binding"
 documentType: "Architecture"
 upstream: []
 downstream: []
-governanceLinks:
-  - "docs/governance/documentation-governance.md"
+governanceLinks: []
 adrLinks: []
-glossaryTerms:
-  - "ADR"
+glossaryTerms: []
 ---
 
 # ADR Index

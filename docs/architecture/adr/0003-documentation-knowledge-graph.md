@@ -5,14 +5,11 @@ owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "Architecture"
-upstream:
-  - "docs/architecture/adr/index.md"
+upstream: []
 downstream: []
-governanceLinks:
-  - "docs/governance/documentation-governance.md"
+governanceLinks: []
 adrLinks: []
-glossaryTerms:
-  - "ADR"
+glossaryTerms: []
 ---
 
 # ADR 0003: Documentation Knowledge Graph

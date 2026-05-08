@@ -7,8 +7,7 @@ governanceLevel: "Informational"
 documentType: "Planning"
 upstream: []
 downstream: []
-governanceLinks:
-  - "docs/governance/documentation-governance.md"
+governanceLinks: []
 adrLinks: []
 glossaryTerms: []
 ---

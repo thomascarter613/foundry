@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-ads-validation-engine.md
+adr-validation-engine.md
 Below is the **complete, governed, canonical specification** for the **ADR Validation Engine** — the subsystem that ensures your Architecture Decision Records are **structurally valid**, **semantically valid**, **lineage‑correct**, **graph‑consistent**, and **governance‑enforced**.
 
 This engine is one of the most important components of the entire documentation platform.  

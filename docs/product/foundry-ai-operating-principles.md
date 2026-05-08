@@ -1,12 +1,15 @@
 ---
 title: "Foundry AI Operating Principles"
-file: "docs/product/foundry-ai-operating-principles.md"
-status: "accepted"
-version: "0.1.0"
-created: "2026-05-06"
-updated: "2026-05-06"
+status: "Approved"
 owner: "Foundry Project"
-scope: "product"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry AI Operating Principles

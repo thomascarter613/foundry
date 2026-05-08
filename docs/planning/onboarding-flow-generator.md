@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-onboarding-flow-geneator.md
+onboarding-flow-generator.md
 Below is the **canonical, governance‑grade specification** for the **Onboarding Flow Generator** — the subsystem that produces **deterministic, governed, role‑aware onboarding flows** for engineers entering the hybrid‑grade monorepo.
 
 This generator is not a “checklist creator.”  

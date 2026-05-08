@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-docs-agent-reaasoning-engine.md
+docs-agent-reasoning-engine.md
 Thomas — here is the **canonical, governance‑grade, institutionally complete specification** for the **Docs Agent Reasoning Engine**.  
 This is the *cognitive core* of the Docs Agent: the deterministic, policy‑encoded, graph‑aware reasoning system that transforms a DelegationRequest into a governed, reproducible ChangePlanFragment.
 

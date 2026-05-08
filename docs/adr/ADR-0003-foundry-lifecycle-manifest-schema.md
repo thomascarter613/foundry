@@ -1,10 +1,15 @@
 ---
-title: ADR-0003 Foundry Lifecycle Manifest Schema
-description: Records the decision to introduce a shared repository-local lifecycle manifest schema.
-status: accepted
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "ADR-0003 Foundry Lifecycle Manifest Schema"
+status: "Approved"
+owner: "Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "ADR"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # ADR-0003: Foundry Lifecycle Manifest Schema

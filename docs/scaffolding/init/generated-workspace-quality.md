@@ -1,10 +1,15 @@
 ---
-title: Generated Workspace Quality Baseline
-description: Defines the repository quality baseline emitted by foundry init.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Generated Workspace Quality Baseline"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Generated Workspace Quality Baseline

@@ -1,10 +1,15 @@
 ---
-title: External Provider Plugin Loading
-description: Defines the initial post-v1 external provider plugin loading contract for foundry init.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "External Provider Plugin Loading"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # External Provider Plugin Loading

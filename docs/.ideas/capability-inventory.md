@@ -1,5 +1,15 @@
 ---
 title: "Capability Inventory"
+status: "Draft"
+owner: "Product Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Planning"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry CLI Capability Inventory

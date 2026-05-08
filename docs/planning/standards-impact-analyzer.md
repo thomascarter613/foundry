@@ -12,7 +12,6 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-
 Below is the **complete, governed, canonical specification** for the **Standards Impact Analyzer** — the subsystem that makes your *standards* reactive, authoritative, and institutionally enforced across the entire documentation knowledge graph.
 
 If the **ADR Impact Analyzer** governs architectural causality, and the **Glossary Impact Analyzer** governs semantic causality, the **Standards Impact Analyzer** governs **behavioral and implementation causality**.

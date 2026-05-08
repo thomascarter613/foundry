@@ -1,11 +1,15 @@
 ---
 title: "Generator Taxonomy"
-status: "accepted"
-version: "1.0.0"
-created: "2026-05-05"
-updated: "2026-05-05"
+status: "Approved"
 owner: "Project Maintainer"
-classification: "internal"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Generator Taxonomy

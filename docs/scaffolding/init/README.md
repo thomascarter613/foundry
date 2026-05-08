@@ -1,10 +1,15 @@
 ---
-title: Foundry Init
-description: User-facing guide for initializing new Foundry workspaces.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Init"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Init

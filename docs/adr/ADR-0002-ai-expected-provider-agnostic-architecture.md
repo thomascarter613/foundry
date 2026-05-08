@@ -1,12 +1,15 @@
 ---
 title: "ADR-0002: Adopt AI-Expected Provider-Agnostic Architecture"
-file: "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
-status: "accepted"
-version: "0.1.0"
-created: "2026-05-06"
-updated: "2026-05-06"
+status: "Approved"
 owner: "Foundry Project"
-decision_type: "architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "ADR"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # ADR-0002: Adopt AI-Expected Provider-Agnostic Architecture

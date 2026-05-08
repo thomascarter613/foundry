@@ -7,8 +7,7 @@ governanceLevel: "Binding"
 documentType: "Governance"
 upstream: []
 downstream: []
-governanceLinks:
-  - "docs/governance/documentation-governance.md"
+governanceLinks: []
 adrLinks: []
 glossaryTerms: []
 ---

@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-governed-document-types-.md
+governed-document-types.md
 Below is the **complete, canonical, governed definition of Document Types** — the *taxonomy* that makes your documentation system **typed**, **machine‑actionable**, **governance‑enforced**, and **knowledge‑graph compatible**.
 
 These are not categories.  

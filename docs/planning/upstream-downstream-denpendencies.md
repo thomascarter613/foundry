@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-upstream-downstream-denpendencies.md
+upstream-downstream-dependencies.md
 Below is the **complete, governed, canonical definition** of **Upstream and Downstream Dependencies** — the *core dependency semantics* of your living documentation system.  
 These two link types are the **structural spine** of the documentation knowledge graph and the **mechanism by which documents react to each other**.
 

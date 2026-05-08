@@ -1,11 +1,15 @@
 ---
 title: "ADR-0001: Monorepo Scaffolding Toolchain"
-status: "accepted"
-version: "1.0.0"
-created: "2026-05-05"
-updated: "2026-05-05"
-decision_owner: "Project Maintainer"
-classification: "internal"
+status: "Approved"
+owner: "Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "ADR"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # ADR-0001: Monorepo Scaffolding Toolchain

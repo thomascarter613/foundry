@@ -1,10 +1,15 @@
 ---
-title: Workspace Upgrade Planning
-description: Defines the read-only upgrade planner for Foundry-generated workspaces.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Workspace Upgrade Planning"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Workspace Upgrade Planning

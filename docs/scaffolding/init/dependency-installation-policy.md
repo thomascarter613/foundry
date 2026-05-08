@@ -1,10 +1,15 @@
 ---
-title: Foundry Init Dependency Installation Policy
-description: Defines when foundry init installs dependencies and when it writes files only.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Init Dependency Installation Policy"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Binding"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Init Dependency Installation Policy

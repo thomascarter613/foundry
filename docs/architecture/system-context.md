@@ -7,8 +7,7 @@ governanceLevel: "Required"
 documentType: "Architecture"
 upstream: []
 downstream: []
-governanceLinks:
-  - "docs/governance/documentation-governance.md"
+governanceLinks: []
 adrLinks: []
 glossaryTerms: []
 ---

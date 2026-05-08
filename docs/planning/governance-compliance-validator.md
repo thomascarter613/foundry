@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-governance-compliance-vaalidator.md
+governance-compliance-validator.md
 Below is the **complete, governed, canonical specification** for the **Governance Compliance Validator** — the subsystem that ensures *every document, every dependency, every rule, every ADR, every glossary term, every diagram, and every structural element* complies with the **governance model** of the monorepo.
 
 If the **Directory Structure Validator** enforces *where things live*, and the **Cross‑Link Graph Validator** enforces *how things relate*, the **Governance Compliance Validator** enforces *what rules apply* and *whether authority flows correctly*.

@@ -1,11 +1,15 @@
 ---
 title: "Generator Manifest and Provenance"
-status: "accepted"
-version: "0.1.0"
-created: "2026-05-06"
-updated: "2026-05-06"
+status: "Approved"
 owner: "Project Maintainer"
-classification: "internal"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Generator Manifest and Provenance

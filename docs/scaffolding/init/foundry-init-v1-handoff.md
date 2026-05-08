@@ -1,10 +1,15 @@
 ---
-title: Foundry Init v1 Handoff
-description: Completion report and continuation guide for foundry init v1.
-status: complete
-version: 1.0.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Init v1 Handoff"
+status: "Approved"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Init v1 Handoff

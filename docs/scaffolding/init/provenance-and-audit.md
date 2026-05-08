@@ -1,10 +1,15 @@
 ---
-title: Foundry Init Provenance and Audit
-description: Defines generated workspace provenance and audit metadata for foundry init.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Init Provenance and Audit"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Init Provenance and Audit

@@ -1,11 +1,15 @@
 ---
 title: "WP-0002: Add Foundry Init Workspace Initializer"
-status: "planned"
-version: "0.1.0"
-created: "2026-05-06"
-updated: "2026-05-06"
+status: "Draft"
 owner: "Project Maintainer"
-classification: "internal"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "ChangePlan"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # WP-0002: Add Foundry Init Workspace Initializer

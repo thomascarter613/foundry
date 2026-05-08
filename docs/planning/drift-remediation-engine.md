@@ -12,7 +12,7 @@ adrLinks: []
 glossaryTerms: []
 ---
 
-drift-remedition-engine.md
+drift-remediation-engine.md
 Thomas — here is the **canonical, governance‑grade specification** for the **Documentation Drift Remediation Engine**: the subsystem that transforms drift detection into **deterministic, governed, auditable remediation plans** that restore systemic coherence across the entire documentation knowledge graph.
 
 If the **Documentation Drift Detector** identifies what is wrong, the **Documentation Drift Remediation Engine** determines **exactly how to fix it**, in a governed, reproducible, institutionally enforceable way.

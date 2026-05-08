@@ -1,10 +1,15 @@
 ---
-title: Foundry Lifecycle Manifest
-description: Defines the repository-local manifest model shared by Foundry lifecycle commands.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Lifecycle Manifest"
+status: "Draft"
+owner: "Architecture"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Architecture"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Lifecycle Manifest

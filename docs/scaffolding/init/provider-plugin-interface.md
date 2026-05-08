@@ -1,10 +1,15 @@
 ---
-title: Foundry Init Provider Plugin Interface
-description: Defines the post-v1 provider plugin contract for foundry init database providers.
-status: draft
-version: 0.1.0
-created: 2026-05-06
-updated: 2026-05-06
+title: "Foundry Init Provider Plugin Interface"
+status: "Draft"
+owner: "Platform"
+lastUpdated: "2026-05-08"
+governanceLevel: "Required"
+documentType: "Platform"
+upstream: []
+downstream: []
+governanceLinks: []
+adrLinks: []
+glossaryTerms: []
 ---
 
 # Foundry Init Provider Plugin Interface
