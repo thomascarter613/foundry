@@ -27,7 +27,9 @@
     "verify:init-external-provider-plugins": "bash tools/scripts/verify-init-external-provider-plugins.sh",
     "verify:init-provider-plugins": "bash tools/scripts/verify-init-provider-plugins.sh",
     "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh",
-    "verify:manifest": "bash tools/scripts/verify-manifest.sh"
+    "verify:manifest": "bash tools/scripts/verify-manifest.sh",
+    "docs:graph": "bun run foundry:build && node packages/cli/bin/run.js docs graph",
+    "docs:graph:validate": "bun run foundry:build && node packages/cli/bin/run.js docs graph validate --skip-orphan-warnings --skip-reciprocal-warnings"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",

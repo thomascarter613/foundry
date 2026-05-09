@@ -16,6 +16,12 @@ export {
   formatGraphValidationReportAsText,
   validateDocsGraph
 } from "./graph-validator.js";
+export {
+  createDocsVerificationArtifacts,
+  formatDocsVerificationPipelineReportAsJson,
+  formatDocsVerificationPipelineReportAsText,
+  runDocsVerificationPipeline
+} from "./pipeline.js";
 export type {
   DocsGraph,
   DocsGraphBuildResult,
@@ -29,6 +35,10 @@ export type {
   DocsGraphValidationReport,
   DocsGraphValidationSummary
 } from "./graph-validator.js";
+export type {
+  DocsVerificationPipelineOptions,
+  DocsVerificationPipelineReport
+} from "./pipeline.js";
 export type {
   DocsEngineOptions,
   DocsValidationIssue,
