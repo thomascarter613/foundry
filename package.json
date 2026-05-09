@@ -29,7 +29,8 @@
     "verify:init-upgrade": "bash tools/scripts/verify-init-upgrade.sh",
     "verify:manifest": "bash tools/scripts/verify-manifest.sh",
     "docs:graph": "bun run foundry:build && node packages/cli/bin/run.js docs graph",
-    "docs:graph:validate": "bun run foundry:build && node packages/cli/bin/run.js docs graph validate --skip-orphan-warnings --skip-reciprocal-warnings"
+    "docs:graph:validate": "bun run foundry:build && node packages/cli/bin/run.js docs graph validate --skip-orphan-warnings --skip-reciprocal-warnings",
+    "verify:manifest-reader": "bash tools/scripts/verify-manifest-reader.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
