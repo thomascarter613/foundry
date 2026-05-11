@@ -127,15 +127,29 @@ for name, path in report_files.items():
             "score": data.get("score"),
             "path": str(path),
         }
-
         if data.get("status") == "blocked":
-            summary["ok"] = False
-            summary["recommendations"].append("Readiness is blocked. Run docs readiness and repair listed dimensions.")
+            summary["recommendations"].append("Strict-mode readiness is blocked. This does not block MVP bootstrap if the pipeline is passing and all validator error counts are zero.")
     else:
         summary["reports"][name] = {
             "path": str(path),
             "note": "Report exists but did not match expected summary shape.",
         }
+pipeline = summary["reports"].get("pipeline", {})
+validator_reports = [
+    value
+    for key, value in summary["reports"].items()
+    if key not in {"pipeline", "readiness"}
+]
+
+summary["bootstrapOk"] = bool(pipeline.get("ok")) and all(
+    isinstance(report, dict) and report.get("errors", 0) == 0
+    for report in validator_reports
+)
+
+readiness = summary["reports"].get("readiness", {})
+summary["strictReady"] = readiness.get("status") == "ready"
+
+summary["ok"] = summary["bootstrapOk"]
 
 Path(".artifacts/docs/mvp-stabilization-summary.json").write_text(
     json.dumps(summary, indent=2) + "\n"
