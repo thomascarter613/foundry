@@ -48,6 +48,11 @@ export {
   runDocsVerificationPipeline
 } from "./pipeline.js";
 export {
+  assessDocsReadiness,
+  formatDocsReadinessReportAsJson,
+  formatDocsReadinessReportAsText
+} from "./readiness.js";
+export {
   formatRelationshipNormalizationPlanAsJson,
   formatRelationshipNormalizationPlanAsText,
   normalizeDocsRelationships
@@ -101,6 +106,13 @@ export type {
   DocsVerificationPipelineOptions,
   DocsVerificationPipelineReport
 } from "./pipeline.js";
+export type {
+  DocsReadinessDimension,
+  DocsReadinessDimensionId,
+  DocsReadinessOptions,
+  DocsReadinessReport,
+  DocsReadinessStatus
+} from "./readiness.js";
 export type {
   RelationshipField,
   RelationshipNormalizationAction,
