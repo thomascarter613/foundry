@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0018 | Add Upgrade Evolve Plan CI Gate | Draft | `docs/work-packets/WP-0018-add-upgrade-evolve-plan-ci-gate.md` |
 | WP-0017 | Integrate Upgrade Evolve Plan Gates | Draft | `docs/work-packets/WP-0017-integrate-upgrade-evolve-plan-gates.md` |
 | WP-0016 | Add Evolve Plan Report | Draft | `docs/work-packets/WP-0016-add-evolve-plan-report.md` |
 | WP-0015 | Add Upgrade Plan Report | Draft | `docs/work-packets/WP-0015-add-upgrade-plan-report.md` |
