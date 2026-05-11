@@ -1,4 +1,115 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
+from __future__ import annotations
+
+from datetime import date
+from pathlib import Path
+
+
+TODAY = date.today().isoformat()
+
+WORK_PACKET_PATH = Path("docs/work-packets/WP-0007-require-init-provenance-audit-contract.md")
+WORK_PACKET_INDEX = Path("docs/work-packets/index.md")
+CHECK_SCRIPT_PATH = Path("tools/scripts/check-generated-workspace-contract.sh")
+
+
+WORK_PACKET = f'''---
+title: "WP-0007: Require Init Provenance Audit Contract"
+status: "Draft"
+owner: "Engineering Productivity"
+lastUpdated: "{TODAY}"
+governanceLevel: "Required"
+documentType: "WorkPacket"
+upstream:
+  - "docs/work-packets/index.md"
+  - "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+  - "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+downstream:
+  - "tools/scripts/check-generated-workspace-contract.sh"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks: []
+glossaryTerms:
+  - "Work Packet"
+  - "Repository Contract"
+  - "Provenance"
+  - "Audit"
+  - "Verification"
+---
+
+# WP-0007: Require Init Provenance Audit Contract
+
+## Purpose
+
+Promote generated workspace provenance and audit files from optional signals to required Foundry init MVP contract artifacts.
+
+## Context
+
+The init writer is expected to emit provenance and audit files as part of the generated workspace. The generated workspace contract verifier previously treated those files as optional. This Work Packet makes them required and validates their minimum semantic shape.
+
+## Required Provenance Contract
+
+A generated workspace must include:
+
+- `.foundry/init/provenance.json`
+- `.foundry/init/audit.ndjson`
+- `.foundry/README.md`
+
+## Required Provenance JSON Fields
+
+The generated `.foundry/init/provenance.json` file must include:
+
+- `schemaVersion`
+- `generatedBy`
+- `generatedAt`
+- `workspace`
+- `generatedFiles`
+- `plan`
+
+The `generatedFiles` field must be a non-empty array.
+
+The `workspace` field must be an object with a non-empty `name`.
+
+## Required Audit Event Fields
+
+The generated `.foundry/init/audit.ndjson` file must contain at least one valid JSON line with:
+
+- `schemaVersion`
+- `type`
+- `occurredAt`
+- `actor`
+- `subject`
+- `details`
+
+The first event type must be:
+
+    foundry.init.workspace_created
+
+## Verification
+
+Run:
+
+    tools/scripts/check-foundry-init-workspace.sh
+    tools/scripts/check-generated-workspace-contract.sh
+    cat .artifacts/foundry/generated-workspace-contract/summary.json
+
+## Acceptance Criteria
+
+This Work Packet is accepted when:
+
+1. Init workspace smoke succeeds.
+2. Generated workspace contract verification succeeds.
+3. Provenance files are required, not optional.
+4. `provenance.json` parses as JSON.
+5. `audit.ndjson` contains at least one valid audit event.
+6. Contract summary reports `"ok": true`.
+
+## Change History
+
+- Promoted init provenance and audit files to required generated workspace contract artifacts.
+'''
+
+
+CHECK_SCRIPT = r'''#!/usr/bin/env bash
 set -u
 
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
@@ -330,3 +441,56 @@ print("- .artifacts/foundry/generated-workspace-contract/summary.txt")
 if not report["ok"]:
     raise SystemExit(1)
 PYTHON_SUMMARY
+'''
+
+
+def write(path: Path, content: str, executable: bool = False) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+    if executable:
+        path.chmod(0o755)
+
+    print(f"wrote {path}")
+
+
+def update_work_packet_index() -> None:
+    if not WORK_PACKET_INDEX.exists():
+        print(f"skipped missing {WORK_PACKET_INDEX}")
+        return
+
+    row = "| WP-0007 | Require Init Provenance Audit Contract | Draft | `docs/work-packets/WP-0007-require-init-provenance-audit-contract.md` |"
+    content = WORK_PACKET_INDEX.read_text(encoding="utf-8")
+
+    if row in content:
+        print(f"{WORK_PACKET_INDEX} already contains WP-0007")
+        return
+
+    marker = "| --- | --- | --- | --- |"
+
+    if marker in content:
+        content = content.replace(marker, marker + "\n" + row)
+    else:
+        content += "\n" + row + "\n"
+
+    WORK_PACKET_INDEX.write_text(content, encoding="utf-8")
+    print(f"updated {WORK_PACKET_INDEX}")
+
+
+def main() -> int:
+    write(WORK_PACKET_PATH, WORK_PACKET)
+    write(CHECK_SCRIPT_PATH, CHECK_SCRIPT, executable=True)
+    update_work_packet_index()
+
+    print("")
+    print("Next:")
+    print("  python3 tools/scripts/implement-generated-workspace-provenance-contract.py")
+    print("  tools/scripts/check-foundry-init-workspace.sh")
+    print("  tools/scripts/check-generated-workspace-contract.sh")
+    print("  cat .artifacts/foundry/generated-workspace-contract/summary.json")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
