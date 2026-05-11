@@ -1,4 +1,10 @@
-import {
+#!/usr/bin/env python3
+from __future__ import annotations
+
+from pathlib import Path
+
+
+READINESS_TS = r'''import {
   validateAdrIndex,
   type AdrValidationReport
 } from "./adr-validator.js";
@@ -653,3 +659,7 @@ function summarizeDimensions(
     }
   );
 }
+'''
+
+Path("packages/cli/src/docs/readiness.ts").write_text(READINESS_TS, encoding="utf-8")
+print("rewrote packages/cli/src/docs/readiness.ts")
