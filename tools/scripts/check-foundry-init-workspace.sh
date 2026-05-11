@@ -61,7 +61,7 @@ declare -a CANDIDATE_COMMANDS=()
 if [ -n "${FOUNDRY_INIT_SMOKE_COMMAND:-}" ]; then
   CANDIDATE_COMMANDS+=("$FOUNDRY_INIT_SMOKE_COMMAND")
 else
-  CANDIDATE_COMMANDS+=("node packages/cli/bin/run.js init $WORKSPACE_DIR --yes --no-install")
+  CANDIDATE_COMMANDS+=("node packages/cli/bin/run.js init $WORKSPACE_DIR --yes --no-install --no-database")
   CANDIDATE_COMMANDS+=("node packages/cli/bin/run.js init $WORKSPACE_DIR --defaults --no-install")
   CANDIDATE_COMMANDS+=("node packages/cli/bin/run.js init --path $WORKSPACE_DIR --yes --no-install")
   CANDIDATE_COMMANDS+=("node packages/cli/bin/run.js init --name foundry-init-smoke --path $WORKSPACE_DIR --yes --no-install")
