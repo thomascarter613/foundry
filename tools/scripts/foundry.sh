@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export FOUNDRY_WORKSPACE_CWD="${FOUNDRY_WORKSPACE_CWD:-$(pwd)}"
 export FOUNDRY_INVOCATION_CWD="${FOUNDRY_INVOCATION_CWD:-$PWD}"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
