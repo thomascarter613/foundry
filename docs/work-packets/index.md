@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0006 | Verify Generated Workspace Contract | Draft | `docs/work-packets/WP-0006-verify-generated-workspace-contract.md` |
 | WP-0005 | Fix Init Destination Path Handling | Draft | `docs/work-packets/WP-0005-fix-init-destination-path-handling.md` |
 | WP-0004 | Add Init Workspace Smoke Fixture | Draft | `docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md` |
 | WP-0003 | Stabilize Foundry Init MVP | Draft | `docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md` |
