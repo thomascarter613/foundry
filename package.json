@@ -17,7 +17,7 @@
     "foundry:build": "cd packages/cli && bun run build",
     "foundry:typecheck": "cd packages/cli && bun run typecheck",
     "typecheck": "bun run --cwd packages/cli typecheck",
-    "verify": "bun run typecheck && bun run build && bun run verify:docs && bash tools/scripts/verify.sh",
+    "verify": "bun run typecheck && bun run build && bun run verify:docs && bash tools/scripts/verify.sh && bun run verify:specs",
     "verify:contracts": "bash tools/scripts/verify-contracts.sh",
     "verify:docs": "bun run tools/scripts/verify-docs.ts",
     "verify:generated": "bash tools/scripts/verify-generated.sh",
