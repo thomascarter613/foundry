@@ -93,9 +93,11 @@ function normalizeValidationInput(
   const destination = normalizeDestinationPath(
     normalizeString(input.destination) ?? "myapp"
   );
-  const workspaceName =
-    normalizeString(input.workspaceName) ??
-    deriveWorkspaceNameFromDestination(destination);
+  const explicitWorkspaceName = normalizeString(input.workspaceName);
+  const workspaceName = normalizeWorkspaceName({
+    destination,
+    workspaceName: explicitWorkspaceName
+  });
 
   const directProvider =
     normalizeString(input.databaseProvider) ??
@@ -114,6 +116,23 @@ function normalizeValidationInput(
     includeDatabase,
     databaseProvider: directProvider
   };
+}
+
+function normalizeWorkspaceName(input: {
+  readonly destination: string;
+  readonly workspaceName: string | undefined;
+}): string {
+  if (!input.workspaceName) {
+    return deriveWorkspaceNameFromDestination(input.destination);
+  }
+
+  const normalizedWorkspaceName = normalizeDestinationPath(input.workspaceName);
+
+  if (normalizedWorkspaceName === input.destination) {
+    return deriveWorkspaceNameFromDestination(input.destination);
+  }
+
+  return normalizedWorkspaceName;
 }
 
 function validateDestination(
