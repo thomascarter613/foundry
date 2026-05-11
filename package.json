@@ -35,7 +35,13 @@
     "docs:relationships:normalize": "bun run foundry:build && node packages/cli/bin/run.js docs relationships normalize",
     "docs:relationships:write": "bun run foundry:build && node packages/cli/bin/run.js docs relationships normalize --write",
     "docs:adr:validate": "bun run foundry:build && node packages/cli/bin/run.js docs adr validate",
-    "docs:adr:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs adr validate --strict-index --fail-on-warnings"
+    "docs:adr:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs adr validate --strict-index --fail-on-warnings",
+    "docs:glossary:validate": "bun run foundry:build && node packages/cli/bin/run.js docs glossary validate",
+    "docs:glossary:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs glossary validate --fail-on-warnings --require-quickref-coverage",
+    "docs:verify": "bun run foundry:build && node packages/cli/bin/run.js docs verify",
+    "docs:verify:strict": "bun run foundry:build && node packages/cli/bin/run.js docs verify --strict",
+    "docs:directory:validate": "bun run foundry:build && node packages/cli/bin/run.js docs directory validate",
+    "docs:directory:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs directory validate --strict --fail-on-warnings"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
