@@ -1,7 +1,7 @@
 {
   "ok": true,
   "summary": {
-    "checkedDocuments": 215,
+    "checkedDocuments": 220,
     "errorCount": 0,
     "warningCount": 0,
     "infoCount": 0
@@ -816,6 +816,10 @@
       "issues": []
     },
     {
+      "path": "docs/standards/foundry-init-mvp-ci.md",
+      "issues": []
+    },
+    {
       "path": "docs/standards/graph-schema-standards.md",
       "issues": []
     },
@@ -861,6 +865,22 @@
     },
     {
       "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
       "issues": []
     },
     {

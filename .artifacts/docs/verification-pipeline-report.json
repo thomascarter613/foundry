@@ -4,7 +4,7 @@
     "ok": true,
     "summary": {
       "checkedDirectories": 20,
-      "checkedFiles": 219,
+      "checkedFiles": 224,
       "errorCount": 0,
       "warningCount": 0,
       "infoCount": 4
@@ -39,7 +39,7 @@
   "metadata": {
     "ok": true,
     "summary": {
-      "checkedDocuments": 215,
+      "checkedDocuments": 220,
       "errorCount": 0,
       "warningCount": 0,
       "infoCount": 0
@@ -854,6 +854,10 @@
         "issues": []
       },
       {
+        "path": "docs/standards/foundry-init-mvp-ci.md",
+        "issues": []
+      },
+      {
         "path": "docs/standards/graph-schema-standards.md",
         "issues": []
       },
@@ -899,6 +903,22 @@
       },
       {
         "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
         "issues": []
       },
       {
@@ -3537,6 +3557,19 @@
         }
       },
       {
+        "id": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "kind": "Document",
+        "label": "Foundry Init MVP CI",
+        "path": "docs/standards/foundry-init-mvp-ci.md",
+        "metadata": {
+          "documentType": "Standard",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
         "id": "doc:docs/standards/graph-schema-standards.md",
         "kind": "Document",
         "label": "Graph Schema Standards",
@@ -3697,6 +3730,58 @@
         "kind": "Document",
         "label": "WP-0008: Integrate Init MVP Verification Gate",
         "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "kind": "Document",
+        "label": "WP-0009: Add Init MVP CI Gate",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "kind": "Document",
+        "label": "WP-0010: Add Init Database Provider Smoke Matrix",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "kind": "Document",
+        "label": "WP-0011: Add Init Database Matrix CI Gate",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "kind": "Document",
+        "label": "WP-0012: Add Upgrade Evolve Baseline Smoke Gate",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
         "metadata": {
           "documentType": "WorkPacket",
           "status": "Draft",
@@ -9700,6 +9785,30 @@
         "rawTarget": "Verification"
       },
       {
+        "id": "GlossaryUsage:doc:docs/standards/foundry-init-mvp-ci.md->term:ci",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "term:ci",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "CI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/foundry-init-mvp-ci.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/foundry-init-mvp-ci.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "term:verification",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "Verification"
+      },
+      {
         "id": "GlossaryUsage:doc:docs/standards/graph-schema-standards.md->term:knowledge-graph",
         "type": "GlossaryUsage",
         "from": "doc:docs/standards/graph-schema-standards.md",
@@ -10009,6 +10118,142 @@
         "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "to": "term:work-packet",
         "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->term:ci",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "term:ci",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "CI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->term:ci",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "term:ci",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "CI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->term:cli",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "term:cli",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "CLI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
         "rawTarget": "Work Packet"
       },
       {
@@ -11612,6 +11857,14 @@
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
+        "id": "Governance:doc:docs/standards/foundry-init-mvp-ci.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
         "id": "Governance:doc:docs/standards/graph-schema-standards.md->doc:docs/governance/documentation-governance.md",
         "type": "Governance",
         "from": "doc:docs/standards/graph-schema-standards.md",
@@ -11713,6 +11966,38 @@
         "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "to": "doc:docs/governance/documentation-governance.md",
         "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
@@ -13356,6 +13641,22 @@
         "rawTarget": "docs/standards/index.md"
       },
       {
+        "id": "Upstream:doc:docs/standards/foundry-init-mvp-ci.md->doc:docs/standards/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "doc:docs/standards/index.md",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "docs/standards/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/standards/foundry-init-mvp-ci.md->doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "type": "Upstream",
+        "from": "doc:docs/standards/foundry-init-mvp-ci.md",
+        "to": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "sourcePath": "docs/standards/foundry-init-mvp-ci.md",
+        "rawTarget": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
         "id": "Upstream:doc:docs/standards/graph-schema-standards.md->doc:docs/standards/index.md",
         "type": "Upstream",
         "from": "doc:docs/standards/graph-schema-standards.md",
@@ -13554,6 +13855,110 @@
         "to": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
         "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "rawTarget": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md->doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "to": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "sourcePath": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "rawTarget": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md->doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "to": "doc:docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "sourcePath": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "rawTarget": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md->doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "to": "doc:docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "sourcePath": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "rawTarget": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md->doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "to": "doc:docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "sourcePath": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "rawTarget": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
       }
     ]
   },
@@ -13569,8 +13974,8 @@
   "graphValidation": {
     "ok": true,
     "summary": {
-      "nodeCount": 253,
-      "edgeCount": 1193,
+      "nodeCount": 258,
+      "edgeCount": 1233,
       "errorCount": 0,
       "warningCount": 1,
       "infoCount": 0
@@ -13760,7 +14165,7 @@
     "summary": {
       "glossaryTermCount": 40,
       "quickrefTermCount": 38,
-      "referencedTermCount": 395,
+      "referencedTermCount": 415,
       "errorCount": 0,
       "warningCount": 0,
       "infoCount": 0
@@ -14887,6 +15292,21 @@
         "path": "docs/standards/documentation-verification-ci.md"
       },
       {
+        "term": "CI",
+        "normalizedTerm": "ci",
+        "path": "docs/standards/foundry-init-mvp-ci.md"
+      },
+      {
+        "term": "CI",
+        "normalizedTerm": "ci",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
+        "term": "CI",
+        "normalizedTerm": "ci",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
+      },
+      {
         "term": "CLI",
         "normalizedTerm": "cli",
         "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
@@ -14925,6 +15345,11 @@
         "term": "CLI",
         "normalizedTerm": "cli",
         "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md"
       },
       {
         "term": "Code Linting",
@@ -15909,6 +16334,11 @@
       {
         "term": "Repository Contract",
         "normalizedTerm": "repository contract",
+        "path": "docs/standards/foundry-init-mvp-ci.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
         "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
       },
       {
@@ -15920,6 +16350,26 @@
         "term": "Repository Contract",
         "normalizedTerm": "repository contract",
         "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md"
       },
       {
         "term": "Scaffolding",
@@ -16077,6 +16527,16 @@
         "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
       },
       {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md"
+      },
+      {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
+      },
+      {
         "term": "Specification",
         "normalizedTerm": "specification",
         "path": "docs/specs/index.md"
@@ -16224,6 +16684,11 @@
       {
         "term": "Verification",
         "normalizedTerm": "verification",
+        "path": "docs/standards/foundry-init-mvp-ci.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
         "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
       },
       {
@@ -16250,6 +16715,26 @@
         "term": "Verification",
         "normalizedTerm": "verification",
         "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md"
       },
       {
         "term": "Work Packet",
@@ -16290,6 +16775,26 @@
         "term": "Work Packet",
         "normalizedTerm": "work packet",
         "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md"
       }
     ],
     "issues": []
@@ -16458,9 +16963,9 @@
   "workPacketValidation": {
     "ok": true,
     "summary": {
-      "workPacketCount": 7,
+      "workPacketCount": 11,
       "indexCount": 1,
-      "indexEntryCount": 7,
+      "indexEntryCount": 11,
       "legacyPathCount": 0,
       "errorCount": 0,
       "warningCount": 0,
@@ -16529,6 +17034,42 @@
         "status": "Draft",
         "documentType": "WorkPacket",
         "isLegacyPath": false
+      },
+      {
+        "number": "0009",
+        "pathNumber": "0009",
+        "title": "WP-0009: Add Init MVP CI Gate",
+        "path": "docs/work-packets/WP-0009-add-init-mvp-ci-gate.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0010",
+        "pathNumber": "0010",
+        "title": "WP-0010: Add Init Database Provider Smoke Matrix",
+        "path": "docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0011",
+        "pathNumber": "0011",
+        "title": "WP-0011: Add Init Database Matrix CI Gate",
+        "path": "docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0012",
+        "pathNumber": "0012",
+        "title": "WP-0012: Add Upgrade Evolve Baseline Smoke Gate",
+        "path": "docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
       }
     ],
     "indexEntries": [
@@ -16537,46 +17078,74 @@
         "title": "Add Foundry Init Workspace Initializer",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 17
+        "line": 21
       },
       {
         "number": "0003",
         "title": "Stabilize Foundry Init MVP",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 16
+        "line": 20
       },
       {
         "number": "0004",
         "title": "Add Init Workspace Smoke Fixture",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 15
+        "line": 19
       },
       {
         "number": "0005",
         "title": "Fix Init Destination Path Handling",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 14
+        "line": 18
       },
       {
         "number": "0006",
         "title": "Verify Generated Workspace Contract",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 13
+        "line": 17
       },
       {
         "number": "0007",
         "title": "Require Init Provenance Audit Contract",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
-        "line": 12
+        "line": 16
       },
       {
         "number": "0008",
         "title": "Integrate Init MVP Verification Gate",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 15
+      },
+      {
+        "number": "0009",
+        "title": "Add Init MVP CI Gate",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 14
+      },
+      {
+        "number": "0010",
+        "title": "Add Init Database Provider Smoke Matrix",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 13
+      },
+      {
+        "number": "0011",
+        "title": "Add Init Database Matrix CI Gate",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 12
+      },
+      {
+        "number": "0012",
+        "title": "Add Upgrade Evolve Baseline Smoke Gate",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
         "line": 11
