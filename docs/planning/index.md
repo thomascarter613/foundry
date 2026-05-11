@@ -25,7 +25,7 @@ downstream:
   - "docs/planning/ci-integration-layer.md"
   - "docs/planning/cli-spec.md"
   - "docs/planning/code-linting-integration-layer.md"
-  - "docs/planning/cp-0001-—-governance-bootstrap-change-plan.md"
+  - "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
   - "docs/planning/cross-document-link-model.md"
   - "docs/planning/cross-link-consistency-checker.md"
   - "docs/planning/cross-link-graph-validator.md"

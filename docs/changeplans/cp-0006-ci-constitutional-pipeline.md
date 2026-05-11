@@ -1,9 +1,9 @@
 ---
-title: "CI Constitutional Pipeline"
+title: "CP-0006: CI Constitutional Pipeline"
 status: "Draft"
 owner: "Engineering Productivity"
-lastUpdated: "2026-05-08"
-governanceLevel: "Binding"
+lastUpdated: "2026-05-11"
+governanceLevel: "Required"
 documentType: "ChangePlan"
 upstream:
   - "docs/changeplans/index.md"
@@ -19,10 +19,12 @@ glossaryTerms:
   - "Pipeline"
 ---
 
-ci-constitutional-pipeline.md
+# CP-0006: CI Constitutional Pipeline
+
+cp-0006-ci-constitutional-pipeline.md
 ---
 
-# 🏛️ **CI Constitutional Pipeline — Canonical Specification**  
+# CP-0006: CI Constitutional Pipeline
 **status:** draft  
 **governanceLevel:** binding  
 **documentType:** governance  

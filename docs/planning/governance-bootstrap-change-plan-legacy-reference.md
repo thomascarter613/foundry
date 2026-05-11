@@ -1,21 +1,25 @@
 ---
-title: "CP-0001: Governance Bootstrap Change Plan"
-status: "Draft"
+title: "Governance Bootstrap Change Plan Legacy Reference"
+status: "Deprecated"
 owner: "Product Architecture"
-lastUpdated: "2026-05-08"
-governanceLevel: "Binding"
+lastUpdated: "2026-05-11"
+governanceLevel: "Informational"
 documentType: "Planning"
 upstream:
   - "docs/planning/index.md"
-downstream: []
+downstream:
+  - "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
-adrLinks:
-  - "docs/architecture/adr/0004-architecture-principles.md"
+adrLinks: []
 glossaryTerms:
   - "ChangePlan"
-  - "Governance"
+  - "Lifecycle"
 ---
+
+> This is a deprecated legacy planning reference. The canonical ChangePlan is `docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md`.
+
+# Governance Bootstrap Change Plan Legacy Reference
 
 cp-0001-—-governance-bootstrap-change-plan.md
 # CP-0001 — Governance Bootstrap ChangePlan

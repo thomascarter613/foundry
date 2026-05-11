@@ -1,9 +1,9 @@
 ---
-title: "Governance Enforcement Engine"
+title: "CP-0008: Governance Enforcement Engine"
 status: "Draft"
 owner: "Engineering Productivity"
-lastUpdated: "2026-05-08"
-governanceLevel: "Binding"
+lastUpdated: "2026-05-11"
+governanceLevel: "Required"
 documentType: "ChangePlan"
 upstream:
   - "docs/changeplans/index.md"
@@ -18,11 +18,13 @@ glossaryTerms:
   - "Governance"
 ---
 
-governance-enforcement-engine.md
+# CP-0008: Governance Enforcement Engine
+
+cp-0008-governance-enforcement-engine.md
 
 ---
 
-# 🏛️ Governance Enforcement Engine (GEE) — Canonical Specification  
+# CP-0008: Governance Enforcement Engine
 **Status:** draft  
 **Governance Level:** binding  
 **Document Type:** governance  

@@ -17,7 +17,7 @@ glossaryTerms:
   - "Pipeline"
 ---
 
-ci-constitutional-pipeline.md
+cp-0006-ci-constitutional-pipeline.md
 ---
 
 # 🏛️ **CI Constitutional Pipeline — Canonical Specification**  

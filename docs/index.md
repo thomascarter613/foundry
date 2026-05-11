@@ -11,7 +11,7 @@ downstream:
   - "docs/architecture/adr/index.md"
   - "docs/architecture/index.md"
   - "docs/changeplans/index.md"
-  - "docs/ci-constitutional-pipeline.md"
+  - "docs/cp-0006-ci-constitutional-pipeline.md"
   - "docs/governance/index.md"
   - "docs/lifecycle/index.md"
   - "docs/onboarding/index.md"
