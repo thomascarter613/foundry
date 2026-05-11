@@ -1,3 +1,8 @@
+export {
+  formatAdrValidationReportAsJson,
+  formatAdrValidationReportAsText,
+  validateAdrIndex
+} from "./adr-validator.js";
 export { runDocsValidation } from "./engine.js";
 export {
   createValidationReport,
@@ -27,6 +32,13 @@ export {
   formatRelationshipNormalizationPlanAsText,
   normalizeDocsRelationships
 } from "./relationship-normalizer.js";
+export type {
+  AdrIndexEntry,
+  AdrRecord,
+  AdrValidationOptions,
+  AdrValidationReport,
+  AdrValidationSummary
+} from "./adr-validator.js";
 export type {
   DocsGraph,
   DocsGraphBuildResult,
