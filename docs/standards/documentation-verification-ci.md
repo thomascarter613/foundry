@@ -7,8 +7,7 @@ governanceLevel: "Required"
 documentType: "Standard"
 upstream:
   - "docs/standards/index.md"
-downstream:
-  - ".github/workflows/docs-verification.yml"
+downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
@@ -61,3 +60,7 @@ Expected reports include:
 - `readiness-report.json`
 - `mvp-stabilization-summary.json`
 - `mvp-stabilization-summary.txt`
+
+## Workflow File
+
+- `.github/workflows/docs-verification.yml`
