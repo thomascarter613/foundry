@@ -1,8 +1,8 @@
 export type {
   FoundrySpecFrontmatter,
   FoundrySpecKind,
+  FoundrySpecLifecycleStatus,
   FoundrySpecRiskLevel,
-  FoundrySpecStatus,
   ParsedFoundrySpec,
   SpecValidationIssue,
   SpecValidationResult,

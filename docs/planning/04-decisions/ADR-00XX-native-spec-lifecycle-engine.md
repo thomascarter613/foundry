@@ -1,15 +1,15 @@
 ---
 id: ADR-00XX
 title: Native Spec Lifecycle Engine
-status: active
+status: Draft
 version: 0.1.0
 created: 2026-05-11
 updated: 2026-05-11
 lastUpdated: 2026-05-11
 owner: project-owner
 decision_owner: project-maintainer
-governanceLevel: project
-documentType: adr
+governanceLevel: Required
+documentType: Planning
 supersedes: []
 superseded_by: []
 related:
