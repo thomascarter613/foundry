@@ -1,4 +1,11 @@
-import {
+#!/usr/bin/env python3
+from __future__ import annotations
+
+from pathlib import Path
+
+
+FILES: dict[str, str] = {
+    "packages/cli/src/docs/pipeline.ts": '''import {
   formatAdrValidationReportAsJson,
   formatAdrValidationReportAsText,
   validateAdrIndex,
@@ -182,7 +189,7 @@ export function formatDocsVerificationPipelineReportAsText(
       : "Documentation verification pipeline failed."
   );
 
-  return sections.join("\n\n");
+  return sections.join("\\n\\n");
 }
 
 export function formatDocsVerificationPipelineReportAsJson(
@@ -206,3 +213,213 @@ export function createDocsVerificationArtifacts(
     "verification-pipeline-report.json": formatDocsVerificationPipelineReportAsJson(report)
   };
 }
+''',
+
+    "packages/cli/src/commands/docs/verify.ts": '''import { Command, Flags } from "@oclif/core";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+
+import {
+  createDocsVerificationArtifacts,
+  formatDocsVerificationPipelineReportAsJson,
+  formatDocsVerificationPipelineReportAsText,
+  runDocsVerificationPipeline
+} from "../../docs/index.js";
+
+export default class DocsVerify extends Command {
+  static override summary = "Run the full documentation verification pipeline.";
+
+  static override description = `
+Run directory topology validation, metadata validation, graph construction,
+graph validation, ADR validation, and glossary validation as one governed
+documentation verification pipeline.
+
+The command writes machine-readable artifacts by default under .artifacts/docs.
+`;
+
+  static override examples = [
+    {
+      description: "Run bootstrap-mode docs verification.",
+      command: "<%= config.bin %> <%= command.id %>"
+    },
+    {
+      description: "Run strict docs verification.",
+      command: "<%= config.bin %> <%= command.id %> --strict"
+    },
+    {
+      description: "Run docs verification and print JSON.",
+      command: "<%= config.bin %> <%= command.id %> --json"
+    },
+    {
+      description: "Write artifacts under a custom directory.",
+      command: "<%= config.bin %> <%= command.id %> --artifacts-dir .artifacts/docs"
+    }
+  ];
+
+  static override flags = {
+    "artifacts-dir": Flags.string({
+      default: ".artifacts/docs",
+      description: "Repository-relative artifact directory for JSON reports."
+    }),
+    "docs-dir": Flags.string({
+      default: "docs",
+      description: "Repository-relative docs directory to verify."
+    }),
+    "fail-on-warnings": Flags.boolean({
+      default: false,
+      description: "Exit non-zero when warnings are present."
+    }),
+    json: Flags.boolean({
+      default: false,
+      description: "Print the full verification pipeline report as JSON."
+    }),
+    "no-artifacts": Flags.boolean({
+      default: false,
+      description: "Do not write JSON report artifacts."
+    }),
+    root: Flags.string({
+      default: process.cwd(),
+      description: "Repository root."
+    }),
+    strict: Flags.boolean({
+      default: false,
+      description: "Enable strict directory, graph, ADR, and glossary checks."
+    })
+  };
+
+  async run(): Promise<void> {
+    const { flags } = await this.parse(DocsVerify);
+    const repoRoot = resolve(flags.root);
+    const failOnWarnings = flags["fail-on-warnings"] || flags.strict;
+
+    const report = runDocsVerificationPipeline({
+      repoRoot,
+      docsDir: flags["docs-dir"],
+      failOnWarnings,
+      directory: {
+        strict: flags.strict,
+        failOnWarnings
+      },
+      graph: {
+        includeOrphanWarnings: flags.strict,
+        requireReciprocalLinks: flags.strict,
+        failOnWarnings
+      },
+      adr: {
+        strictIndex: flags.strict,
+        failOnWarnings
+      },
+      glossary: {
+        requireQuickrefCoverage: flags.strict,
+        failOnWarnings
+      }
+    });
+
+    if (!flags["no-artifacts"]) {
+      const artifactsDir = resolve(repoRoot, flags["artifacts-dir"]);
+      mkdirSync(artifactsDir, { recursive: true });
+
+      const artifacts = createDocsVerificationArtifacts(report);
+
+      for (const [fileName, content] of Object.entries(artifacts)) {
+        writeFileSync(join(artifactsDir, fileName), `${content}\\n`, "utf8");
+      }
+    }
+
+    this.log(
+      flags.json
+        ? formatDocsVerificationPipelineReportAsJson(report)
+        : formatDocsVerificationPipelineReportAsText(report)
+    );
+
+    if (!flags["no-artifacts"]) {
+      this.log("");
+      this.log("Documentation verification artifacts written:");
+      this.log(`- ${flags["artifacts-dir"]}/directory-validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/graph.json`);
+      this.log(`- ${flags["artifacts-dir"]}/graph-validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/adr-validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/glossary-validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/verification-pipeline-report.json`);
+    }
+
+    if (!report.ok) {
+      this.exit(1);
+    }
+  }
+}
+''',
+
+    "tools/scripts/verify-docs.ts": '''import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+
+import {
+  createDocsVerificationArtifacts,
+  formatDocsVerificationPipelineReportAsText,
+  runDocsVerificationPipeline
+} from "../../packages/cli/src/docs/index.ts";
+
+const repoRoot = process.cwd();
+const artifactsDir = join(repoRoot, ".artifacts", "docs");
+
+const report = runDocsVerificationPipeline({
+  repoRoot,
+  docsDir: "docs",
+  directory: {
+    strict: false,
+    failOnWarnings: false
+  },
+  graph: {
+    includeOrphanWarnings: false,
+    requireReciprocalLinks: false,
+    failOnWarnings: false
+  },
+  adr: {
+    strictIndex: false,
+    failOnWarnings: false
+  },
+  glossary: {
+    requireQuickrefCoverage: false,
+    failOnWarnings: false
+  }
+});
+
+mkdirSync(artifactsDir, { recursive: true });
+
+const artifacts = createDocsVerificationArtifacts(report);
+
+for (const [fileName, content] of Object.entries(artifacts)) {
+  writeFileSync(join(artifactsDir, fileName), `${content}\\n`, "utf8");
+}
+
+console.log(formatDocsVerificationPipelineReportAsText(report));
+console.log("");
+console.log("Documentation verification artifacts written:");
+console.log("- .artifacts/docs/directory-validation-report.json");
+console.log("- .artifacts/docs/validation-report.json");
+console.log("- .artifacts/docs/graph.json");
+console.log("- .artifacts/docs/graph-validation-report.json");
+console.log("- .artifacts/docs/adr-validation-report.json");
+console.log("- .artifacts/docs/glossary-validation-report.json");
+console.log("- .artifacts/docs/verification-pipeline-report.json");
+
+if (!report.ok) {
+  process.exit(1);
+}
+''',
+}
+
+
+def main() -> int:
+    for file_name, content in FILES.items():
+        path = Path(file_name)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+        print(f"wrote {file_name}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
