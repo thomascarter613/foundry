@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0004 | Add Init Workspace Smoke Fixture | Draft | `docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md` |
 | WP-0003 | Stabilize Foundry Init MVP | Draft | `docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md` |
 | WP-0002 | Add Foundry Init Workspace Initializer | Draft | `docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md` |
 
