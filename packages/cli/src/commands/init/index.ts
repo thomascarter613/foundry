@@ -137,9 +137,11 @@ export default class Init extends Command {
         return;
       }
 
+      const destination = normalizeDestinationPath(wizardAnswers.destination);
+
       config = {
-        destination: normalizeDestinationPath(wizardAnswers.destination),
-        workspaceName: inferWorkspaceName(wizardAnswers.destination),
+        destination,
+        workspaceName: inferWorkspaceName(destination),
         includeDatabase: wizardAnswers.includeDatabase,
         databaseProvider: wizardAnswers.includeDatabase
           ? wizardAnswers.databaseProvider ?? "postgres:drizzle"
