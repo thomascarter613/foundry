@@ -7,14 +7,24 @@ cd "$ROOT_DIR"
 export FOUNDRY_WORKSPACE_CWD="$ROOT_DIR"
 
 ARTIFACT_DIR="$ROOT_DIR/.artifacts/foundry/spec-validation"
+CREATE_DIR="$ARTIFACT_DIR/generated-specs"
 VALID_SPEC="packages/cli/fixtures/specs/0001-example/spec.md"
 INVALID_SPEC="$ARTIFACT_DIR/invalid-spec.md"
+
+VALID_OUT="$ARTIFACT_DIR/valid-spec.out"
+INVALID_OUT="$ARTIFACT_DIR/invalid-spec.out"
+INVALID_ERR="$ARTIFACT_DIR/invalid-spec.err"
+JSON_OUT="$ARTIFACT_DIR/json-spec.out"
+CREATE_OUT="$ARTIFACT_DIR/create-spec.out"
+CREATE_JSON_OUT="$ARTIFACT_DIR/create-spec-json.out"
 
 cleanup() {
   rm -rf "$ARTIFACT_DIR"
 }
 
 trap cleanup EXIT
+
+mkdir -p "$ARTIFACT_DIR"
 
 echo "verify:specs: checking native spec validation"
 
@@ -26,25 +36,23 @@ if [[ ! -f "$VALID_SPEC" ]]; then
 fi
 
 echo "verify:specs: validating known-good spec"
-bash tools/scripts/foundry.sh spec validate "$VALID_SPEC" >/tmp/foundry-valid-spec.out
+bash tools/scripts/foundry.sh spec validate "$VALID_SPEC" >"$VALID_OUT"
 
-if ! grep -q "Foundry spec validation: passed" /tmp/foundry-valid-spec.out; then
+if ! grep -q "Foundry spec validation: passed" "$VALID_OUT"; then
   echo "verify:specs: failed"
   echo ""
   echo "Expected valid spec validation to pass."
   echo ""
   echo "Output:"
-  cat /tmp/foundry-valid-spec.out
+  cat "$VALID_OUT"
   exit 1
 fi
-
-mkdir -p "$ARTIFACT_DIR"
 
 cat > "$INVALID_SPEC" <<'INVALID_SPEC_EOF'
 ---
 id: BAD-1
 title: Invalid Spec
-status: active
+status: Current
 specStatus: draft
 kind: feature
 version: 0.1.0
@@ -54,8 +62,8 @@ lastUpdated: 2026-05-11
 owner: project-owner
 owners:
   - project-maintainer
-governanceLevel: project
-documentType: spec
+governanceLevel: Repository
+documentType: Specification
 related_adrs: []
 related_work_packets: []
 risk_level: low
@@ -79,7 +87,7 @@ INVALID_SPEC_EOF
 echo "verify:specs: validating known-bad spec"
 
 set +e
-bash tools/scripts/foundry.sh spec validate "$INVALID_SPEC" >/tmp/foundry-invalid-spec.out 2>/tmp/foundry-invalid-spec.err
+bash tools/scripts/foundry.sh spec validate "$INVALID_SPEC" >"$INVALID_OUT" 2>"$INVALID_ERR"
 INVALID_EXIT_CODE=$?
 set -e
 
@@ -89,59 +97,180 @@ if [[ "$INVALID_EXIT_CODE" -eq 0 ]]; then
   echo "Expected invalid spec validation to fail, but it passed."
   echo ""
   echo "Output:"
-  cat /tmp/foundry-invalid-spec.out
+  cat "$INVALID_OUT"
   echo ""
   echo "Error:"
-  cat /tmp/foundry-invalid-spec.err
+  cat "$INVALID_ERR"
   exit 1
 fi
 
-if ! grep -q "invalid-spec-id" /tmp/foundry-invalid-spec.out; then
+if ! grep -q "invalid-spec-id" "$INVALID_OUT"; then
   echo "verify:specs: failed"
   echo ""
   echo "Expected invalid spec output to include invalid-spec-id."
   echo ""
   echo "Output:"
-  cat /tmp/foundry-invalid-spec.out
+  cat "$INVALID_OUT"
   exit 1
 fi
 
-if ! grep -q "missing-required-section" /tmp/foundry-invalid-spec.out; then
+if ! grep -q "missing-required-section" "$INVALID_OUT"; then
   echo "verify:specs: failed"
   echo ""
   echo "Expected invalid spec output to include missing-required-section."
   echo ""
   echo "Output:"
-  cat /tmp/foundry-invalid-spec.out
+  cat "$INVALID_OUT"
   exit 1
 fi
 
 echo "verify:specs: validating JSON output"
 
-JSON_OUTPUT="$(bash tools/scripts/foundry.sh spec validate "$VALID_SPEC" --json)"
+bash tools/scripts/foundry.sh spec validate "$VALID_SPEC" --json >"$JSON_OUT"
 
-if ! echo "$JSON_OUTPUT" | grep -q '"ok": true'; then
+if ! grep -q '"ok": true' "$JSON_OUT"; then
   echo "verify:specs: failed"
   echo ""
   echo "Expected JSON output to include \"ok\": true."
   echo ""
   echo "Output:"
-  echo "$JSON_OUTPUT"
+  cat "$JSON_OUT"
   exit 1
 fi
 
-if ! echo "$JSON_OUTPUT" | grep -q '"warningsAsErrors": false'; then
+if ! grep -q '"warningsAsErrors": false' "$JSON_OUT"; then
   echo "verify:specs: failed"
   echo ""
   echo "Expected JSON output to include \"warningsAsErrors\": false."
   echo ""
   echo "Output:"
-  echo "$JSON_OUTPUT"
+  cat "$JSON_OUT"
   exit 1
 fi
 
-rm -f /tmp/foundry-valid-spec.out
-rm -f /tmp/foundry-invalid-spec.out
-rm -f /tmp/foundry-invalid-spec.err
+echo "verify:specs: creating generated spec"
+
+bash tools/scripts/foundry.sh spec create "Add Authentication" \
+  --dir "$CREATE_DIR" \
+  >"$CREATE_OUT"
+
+GENERATED_SPEC="$CREATE_DIR/0001-add-authentication/spec.md"
+
+if [[ ! -f "$GENERATED_SPEC" ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected generated spec file to exist:"
+  echo "$GENERATED_SPEC"
+  echo ""
+  echo "Output:"
+  cat "$CREATE_OUT"
+  exit 1
+fi
+
+if ! grep -q "Foundry spec created." "$CREATE_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected create output to confirm spec creation."
+  echo ""
+  echo "Output:"
+  cat "$CREATE_OUT"
+  exit 1
+fi
+
+if ! grep -q "ID: SPEC-0001" "$CREATE_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected create output to include ID: SPEC-0001."
+  echo ""
+  echo "Output:"
+  cat "$CREATE_OUT"
+  exit 1
+fi
+
+if ! grep -q "id: SPEC-0001" "$GENERATED_SPEC"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Generated spec is missing expected id frontmatter."
+  echo ""
+  echo "Generated spec:"
+  cat "$GENERATED_SPEC"
+  exit 1
+fi
+
+if ! grep -q "specStatus: draft" "$GENERATED_SPEC"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Generated spec is missing expected specStatus frontmatter."
+  echo ""
+  echo "Generated spec:"
+  cat "$GENERATED_SPEC"
+  exit 1
+fi
+
+echo "verify:specs: validating generated spec"
+
+bash tools/scripts/foundry.sh spec validate "$GENERATED_SPEC" >"$ARTIFACT_DIR/generated-spec-validation.out"
+
+if ! grep -q "Foundry spec validation: passed" "$ARTIFACT_DIR/generated-spec-validation.out"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected generated spec validation to pass."
+  echo ""
+  echo "Output:"
+  cat "$ARTIFACT_DIR/generated-spec-validation.out"
+  exit 1
+fi
+
+echo "verify:specs: creating generated spec with JSON output"
+
+bash tools/scripts/foundry.sh spec create "Add Billing" \
+  --dir "$CREATE_DIR" \
+  --json \
+  >"$CREATE_JSON_OUT"
+
+GENERATED_JSON_SPEC="$CREATE_DIR/0002-add-billing/spec.md"
+
+if [[ ! -f "$GENERATED_JSON_SPEC" ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected second generated spec file to exist:"
+  echo "$GENERATED_JSON_SPEC"
+  echo ""
+  echo "Output:"
+  cat "$CREATE_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"ok": true' "$CREATE_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected create JSON output to include \"ok\": true."
+  echo ""
+  echo "Output:"
+  cat "$CREATE_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"id": "SPEC-0002"' "$CREATE_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected create JSON output to include SPEC-0002."
+  echo ""
+  echo "Output:"
+  cat "$CREATE_JSON_OUT"
+  exit 1
+fi
+
+bash tools/scripts/foundry.sh spec validate "$GENERATED_JSON_SPEC" >"$ARTIFACT_DIR/generated-json-spec-validation.out"
+
+if ! grep -q "Foundry spec validation: passed" "$ARTIFACT_DIR/generated-json-spec-validation.out"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected second generated spec validation to pass."
+  echo ""
+  echo "Output:"
+  cat "$ARTIFACT_DIR/generated-json-spec-validation.out"
+  exit 1
+fi
 
 echo "verify:specs: passed"
