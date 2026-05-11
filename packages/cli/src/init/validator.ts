@@ -51,8 +51,8 @@ export async function validateInitConfig(
     return [
       "destination-empty",
       "destination-absolute",
+      "destination-windows-absolute",
       "destination-reserved",
-      "destination-path-separator",
       "destination-outside-cwd"
     ].includes(issue.code);
   });
@@ -90,9 +90,12 @@ export async function validateInitConfiguration(
 function normalizeValidationInput(
   input: InitValidationInput
 ): NormalizedInitValidationInput {
-  const destination = normalizeString(input.destination) ?? "myapp";
+  const destination = normalizeDestinationPath(
+    normalizeString(input.destination) ?? "myapp"
+  );
   const workspaceName =
-    normalizeString(input.workspaceName) ?? path.basename(destination);
+    normalizeString(input.workspaceName) ??
+    deriveWorkspaceNameFromDestination(destination);
 
   const directProvider =
     normalizeString(input.databaseProvider) ??
@@ -136,19 +139,19 @@ function validateDestination(
     });
   }
 
+  if (isWindowsAbsolutePath(destination)) {
+    issues.push({
+      severity: "error",
+      code: "destination-windows-absolute",
+      message: "Destination must be repository-relative and must not use a Windows absolute path."
+    });
+  }
+
   if (destination === "." || destination === "..") {
     issues.push({
       severity: "error",
       code: "destination-reserved",
       message: "Destination must not be . or ..."
-    });
-  }
-
-  if (containsPathSeparator(destination)) {
-    issues.push({
-      severity: "error",
-      code: "destination-path-separator",
-      message: "Destination must be a single repository-relative directory name."
     });
   }
 
@@ -175,6 +178,14 @@ function validateWorkspaceName(
       severity: "error",
       code: "workspace-name-empty",
       message: "Workspace name must not be empty."
+    });
+  }
+
+  if (workspaceName === "." || workspaceName === "..") {
+    issues.push({
+      severity: "error",
+      code: "workspace-name-reserved",
+      message: "Workspace name must not be . or ..."
     });
   }
 
@@ -345,8 +356,23 @@ function getInvocationCwd(): string {
   return process.cwd();
 }
 
+function normalizeDestinationPath(destination: string): string {
+  return destination.trim().replaceAll("\\", "/").replace(/\/+$/, "") || "myapp";
+}
+
+function deriveWorkspaceNameFromDestination(destination: string): string {
+  const normalized = normalizeDestinationPath(destination);
+  const segments = normalized.split("/").filter((segment) => segment.length > 0);
+
+  return segments.at(-1) ?? "myapp";
+}
+
 function containsPathSeparator(value: string): boolean {
   return value.includes("/") || value.includes("\\");
+}
+
+function isWindowsAbsolutePath(value: string): boolean {
+  return /^[A-Za-z]:[\\/]/.test(value) || value.startsWith("\\\\");
 }
 
 function isPathInside(parentPath: string, childPath: string): boolean {

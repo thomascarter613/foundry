@@ -1,5 +1,4 @@
 import { Args, Command, Flags } from "@oclif/core";
-import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 import {
@@ -7,6 +6,10 @@ import {
   supportedInitWizardDatabaseProviders,
   type InitWizardDatabaseProviderId
 } from "../../init/wizard.js";
+import {
+  validateInitConfig,
+  type InitValidationIssue
+} from "../../init/validator.js";
 import { writeInitWorkspace } from "../../init/writer.js";
 
 type InitDatabaseProviderId = InitWizardDatabaseProviderId;
@@ -17,12 +20,6 @@ interface InitConfig {
   readonly includeDatabase: boolean;
   readonly databaseProvider: InitDatabaseProviderId | undefined;
   readonly installDependencies: boolean;
-}
-
-interface InitValidationIssue {
-  readonly severity: "error";
-  readonly code: string;
-  readonly message: string;
 }
 
 interface InitPlanDirectory {
@@ -63,6 +60,7 @@ export default class Init extends Command {
     "<%= config.bin %> <%= command.id %> myapp",
     "<%= config.bin %> <%= command.id %> myapp --dry-run",
     "<%= config.bin %> <%= command.id %> myapp --no-database --yes --no-install",
+    "<%= config.bin %> <%= command.id %> examples/myapp --no-database --yes --no-install",
     "<%= config.bin %> <%= command.id %> myapp --database-provider postgres:drizzle --yes --no-install",
     "<%= config.bin %> <%= command.id %> myapp --database-provider postgres:prisma --yes --no-install",
     "<%= config.bin %> <%= command.id %> myapp --database-provider sqlite:drizzle --yes --no-install",
@@ -140,7 +138,7 @@ export default class Init extends Command {
       }
 
       config = {
-        destination: wizardAnswers.destination,
+        destination: normalizeDestinationPath(wizardAnswers.destination),
         workspaceName: inferWorkspaceName(wizardAnswers.destination),
         includeDatabase: wizardAnswers.includeDatabase,
         databaseProvider: wizardAnswers.includeDatabase
@@ -152,7 +150,7 @@ export default class Init extends Command {
       confirmedByWizard = true;
     }
 
-    const issues = await validateInitConfig(config);
+    const issues = await validateInitConfig(toValidationInput(config));
 
     if (issues.length > 0) {
       this.error(formatValidationFailure(issues), { exit: 1 });
@@ -171,9 +169,11 @@ export default class Init extends Command {
 
     printPlan(this, plan);
 
+    const resolvedDestination = resolveInitDestination(config.destination);
+
     const writeConfig: InitConfig = {
       ...config,
-      destination: resolveInitDestination(config.destination)
+      destination: resolvedDestination
     };
 
     const result = await writeInitWorkspace({
@@ -214,7 +214,7 @@ function buildInitialConfig(input: {
   readonly databaseProvider: string | undefined;
   readonly noInstall: boolean;
 }): InitConfig {
-  const destination = input.destination ?? "myapp";
+  const destination = normalizeDestinationPath(input.destination ?? "myapp");
   const includeDatabase =
     input.noDatabase ? false : input.databaseProvider !== undefined;
 
@@ -227,108 +227,6 @@ function buildInitialConfig(input: {
       : undefined,
     installDependencies: !input.noInstall
   };
-}
-
-async function validateInitConfig(
-  config: InitConfig
-): Promise<readonly InitValidationIssue[]> {
-  const issues: InitValidationIssue[] = [];
-
-  if (config.destination.trim().length === 0) {
-    issues.push({
-      severity: "error",
-      code: "destination-empty",
-      message: "Destination must not be empty."
-    });
-  }
-
-  if (path.isAbsolute(config.destination)) {
-    issues.push({
-      severity: "error",
-      code: "destination-absolute",
-      message: "Destination must be repository-relative for this initializer slice."
-    });
-  }
-
-  if (containsPathSeparator(config.destination)) {
-    issues.push({
-      severity: "error",
-      code: "project-name-path-separator",
-      message: "Project name must not contain path separators."
-    });
-  }
-
-  if (config.destination === "." || config.destination === "..") {
-    issues.push({
-      severity: "error",
-      code: "destination-reserved",
-      message: "Destination must not be . or ..."
-    });
-  }
-
-  const resolvedDestination = resolveInitDestination(config.destination);
-
-  if (!isPathInside(getInvocationCwd(), resolvedDestination)) {
-    issues.push({
-      severity: "error",
-      code: "destination-outside-cwd",
-      message: "Destination resolves outside the current working directory."
-    });
-  }
-
-  if (
-    config.includeDatabase &&
-    config.databaseProvider !== undefined &&
-    !isDatabaseProvider(config.databaseProvider)
-  ) {
-    issues.push({
-      severity: "error",
-      code: "database-provider-unsupported",
-      message: `Unsupported database provider: ${config.databaseProvider}. Supported providers: ${databaseProviders.join(", ")}`
-    });
-  }
-
-  const destinationState = await inspectDestination(resolvedDestination);
-
-  if (destinationState === "file") {
-    issues.push({
-      severity: "error",
-      code: "destination-file",
-      message: `Destination already exists and is a file: ${config.destination}`
-    });
-  }
-
-  if (destinationState === "non-empty-directory") {
-    issues.push({
-      severity: "error",
-      code: "destination-not-empty",
-      message: `Destination already exists and is not empty: ${config.destination}`
-    });
-  }
-
-  return issues;
-}
-
-async function inspectDestination(
-  destination: string
-): Promise<"missing" | "empty-directory" | "non-empty-directory" | "file"> {
-  try {
-    const destinationStat = await stat(destination);
-
-    if (!destinationStat.isDirectory()) {
-      return "file";
-    }
-
-    const entries = await readdir(destination);
-
-    return entries.length === 0 ? "empty-directory" : "non-empty-directory";
-  } catch (error) {
-    if (isNodeError(error) && error.code === "ENOENT") {
-      return "missing";
-    }
-
-    throw error;
-  }
 }
 
 function createInitPlan(config: InitConfig): InitPlan {
@@ -560,21 +458,33 @@ ${formattedIssues}
 Fix the inputs and run the command again.`;
 }
 
+function toValidationInput(config: InitConfig): {
+  readonly destination: string;
+  readonly workspaceName: string;
+  readonly includeDatabase: boolean;
+  readonly databaseProvider?: string;
+} {
+  return {
+    destination: config.destination,
+    workspaceName: config.workspaceName,
+    includeDatabase: config.includeDatabase,
+    ...(config.databaseProvider
+      ? { databaseProvider: config.databaseProvider }
+      : {})
+  };
+}
+
 function inferWorkspaceName(destination: string): string {
-  return path.basename(destination);
+  const normalizedDestination = normalizeDestinationPath(destination);
+  const segments = normalizedDestination
+    .split("/")
+    .filter((segment) => segment.length > 0);
+
+  return segments.at(-1) ?? "myapp";
 }
 
-function containsPathSeparator(value: string): boolean {
-  return value.includes("/") || value.includes("\\");
-}
-
-function isPathInside(parentPath: string, childPath: string): boolean {
-  const relativePath = path.relative(parentPath, childPath);
-
-  return (
-    relativePath.length === 0 ||
-    (!relativePath.startsWith("..") && !path.isAbsolute(relativePath))
-  );
+function normalizeDestinationPath(destination: string): string {
+  return destination.trim().replaceAll("\\", "/").replace(/\/+$/, "") || "myapp";
 }
 
 function normalizeDatabaseProvider(
@@ -605,8 +515,4 @@ function getInvocationCwd(): string {
 
 function resolveInitDestination(destination: string): string {
   return path.resolve(getInvocationCwd(), destination);
-}
-
-function isNodeError(error: unknown): error is NodeJS.ErrnoException {
-  return error instanceof Error && "code" in error;
 }
