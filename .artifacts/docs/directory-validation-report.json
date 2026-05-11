@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "summary": {
+    "checkedDirectories": 18,
+    "checkedFiles": 208,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0
+  },
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "directory.legacyDirectory",
+      "message": "legacy docs directory is still present and should eventually be migrated: docs/.ideas",
+      "path": "docs/.ideas"
+    },
+    {
+      "severity": "warning",
+      "code": "directory.legacyDirectory",
+      "message": "legacy docs directory is still present and should eventually be migrated: docs/adr",
+      "path": "docs/adr"
+    },
+    {
+      "severity": "warning",
+      "code": "directory.legacyDirectory",
+      "message": "legacy docs directory is still present and should eventually be migrated: docs/product",
+      "path": "docs/product"
+    },
+    {
+      "severity": "warning",
+      "code": "directory.legacyDirectory",
+      "message": "legacy docs directory is still present and should eventually be migrated: docs/scaffolding",
+      "path": "docs/scaffolding"
+    }
+  ]
+}

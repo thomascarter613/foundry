@@ -1,0 +1,170 @@
+{
+  "ok": true,
+  "summary": {
+    "adrCount": 11,
+    "indexCount": 1,
+    "indexEntryCount": 11,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "adrs": [
+    {
+      "number": "0001",
+      "pathNumber": "0001",
+      "title": "ADR-0001: Monorepo Scaffolding Toolchain",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md",
+      "status": "Approved"
+    },
+    {
+      "number": "0002",
+      "pathNumber": "0002",
+      "title": "ADR-0002: Adopt AI-Expected Provider-Agnostic Architecture",
+      "path": "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md",
+      "status": "Approved"
+    },
+    {
+      "number": "0003",
+      "pathNumber": "0003",
+      "title": "ADR-0003 Foundry Lifecycle Manifest Schema",
+      "path": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md",
+      "status": "Approved"
+    },
+    {
+      "number": "0004",
+      "pathNumber": "0004",
+      "title": "ADR 0004: Architecture Principles",
+      "path": "docs/architecture/adr/0004-architecture-principles.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0005",
+      "pathNumber": "0005",
+      "title": "ADR 0005: Documentation System Topology",
+      "path": "docs/architecture/adr/0005-documentation-system-topology.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0006",
+      "pathNumber": "0006",
+      "title": "ADR 0006: Governed Document Metadata",
+      "path": "docs/architecture/adr/0006-governed-document-metadata.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0007",
+      "pathNumber": "0007",
+      "title": "ADR 0007: Monorepo Structure",
+      "path": "docs/architecture/adr/0007-monorepo-structure.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0008",
+      "pathNumber": "0008",
+      "title": "ADR 0008: Documentation Knowledge Graph",
+      "path": "docs/architecture/adr/0008-documentation-knowledge-graph.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0009",
+      "pathNumber": "0009",
+      "title": "ADR 0009: Package Management",
+      "path": "docs/architecture/adr/0009-package-management.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0010",
+      "pathNumber": "0010",
+      "title": "ADR 0010: CI Governance",
+      "path": "docs/architecture/adr/0010-ci-governance.md",
+      "status": "Draft"
+    },
+    {
+      "number": "0011",
+      "pathNumber": "0011",
+      "title": "ADR 0011: Documentation CI Validation",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md",
+      "status": "Draft"
+    }
+  ],
+  "indexEntries": [
+    {
+      "number": "0001",
+      "title": "Monorepo Scaffolding Toolchain",
+      "status": "Approved",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 11
+    },
+    {
+      "number": "0002",
+      "title": "Adopt AI-Expected Provider-Agnostic Architecture",
+      "status": "Approved",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 12
+    },
+    {
+      "number": "0003",
+      "title": "Foundry Lifecycle Manifest Schema",
+      "status": "Approved",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 13
+    },
+    {
+      "number": "0004",
+      "title": "Architecture Principles",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 14
+    },
+    {
+      "number": "0005",
+      "title": "Documentation System Topology",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 15
+    },
+    {
+      "number": "0006",
+      "title": "Governed Document Metadata",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 16
+    },
+    {
+      "number": "0007",
+      "title": "Monorepo Structure",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 17
+    },
+    {
+      "number": "0008",
+      "title": "Documentation Knowledge Graph",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 18
+    },
+    {
+      "number": "0009",
+      "title": "Package Management",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 19
+    },
+    {
+      "number": "0010",
+      "title": "CI Governance",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 20
+    },
+    {
+      "number": "0011",
+      "title": "Documentation CI Validation",
+      "status": "Draft",
+      "indexPath": "docs/architecture/adr/index.md",
+      "line": 21
+    }
+  ],
+  "issues": []
+}

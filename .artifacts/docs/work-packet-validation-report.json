@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "summary": {
+    "workPacketCount": 1,
+    "indexCount": 1,
+    "indexEntryCount": 1,
+    "legacyPathCount": 0,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "workPackets": [
+    {
+      "number": "0002",
+      "pathNumber": "0002",
+      "title": "WP-0002: Add Foundry Init Workspace Initializer",
+      "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    }
+  ],
+  "indexEntries": [
+    {
+      "number": "0002",
+      "title": "Add Foundry Init Workspace Initializer",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 11
+    }
+  ],
+  "issues": []
+}

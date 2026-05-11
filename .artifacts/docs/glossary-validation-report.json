@@ -1,0 +1,2121 @@
+{
+  "ok": true,
+  "summary": {
+    "glossaryTermCount": 37,
+    "quickrefTermCount": 12,
+    "referencedTermCount": 352,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "glossaryTerms": [
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "anchor": "adr",
+      "path": "docs/planning/glossary.md",
+      "line": 9
+    },
+    {
+      "term": "AI Provider",
+      "normalizedTerm": "ai provider",
+      "anchor": "ai-provider",
+      "path": "docs/planning/glossary.md",
+      "line": 13
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "anchor": "api",
+      "path": "docs/planning/glossary.md",
+      "line": 17
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "anchor": "architecture",
+      "path": "docs/planning/glossary.md",
+      "line": 21
+    },
+    {
+      "term": "Audit Log",
+      "normalizedTerm": "audit log",
+      "anchor": "audit-log",
+      "path": "docs/planning/glossary.md",
+      "line": 25
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "anchor": "authority",
+      "path": "docs/planning/glossary.md",
+      "line": 29
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "anchor": "changeplan",
+      "path": "docs/planning/glossary.md",
+      "line": 33
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "anchor": "ci",
+      "path": "docs/planning/glossary.md",
+      "line": 37
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "anchor": "cli",
+      "path": "docs/planning/glossary.md",
+      "line": 41
+    },
+    {
+      "term": "Code Linting",
+      "normalizedTerm": "code linting",
+      "anchor": "code-linting",
+      "path": "docs/planning/glossary.md",
+      "line": 45
+    },
+    {
+      "term": "Compliance",
+      "normalizedTerm": "compliance",
+      "anchor": "compliance",
+      "path": "docs/planning/glossary.md",
+      "line": 49
+    },
+    {
+      "term": "Configuration",
+      "normalizedTerm": "configuration",
+      "anchor": "configuration",
+      "path": "docs/planning/glossary.md",
+      "line": 53
+    },
+    {
+      "term": "Contract",
+      "normalizedTerm": "contract",
+      "anchor": "contract",
+      "path": "docs/planning/glossary.md",
+      "line": 57
+    },
+    {
+      "term": "Dashboard",
+      "normalizedTerm": "dashboard",
+      "anchor": "dashboard",
+      "path": "docs/planning/glossary.md",
+      "line": 61
+    },
+    {
+      "term": "Documentation Engine",
+      "normalizedTerm": "documentation engine",
+      "anchor": "documentation-engine",
+      "path": "docs/planning/glossary.md",
+      "line": 65
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "anchor": "documentation-system",
+      "path": "docs/planning/glossary.md",
+      "line": 69
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "anchor": "drift",
+      "path": "docs/planning/glossary.md",
+      "line": 73
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "anchor": "governance",
+      "path": "docs/planning/glossary.md",
+      "line": 77
+    },
+    {
+      "term": "Governed Metadata",
+      "normalizedTerm": "governed metadata",
+      "anchor": "governed-metadata",
+      "path": "docs/planning/glossary.md",
+      "line": 81
+    },
+    {
+      "term": "Graph Validation",
+      "normalizedTerm": "graph validation",
+      "anchor": "graph-validation",
+      "path": "docs/planning/glossary.md",
+      "line": 85
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "anchor": "knowledge-graph",
+      "path": "docs/planning/glossary.md",
+      "line": 89
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "anchor": "lifecycle",
+      "path": "docs/planning/glossary.md",
+      "line": 93
+    },
+    {
+      "term": "Manifest",
+      "normalizedTerm": "manifest",
+      "anchor": "manifest",
+      "path": "docs/planning/glossary.md",
+      "line": 97
+    },
+    {
+      "term": "Monorepo",
+      "normalizedTerm": "monorepo",
+      "anchor": "monorepo",
+      "path": "docs/planning/glossary.md",
+      "line": 101
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "anchor": "onboarding",
+      "path": "docs/planning/glossary.md",
+      "line": 105
+    },
+    {
+      "term": "Package Management",
+      "normalizedTerm": "package management",
+      "anchor": "package-management",
+      "path": "docs/planning/glossary.md",
+      "line": 109
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "anchor": "pipeline",
+      "path": "docs/planning/glossary.md",
+      "line": 113
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "anchor": "platform",
+      "path": "docs/planning/glossary.md",
+      "line": 117
+    },
+    {
+      "term": "Policy",
+      "normalizedTerm": "policy",
+      "anchor": "policy",
+      "path": "docs/planning/glossary.md",
+      "line": 121
+    },
+    {
+      "term": "Product",
+      "normalizedTerm": "product",
+      "anchor": "product",
+      "path": "docs/planning/glossary.md",
+      "line": 125
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "anchor": "repository-contract",
+      "path": "docs/planning/glossary.md",
+      "line": 129
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "anchor": "scaffolding",
+      "path": "docs/planning/glossary.md",
+      "line": 133
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "anchor": "standard",
+      "path": "docs/planning/glossary.md",
+      "line": 137
+    },
+    {
+      "term": "Toolchain",
+      "normalizedTerm": "toolchain",
+      "anchor": "toolchain",
+      "path": "docs/planning/glossary.md",
+      "line": 141
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "anchor": "validation",
+      "path": "docs/planning/glossary.md",
+      "line": 145
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "anchor": "verification",
+      "path": "docs/planning/glossary.md",
+      "line": 149
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "anchor": "work-packet",
+      "path": "docs/planning/glossary.md",
+      "line": 153
+    }
+  ],
+  "quickrefTerms": [
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "anchor": "adr",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 9
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "anchor": "architecture",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 13
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "anchor": "changeplan",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 17
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "anchor": "documentation-system",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 21
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "anchor": "governance",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 25
+    },
+    {
+      "term": "Governed Metadata",
+      "normalizedTerm": "governed metadata",
+      "anchor": "governed-metadata",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 29
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "anchor": "knowledge-graph",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 33
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "anchor": "lifecycle",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 37
+    },
+    {
+      "term": "Monorepo",
+      "normalizedTerm": "monorepo",
+      "anchor": "monorepo",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 41
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "anchor": "scaffolding",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 45
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "anchor": "validation",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 49
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "anchor": "verification",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 53
+    }
+  ],
+  "references": [
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/_supersession.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/_template.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0004-architecture-principles.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0005-documentation-system-topology.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0006-governed-document-metadata.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0007-monorepo-structure.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0009-package-management.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0010-ci-governance.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/architecture/adr/index.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/planning/adr-directory-structure.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/planning/adr-impact-analyzer.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/planning/adr-validation-engine.md"
+    },
+    {
+      "term": "ADR",
+      "normalizedTerm": "adr",
+      "path": "docs/planning/adrlinks.md"
+    },
+    {
+      "term": "AI Provider",
+      "normalizedTerm": "ai provider",
+      "path": "docs/architecture/ai-provider-agnostic-architecture.md"
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "path": "docs/planning/api-overview.md"
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "path": "docs/planning/api-reference--generator.md"
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "path": "docs/planning/docs-api.md"
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "path": "docs/platform/documentation-api.md"
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "path": "docs/standards/api-standards.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/_supersession.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/_template.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0004-architecture-principles.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0005-documentation-system-topology.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0006-governed-document-metadata.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0007-monorepo-structure.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0009-package-management.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0010-ci-governance.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/adr/index.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/ai-provider-agnostic-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/architecture-overview.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/component-diagram.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/constraints.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/container-diagram.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/data-flow.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/diagrams/docs-agent-flow.meta.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/diagrams/documentation-knowledge-graph.meta.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/diagrams/system-context.meta.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/diagrams/validation-pipeline.meta.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/documentation-agent-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/documentation-system-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/documentation-validation-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/foundry-lifecycle-engine.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/foundry-lifecycle-manifest.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/index.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/integration-map.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/principles.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/runtime-views.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/architecture/system-context.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/planning/architecture-diagram-generator.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/planning/architecture-diagrams-directory.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/planning/architecture-integration-layer.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/planning/architecture-overview.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/planning/multi-agent-architecture.md"
+    },
+    {
+      "term": "Architecture",
+      "normalizedTerm": "architecture",
+      "path": "docs/scaffolding/init/database-provider-architecture.md"
+    },
+    {
+      "term": "Audit Log",
+      "normalizedTerm": "audit log",
+      "path": "docs/scaffolding/init/provenance-and-audit.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/authority-map.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/ci-policy.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/contribution-model.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/documentation-ci-rules.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/documentation-governance.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/exception-process.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/governance-charter.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/index.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/repository-contract.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/governance/versioning-strategy.md"
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "path": "docs/planning/authority-map.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0002_governed-header-block-rollout.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0003_governance.json-population.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/index.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/lifecycle/documentation-changeplan-lifecycle.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/work-packets/index.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/architecture/adr/0004-architecture-principles.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/architecture/adr/0010-ci-governance.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/architecture/principles.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/governance/ci-policy.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/governance/documentation-ci-rules.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/lifecycle/incident-response.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/ci-integration-layer.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/docs-agent-specification.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/docs-ci-rules.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/implementation-sequencing.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/upstream-downstream-denpendencies.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/planning/upstream-downstream-dependencies.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/platform/ci-cd.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/product/foundry-ai-operating-principles.md"
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/scaffolding/ci-verification.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/planning/cli-spec.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/planning/docs-cli.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/platform/documentation-cli.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/scaffolding/cli/foundry-cli-usage.md"
+    },
+    {
+      "term": "Code Linting",
+      "normalizedTerm": "code linting",
+      "path": "docs/planning/code-linting-integration-layer.md"
+    },
+    {
+      "term": "Code Linting",
+      "normalizedTerm": "code linting",
+      "path": "docs/planning/docs-linting-rules.md"
+    },
+    {
+      "term": "Compliance",
+      "normalizedTerm": "compliance",
+      "path": "docs/planning/governance-compliance-validator.md"
+    },
+    {
+      "term": "Contract",
+      "normalizedTerm": "contract",
+      "path": "docs/governance/repository-contract.md"
+    },
+    {
+      "term": "Contract",
+      "normalizedTerm": "contract",
+      "path": "docs/planning/repository-contract.md"
+    },
+    {
+      "term": "Contract",
+      "normalizedTerm": "contract",
+      "path": "docs/scaffolding/contract-verification.md"
+    },
+    {
+      "term": "Dashboard",
+      "normalizedTerm": "dashboard",
+      "path": "docs/planning/docs-dashboard.md"
+    },
+    {
+      "term": "Dashboard",
+      "normalizedTerm": "dashboard",
+      "path": "docs/platform/documentation-dashboard.md"
+    },
+    {
+      "term": "Documentation Engine",
+      "normalizedTerm": "documentation engine",
+      "path": "docs/planning/docs-engine-canonical-spec.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/.ideas/capability-inventory.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/.ideas/plugins.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/adr/0005-documentation-system-topology.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/diagrams/documentation-knowledge-graph.meta.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/documentation-agent-architecture.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/documentation-system-architecture.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/architecture/documentation-validation-architecture.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/governance/documentation-ci-rules.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/governance/documentation-governance.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/index.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/lifecycle/documentation-changeplan-lifecycle.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/lifecycle/documentation-lifecycle.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/onboarding/documentation-system-guide.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/onboarding/documentation-system-mvp-v1.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/cross-document-link-model.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/cross-link-consistency-checker.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-agent-execution-engine.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-agent-planning-engine.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-agent-reaasoning-engine.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-agent-reasoning-engine.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-background-daemon.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-event-system.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/docs-service.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/documentation-directory-structure.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/documentation-system-component-map.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/domain-map.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/exception-process.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/execution-agent-design.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/glossary-directory-structure.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/glossary-impact-analyzer.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/glossary-term-linking.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/glossary.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/governed-document-types-.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/governed-document-types.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/governed-header-block.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/idea.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/index.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/nonfunctional-requirements.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/overview.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/pea-design.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/release-plan.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/repo-as-memory-system-design.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/repo-as-memory.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/risks-and-assumptions.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/saas-business-model.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/scope.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/universal-governed-header-block.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/versioning-strategy.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/planning/vision.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/platform/documentation-api.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/platform/documentation-background-daemon.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/platform/documentation-cli.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/platform/documentation-dashboard.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/README.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/standards/documentation-standards.md"
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "path": "docs/planning/docs-drift-detector.md"
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "path": "docs/planning/drift-classification-engine.md"
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "path": "docs/planning/drift-remediation-engine.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/architecture/adr/0010-ci-governance.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/changeplans/cp-0003_governance.json-population.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/authority-map.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/ci-policy.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/contribution-model.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/documentation-ci-rules.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/documentation-governance.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/exception-process.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/governance-charter.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/index.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/repository-contract.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/versioning-strategy.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/onboarding/documentation-system-mvp-v1.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/docs-agent-governance-interpreter.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/docs-governance-engine.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/glossary.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/governance-charter.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/governance-compliance-validator.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/governance-impact-analyzer.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/governance-links.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/planning/governance-rules.md"
+    },
+    {
+      "term": "Governed Metadata",
+      "normalizedTerm": "governed metadata",
+      "path": "docs/architecture/adr/0006-governed-document-metadata.md"
+    },
+    {
+      "term": "Governed Metadata",
+      "normalizedTerm": "governed metadata",
+      "path": "docs/planning/document-metadata-schema.md"
+    },
+    {
+      "term": "Governed Metadata",
+      "normalizedTerm": "governed metadata",
+      "path": "docs/standards/metadata-standards.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/architecture/diagrams/documentation-knowledge-graph.meta.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/architecture/documentation-knowledge-graph.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/planning/cross-link-graph-validator.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/planning/docs-knowledge-graph-schema.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/planning/glossary.md"
+    },
+    {
+      "term": "Knowledge Graph",
+      "normalizedTerm": "knowledge graph",
+      "path": "docs/standards/graph-schema-standards.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/architecture/foundry-lifecycle-engine.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/architecture/foundry-lifecycle-manifest.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0002_governed-header-block-rollout.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0003_governance.json-population.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/index.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/branching-strategy.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/change-management.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/development-lifecycle.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/documentation-changeplan-lifecycle.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/documentation-lifecycle.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/incident-response.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/index.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/lifecycle/release-lifecycle.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/planning/lifecycle-integration-layer.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/work-packets/index.md"
+    },
+    {
+      "term": "Manifest",
+      "normalizedTerm": "manifest",
+      "path": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+    },
+    {
+      "term": "Manifest",
+      "normalizedTerm": "manifest",
+      "path": "docs/architecture/foundry-lifecycle-manifest.md"
+    },
+    {
+      "term": "Manifest",
+      "normalizedTerm": "manifest",
+      "path": "docs/scaffolding/generator-manifest.md"
+    },
+    {
+      "term": "Monorepo",
+      "normalizedTerm": "monorepo",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "Monorepo",
+      "normalizedTerm": "monorepo",
+      "path": "docs/architecture/adr/0007-monorepo-structure.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/documentation-system-guide.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/glossary-quickref.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/how-to-navigate-the-repo.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/index.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/README.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/onboarding/system-overview.md"
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "path": "docs/planning/onboarding-flow-generator.md"
+    },
+    {
+      "term": "Package Management",
+      "normalizedTerm": "package management",
+      "path": "docs/architecture/adr/0009-package-management.md"
+    },
+    {
+      "term": "Package Management",
+      "normalizedTerm": "package management",
+      "path": "docs/scaffolding/init/provider-plugin-packages.md"
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "path": "docs/architecture/diagrams/validation-pipeline.meta.md"
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "path": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "path": "docs/ci-constitutional-pipeline.md"
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "path": "docs/planning/docs-self-validation-pipeline.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/planning/platform-integration-layer.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/ci-cd.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/documentation-api.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/documentation-background-daemon.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/documentation-cli.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/documentation-dashboard.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/index.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/observability.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/overview.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/platform/tooling.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/ci-verification.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/cli/foundry-cli-usage.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/contract-verification.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/generated-artifact-hygiene.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/generator-manifest.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/generator-smoke-tests.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/generator-taxonomy.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/database-provider-architecture.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/database-provider-reference.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/dependency-installation-policy.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/external-provider-plugin-loading.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/foundry-init-requirements.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/foundry-init-v1-handoff.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/generated-workspace-quality.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/provenance-and-audit.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/provider-plugin-interface.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/provider-plugin-packages.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/README.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/supabase-compatibility.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/workspace-upgrade-planning.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/init/workspace-upgrade-workflow.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/releases/v1-mvp-acceptance-checklist.md"
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "path": "docs/scaffolding/scaffolding-strategy.md"
+    },
+    {
+      "term": "Policy",
+      "normalizedTerm": "policy",
+      "path": "docs/governance/ci-policy.md"
+    },
+    {
+      "term": "Policy",
+      "normalizedTerm": "policy",
+      "path": "docs/scaffolding/init/dependency-installation-policy.md"
+    },
+    {
+      "term": "Product",
+      "normalizedTerm": "product",
+      "path": "docs/planning/product-vision.md"
+    },
+    {
+      "term": "Product",
+      "normalizedTerm": "product",
+      "path": "docs/product/foundry-ai-operating-principles.md"
+    },
+    {
+      "term": "Product",
+      "normalizedTerm": "product",
+      "path": "docs/product/foundry-core-operating-model.md"
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/governance/repository-contract.md"
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/planning/repository-contract.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/planning/ai-native-scaffolding-engine.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/planning/scaffolding-generator.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/ci-verification.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/cli/foundry-cli-usage.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/contract-verification.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/generated-artifact-hygiene.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/generator-manifest.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/generator-smoke-tests.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/generator-taxonomy.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/database-provider-architecture.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/database-provider-reference.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/dependency-installation-policy.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/external-provider-plugin-loading.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/foundry-init-requirements.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/foundry-init-v1-handoff.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/generated-workspace-quality.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/provenance-and-audit.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/provider-plugin-interface.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/provider-plugin-packages.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/README.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/supabase-compatibility.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/workspace-upgrade-planning.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/init/workspace-upgrade-workflow.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/releases/v1-mvp-acceptance-checklist.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/scaffolding/scaffolding-strategy.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/planning/standards-impact-analyzer.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/planning/standards-integration-layer.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/api-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/coding-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/documentation-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/graph-schema-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/index.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/markdown-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/metadata-standards.md"
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "path": "docs/standards/testing-standards.md"
+    },
+    {
+      "term": "Toolchain",
+      "normalizedTerm": "toolchain",
+      "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/architecture/adr/0011-documentation-ci-validation.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/architecture/diagrams/validation-pipeline.meta.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/architecture/documentation-validation-architecture.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/onboarding/documentation-system-mvp-v1.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/adr-validation-engine.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/cross-link-graph-validator.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/directory-structure-validator.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/docs-self-validation-pipeline.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/glossary-validation-engine.md"
+    },
+    {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/planning/governance-compliance-validator.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/onboarding/documentation-system-mvp-v1.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/scaffolding/ci-verification.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/scaffolding/contract-verification.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/index.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+    }
+  ],
+  "issues": []
+}

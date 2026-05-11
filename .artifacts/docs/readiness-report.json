@@ -1,0 +1,79 @@
+{
+  "ok": false,
+  "generatedAt": "2026-05-11T09:42:54.116Z",
+  "status": "blocked",
+  "score": 68,
+  "dimensions": [
+    {
+      "id": "directory",
+      "label": "Directory topology",
+      "status": "blocked",
+      "score": 0,
+      "weight": 18,
+      "errorCount": 5,
+      "warningCount": 0,
+      "recommendations": [
+        "Run `foundry docs directory repair --write`, then re-run directory validation."
+      ]
+    },
+    {
+      "id": "metadata",
+      "label": "Governed metadata",
+      "status": "ready",
+      "score": 100,
+      "weight": 22,
+      "errorCount": 0,
+      "warningCount": 0,
+      "recommendations": []
+    },
+    {
+      "id": "graph",
+      "label": "Documentation graph",
+      "status": "attention",
+      "score": 60,
+      "weight": 22,
+      "errorCount": 0,
+      "warningCount": 30,
+      "recommendations": [
+        "Resolve graph warnings or intentionally defer them before strict graph validation."
+      ]
+    },
+    {
+      "id": "adr",
+      "label": "ADR governance",
+      "status": "ready",
+      "score": 100,
+      "weight": 13,
+      "errorCount": 0,
+      "warningCount": 0,
+      "recommendations": []
+    },
+    {
+      "id": "glossary",
+      "label": "Glossary coverage",
+      "status": "attention",
+      "score": 60,
+      "weight": 12,
+      "errorCount": 0,
+      "warningCount": 122,
+      "recommendations": [
+        "Add missing glossary terms or update document glossaryTerms references."
+      ]
+    },
+    {
+      "id": "changeplans",
+      "label": "ChangePlan governance",
+      "status": "ready",
+      "score": 100,
+      "weight": 13,
+      "errorCount": 0,
+      "warningCount": 0,
+      "recommendations": []
+    }
+  ],
+  "recommendations": [
+    "Run `foundry docs directory repair --write`, then re-run directory validation.",
+    "Resolve graph warnings or intentionally defer them before strict graph validation.",
+    "Add missing glossary terms or update document glossaryTerms references."
+  ]
+}

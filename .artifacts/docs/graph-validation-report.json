@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "summary": {
+    "nodeCount": 239,
+    "edgeCount": 1083,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "issues": []
+}

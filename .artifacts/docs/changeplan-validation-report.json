@@ -1,0 +1,145 @@
+{
+  "ok": true,
+  "summary": {
+    "changePlanCount": 8,
+    "indexCount": 1,
+    "indexEntryCount": 8,
+    "legacyPlanningCount": 0,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0
+  },
+  "changePlans": [
+    {
+      "number": "0001",
+      "pathNumber": "0001",
+      "title": "CP-0001: Governance Bootstrap Change Plan",
+      "path": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0002",
+      "pathNumber": "0002",
+      "title": "CP-0002: Governed Header Block Rollout",
+      "path": "docs/changeplans/cp-0002_governed-header-block-rollout.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0003",
+      "pathNumber": "0003",
+      "title": "CP-0003: Governance JSON Population",
+      "path": "docs/changeplans/cp-0003_governance.json-population.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0004",
+      "pathNumber": "0004",
+      "title": "CP-0004: Architecture JSON Architecture Graph Seed",
+      "path": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0005",
+      "pathNumber": "0005",
+      "title": "CP-0005: Platform Capability Seed",
+      "path": "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0006",
+      "pathNumber": "0006",
+      "title": "CP-0006: CI Constitutional Pipeline",
+      "path": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0007",
+      "pathNumber": "0007",
+      "title": "CP-0007: Drift Baseline JSON Cross Surface Baselines",
+      "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0008",
+      "pathNumber": "0008",
+      "title": "CP-0008: Governance Enforcement Engine",
+      "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
+    }
+  ],
+  "indexEntries": [
+    {
+      "number": "0001",
+      "title": "Governance Bootstrap Change Plan",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 11
+    },
+    {
+      "number": "0002",
+      "title": "Governed Header Block Rollout",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 12
+    },
+    {
+      "number": "0003",
+      "title": "Governance JSON Population",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 13
+    },
+    {
+      "number": "0004",
+      "title": "Architecture JSON Architecture Graph Seed",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 14
+    },
+    {
+      "number": "0005",
+      "title": "Platform Capability Seed",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 15
+    },
+    {
+      "number": "0006",
+      "title": "CI Constitutional Pipeline",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 16
+    },
+    {
+      "number": "0007",
+      "title": "Drift Baseline JSON Cross Surface Baselines",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 17
+    },
+    {
+      "number": "0008",
+      "title": "Governance Enforcement Engine",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 18
+    }
+  ],
+  "issues": []
+}

@@ -1,0 +1,44 @@
+==> typecheck
+status: 0
+
+typecheck	0
+==> build
+status: 0
+
+build	0
+==> docs verify
+status: 0
+
+docs verify	0
+==> docs readiness
+status: 1
+
+docs readiness	1
+==> root docs verifier
+status: 0
+
+root docs verifier	0
+==> directory validation
+status: 0
+
+directory validation	0
+==> graph validation
+status: 0
+
+graph validation	0
+==> adr validation
+status: 0
+
+adr validation	0
+==> glossary validation
+status: 0
+
+glossary validation	0
+==> changeplan validation
+status: 0
+
+changeplan validation	0
+==> work packet validation
+status: 0
+
+work packet validation	0
