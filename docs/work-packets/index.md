@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0009 | Add Init MVP CI Gate | Draft | `docs/work-packets/WP-0009-add-init-mvp-ci-gate.md` |
 | WP-0008 | Integrate Init MVP Verification Gate | Draft | `docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md` |
 | WP-0007 | Require Init Provenance Audit Contract | Draft | `docs/work-packets/WP-0007-require-init-provenance-audit-contract.md` |
 | WP-0006 | Verify Generated Workspace Contract | Draft | `docs/work-packets/WP-0006-verify-generated-workspace-contract.md` |

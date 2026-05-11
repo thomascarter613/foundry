@@ -1,0 +1,51 @@
+name: Foundry Init MVP Verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  foundry-init-mvp:
+    name: Foundry init MVP gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Ensure verification scripts are executable
+        run: |
+          chmod +x tools/scripts/*.sh
+
+      - name: Run Foundry init MVP gate
+        run: tools/scripts/check-foundry-init-mvp.sh
+
+      - name: Print Foundry init MVP summary
+        if: always()
+        run: |
+          if [ -f .artifacts/foundry/init-mvp/summary.json ]; then
+            cat .artifacts/foundry/init-mvp/summary.json
+          fi
+
+      - name: Upload Foundry init MVP artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundry-init-mvp-artifacts
+          path: |
+            .artifacts/foundry
+            .artifacts/docs
+          if-no-files-found: warn
