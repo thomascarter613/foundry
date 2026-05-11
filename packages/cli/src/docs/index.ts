@@ -4,6 +4,11 @@ export {
   validateAdrIndex
 } from "./adr-validator.js";
 export {
+  createDirectoryRepairPlan,
+  formatDirectoryRepairPlanAsJson,
+  formatDirectoryRepairPlanAsText
+} from "./directory-repair.js";
+export {
   formatDirectoryValidationReportAsJson,
   formatDirectoryValidationReportAsText,
   validateDirectoryTopology
@@ -21,6 +26,11 @@ export {
   buildDocsGraph,
   summarizeDocsGraph
 } from "./graph.js";
+export {
+  createGraphRepairPlan,
+  formatGraphRepairPlanAsJson,
+  formatGraphRepairPlanAsText
+} from "./graph-repair.js";
 export {
   formatGraphValidationReportAsJson,
   formatGraphValidationReportAsText,
@@ -50,6 +60,12 @@ export type {
   AdrValidationSummary
 } from "./adr-validator.js";
 export type {
+  DirectoryRepairAction,
+  DirectoryRepairActionKind,
+  DirectoryRepairOptions,
+  DirectoryRepairPlan
+} from "./directory-repair.js";
+export type {
   DirectoryValidationOptions,
   DirectoryValidationReport,
   DirectoryValidationSummary
@@ -62,6 +78,13 @@ export type {
   DocsGraphNode,
   DocsGraphNodeKind
 } from "./graph.js";
+export type {
+  GraphRepairAction,
+  GraphRepairActionKind,
+  GraphRepairField,
+  GraphRepairOptions,
+  GraphRepairPlan
+} from "./graph-repair.js";
 export type {
   DocsGraphValidationOptions,
   DocsGraphValidationReport,
