@@ -21,6 +21,12 @@ CLARIFY_OUT="$ARTIFACT_DIR/clarify-spec.out"
 CLARIFY_JSON_OUT="$ARTIFACT_DIR/clarify-spec-json.out"
 CLARIFY_FAIL_OUT="$ARTIFACT_DIR/clarify-fail-on-blocking.out"
 CLARIFY_FAIL_ERR="$ARTIFACT_DIR/clarify-fail-on-blocking.err"
+PLAN_REJECT_OUT="$ARTIFACT_DIR/plan-reject-blocking.out"
+PLAN_REJECT_ERR="$ARTIFACT_DIR/plan-reject-blocking.err"
+PLAN_OUT="$ARTIFACT_DIR/plan-spec.out"
+PLAN_JSON_OUT="$ARTIFACT_DIR/plan-spec-json.out"
+PLAN_OVERWRITE_OUT="$ARTIFACT_DIR/plan-overwrite.out"
+PLAN_OVERWRITE_ERR="$ARTIFACT_DIR/plan-overwrite.err"
 
 cleanup() {
   rm -rf "$ARTIFACT_DIR"
@@ -160,6 +166,7 @@ bash tools/scripts/foundry.sh spec create "Add Authentication" \
 
 GENERATED_SPEC="$CREATE_DIR/0001-add-authentication/spec.md"
 GENERATED_CLARIFICATIONS="$CREATE_DIR/0001-add-authentication/clarifications.md"
+GENERATED_PLAN="$CREATE_DIR/0001-add-authentication/implementation-plan.md"
 
 if [[ ! -f "$GENERATED_SPEC" ]]; then
   echo "verify:specs: failed"
@@ -368,6 +375,172 @@ if [[ "$CLARIFY_FAIL_EXIT_CODE" -eq 0 ]]; then
   echo ""
   echo "Error:"
   cat "$CLARIFY_FAIL_ERR"
+  exit 1
+fi
+
+echo "verify:specs: validating plan rejection with blocking clarifications"
+
+set +e
+bash tools/scripts/foundry.sh spec plan "$GENERATED_SPEC" \
+  >"$PLAN_REJECT_OUT" 2>"$PLAN_REJECT_ERR"
+PLAN_REJECT_EXIT_CODE=$?
+set -e
+
+if [[ "$PLAN_REJECT_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected spec plan to reject blocking clarifications by default."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_REJECT_OUT"
+  echo ""
+  echo "Error:"
+  cat "$PLAN_REJECT_ERR"
+  exit 1
+fi
+
+PLAN_REJECT_COMBINED="$ARTIFACT_DIR/plan-reject-blocking.combined"
+
+cat "$PLAN_REJECT_OUT" "$PLAN_REJECT_ERR" >"$PLAN_REJECT_COMBINED"
+
+if ! grep -q "blocking clarification" "$PLAN_REJECT_COMBINED" || \
+   ! grep -q "questions remain" "$PLAN_REJECT_COMBINED"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan rejection output to mention blocking clarification questions."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_REJECT_OUT"
+  echo ""
+  echo "Error:"
+  cat "$PLAN_REJECT_ERR"
+  exit 1
+fi
+
+echo "verify:specs: planning generated spec with explicit blocking override"
+
+bash tools/scripts/foundry.sh spec plan "$GENERATED_SPEC" \
+  --allow-blocking-clarifications \
+  >"$PLAN_OUT"
+
+if [[ ! -f "$GENERATED_PLAN" ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected implementation plan to exist:"
+  echo "$GENERATED_PLAN"
+  echo ""
+  echo "Output:"
+  cat "$PLAN_OUT"
+  exit 1
+fi
+
+if ! grep -q "Foundry implementation plan created." "$PLAN_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan output to confirm plan creation."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_OUT"
+  exit 1
+fi
+
+if ! grep -q "# Implementation Plan: SPEC-0001" "$GENERATED_PLAN"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected implementation plan heading for SPEC-0001."
+  echo ""
+  echo "Plan:"
+  cat "$GENERATED_PLAN"
+  exit 1
+fi
+
+if ! grep -q "## Planning Gate Status" "$GENERATED_PLAN"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected implementation plan to include Planning Gate Status section."
+  echo ""
+  echo "Plan:"
+  cat "$GENERATED_PLAN"
+  exit 1
+fi
+
+if ! grep -q "## Requirements Covered" "$GENERATED_PLAN"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected implementation plan to include Requirements Covered section."
+  echo ""
+  echo "Plan:"
+  cat "$GENERATED_PLAN"
+  exit 1
+fi
+
+if ! grep -q "## Work Breakdown Seed" "$GENERATED_PLAN"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected implementation plan to include Work Breakdown Seed section."
+  echo ""
+  echo "Plan:"
+  cat "$GENERATED_PLAN"
+  exit 1
+fi
+
+echo "verify:specs: validating plan overwrite protection"
+
+set +e
+bash tools/scripts/foundry.sh spec plan "$GENERATED_SPEC" \
+  --allow-blocking-clarifications \
+  >"$PLAN_OVERWRITE_OUT" 2>"$PLAN_OVERWRITE_ERR"
+PLAN_OVERWRITE_EXIT_CODE=$?
+set -e
+
+if [[ "$PLAN_OVERWRITE_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan to reject overwriting an existing plan without --force."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_OVERWRITE_OUT"
+  echo ""
+  echo "Error:"
+  cat "$PLAN_OVERWRITE_ERR"
+  exit 1
+fi
+
+echo "verify:specs: validating plan JSON output"
+
+bash tools/scripts/foundry.sh spec plan "$GENERATED_SPEC" \
+  --allow-blocking-clarifications \
+  --force \
+  --json \
+  >"$PLAN_JSON_OUT"
+
+if ! grep -q '"ok": true' "$PLAN_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan JSON output to include \"ok\": true."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"specId": "SPEC-0001"' "$PLAN_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan JSON output to include SPEC-0001."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"requirementCount": 1' "$PLAN_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected plan JSON output to include requirementCount 1."
+  echo ""
+  echo "Output:"
+  cat "$PLAN_JSON_OUT"
   exit 1
 fi
 
