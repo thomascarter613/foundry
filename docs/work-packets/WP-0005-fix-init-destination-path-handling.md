@@ -10,6 +10,7 @@ upstream:
   - "docs/changeplans/cp-0009-foundry-init-stabilization.md"
 downstream:
   - "tools/scripts/check-foundry-init-workspace.sh"
+  - "tools/scripts/inspect-init-path-validation.sh"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
@@ -33,7 +34,7 @@ The init command help documents `[DESTINATION]` as a repository-relative workspa
 This causes a valid invocation such as:
 
 ~~~bash
-node packages/cli/bin/run.js init .artifacts/foundry/init-workspace/workspace --yes --no-install
+node packages/cli/bin/run.js init .artifacts/foundry/init-workspace/workspace --yes --no-install --no-database
 ~~~
 
 to fail with:
@@ -68,7 +69,7 @@ Examples:
 4. This command exits `0`:
 
 ~~~bash
-node packages/cli/bin/run.js init .artifacts/foundry/init-workspace/workspace --yes --no-install
+node packages/cli/bin/run.js init .artifacts/foundry/init-workspace/workspace --yes --no-install --no-database
 ~~~
 
 5. The workspace smoke fixture reports `"ok": true`.
