@@ -10,7 +10,7 @@ upstream:
 downstream: []
 governanceLinks: []
 adrLinks:
-  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/architecture/adr/0004-architecture-principles.md"
 glossaryTerms:
   - "Governance"
   - "Authority"

@@ -20,7 +20,7 @@ downstream:
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
-  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/architecture/adr/0004-architecture-principles.md"
 glossaryTerms:
   - "Governance"
   - "Authority"

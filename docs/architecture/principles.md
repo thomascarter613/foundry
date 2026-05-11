@@ -11,9 +11,8 @@ downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
-  - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
-  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/architecture/adr/0004-architecture-principles.md"
 glossaryTerms:
   - "Architecture"
   - "CI"

@@ -11,7 +11,7 @@ downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
-  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/architecture/adr/0004-architecture-principles.md"
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
   - "Product"

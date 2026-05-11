@@ -11,9 +11,9 @@ downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
-  - "docs/architecture/adr/0002-monorepo-structure.md"
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
-  - "docs/architecture/adr/0003-package-management.md"
+  - "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
 glossaryTerms:
   - "Platform"
 ---

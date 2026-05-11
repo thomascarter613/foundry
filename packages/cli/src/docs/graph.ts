@@ -107,7 +107,7 @@ export function buildDocsGraph(documents: readonly ParsedMarkdownDocument[]): Do
   return {
     graph: {
       nodes: [...registry.nodes.values()].sort((left, right) => left.id.localeCompare(right.id)),
-      edges: edges.sort((left, right) => left.id.localeCompare(right.id))
+      edges: uniqueEdgesById(edges).sort((left, right) => left.id.localeCompare(right.id))
     },
     issues
   };
@@ -415,4 +415,21 @@ function countBy<TValue, TKey extends string>(
   }
 
   return counts;
+}
+
+
+function uniqueEdgesById(edges: readonly DocsGraphEdge[]): DocsGraphEdge[] {
+  const result: DocsGraphEdge[] = [];
+  const seen = new Set<string>();
+
+  for (const edge of edges) {
+    if (seen.has(edge.id)) {
+      continue;
+    }
+
+    seen.add(edge.id);
+    result.push(edge);
+  }
+
+  return result;
 }

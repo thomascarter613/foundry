@@ -11,7 +11,6 @@ downstream:
   - "docs/onboarding/README.md"
   - "docs/onboarding/documentation-system-guide.md"
   - "docs/onboarding/glossary-quickref.md"
-  - "docs/onboarding/glossary-quickreference.md"
   - "docs/onboarding/how-to-navigate-the-repo.md"
   - "docs/onboarding/system-overview.md"
 governanceLinks:

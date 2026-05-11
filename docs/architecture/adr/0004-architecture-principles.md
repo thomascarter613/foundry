@@ -12,7 +12,6 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
-  - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
   - "ADR"
   - "Architecture"
