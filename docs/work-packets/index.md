@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0013 | Add Upgrade Evolve Command Registration | Draft | `docs/work-packets/WP-0013-add-upgrade-evolve-command-registration.md` |
 | WP-0012 | Add Upgrade Evolve Baseline Smoke Gate | Draft | `docs/work-packets/WP-0012-add-upgrade-evolve-baseline-smoke-gate.md` |
 | WP-0011 | Add Init Database Matrix CI Gate | Draft | `docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md` |
 | WP-0010 | Add Init Database Provider Smoke Matrix | Draft | `docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md` |
