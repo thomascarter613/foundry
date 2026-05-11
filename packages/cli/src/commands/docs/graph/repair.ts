@@ -15,7 +15,9 @@ export default class DocsGraphRepair extends Command {
 Repair graph-related frontmatter relationship metadata.
 
 This command removes self-referencing ADR links, normalizes ADR targets,
-de-duplicates relationship arrays, and replaces stale documentation references.
+de-duplicates relationship arrays, replaces stale documentation references,
+and can add missing reciprocal upstream/downstream links.
+
 It is dry-run by default. Pass --write to update Markdown files.
 `;
 
@@ -25,8 +27,12 @@ It is dry-run by default. Pass --write to update Markdown files.
       command: "<%= config.bin %> <%= command.id %>"
     },
     {
+      description: "Preview reciprocal relationship repairs.",
+      command: "<%= config.bin %> <%= command.id %> --repair-reciprocal-links"
+    },
+    {
       description: "Apply graph relationship repairs.",
-      command: "<%= config.bin %> <%= command.id %> --write"
+      command: "<%= config.bin %> <%= command.id %> --repair-reciprocal-links --write"
     },
     {
       description: "Write a JSON graph repair plan.",
@@ -42,6 +48,10 @@ It is dry-run by default. Pass --write to update Markdown files.
     json: Flags.boolean({
       default: false,
       description: "Print the graph repair plan as JSON."
+    }),
+    "repair-reciprocal-links": Flags.boolean({
+      default: false,
+      description: "Add missing reciprocal upstream/downstream links."
     }),
     "report-path": Flags.string({
       description: "Optional repository-relative path to write the graph repair JSON plan."
@@ -63,7 +73,8 @@ It is dry-run by default. Pass --write to update Markdown files.
     const plan = createGraphRepairPlan({
       repoRoot,
       docsDir: flags["docs-dir"],
-      write: flags.write
+      write: flags.write,
+      repairReciprocalLinks: flags["repair-reciprocal-links"]
     });
 
     if (flags["report-path"]) {

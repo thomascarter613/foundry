@@ -1,4 +1,10 @@
-import { writeFileSync } from "node:fs";
+#!/usr/bin/env python3
+from __future__ import annotations
+
+from pathlib import Path
+
+
+GRAPH_REPAIR_TS = r'''import { writeFileSync } from "node:fs";
 
 import { parseMarkdownDocument } from "./frontmatter.js";
 import { getFrontmatterString } from "./metadata.js";
@@ -611,3 +617,107 @@ function summarizeChangedFiles(actions: readonly GraphRepairAction[]): GraphRepa
 function yamlEscape(value: string): string {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
+'''
+
+GRAPH_REPAIR_COMMAND_TS = r'''import { Command, Flags } from "@oclif/core";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+
+import {
+  createGraphRepairPlan,
+  formatGraphRepairPlanAsJson,
+  formatGraphRepairPlanAsText
+} from "../../../docs/graph-repair.js";
+
+export default class DocsGraphRepair extends Command {
+  static override summary = "Repair documentation graph relationship metadata.";
+
+  static override description = `
+Repair graph-related frontmatter relationship metadata.
+
+This command removes self-referencing ADR links, normalizes ADR targets,
+de-duplicates relationship arrays, replaces stale documentation references,
+and can add missing reciprocal upstream/downstream links.
+
+It is dry-run by default. Pass --write to update Markdown files.
+`;
+
+  static override examples = [
+    {
+      description: "Preview graph relationship repair actions.",
+      command: "<%= config.bin %> <%= command.id %>"
+    },
+    {
+      description: "Preview reciprocal relationship repairs.",
+      command: "<%= config.bin %> <%= command.id %> --repair-reciprocal-links"
+    },
+    {
+      description: "Apply graph relationship repairs.",
+      command: "<%= config.bin %> <%= command.id %> --repair-reciprocal-links --write"
+    },
+    {
+      description: "Write a JSON graph repair plan.",
+      command: "<%= config.bin %> <%= command.id %> --json --report-path .artifacts/docs/graph-repair-plan.json"
+    }
+  ];
+
+  static override flags = {
+    "docs-dir": Flags.string({
+      default: "docs",
+      description: "Repository-relative docs directory to repair."
+    }),
+    json: Flags.boolean({
+      default: false,
+      description: "Print the graph repair plan as JSON."
+    }),
+    "repair-reciprocal-links": Flags.boolean({
+      default: false,
+      description: "Add missing reciprocal upstream/downstream links."
+    }),
+    "report-path": Flags.string({
+      description: "Optional repository-relative path to write the graph repair JSON plan."
+    }),
+    root: Flags.string({
+      default: process.cwd(),
+      description: "Repository root."
+    }),
+    write: Flags.boolean({
+      default: false,
+      description: "Write graph relationship repairs to Markdown files."
+    })
+  };
+
+  async run(): Promise<void> {
+    const { flags } = await this.parse(DocsGraphRepair);
+    const repoRoot = resolve(flags.root);
+
+    const plan = createGraphRepairPlan({
+      repoRoot,
+      docsDir: flags["docs-dir"],
+      write: flags.write,
+      repairReciprocalLinks: flags["repair-reciprocal-links"]
+    });
+
+    if (flags["report-path"]) {
+      const reportPath = resolve(repoRoot, flags["report-path"]);
+      mkdirSync(dirname(reportPath), { recursive: true });
+      writeFileSync(reportPath, `${formatGraphRepairPlanAsJson(plan)}\n`, "utf8");
+    }
+
+    this.log(
+      flags.json
+        ? formatGraphRepairPlanAsJson(plan)
+        : formatGraphRepairPlanAsText(plan)
+    );
+
+    if (!plan.ok) {
+      this.exit(1);
+    }
+  }
+}
+'''
+
+Path("packages/cli/src/docs/graph-repair.ts").write_text(GRAPH_REPAIR_TS, encoding="utf-8")
+Path("packages/cli/src/commands/docs/graph/repair.ts").write_text(GRAPH_REPAIR_COMMAND_TS, encoding="utf-8")
+
+print("rewrote graph repair engine and command")
