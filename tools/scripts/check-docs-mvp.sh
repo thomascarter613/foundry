@@ -41,7 +41,7 @@ run_step() {
 run_step "typecheck" bun run --cwd packages/cli typecheck
 run_step "build" bash -lc 'cd packages/cli && bun run build'
 run_step "docs verify" node packages/cli/bin/run.js docs verify
-run_step "docs readiness" node packages/cli/bin/run.js docs readiness
+run_step "docs readiness" node packages/cli/bin/run.js docs readiness --report-path .artifacts/docs/readiness-report.json
 run_step "root docs verifier" bun run tools/scripts/verify-docs.ts
 run_step "directory validation" node packages/cli/bin/run.js docs directory validate
 run_step "graph validation" node packages/cli/bin/run.js docs graph validate --skip-orphan-warnings --skip-reciprocal-warnings

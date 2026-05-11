@@ -46,7 +46,7 @@
     "docs:directory:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs directory repair --write",
     "docs:graph:repair": "bun run foundry:build && node packages/cli/bin/run.js docs graph repair",
     "docs:graph:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs graph repair --write",
-    "docs:readiness": "bun run foundry:build && node packages/cli/bin/run.js docs readiness",
+    "docs:readiness": "bun run foundry:build && node packages/cli/bin/run.js docs readiness --report-path .artifacts/docs/readiness-report.json",
     "docs:readiness:json": "bun run foundry:build && node packages/cli/bin/run.js docs readiness --json --report-path .artifacts/docs/readiness-report.json",
     "docs:changeplans:validate": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate",
     "docs:changeplans:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate --strict-index --strict-placement --fail-on-warnings",
