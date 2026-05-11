@@ -19,6 +19,10 @@ import {
   validateGlossary,
   type GlossaryValidationReport
 } from "./glossary-validator.js";
+import {
+  validateWorkPackets,
+  type WorkPacketValidationReport
+} from "./work-packet-validator.js";
 import { parseMarkdownDocument } from "./frontmatter.js";
 import { scanMarkdownDocuments } from "./scanner.js";
 import type {
@@ -35,7 +39,8 @@ export type DocsReadinessDimensionId =
   | "graph"
   | "adr"
   | "glossary"
-  | "changeplans";
+  | "changeplans"
+  | "workPackets";
 
 export type DocsReadinessDimension = {
   readonly id: DocsReadinessDimensionId;
@@ -72,12 +77,13 @@ type DimensionInput = {
 };
 
 const weights: Record<DocsReadinessDimensionId, number> = {
-  directory: 18,
-  metadata: 22,
-  graph: 22,
-  adr: 13,
+  directory: 16,
+  metadata: 20,
+  graph: 20,
+  adr: 12,
   glossary: 12,
-  changeplans: 13
+  changeplans: 10,
+  workPackets: 10
 };
 
 export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadinessReport {
@@ -116,6 +122,14 @@ export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadines
     failOnWarnings: false
   });
 
+  const workPacketValidation = validateWorkPackets({
+    repoRoot: options.repoRoot,
+    ...(options.docsDir ? { docsDir: options.docsDir } : {}),
+    strictIndex: true,
+    strictPlacement: true,
+    failOnWarnings: false
+  });
+
   const graphValidation = createGraphValidationReport(options);
 
   const dimensions = [
@@ -124,7 +138,8 @@ export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadines
     createGraphDimension(graphValidation),
     createAdrDimension(adrValidation),
     createGlossaryDimension(glossaryValidation),
-    createChangePlanDimension(changePlanValidation)
+    createChangePlanDimension(changePlanValidation),
+    createWorkPacketDimension(workPacketValidation)
   ];
 
   const score = Math.round(
@@ -337,6 +352,24 @@ function createChangePlanDimension(report: ChangePlanValidationReport): DocsRead
         : []),
       ...(report.summary.warningCount > 0
         ? ["Regenerate docs/changeplans/index.md and migrate legacy planning CP files before strict enforcement."]
+        : [])
+    ]
+  });
+}
+
+function createWorkPacketDimension(report: WorkPacketValidationReport): DocsReadinessDimension {
+  return createDimension({
+    id: "workPackets",
+    label: "Work Packet governance",
+    weight: weights.workPackets,
+    errorCount: report.summary.errorCount,
+    warningCount: report.summary.warningCount,
+    recommendations: [
+      ...(report.summary.errorCount > 0
+        ? ["Repair Work Packet numbering, duplicate WP files, and required WP metadata."]
+        : []),
+      ...(report.summary.warningCount > 0
+        ? ["Create or update docs/work-packets/index.md before strict enforcement."]
         : [])
     ]
   });

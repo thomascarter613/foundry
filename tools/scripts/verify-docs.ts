@@ -34,6 +34,11 @@ const report = runDocsVerificationPipeline({
     strictIndex: false,
     strictPlacement: false,
     failOnWarnings: false
+  },
+  workPackets: {
+    strictIndex: false,
+    strictPlacement: false,
+    failOnWarnings: false
   }
 });
 
@@ -55,6 +60,7 @@ console.log("- .artifacts/docs/graph-validation-report.json");
 console.log("- .artifacts/docs/adr-validation-report.json");
 console.log("- .artifacts/docs/glossary-validation-report.json");
 console.log("- .artifacts/docs/changeplan-validation-report.json");
+console.log("- .artifacts/docs/work-packet-validation-report.json");
 console.log("- .artifacts/docs/verification-pipeline-report.json");
 
 if (!report.ok) {

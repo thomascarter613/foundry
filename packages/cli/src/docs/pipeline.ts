@@ -29,6 +29,12 @@ import {
   validateGlossary,
   type GlossaryValidationReport
 } from "./glossary-validator.js";
+import {
+  formatWorkPacketValidationReportAsJson,
+  formatWorkPacketValidationReportAsText,
+  validateWorkPackets,
+  type WorkPacketValidationReport
+} from "./work-packet-validator.js";
 import { parseMarkdownDocument } from "./frontmatter.js";
 import {
   formatValidationReportAsJson,
@@ -66,6 +72,11 @@ export type DocsVerificationPipelineOptions = DocsEngineOptions & {
     readonly strictPlacement?: boolean;
     readonly failOnWarnings?: boolean;
   };
+  readonly workPackets?: {
+    readonly strictIndex?: boolean;
+    readonly strictPlacement?: boolean;
+    readonly failOnWarnings?: boolean;
+  };
 };
 
 export type DocsVerificationPipelineReport = {
@@ -78,6 +89,7 @@ export type DocsVerificationPipelineReport = {
   readonly adrValidation: AdrValidationReport;
   readonly glossaryValidation: GlossaryValidationReport;
   readonly changePlanValidation: ChangePlanValidationReport;
+  readonly workPacketValidation: WorkPacketValidationReport;
 };
 
 export function runDocsVerificationPipeline(
@@ -123,6 +135,14 @@ export function runDocsVerificationPipeline(
     failOnWarnings: options.changeplans?.failOnWarnings ?? false
   });
 
+  const workPacketValidation = validateWorkPackets({
+    repoRoot: options.repoRoot,
+    ...(options.docsDir ? { docsDir: options.docsDir } : {}),
+    strictIndex: options.workPackets?.strictIndex ?? false,
+    strictPlacement: options.workPackets?.strictPlacement ?? false,
+    failOnWarnings: options.workPackets?.failOnWarnings ?? false
+  });
+
   if (!scanResult.ok) {
     return {
       ok: false,
@@ -140,7 +160,8 @@ export function runDocsVerificationPipeline(
       graphValidation: null,
       adrValidation,
       glossaryValidation,
-      changePlanValidation
+      changePlanValidation,
+      workPacketValidation
     };
   }
 
@@ -162,7 +183,8 @@ export function runDocsVerificationPipeline(
       graphValidation.ok &&
       adrValidation.ok &&
       glossaryValidation.ok &&
-      changePlanValidation.ok,
+      changePlanValidation.ok &&
+      workPacketValidation.ok,
     directoryValidation,
     metadata,
     graph: graphBuildResult.graph,
@@ -170,7 +192,8 @@ export function runDocsVerificationPipeline(
     graphValidation,
     adrValidation,
     glossaryValidation,
-    changePlanValidation
+    changePlanValidation,
+    workPacketValidation
   };
 }
 
@@ -199,6 +222,7 @@ export function formatDocsVerificationPipelineReportAsText(
   sections.push(formatAdrValidationReportAsText(report.adrValidation));
   sections.push(formatGlossaryValidationReportAsText(report.glossaryValidation));
   sections.push(formatChangePlanValidationReportAsText(report.changePlanValidation));
+  sections.push(formatWorkPacketValidationReportAsText(report.workPacketValidation));
 
   sections.push(
     report.ok
@@ -228,6 +252,7 @@ export function createDocsVerificationArtifacts(
     "adr-validation-report.json": formatAdrValidationReportAsJson(report.adrValidation),
     "glossary-validation-report.json": formatGlossaryValidationReportAsJson(report.glossaryValidation),
     "changeplan-validation-report.json": formatChangePlanValidationReportAsJson(report.changePlanValidation),
+    "work-packet-validation-report.json": formatWorkPacketValidationReportAsJson(report.workPacketValidation),
     "verification-pipeline-report.json": formatDocsVerificationPipelineReportAsJson(report)
   };
 }
