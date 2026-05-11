@@ -28,6 +28,7 @@ Provide the authoritative index of governed Work Packet documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| WP-0011 | Add Init Database Matrix CI Gate | Draft | `docs/work-packets/WP-0011-add-init-database-matrix-ci-gate.md` |
 | WP-0010 | Add Init Database Provider Smoke Matrix | Draft | `docs/work-packets/WP-0010-add-init-database-provider-smoke-matrix.md` |
 | WP-0009 | Add Init MVP CI Gate | Draft | `docs/work-packets/WP-0009-add-init-mvp-ci-gate.md` |
 | WP-0008 | Integrate Init MVP Verification Gate | Draft | `docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md` |

@@ -49,3 +49,42 @@ jobs:
             .artifacts/foundry
             .artifacts/docs
           if-no-files-found: warn
+
+  foundry-init-database-matrix:
+    name: Foundry init database matrix
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Ensure verification scripts are executable
+        run: |
+          chmod +x tools/scripts/*.sh
+
+      - name: Run Foundry init database-provider matrix
+        run: tools/scripts/check-foundry-init-database-matrix.sh
+
+      - name: Print Foundry init database matrix summary
+        if: always()
+        run: |
+          if [ -f .artifacts/foundry/init-database-matrix/summary.json ]; then
+            cat .artifacts/foundry/init-database-matrix/summary.json
+          fi
+
+      - name: Upload Foundry init database matrix artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundry-init-database-matrix-artifacts
+          path: |
+            .artifacts/foundry/init-database-matrix
+          if-no-files-found: warn

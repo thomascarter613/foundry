@@ -66,3 +66,15 @@ The init MVP CI gate requires documentation verification to pass and requires th
 ## Change History
 
 - Added Foundry init MVP CI standard.
+
+## Database-Provider Matrix Job
+
+The workflow also runs a separate database-provider smoke matrix job.
+
+The matrix job executes:
+
+    tools/scripts/check-foundry-init-database-matrix.sh
+
+The job verifies that supported database providers can be generated non-interactively and that each generated workspace satisfies its provider contract.
+
+This job is intentionally separate from the no-database init MVP gate so the baseline init path and provider-template matrix can be diagnosed independently.
