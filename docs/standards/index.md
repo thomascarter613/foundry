@@ -15,6 +15,7 @@ downstream:
   - "docs/standards/markdown-standards.md"
   - "docs/standards/metadata-standards.md"
   - "docs/standards/testing-standards.md"
+  - "docs/standards/documentation-verification-ci.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
