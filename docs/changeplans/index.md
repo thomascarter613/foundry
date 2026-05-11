@@ -35,6 +35,7 @@ Provide the authoritative index of governed ChangePlan documents.
 
 | Number | Title | Status | File |
 | --- | --- | --- | --- |
+| CP-0009 | Foundry Init Stabilization | Draft | `docs/changeplans/cp-0009-foundry-init-stabilization.md` |
 | CP-0001 | Governance Bootstrap Change Plan | Draft | `docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md` |
 | CP-0002 | Governed Header Block Rollout | Draft | `docs/changeplans/cp-0002_governed-header-block-rollout.md` |
 | CP-0003 | Governance JSON Population | Draft | `docs/changeplans/cp-0003_governance.json-population.md` |
