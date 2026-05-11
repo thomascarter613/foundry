@@ -27,6 +27,12 @@ PLAN_OUT="$ARTIFACT_DIR/plan-spec.out"
 PLAN_JSON_OUT="$ARTIFACT_DIR/plan-spec-json.out"
 PLAN_OVERWRITE_OUT="$ARTIFACT_DIR/plan-overwrite.out"
 PLAN_OVERWRITE_ERR="$ARTIFACT_DIR/plan-overwrite.err"
+TASKS_REJECT_OUT="$ARTIFACT_DIR/tasks-reject-blocking.out"
+TASKS_REJECT_ERR="$ARTIFACT_DIR/tasks-reject-blocking.err"
+TASKS_OUT="$ARTIFACT_DIR/tasks-spec.out"
+TASKS_JSON_OUT="$ARTIFACT_DIR/tasks-spec-json.out"
+TASKS_OVERWRITE_OUT="$ARTIFACT_DIR/tasks-overwrite.out"
+TASKS_OVERWRITE_ERR="$ARTIFACT_DIR/tasks-overwrite.err"
 
 cleanup() {
   rm -rf "$ARTIFACT_DIR"
@@ -167,6 +173,7 @@ bash tools/scripts/foundry.sh spec create "Add Authentication" \
 GENERATED_SPEC="$CREATE_DIR/0001-add-authentication/spec.md"
 GENERATED_CLARIFICATIONS="$CREATE_DIR/0001-add-authentication/clarifications.md"
 GENERATED_PLAN="$CREATE_DIR/0001-add-authentication/implementation-plan.md"
+GENERATED_TASKS="$CREATE_DIR/0001-add-authentication/tasks.md"
 
 if [[ ! -f "$GENERATED_SPEC" ]]; then
   echo "verify:specs: failed"
@@ -543,6 +550,202 @@ if ! grep -q '"requirementCount": 1' "$PLAN_JSON_OUT"; then
   cat "$PLAN_JSON_OUT"
   exit 1
 fi
+
+echo "verify:specs: validating tasks rejection with blocking clarifications"
+
+set +e
+bash tools/scripts/foundry.sh spec tasks "$GENERATED_PLAN" \
+  >"$TASKS_REJECT_OUT" 2>"$TASKS_REJECT_ERR"
+TASKS_REJECT_EXIT_CODE=$?
+set -e
+
+if [[ "$TASKS_REJECT_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected spec tasks to reject blocking clarifications by default."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_REJECT_OUT"
+  echo ""
+  echo "Error:"
+  cat "$TASKS_REJECT_ERR"
+  exit 1
+fi
+
+TASKS_REJECT_COMBINED="$ARTIFACT_DIR/tasks-reject-blocking.combined"
+cat "$TASKS_REJECT_OUT" "$TASKS_REJECT_ERR" >"$TASKS_REJECT_COMBINED"
+
+if ! grep -q "Cannot generate tasks" "$TASKS_REJECT_COMBINED" || \
+   ! grep -q "blocking clarification" "$TASKS_REJECT_COMBINED"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks rejection output to mention blocking clarification questions."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_REJECT_OUT"
+  echo ""
+  echo "Error:"
+  cat "$TASKS_REJECT_ERR"
+  exit 1
+fi
+
+echo "verify:specs: generating tasks with explicit blocking override"
+
+bash tools/scripts/foundry.sh spec tasks "$GENERATED_PLAN" \
+  --allow-blocking-clarifications \
+  >"$TASKS_OUT"
+
+if [[ ! -f "$GENERATED_TASKS" ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected task document to exist:"
+  echo "$GENERATED_TASKS"
+  echo ""
+  echo "Output:"
+  cat "$TASKS_OUT"
+  exit 1
+fi
+
+if ! grep -q "Foundry task document created." "$TASKS_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks output to confirm task document creation."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_OUT"
+  exit 1
+fi
+
+if ! grep -q "# Tasks: SPEC-0001" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected task document heading for SPEC-0001."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+if ! grep -q "## Requirements Traceability" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected task document to include Requirements Traceability section."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+if ! grep -q "## Task List" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected task document to include Task List section."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+if ! grep -q "TASK-0001" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected generated tasks to include TASK-0001."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+if ! grep -q "REQ-0001" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected generated tasks to include REQ-0001 traceability."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+if ! grep -q "bun run verify:specs" "$GENERATED_TASKS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected generated tasks to include spec verification command."
+  echo ""
+  echo "Tasks:"
+  cat "$GENERATED_TASKS"
+  exit 1
+fi
+
+echo "verify:specs: validating tasks overwrite protection"
+
+set +e
+bash tools/scripts/foundry.sh spec tasks "$GENERATED_PLAN" \
+  --allow-blocking-clarifications \
+  >"$TASKS_OVERWRITE_OUT" 2>"$TASKS_OVERWRITE_ERR"
+TASKS_OVERWRITE_EXIT_CODE=$?
+set -e
+
+if [[ "$TASKS_OVERWRITE_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks command to reject overwriting an existing task document without --force."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_OVERWRITE_OUT"
+  echo ""
+  echo "Error:"
+  cat "$TASKS_OVERWRITE_ERR"
+  exit 1
+fi
+
+echo "verify:specs: validating tasks JSON output"
+
+bash tools/scripts/foundry.sh spec tasks "$GENERATED_PLAN" \
+  --allow-blocking-clarifications \
+  --force \
+  --json \
+  >"$TASKS_JSON_OUT"
+
+if ! grep -q '"ok": true' "$TASKS_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks JSON output to include \"ok\": true."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"specId": "SPEC-0001"' "$TASKS_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks JSON output to include SPEC-0001."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"requirementCount": 1' "$TASKS_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks JSON output to include requirementCount 1."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"taskCount":' "$TASKS_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected tasks JSON output to include taskCount."
+  echo ""
+  echo "Output:"
+  cat "$TASKS_JSON_OUT"
+  exit 1
+fi
+
 
 echo "verify:specs: creating generated spec with JSON output"
 
