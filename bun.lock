@@ -6,7 +6,7 @@
       "name": "myapp",
       "devDependencies": {
         "@redocly/cli": "^2.30.3",
-        "@types/bun": "latest",
+        "@types/bun": "^1.3.13",
         "orval": "^8.9.1",
         "plop": "^4.0.5",
         "scaffdog": "^4.1.0",
