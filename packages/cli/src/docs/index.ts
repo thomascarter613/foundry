@@ -46,6 +46,12 @@ export {
   formatGlossaryValidationReportAsText,
   validateGlossary
 } from "./glossary-validator.js";
+
+export {
+  createGlossaryQuickrefRepairPlan,
+  formatGlossaryQuickrefRepairPlanAsJson,
+  formatGlossaryQuickrefRepairPlanAsText
+} from "./glossary-repair.js";
 export {
   createDocsVerificationArtifacts,
   formatDocsVerificationPipelineReportAsJson,

@@ -51,7 +51,9 @@
     "docs:changeplans:validate": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate",
     "docs:changeplans:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate --strict-index --strict-placement --fail-on-warnings",
     "docs:work-packets:validate": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate",
-    "docs:work-packets:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate --strict-index --strict-placement --fail-on-warnings"
+    "docs:work-packets:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate --strict-index --strict-placement --fail-on-warnings",
+    "docs:glossary:repair": "bun run foundry:build && node packages/cli/bin/run.js docs glossary repair",
+    "docs:glossary:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs glossary repair --write"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
