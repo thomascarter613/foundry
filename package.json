@@ -53,7 +53,8 @@
     "docs:work-packets:validate": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate",
     "docs:work-packets:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate --strict-index --strict-placement --fail-on-warnings",
     "docs:glossary:repair": "bun run foundry:build && node packages/cli/bin/run.js docs glossary repair",
-    "docs:glossary:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs glossary repair --write"
+    "docs:glossary:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs glossary repair --write",
+    "verify:specs": "bash tools/scripts/verify-specs.sh"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
