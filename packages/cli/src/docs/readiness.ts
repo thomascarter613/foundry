@@ -3,6 +3,10 @@ import {
   type AdrValidationReport
 } from "./adr-validator.js";
 import {
+  validateChangePlans,
+  type ChangePlanValidationReport
+} from "./changeplan-validator.js";
+import {
   validateDirectoryTopology,
   type DirectoryValidationReport
 } from "./directory-validator.js";
@@ -30,7 +34,8 @@ export type DocsReadinessDimensionId =
   | "metadata"
   | "graph"
   | "adr"
-  | "glossary";
+  | "glossary"
+  | "changeplans";
 
 export type DocsReadinessDimension = {
   readonly id: DocsReadinessDimensionId;
@@ -67,11 +72,12 @@ type DimensionInput = {
 };
 
 const weights: Record<DocsReadinessDimensionId, number> = {
-  directory: 20,
-  metadata: 25,
-  graph: 25,
-  adr: 15,
-  glossary: 15
+  directory: 18,
+  metadata: 22,
+  graph: 22,
+  adr: 13,
+  glossary: 12,
+  changeplans: 13
 };
 
 export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadinessReport {
@@ -102,6 +108,14 @@ export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadines
     failOnWarnings: false
   });
 
+  const changePlanValidation = validateChangePlans({
+    repoRoot: options.repoRoot,
+    ...(options.docsDir ? { docsDir: options.docsDir } : {}),
+    strictIndex: true,
+    strictPlacement: true,
+    failOnWarnings: false
+  });
+
   const graphValidation = createGraphValidationReport(options);
 
   const dimensions = [
@@ -109,7 +123,8 @@ export function assessDocsReadiness(options: DocsReadinessOptions): DocsReadines
     createMetadataDimension(metadataValidation),
     createGraphDimension(graphValidation),
     createAdrDimension(adrValidation),
-    createGlossaryDimension(glossaryValidation)
+    createGlossaryDimension(glossaryValidation),
+    createChangePlanDimension(changePlanValidation)
   ];
 
   const score = Math.round(
@@ -304,6 +319,24 @@ function createGlossaryDimension(report: GlossaryValidationReport): DocsReadines
         : []),
       ...(report.summary.warningCount > 0
         ? ["Add missing glossary terms or update document glossaryTerms references."]
+        : [])
+    ]
+  });
+}
+
+function createChangePlanDimension(report: ChangePlanValidationReport): DocsReadinessDimension {
+  return createDimension({
+    id: "changeplans",
+    label: "ChangePlan governance",
+    weight: weights.changeplans,
+    errorCount: report.summary.errorCount,
+    warningCount: report.summary.warningCount,
+    recommendations: [
+      ...(report.summary.errorCount > 0
+        ? ["Repair ChangePlan numbering, duplicate CP files, and required CP metadata."]
+        : []),
+      ...(report.summary.warningCount > 0
+        ? ["Regenerate docs/changeplans/index.md and migrate legacy planning CP files before strict enforcement."]
         : [])
     ]
   });

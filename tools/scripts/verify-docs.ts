@@ -29,6 +29,11 @@ const report = runDocsVerificationPipeline({
   glossary: {
     requireQuickrefCoverage: false,
     failOnWarnings: false
+  },
+  changeplans: {
+    strictIndex: false,
+    strictPlacement: false,
+    failOnWarnings: false
   }
 });
 
@@ -49,6 +54,7 @@ console.log("- .artifacts/docs/graph.json");
 console.log("- .artifacts/docs/graph-validation-report.json");
 console.log("- .artifacts/docs/adr-validation-report.json");
 console.log("- .artifacts/docs/glossary-validation-report.json");
+console.log("- .artifacts/docs/changeplan-validation-report.json");
 console.log("- .artifacts/docs/verification-pipeline-report.json");
 
 if (!report.ok) {

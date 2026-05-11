@@ -14,8 +14,8 @@ export default class DocsVerify extends Command {
 
   static override description = `
 Run directory topology validation, metadata validation, graph construction,
-graph validation, ADR validation, and glossary validation as one governed
-documentation verification pipeline.
+graph validation, ADR validation, glossary validation, and ChangePlan validation
+as one governed documentation verification pipeline.
 
 The command writes machine-readable artifacts by default under .artifacts/docs.
 `;
@@ -66,7 +66,7 @@ The command writes machine-readable artifacts by default under .artifacts/docs.
     }),
     strict: Flags.boolean({
       default: false,
-      description: "Enable strict directory, graph, ADR, and glossary checks."
+      description: "Enable strict directory, graph, ADR, glossary, and ChangePlan checks."
     })
   };
 
@@ -94,6 +94,11 @@ The command writes machine-readable artifacts by default under .artifacts/docs.
       },
       glossary: {
         requireQuickrefCoverage: flags.strict,
+        failOnWarnings
+      },
+      changeplans: {
+        strictIndex: flags.strict,
+        strictPlacement: flags.strict,
         failOnWarnings
       }
     });
@@ -124,6 +129,7 @@ The command writes machine-readable artifacts by default under .artifacts/docs.
       this.log(`- ${flags["artifacts-dir"]}/graph-validation-report.json`);
       this.log(`- ${flags["artifacts-dir"]}/adr-validation-report.json`);
       this.log(`- ${flags["artifacts-dir"]}/glossary-validation-report.json`);
+      this.log(`- ${flags["artifacts-dir"]}/changeplan-validation-report.json`);
       this.log(`- ${flags["artifacts-dir"]}/verification-pipeline-report.json`);
     }
 

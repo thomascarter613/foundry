@@ -5,6 +5,12 @@ import {
   type AdrValidationReport
 } from "./adr-validator.js";
 import {
+  formatChangePlanValidationReportAsJson,
+  formatChangePlanValidationReportAsText,
+  validateChangePlans,
+  type ChangePlanValidationReport
+} from "./changeplan-validator.js";
+import {
   formatDirectoryValidationReportAsJson,
   formatDirectoryValidationReportAsText,
   validateDirectoryTopology,
@@ -55,6 +61,11 @@ export type DocsVerificationPipelineOptions = DocsEngineOptions & {
     readonly requireQuickrefCoverage?: boolean;
     readonly failOnWarnings?: boolean;
   };
+  readonly changeplans?: {
+    readonly strictIndex?: boolean;
+    readonly strictPlacement?: boolean;
+    readonly failOnWarnings?: boolean;
+  };
 };
 
 export type DocsVerificationPipelineReport = {
@@ -66,6 +77,7 @@ export type DocsVerificationPipelineReport = {
   readonly graphValidation: DocsGraphValidationReport | null;
   readonly adrValidation: AdrValidationReport;
   readonly glossaryValidation: GlossaryValidationReport;
+  readonly changePlanValidation: ChangePlanValidationReport;
 };
 
 export function runDocsVerificationPipeline(
@@ -103,6 +115,14 @@ export function runDocsVerificationPipeline(
     failOnWarnings: options.glossary?.failOnWarnings ?? false
   });
 
+  const changePlanValidation = validateChangePlans({
+    repoRoot: options.repoRoot,
+    ...(options.docsDir ? { docsDir: options.docsDir } : {}),
+    strictIndex: options.changeplans?.strictIndex ?? false,
+    strictPlacement: options.changeplans?.strictPlacement ?? false,
+    failOnWarnings: options.changeplans?.failOnWarnings ?? false
+  });
+
   if (!scanResult.ok) {
     return {
       ok: false,
@@ -119,7 +139,8 @@ export function runDocsVerificationPipeline(
       ],
       graphValidation: null,
       adrValidation,
-      glossaryValidation
+      glossaryValidation,
+      changePlanValidation
     };
   }
 
@@ -140,14 +161,16 @@ export function runDocsVerificationPipeline(
       metadata.ok &&
       graphValidation.ok &&
       adrValidation.ok &&
-      glossaryValidation.ok,
+      glossaryValidation.ok &&
+      changePlanValidation.ok,
     directoryValidation,
     metadata,
     graph: graphBuildResult.graph,
     graphBuildIssues: graphBuildResult.issues,
     graphValidation,
     adrValidation,
-    glossaryValidation
+    glossaryValidation,
+    changePlanValidation
   };
 }
 
@@ -175,6 +198,7 @@ export function formatDocsVerificationPipelineReportAsText(
 
   sections.push(formatAdrValidationReportAsText(report.adrValidation));
   sections.push(formatGlossaryValidationReportAsText(report.glossaryValidation));
+  sections.push(formatChangePlanValidationReportAsText(report.changePlanValidation));
 
   sections.push(
     report.ok
@@ -203,6 +227,7 @@ export function createDocsVerificationArtifacts(
       : JSON.stringify(null, null, 2),
     "adr-validation-report.json": formatAdrValidationReportAsJson(report.adrValidation),
     "glossary-validation-report.json": formatGlossaryValidationReportAsJson(report.glossaryValidation),
+    "changeplan-validation-report.json": formatChangePlanValidationReportAsJson(report.changePlanValidation),
     "verification-pipeline-report.json": formatDocsVerificationPipelineReportAsJson(report)
   };
 }
