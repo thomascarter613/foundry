@@ -7,7 +7,7 @@ import { validateParsedDocument } from "./validator.js";
 export function runDocsValidation(options: DocsEngineOptions): DocsValidationReport {
   const scanResult = scanMarkdownDocuments({
     repoRoot: options.repoRoot,
-    ...(options.docsDir ? { docsDir: options.docsDir } : {})
+    docsDir: options.docsDir
   });
 
   if (!scanResult.ok) {

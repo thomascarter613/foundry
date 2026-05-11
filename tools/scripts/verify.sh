@@ -104,3 +104,5 @@ bash "$ROOT_DIR/tools/scripts/verify-init-upgrade.sh"
 bash "$ROOT_DIR/tools/scripts/verify-manifest.sh"
 
 bash "$ROOT_DIR/tools/scripts/verify-manifest-reader.sh"
+
+bash "$ROOT_DIR/tools/scripts/verify-manifest-command.sh"
