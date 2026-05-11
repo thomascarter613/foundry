@@ -3,6 +3,11 @@ export {
   formatAdrValidationReportAsText,
   validateAdrIndex
 } from "./adr-validator.js";
+export {
+  formatDirectoryValidationReportAsJson,
+  formatDirectoryValidationReportAsText,
+  validateDirectoryTopology
+} from "./directory-validator.js";
 export { runDocsValidation } from "./engine.js";
 export {
   createValidationReport,
@@ -22,6 +27,11 @@ export {
   validateDocsGraph
 } from "./graph-validator.js";
 export {
+  formatGlossaryValidationReportAsJson,
+  formatGlossaryValidationReportAsText,
+  validateGlossary
+} from "./glossary-validator.js";
+export {
   createDocsVerificationArtifacts,
   formatDocsVerificationPipelineReportAsJson,
   formatDocsVerificationPipelineReportAsText,
@@ -40,6 +50,11 @@ export type {
   AdrValidationSummary
 } from "./adr-validator.js";
 export type {
+  DirectoryValidationOptions,
+  DirectoryValidationReport,
+  DirectoryValidationSummary
+} from "./directory-validator.js";
+export type {
   DocsGraph,
   DocsGraphBuildResult,
   DocsGraphEdge,
@@ -52,6 +67,13 @@ export type {
   DocsGraphValidationReport,
   DocsGraphValidationSummary
 } from "./graph-validator.js";
+export type {
+  GlossaryReferenceRecord,
+  GlossaryTermRecord,
+  GlossaryValidationOptions,
+  GlossaryValidationReport,
+  GlossaryValidationSummary
+} from "./glossary-validator.js";
 export type {
   DocsVerificationPipelineOptions,
   DocsVerificationPipelineReport
