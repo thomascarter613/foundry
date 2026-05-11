@@ -101,7 +101,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
+  - "Documentation System"
 ---
 
 # Planning Index

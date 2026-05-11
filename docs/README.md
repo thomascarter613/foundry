@@ -12,7 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Onboarding"
+  - "Documentation System"
 ---
 
 # Documentation README

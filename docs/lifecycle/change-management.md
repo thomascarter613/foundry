@@ -13,8 +13,6 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Lifecycle"
-  - "Change"
-  - "Management"
 ---
 
 # Change Management

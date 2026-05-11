@@ -13,9 +13,9 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Lifecycle"
   - "ChangePlan"
-  - "Constitutional"
+  - "Lifecycle"
+  - "CI"
   - "Pipeline"
 ---
 

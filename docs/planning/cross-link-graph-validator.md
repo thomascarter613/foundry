@@ -12,12 +12,8 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Knowledge Graph"
-  - "Cross"
-  - "Link"
-  - "Graph"
-  - "Validator"
+  - "Validation"
 ---
 
 # Cross Link Graph Validator

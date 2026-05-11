@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Reference"
-  - "Generator"
+  - "API"
 ---
 
 api-reference--generator.md

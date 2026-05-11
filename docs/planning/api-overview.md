@@ -12,7 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
+  - "API"
 ---
 
 # API Overview

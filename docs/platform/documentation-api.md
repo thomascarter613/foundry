@@ -15,6 +15,8 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
   - "Platform"
+  - "API"
+  - "Documentation System"
 ---
 
 # Documentation API Platform
@@ -57,8 +59,8 @@ TODO: Define operational expectations when the platform is implemented.
 
 ## Related ADRs
 
-- ADR 0003 - Documentation Knowledge Graph
-- ADR 0004 - Documentation CI Validation
+- ADR 0008 - Documentation Knowledge Graph
+- ADR 0011 - Documentation CI Validation
 
 ## Glossary Terms
 

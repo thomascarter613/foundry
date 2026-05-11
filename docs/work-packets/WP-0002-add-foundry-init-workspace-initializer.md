@@ -12,14 +12,10 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
+  - "Work Packet"
   - "ChangePlan"
-  - "0002"
-  - "Foundry"
-  - "Init"
-  - "Workspace"
-  - "Initializer"
-  - "WorkPacket"
 ---
+
 # WP-0002: Add Foundry Init Workspace Initializer
 
 ## Status

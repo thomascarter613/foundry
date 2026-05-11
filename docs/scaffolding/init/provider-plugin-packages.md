@@ -16,11 +16,9 @@ adrLinks:
   - "docs/architecture/adr/0003-package-management.md"
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
-  - "Platform"
   - "Scaffolding"
-  - "Provider"
-  - "Plugin"
-  - "Packages"
+  - "Platform"
+  - "Package Management"
 ---
 
 # Provider Plugin Packages

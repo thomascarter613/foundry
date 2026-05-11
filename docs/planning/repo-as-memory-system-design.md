@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Repo"
-  - "Memory"
+  - "Documentation System"
 ---
 
 ### Repo‑as‑memory system design

@@ -15,7 +15,6 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
   - "Architecture"
-  - "Foundry"
   - "Lifecycle"
   - "Manifest"
 ---

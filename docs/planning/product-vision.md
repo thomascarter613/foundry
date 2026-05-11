@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Product"
-  - "Vision"
 ---
 
 ## **Product Vision: The AI‑Native Scaffolder Platform**  

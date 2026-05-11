@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Architecture"
-  - "Integration"
-  - "Layer"
 ---
 
 architecture-integration-layer.md

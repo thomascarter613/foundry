@@ -14,12 +14,10 @@ adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
-  - "Planning"
-  - "Foundry"
-  - "Operating"
-  - "Principles"
   - "Product"
+  - "CI"
 ---
+
 # Foundry AI Operating Principles
 
 Foundry is AI-expected, AI-native, AI-optional, provider-agnostic, model-agnostic, subscription-agnostic, and local-runtime-compatible.

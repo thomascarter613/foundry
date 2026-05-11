@@ -1,5 +1,5 @@
 ---
-title: "ADR 0002: Monorepo Structure"
+title: "ADR 0004: Architecture Principles"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -11,13 +11,11 @@ downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:
-  - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "0002"
-  - "Monorepo"
-  - "Structure"
+  - "Architecture"
+  - "CI"
 ---
 

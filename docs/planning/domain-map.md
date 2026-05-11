@@ -13,8 +13,7 @@ governanceLinks:
 adrLinks:
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
-  - "Planning"
-  - "Domain"
+  - "Documentation System"
 ---
 
 # Domain Map

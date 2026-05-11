@@ -1,5 +1,5 @@
 ---
-title: "ADR 0004: CI Governance"
+title: "ADR 0009: Package Management"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -14,9 +14,8 @@ adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Architecture"
-  - "Governance"
   - "ADR"
-  - "0004"
+  - "Architecture"
+  - "Package Management"
 ---
 

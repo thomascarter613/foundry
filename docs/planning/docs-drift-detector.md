@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Drift"
-  - "Detector"
 ---
 
 # Documentation Drift Detector

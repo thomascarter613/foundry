@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "ADR"
-  - "Adrlinks"
 ---
 
 adrlinks.md
@@ -88,9 +86,9 @@ Every document that depends on architectural decisions must include:
 
 ```markdown
 ## Related ADRs
-- ADR 0001 – Architecture Principles
-- ADR 0002 – Monorepo Structure
-- ADR 0003 – Package Management (bun-only)
+- ADR 0004 - Architecture Principles
+- ADR 0007 - Monorepo Structure
+- ADR 0009 - Package Management (bun-only)
 ```
 
 This section is **mandatory** for:

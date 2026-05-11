@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Risks"
-  - "Assumptions"
+  - "Documentation System"
 ---
 
 # Risks And Assumptions

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Architecture"
-  - "Diagram"
-  - "Generator"
 ---
 
 architecture-diagram-generator.md

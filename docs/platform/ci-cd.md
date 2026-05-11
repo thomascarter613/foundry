@@ -16,6 +16,7 @@ adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
   - "Platform"
+  - "CI"
 ---
 
 # CI CD
@@ -58,8 +59,8 @@ TODO: Define operational expectations when the platform is implemented.
 
 ## Related ADRs
 
-- ADR 0003 - Documentation Knowledge Graph
-- ADR 0004 - Documentation CI Validation
+- ADR 0008 - Documentation Knowledge Graph
+- ADR 0011 - Documentation CI Validation
 
 ## Glossary Terms
 

@@ -12,9 +12,8 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Repository"
   - "Contract"
+  - "Repository Contract"
 ---
 
 repository-contract.md

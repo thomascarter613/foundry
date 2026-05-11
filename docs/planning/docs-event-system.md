@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Docs"
-  - "Event"
+  - "Documentation System"
 ---
 
 docs-event-system.md

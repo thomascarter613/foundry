@@ -12,11 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Knowledge Graph"
-  - "Knowledge"
-  - "Graph"
-  - "Schema"
 ---
 
 # Documentation Knowledge Graph Schema

@@ -14,7 +14,7 @@ adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
   - "Governance"
-  - "Charter"
+  - "Authority"
 ---
 
 # Governance Charter

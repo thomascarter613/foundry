@@ -12,13 +12,9 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Foundry"
-  - "Core"
-  - "Operating"
-  - "Model"
   - "Product"
 ---
+
 # Foundry Core Operating Model
 
 Foundry is a docs/spec-driven, AI-native software lifecycle CLI for creating, evolving, validating, auditing, and handing off serious software repositories.

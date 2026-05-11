@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Governed"
-  - "Types"
+  - "Documentation System"
 ---
 
 governed-document-types.md

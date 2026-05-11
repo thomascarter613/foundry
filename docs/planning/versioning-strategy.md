@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Versioning"
-  - "Strategy"
+  - "Documentation System"
 ---
 
 versioning-strategy.md

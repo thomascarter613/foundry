@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Lifecycle"
-  - "Integration"
-  - "Layer"
 ---
 
 lifecycle-integration-layer.md

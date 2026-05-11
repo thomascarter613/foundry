@@ -13,9 +13,9 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "ADR"
-  - "Scaffolding"
-  - "0001"
+  - "Architecture"
   - "Monorepo"
+  - "Scaffolding"
   - "Toolchain"
 ---
 

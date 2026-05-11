@@ -15,8 +15,8 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Platform"
   - "Scaffolding"
+  - "Platform"
   - "Contract"
   - "Verification"
 ---

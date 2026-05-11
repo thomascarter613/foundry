@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Linting"
-  - "Rules"
+  - "Code Linting"
 ---
 
 # Documentation Linting Rules

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Platform"
-  - "Integration"
-  - "Layer"
 ---
 
 platform-integration-layer.md

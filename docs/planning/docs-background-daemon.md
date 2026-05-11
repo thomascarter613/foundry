@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Background"
-  - "Daemon"
+  - "Documentation System"
 ---
 
 # Documentation Background Daemon

@@ -14,9 +14,8 @@ adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "Template"
+  - "Architecture"
 ---
 
 # ADR <Number>: <Title>

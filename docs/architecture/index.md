@@ -54,10 +54,10 @@ Provide the governed index for architecture documents.
 
 ## Related ADRs
 
-- ADR 0001 - Architecture Principles
-- ADR 0002 - Monorepo Structure
-- ADR 0003 - Package Management
-- ADR 0004 - CI Governance
+- ADR 0004 - Architecture Principles
+- ADR 0007 - Monorepo Structure
+- ADR 0009 - Package Management
+- ADR 0010 - CI Governance
 
 ## Upstream
 

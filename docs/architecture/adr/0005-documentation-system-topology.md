@@ -1,5 +1,5 @@
 ---
-title: "ADR 0004: Documentation CI Validation"
+title: "ADR 0005: Documentation System Topology"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -13,15 +13,13 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
-  - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "0004"
-  - "Validation"
+  - "Architecture"
+  - "Documentation System"
 ---
 
-# ADR 0004: Documentation CI Validation
+# ADR 0005: Documentation System Topology
 
 ## Context
 

@@ -12,13 +12,9 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Lifecycle"
   - "ChangePlan"
-  - "0007"
+  - "Lifecycle"
   - "Drift"
-  - "Baseline"
-  - "JSON"
-  - "Cross"
 ---
 
 cp-0007_drift-baseline_json_cross-surface-baselines.md

@@ -20,7 +20,6 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Standard"
-  - "Standards"
 ---
 
 # Standards Index

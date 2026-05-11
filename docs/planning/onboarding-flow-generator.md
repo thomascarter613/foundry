@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Onboarding"
-  - "Flow"
-  - "Generator"
 ---
 
 onboarding-flow-generator.md

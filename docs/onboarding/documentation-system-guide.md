@@ -13,7 +13,7 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Onboarding"
-  - "Guide"
+  - "Documentation System"
 ---
 
 # Documentation System Guide

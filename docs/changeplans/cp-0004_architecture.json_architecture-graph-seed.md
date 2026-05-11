@@ -12,13 +12,10 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
+  - "ChangePlan"
   - "Lifecycle"
   - "Architecture"
   - "Knowledge Graph"
-  - "ChangePlan"
-  - "0004"
-  - "JSON"
-  - "Graph"
 ---
 
 cp-0004_architecture.json_architecture-graph-seed.md

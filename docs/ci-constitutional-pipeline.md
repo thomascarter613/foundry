@@ -13,11 +13,10 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Lifecycle"
-  - "Constitutional"
+  - "CI"
   - "Pipeline"
-  - "Planning"
 ---
+
 ci-constitutional-pipeline.md
 ---
 

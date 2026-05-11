@@ -13,7 +13,7 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Standard"
-  - "Standards"
+  - "Documentation System"
 ---
 
 # Documentation Standards
@@ -58,8 +58,8 @@ This standard is enforced by documentation verification, CI, and future graph va
 
 ## Related ADRs
 
-- ADR 0002 - Governed Document Metadata
-- ADR 0004 - Documentation CI Validation
+- ADR 0006 - Governed Document Metadata
+- ADR 0011 - Documentation CI Validation
 
 ## Glossary Terms
 

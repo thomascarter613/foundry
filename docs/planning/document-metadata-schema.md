@@ -12,9 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Metadata"
-  - "Schema"
+  - "Governed Metadata"
 ---
 
 # Document Metadata Schema

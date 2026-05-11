@@ -12,8 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Component"
+  - "Documentation System"
 ---
 
 # Documentation System Component Map

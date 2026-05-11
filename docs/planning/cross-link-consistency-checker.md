@@ -12,11 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Cross"
-  - "Link"
-  - "Consistency"
-  - "Checker"
+  - "Documentation System"
 ---
 
 # Cross Link Consistency Checker

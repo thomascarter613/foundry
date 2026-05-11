@@ -13,9 +13,7 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Planning"
   - "Governance"
-  - "Charter"
 ---
 
 governance-charter.md

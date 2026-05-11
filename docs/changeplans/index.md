@@ -22,6 +22,7 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "ChangePlan"
+  - "Lifecycle"
 ---
 
 # ChangePlan Index

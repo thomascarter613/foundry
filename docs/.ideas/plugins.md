@@ -12,11 +12,9 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Plugin"
-  - "Ideas"
-  - "Idea"
+  - "Documentation System"
 ---
+
 @foundry/plugin-postgres-drizzle
 @foundry/plugin-postgres-prisma
 @foundry/plugin-mongodb

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Standards"
-  - "Impact"
-  - "Analyzer"
+  - "Standard"
 ---
 
 Below is the **complete, governed, canonical specification** for the **Standards Impact Analyzer** — the subsystem that makes your *standards* reactive, authoritative, and institutionally enforced across the entire documentation knowledge graph.

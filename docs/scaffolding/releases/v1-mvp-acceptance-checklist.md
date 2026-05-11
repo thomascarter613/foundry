@@ -14,10 +14,8 @@ adrLinks:
   - "docs/architecture/adr/0002-monorepo-structure.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Platform"
   - "Scaffolding"
-  - "Acceptance"
-  - "Checklist"
+  - "Platform"
 ---
 
 # v1 MVP Acceptance Checklist

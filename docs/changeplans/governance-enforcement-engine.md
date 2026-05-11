@@ -13,10 +13,9 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
+  - "ChangePlan"
   - "Lifecycle"
   - "Governance"
-  - "ChangePlan"
-  - "Enforcement"
 ---
 
 governance-enforcement-engine.md

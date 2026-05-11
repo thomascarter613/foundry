@@ -14,7 +14,9 @@ adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
   - "Governance"
-  - "Rules"
+  - "Authority"
+  - "CI"
+  - "Documentation System"
 ---
 
 # Documentation CI Rules

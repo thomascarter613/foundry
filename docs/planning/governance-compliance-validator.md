@@ -13,10 +13,9 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Planning"
-  - "Governance"
   - "Compliance"
-  - "Validator"
+  - "Governance"
+  - "Validation"
 ---
 
 governance-compliance-validator.md

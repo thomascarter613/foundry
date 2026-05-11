@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Glossary"
-  - "Directory"
-  - "Structure"
+  - "Documentation System"
 ---
 
 # Glossary Directory Structure

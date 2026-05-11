@@ -15,11 +15,8 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
-  - "Platform"
   - "Scaffolding"
-  - "Database"
-  - "Provider"
-  - "Reference"
+  - "Platform"
 ---
 
 # Database Provider Reference

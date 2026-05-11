@@ -15,9 +15,7 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
-  - "Planning"
   - "Scaffolding"
-  - "Native"
 ---
 
 ## **AI‑Native Scaffolding Engine — Full Explanation**  

@@ -13,8 +13,6 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Onboarding"
-  - "Navigate"
-  - "Repo"
 ---
 
 # How To Navigate The Repo

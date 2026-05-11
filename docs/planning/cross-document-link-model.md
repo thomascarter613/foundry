@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Cross"
-  - "Link"
-  - "Model"
+  - "Documentation System"
 ---
 
 # Cross Document Link Model

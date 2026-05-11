@@ -12,11 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Universal"
-  - "Governed"
-  - "Header"
-  - "Block"
+  - "Documentation System"
 ---
 
 # Universal Governed Header Block

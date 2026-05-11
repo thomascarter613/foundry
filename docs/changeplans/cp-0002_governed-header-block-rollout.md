@@ -12,13 +12,8 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Lifecycle"
   - "ChangePlan"
-  - "0002"
-  - "Governed"
-  - "Header"
-  - "Block"
-  - "Rollout"
+  - "Lifecycle"
 ---
 
 cp-0002_governed-header-block-rollout.md

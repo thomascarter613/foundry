@@ -14,11 +14,6 @@ adrLinks: []
 glossaryTerms:
   - "ADR"
   - "Architecture"
-  - "0002"
-  - "Adopt"
-  - "Expected"
-  - "Provider"
-  - "Agnostic"
 ---
 
 # ADR-0002: Adopt AI-Expected Provider-Agnostic Architecture

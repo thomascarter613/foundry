@@ -13,8 +13,6 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Lifecycle"
-  - "Branching"
-  - "Strategy"
 ---
 
 # Branching Strategy

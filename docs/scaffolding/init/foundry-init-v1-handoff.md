@@ -14,11 +14,8 @@ adrLinks:
   - "docs/architecture/adr/0002-monorepo-structure.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Platform"
   - "Scaffolding"
-  - "Foundry"
-  - "Init"
-  - "Handoff"
+  - "Platform"
 ---
 
 # Foundry Init v1 Handoff

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Docs"
-  - "Agent"
-  - "Reasoning"
+  - "Documentation System"
 ---
 
 # Docs Agent Reasoning Engine

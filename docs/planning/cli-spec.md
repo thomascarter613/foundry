@@ -12,8 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Spec"
+  - "CLI"
 ---
 
 ### CLI specification for the AI‑native scaffolder

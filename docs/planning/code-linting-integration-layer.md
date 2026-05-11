@@ -12,11 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Code"
-  - "Linting"
-  - "Integration"
-  - "Layer"
+  - "Code Linting"
 ---
 
 code-linting-integration-layer.md

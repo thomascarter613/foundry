@@ -14,6 +14,7 @@ adrLinks: []
 glossaryTerms:
   - "Lifecycle"
   - "ChangePlan"
+  - "Documentation System"
 ---
 
 # Documentation ChangePlan Lifecycle

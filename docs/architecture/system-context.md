@@ -15,7 +15,6 @@ adrLinks:
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
   - "Architecture"
-  - "Context"
 ---
 
 # System Context
@@ -44,10 +43,10 @@ TODO: Document tradeoffs and rejected alternatives.
 
 ## Related ADRs
 
-- ADR 0001 - Documentation System Topology
-- ADR 0002 - Governed Document Metadata
-- ADR 0003 - Documentation Knowledge Graph
-- ADR 0004 - Documentation CI Validation
+- ADR 0005 - Documentation System Topology
+- ADR 0006 - Governed Document Metadata
+- ADR 0008 - Documentation Knowledge Graph
+- ADR 0011 - Documentation CI Validation
 
 ## Upstream
 

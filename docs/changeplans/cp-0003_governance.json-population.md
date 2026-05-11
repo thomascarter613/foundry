@@ -13,12 +13,9 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
+  - "ChangePlan"
   - "Lifecycle"
   - "Governance"
-  - "ChangePlan"
-  - "0003"
-  - "JSON"
-  - "Population"
 ---
 
 cp-0003_governance.json-population.md

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Standards"
-  - "Integration"
-  - "Layer"
+  - "Standard"
 ---
 
 standards-integration-layer.md

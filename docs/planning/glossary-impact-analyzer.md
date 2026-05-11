@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Glossary"
-  - "Impact"
-  - "Analyzer"
+  - "Documentation System"
 ---
 
 glossary-impact-analyzer.md

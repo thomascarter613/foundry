@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Architecture"
-  - "Diagrams"
-  - "Directory"
 ---
 
 architecture-diagrams-directory.md
@@ -179,8 +176,8 @@ Owned By: Architecture
 Last Updated: YYYY-MM-DD
 Related Document: ../system-context.md
 Related ADRs:
-  - ADR 0001: Architecture Principles
-  - ADR 0002: Monorepo Structure
+  - ADR 0004: Architecture Principles
+  - ADR 0007: Monorepo Structure
 ```
 
 This metadata powers:

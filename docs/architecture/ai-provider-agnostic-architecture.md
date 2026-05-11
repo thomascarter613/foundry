@@ -16,8 +16,7 @@ adrLinks:
   - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
 glossaryTerms:
   - "Architecture"
-  - "Provider"
-  - "Agnostic"
+  - "AI Provider"
 ---
 
 # AI Provider-Agnostic Architecture

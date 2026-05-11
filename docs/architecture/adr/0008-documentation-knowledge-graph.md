@@ -1,5 +1,5 @@
 ---
-title: "ADR 0001: Documentation System Topology"
+title: "ADR 0008: Documentation Knowledge Graph"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -14,13 +14,13 @@ adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "0001"
-  - "Topology"
+  - "Architecture"
+  - "Documentation System"
+  - "Knowledge Graph"
 ---
 
-# ADR 0001: Documentation System Topology
+# ADR 0008: Documentation Knowledge Graph
 
 ## Context
 

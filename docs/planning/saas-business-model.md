@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "SAAS"
-  - "Business"
-  - "Model"
+  - "Documentation System"
 ---
 
 ## **SaaS Business Model for the AI‑Native Scaffolder Platform**  

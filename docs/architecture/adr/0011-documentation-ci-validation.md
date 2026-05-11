@@ -1,5 +1,5 @@
 ---
-title: "ADR 0003: Documentation Knowledge Graph"
+title: "ADR 0011: Documentation CI Validation"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -13,16 +13,16 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "Knowledge Graph"
-  - "0003"
-  - "Knowledge"
-  - "Graph"
+  - "Architecture"
+  - "CI"
+  - "Documentation System"
+  - "Validation"
 ---
 
-# ADR 0003: Documentation Knowledge Graph
+# ADR 0011: Documentation CI Validation
 
 ## Context
 

@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Docs"
-  - "Canonical"
-  - "Spec"
+  - "Documentation Engine"
 ---
 
 docs-engine-canonical-spec.md

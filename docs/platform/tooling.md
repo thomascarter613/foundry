@@ -16,7 +16,6 @@ adrLinks:
   - "docs/architecture/adr/0003-package-management.md"
 glossaryTerms:
   - "Platform"
-  - "Tooling"
 ---
 
 # Tooling
@@ -59,8 +58,8 @@ TODO: Define operational expectations when the platform is implemented.
 
 ## Related ADRs
 
-- ADR 0003 - Documentation Knowledge Graph
-- ADR 0004 - Documentation CI Validation
+- ADR 0008 - Documentation Knowledge Graph
+- ADR 0011 - Documentation CI Validation
 
 ## Glossary Terms
 

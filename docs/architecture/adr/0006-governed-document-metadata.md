@@ -1,5 +1,5 @@
 ---
-title: "ADR 0002: Governed Document Metadata"
+title: "ADR 0006: Governed Document Metadata"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -14,14 +14,12 @@ adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "0002"
-  - "Governed"
-  - "Metadata"
+  - "Architecture"
+  - "Governed Metadata"
 ---
 
-# ADR 0002: Governed Document Metadata
+# ADR 0006: Governed Document Metadata
 
 ## Context
 

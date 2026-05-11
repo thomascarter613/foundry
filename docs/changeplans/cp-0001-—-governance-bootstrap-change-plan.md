@@ -13,13 +13,9 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
+  - "ChangePlan"
   - "Lifecycle"
   - "Governance"
-  - "ChangePlan"
-  - "0001"
-  - "Bootstrap"
-  - "Change"
-  - "Plan"
 ---
 
 cp-0001-—-governance-bootstrap-change-plan.md

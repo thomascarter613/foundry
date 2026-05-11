@@ -12,10 +12,7 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
   - "Architecture"
-  - "Multi"
-  - "Agent"
 ---
 
 ### Multi‑agent architecture for the AI‑native scaffolder

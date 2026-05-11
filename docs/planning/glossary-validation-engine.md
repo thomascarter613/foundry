@@ -12,8 +12,6 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Glossary"
   - "Validation"
 ---
 

@@ -12,11 +12,9 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Planning"
-  - "Capability"
-  - "Inventory"
-  - "Idea"
+  - "Documentation System"
 ---
+
 # Foundry CLI Capability Inventory
 
 Below is the clearest honest inventory based on what we have been building.

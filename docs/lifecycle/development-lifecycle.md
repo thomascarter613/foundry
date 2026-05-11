@@ -13,7 +13,6 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Lifecycle"
-  - "Development"
 ---
 
 # Development Lifecycle

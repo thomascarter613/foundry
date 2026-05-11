@@ -13,9 +13,7 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Planning"
-  - "Integration"
-  - "Layer"
+  - "CI"
 ---
 
 ci-integration-layer.md

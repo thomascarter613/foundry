@@ -14,8 +14,9 @@ adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
   - "Governance"
-  - "Repository"
+  - "Authority"
   - "Contract"
+  - "Repository Contract"
 ---
 
 # Repository Contract

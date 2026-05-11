@@ -1,5 +1,5 @@
 ---
-title: "ADR 0003: Package Management"
+title: "ADR 0007: Monorepo Structure"
 status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
@@ -14,10 +14,8 @@ adrLinks:
   - "docs/architecture/adr/0001-architecture-principles.md"
   - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
 glossaryTerms:
-  - "Architecture"
   - "ADR"
-  - "0003"
-  - "Package"
-  - "Management"
+  - "Architecture"
+  - "Monorepo"
 ---
 

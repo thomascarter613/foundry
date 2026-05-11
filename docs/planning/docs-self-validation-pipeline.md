@@ -13,10 +13,8 @@ governanceLinks:
 adrLinks:
   - "docs/architecture/adr/0004-ci-governance.md"
 glossaryTerms:
-  - "Planning"
-  - "Self"
-  - "Validation"
   - "Pipeline"
+  - "Validation"
 ---
 
 # Documentation Self Validation Pipeline

@@ -13,6 +13,7 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "Lifecycle"
+  - "Documentation System"
 ---
 
 # Documentation Lifecycle

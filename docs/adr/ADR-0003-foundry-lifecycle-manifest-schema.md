@@ -13,11 +13,9 @@ governanceLinks:
 adrLinks: []
 glossaryTerms:
   - "ADR"
-  - "0003"
-  - "Foundry"
+  - "Architecture"
   - "Lifecycle"
   - "Manifest"
-  - "Schema"
 ---
 
 # ADR-0003: Foundry Lifecycle Manifest Schema

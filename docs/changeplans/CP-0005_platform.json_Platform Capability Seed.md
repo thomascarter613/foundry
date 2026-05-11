@@ -12,12 +12,9 @@ governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
 glossaryTerms:
-  - "Lifecycle"
   - "ChangePlan"
-  - "0005"
+  - "Lifecycle"
   - "Platform"
-  - "Capability"
-  - "Seed"
 ---
 
 CP-0005_platform.json_Platform Capability Seed.md
