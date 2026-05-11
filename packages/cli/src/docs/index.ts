@@ -4,6 +4,11 @@ export {
   validateAdrIndex
 } from "./adr-validator.js";
 export {
+  formatChangePlanValidationReportAsJson,
+  formatChangePlanValidationReportAsText,
+  validateChangePlans
+} from "./changeplan-validator.js";
+export {
   createDirectoryRepairPlan,
   formatDirectoryRepairPlanAsJson,
   formatDirectoryRepairPlanAsText
@@ -57,6 +62,11 @@ export {
   formatRelationshipNormalizationPlanAsText,
   normalizeDocsRelationships
 } from "./relationship-normalizer.js";
+export {
+  formatWorkPacketValidationReportAsJson,
+  formatWorkPacketValidationReportAsText,
+  validateWorkPackets
+} from "./work-packet-validator.js";
 export type {
   AdrIndexEntry,
   AdrRecord,
@@ -64,6 +74,13 @@ export type {
   AdrValidationReport,
   AdrValidationSummary
 } from "./adr-validator.js";
+export type {
+  ChangePlanIndexEntry,
+  ChangePlanRecord,
+  ChangePlanValidationOptions,
+  ChangePlanValidationReport,
+  ChangePlanValidationSummary
+} from "./changeplan-validator.js";
 export type {
   DirectoryRepairAction,
   DirectoryRepairActionKind,
@@ -120,6 +137,13 @@ export type {
   RelationshipNormalizationOptions,
   RelationshipNormalizationPlan
 } from "./relationship-normalizer.js";
+export type {
+  WorkPacketIndexEntry,
+  WorkPacketRecord,
+  WorkPacketValidationOptions,
+  WorkPacketValidationReport,
+  WorkPacketValidationSummary
+} from "./work-packet-validator.js";
 export type {
   DocsEngineOptions,
   DocsValidationIssue,

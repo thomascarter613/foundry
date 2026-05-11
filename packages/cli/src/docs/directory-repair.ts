@@ -47,7 +47,8 @@ type IndexDefinition = {
     | "Lifecycle"
     | "Standard"
     | "Platform"
-    | "Onboarding";
+    | "Onboarding"
+    | "WorkPacket";
   readonly upstream: readonly string[];
   readonly downstream: readonly string[];
   readonly body: string;
@@ -60,17 +61,24 @@ const canonicalDirectories = [
   "docs/architecture/adr",
   "docs/architecture/diagrams",
   "docs/changeplans",
+  "docs/work-packets",
   "docs/lifecycle",
   "docs/standards",
   "docs/platform",
   "docs/onboarding"
 ] as const;
 
+const acceptedLegacyDirectories = new Set([
+  "docs/.ideas",
+  "docs/adr",
+  "docs/product",
+  "docs/scaffolding"
+]);
+
 const legacyDirectories = new Set([
   "docs/adr",
   "docs/product",
   "docs/scaffolding",
-  "docs/work-packets",
   "docs/.ideas"
 ]);
 
@@ -118,6 +126,7 @@ const indexDefinitions: readonly IndexDefinition[] = [
       "docs/governance/index.md",
       "docs/architecture/index.md",
       "docs/changeplans/index.md",
+      "docs/work-packets/index.md",
       "docs/lifecycle/index.md",
       "docs/standards/index.md",
       "docs/platform/index.md",
@@ -239,6 +248,25 @@ The ADR validator may regenerate this section from discovered ADR files.
 ## Purpose
 
 Provide the governed index for ChangePlan documents.
+
+## Change History
+
+- Created by the directory topology repair command.
+`
+  },
+  {
+    path: "docs/work-packets/index.md",
+    title: "Work Packet Index",
+    owner: "Engineering Productivity",
+    governanceLevel: "Required",
+    documentType: "ChangePlan",
+    upstream: ["docs/index.md"],
+    downstream: [],
+    body: `# Work Packet Index
+
+## Purpose
+
+Provide the governed index for Work Packet documents.
 
 ## Change History
 
@@ -384,7 +412,7 @@ export function createDirectoryRepairPlan(options: DirectoryRepairOptions): Dire
         });
       }
 
-      if (legacyDirectories.has(directory)) {
+      if (legacyDirectories.has(directory) && !acceptedLegacyDirectories.has(directory)) {
         actions.push({
           kind: "reportLegacyDirectory",
           path: directory,

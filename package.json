@@ -47,7 +47,11 @@
     "docs:graph:repair": "bun run foundry:build && node packages/cli/bin/run.js docs graph repair",
     "docs:graph:repair:write": "bun run foundry:build && node packages/cli/bin/run.js docs graph repair --write",
     "docs:readiness": "bun run foundry:build && node packages/cli/bin/run.js docs readiness",
-    "docs:readiness:json": "bun run foundry:build && node packages/cli/bin/run.js docs readiness --json --report-path .artifacts/docs/readiness-report.json"
+    "docs:readiness:json": "bun run foundry:build && node packages/cli/bin/run.js docs readiness --json --report-path .artifacts/docs/readiness-report.json",
+    "docs:changeplans:validate": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate",
+    "docs:changeplans:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs changeplans validate --strict-index --strict-placement --fail-on-warnings",
+    "docs:work-packets:validate": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate",
+    "docs:work-packets:validate:strict": "bun run foundry:build && node packages/cli/bin/run.js docs work-packets validate --strict-index --strict-placement --fail-on-warnings"
   },
   "devDependencies": {
     "@redocly/cli": "^2.30.3",
