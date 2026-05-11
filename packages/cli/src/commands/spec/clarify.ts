@@ -522,17 +522,41 @@ function hasSection(body: string, section: string): boolean {
   return sectionPattern.test(body);
 }
 
+
 function extractSection(body: string, section: string): string | null {
-  const escaped = escapeRegExp(section);
-  const pattern = new RegExp(
-    `^##\\s+${escaped}\\s*$([\\s\\S]*?)(?=^##\\s+|$)`,
-    "m",
+  const lines = body.replace(/\r\n/g, "\n").split("\n");
+  const sectionHeadingPattern = new RegExp(
+    `^##\\s+${escapeRegExp(section)}\\s*$`,
   );
 
-  const match = body.match(pattern);
+  let startIndex = -1;
 
-  return match?.[1]?.trim() ?? null;
+  for (let index = 0; index < lines.length; index += 1) {
+    if (sectionHeadingPattern.test(lines[index]?.trim() ?? "")) {
+      startIndex = index + 1;
+      break;
+    }
+  }
+
+  if (startIndex === -1) {
+    return null;
+  }
+
+  const collected: string[] = [];
+
+  for (let index = startIndex; index < lines.length; index += 1) {
+    const line = lines[index] ?? "";
+
+    if (/^##\s+/.test(line.trim())) {
+      break;
+    }
+
+    collected.push(line);
+  }
+
+  return collected.join("\n").trim();
 }
+
 
 function normalizeQuestionLine(line: string): string {
   return line
