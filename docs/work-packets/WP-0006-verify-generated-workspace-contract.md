@@ -10,7 +10,6 @@ upstream:
   - "docs/changeplans/cp-0009-foundry-init-stabilization.md"
   - "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
 downstream:
-  - "tools/scripts/check-generated-workspace-contract.sh"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

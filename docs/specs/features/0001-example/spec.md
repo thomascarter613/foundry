@@ -1,12 +1,18 @@
 ---
 id: SPEC-0001
 title: Example Native Foundry Spec
-status: draft
+status: active
+specStatus: draft
 kind: feature
+version: 0.1.0
 created: 2026-05-11
 updated: 2026-05-11
+lastUpdated: 2026-05-11
+owner: project-owner
 owners:
   - project-maintainer
+governanceLevel: project
+documentType: spec
 related_adrs:
   - ADR-00XX
 related_work_packets: []
@@ -16,6 +22,11 @@ requires_database_change: false
 requires_api_change: false
 requires_security_review: false
 requires_migration: false
+tags:
+  - spec
+  - example
+  - foundry
+  - spec-lifecycle
 ---
 
 # SPEC-0001: Example Native Foundry Spec

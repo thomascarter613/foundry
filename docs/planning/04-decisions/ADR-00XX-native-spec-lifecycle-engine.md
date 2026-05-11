@@ -1,9 +1,15 @@
 ---
 id: ADR-00XX
 title: Native Spec Lifecycle Engine
-status: accepted
-date: 2026-05-11
+status: active
+version: 0.1.0
+created: 2026-05-11
+updated: 2026-05-11
+lastUpdated: 2026-05-11
+owner: project-owner
 decision_owner: project-maintainer
+governanceLevel: project
+documentType: adr
 supersedes: []
 superseded_by: []
 related:
@@ -11,6 +17,12 @@ related:
   - AionX
   - Charon
   - Work Packet Execution Model
+tags:
+  - adr
+  - specs
+  - spec-lifecycle
+  - foundry
+  - aionx
 ---
 
 # ADR-00XX: Native Spec Lifecycle Engine

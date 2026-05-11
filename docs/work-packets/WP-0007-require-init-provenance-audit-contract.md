@@ -10,7 +10,6 @@ upstream:
   - "docs/changeplans/cp-0009-foundry-init-stabilization.md"
   - "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
 downstream:
-  - "tools/scripts/check-generated-workspace-contract.sh"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

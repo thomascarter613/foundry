@@ -9,8 +9,6 @@ upstream:
   - "docs/work-packets/index.md"
   - "docs/changeplans/cp-0009-foundry-init-stabilization.md"
 downstream:
-  - "tools/scripts/check-foundry-init-workspace.sh"
-  - "tools/scripts/inspect-init-path-validation.sh"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
