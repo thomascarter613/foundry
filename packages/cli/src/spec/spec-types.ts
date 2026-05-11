@@ -9,6 +9,8 @@ export type FoundrySpecLifecycleStatus =
   | "superseded"
   | "rejected";
 
+export type FoundrySpecStatus = FoundrySpecLifecycleStatus;
+
 export type FoundrySpecKind =
   | "feature"
   | "bugfix"
@@ -26,37 +28,42 @@ export interface FoundrySpecFrontmatter {
   title: string;
 
   /**
-   * Governed document status.
-   *
-   * This is intentionally separate from specStatus because the documentation
-   * verification pipeline owns the generic `status` field.
-   */
-  status: string;
-
-  /**
-   * Native Foundry spec lifecycle status.
+   * Native spec lifecycle status used by the current spec validator.
    */
   specStatus: FoundrySpecLifecycleStatus;
 
-  kind: FoundrySpecKind;
+  /**
+   * Backward-compatible alias used by earlier spec slices.
+   */
+  status: FoundrySpecStatus;
+
   version: string;
+  kind: FoundrySpecKind;
   created: string;
   updated: string;
   lastUpdated: string;
+
   owner: string;
   owners: string[];
+
   governanceLevel: string;
   documentType: string;
+
+  tags: string[];
+
   related_adrs: string[];
   related_work_packets: string[];
+
   risk_level: FoundrySpecRiskLevel;
+
   requires_ai: boolean;
   requires_database_change: boolean;
   requires_api_change: boolean;
   requires_security_review: boolean;
   requires_migration: boolean;
-  tags: string[];
 }
+
+export type FoundrySpecFrontmatterField = keyof FoundrySpecFrontmatter;
 
 export interface ParsedFoundrySpec {
   filePath: string;
@@ -68,7 +75,7 @@ export interface SpecValidationIssue {
   severity: "error" | "warning";
   code: string;
   message: string;
-  field?: string;
+  field?: FoundrySpecFrontmatterField | string;
   section?: string;
 }
 

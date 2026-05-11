@@ -1,35 +1,35 @@
 {
   "ok": true,
   "summary": {
-    "checkedDirectories": 18,
-    "checkedFiles": 208,
+    "checkedDirectories": 20,
+    "checkedFiles": 219,
     "errorCount": 0,
-    "warningCount": 4,
-    "infoCount": 0
+    "warningCount": 0,
+    "infoCount": 4
   },
   "issues": [
     {
-      "severity": "warning",
-      "code": "directory.legacyDirectory",
-      "message": "legacy docs directory is still present and should eventually be migrated: docs/.ideas",
+      "severity": "info",
+      "code": "directory.acceptedLegacyDirectory",
+      "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/.ideas",
       "path": "docs/.ideas"
     },
     {
-      "severity": "warning",
-      "code": "directory.legacyDirectory",
-      "message": "legacy docs directory is still present and should eventually be migrated: docs/adr",
+      "severity": "info",
+      "code": "directory.acceptedLegacyDirectory",
+      "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/adr",
       "path": "docs/adr"
     },
     {
-      "severity": "warning",
-      "code": "directory.legacyDirectory",
-      "message": "legacy docs directory is still present and should eventually be migrated: docs/product",
+      "severity": "info",
+      "code": "directory.acceptedLegacyDirectory",
+      "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/product",
       "path": "docs/product"
     },
     {
-      "severity": "warning",
-      "code": "directory.legacyDirectory",
-      "message": "legacy docs directory is still present and should eventually be migrated: docs/scaffolding",
+      "severity": "info",
+      "code": "directory.acceptedLegacyDirectory",
+      "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/scaffolding",
       "path": "docs/scaffolding"
     }
   ]

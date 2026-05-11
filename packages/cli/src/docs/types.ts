@@ -17,7 +17,8 @@ export type DocumentType =
   | "Product"
   | "Scaffolding"
   | "WorkPacket"
-  | "Idea";
+  | "Idea"
+  | "Spec";
 
 export type DocsEngineOptions = {
   readonly repoRoot: string;

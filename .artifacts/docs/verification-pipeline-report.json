@@ -3,35 +3,35 @@
   "directoryValidation": {
     "ok": true,
     "summary": {
-      "checkedDirectories": 18,
-      "checkedFiles": 208,
+      "checkedDirectories": 20,
+      "checkedFiles": 219,
       "errorCount": 0,
-      "warningCount": 4,
-      "infoCount": 0
+      "warningCount": 0,
+      "infoCount": 4
     },
     "issues": [
       {
-        "severity": "warning",
-        "code": "directory.legacyDirectory",
-        "message": "legacy docs directory is still present and should eventually be migrated: docs/.ideas",
+        "severity": "info",
+        "code": "directory.acceptedLegacyDirectory",
+        "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/.ideas",
         "path": "docs/.ideas"
       },
       {
-        "severity": "warning",
-        "code": "directory.legacyDirectory",
-        "message": "legacy docs directory is still present and should eventually be migrated: docs/adr",
+        "severity": "info",
+        "code": "directory.acceptedLegacyDirectory",
+        "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/adr",
         "path": "docs/adr"
       },
       {
-        "severity": "warning",
-        "code": "directory.legacyDirectory",
-        "message": "legacy docs directory is still present and should eventually be migrated: docs/product",
+        "severity": "info",
+        "code": "directory.acceptedLegacyDirectory",
+        "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/product",
         "path": "docs/product"
       },
       {
-        "severity": "warning",
-        "code": "directory.legacyDirectory",
-        "message": "legacy docs directory is still present and should eventually be migrated: docs/scaffolding",
+        "severity": "info",
+        "code": "directory.acceptedLegacyDirectory",
+        "message": "accepted legacy docs directory is governed by docs/governance/legacy-docs-topology.md: docs/scaffolding",
         "path": "docs/scaffolding"
       }
     ]
@@ -39,7 +39,7 @@
   "metadata": {
     "ok": true,
     "summary": {
-      "checkedDocuments": 204,
+      "checkedDocuments": 215,
       "errorCount": 0,
       "warningCount": 0,
       "infoCount": 0
@@ -230,6 +230,10 @@
         "issues": []
       },
       {
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "issues": []
+      },
+      {
         "path": "docs/changeplans/index.md",
         "issues": []
       },
@@ -267,6 +271,10 @@
       },
       {
         "path": "docs/governance/index.md",
+        "issues": []
+      },
+      {
+        "path": "docs/governance/legacy-docs-topology.md",
         "issues": []
       },
       {
@@ -339,6 +347,10 @@
       },
       {
         "path": "docs/onboarding/system-overview.md",
+        "issues": []
+      },
+      {
+        "path": "docs/planning/04-decisions/ADR-00XX-native-spec-lifecycle-engine.md",
         "issues": []
       },
       {
@@ -822,6 +834,10 @@
         "issues": []
       },
       {
+        "path": "docs/specs/index.md",
+        "issues": []
+      },
+      {
         "path": "docs/standards/api-standards.md",
         "issues": []
       },
@@ -831,6 +847,10 @@
       },
       {
         "path": "docs/standards/documentation-standards.md",
+        "issues": []
+      },
+      {
+        "path": "docs/standards/documentation-verification-ci.md",
         "issues": []
       },
       {
@@ -855,6 +875,30 @@
       },
       {
         "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "issues": []
+      },
+      {
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "issues": []
       },
       {
@@ -1452,6 +1496,19 @@
         }
       },
       {
+        "id": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "kind": "Document",
+        "label": "CP-0009: Foundry Init Stabilization",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "metadata": {
+          "documentType": "ChangePlan",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
         "id": "doc:docs/changeplans/index.md",
         "kind": "Document",
         "label": "ChangePlan Index",
@@ -1579,6 +1636,19 @@
           "owner": "Governance",
           "governanceLevel": "Binding",
           "lastUpdated": "2026-05-08"
+        }
+      },
+      {
+        "id": "doc:docs/governance/legacy-docs-topology.md",
+        "kind": "Document",
+        "label": "Legacy Documentation Topology Policy",
+        "path": "docs/governance/legacy-docs-topology.md",
+        "metadata": {
+          "documentType": "Governance",
+          "status": "Approved",
+          "owner": "Governance",
+          "governanceLevel": "Binding",
+          "lastUpdated": "2026-05-11"
         }
       },
       {
@@ -1813,6 +1883,19 @@
           "owner": "Documentation",
           "governanceLevel": "Informational",
           "lastUpdated": "2026-05-08"
+        }
+      },
+      {
+        "id": "doc:docs/planning/04-decisions/ADR-00XX-native-spec-lifecycle-engine.md",
+        "kind": "Document",
+        "label": "Native Spec Lifecycle Engine",
+        "path": "docs/planning/04-decisions/ADR-00XX-native-spec-lifecycle-engine.md",
+        "metadata": {
+          "documentType": "Planning",
+          "status": "Draft",
+          "owner": "project-owner",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
         }
       },
       {
@@ -3389,6 +3472,19 @@
         }
       },
       {
+        "id": "doc:docs/specs/index.md",
+        "kind": "Document",
+        "label": "Specification Index",
+        "path": "docs/specs/index.md",
+        "metadata": {
+          "documentType": "Spec",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
         "id": "doc:docs/standards/api-standards.md",
         "kind": "Document",
         "label": "API Standards",
@@ -3425,6 +3521,19 @@
           "owner": "Standards",
           "governanceLevel": "Binding",
           "lastUpdated": "2026-05-08"
+        }
+      },
+      {
+        "id": "doc:docs/standards/documentation-verification-ci.md",
+        "kind": "Document",
+        "label": "Documentation Verification CI",
+        "path": "docs/standards/documentation-verification-ci.md",
+        "metadata": {
+          "documentType": "Standard",
+          "status": "Approved",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
         }
       },
       {
@@ -3519,6 +3628,84 @@
         }
       },
       {
+        "id": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "kind": "Document",
+        "label": "WP-0003: Stabilize Foundry Init MVP",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "kind": "Document",
+        "label": "WP-0004: Add Init Workspace Smoke Fixture",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "kind": "Document",
+        "label": "WP-0005: Fix Init Destination Path Handling",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "kind": "Document",
+        "label": "WP-0006: Verify Generated Workspace Contract",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "kind": "Document",
+        "label": "WP-0007: Require Init Provenance Audit Contract",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
+        "id": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "kind": "Document",
+        "label": "WP-0008: Integrate Init MVP Verification Gate",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "metadata": {
+          "documentType": "WorkPacket",
+          "status": "Draft",
+          "owner": "Engineering Productivity",
+          "governanceLevel": "Required",
+          "lastUpdated": "2026-05-11"
+        }
+      },
+      {
         "id": "term:adr",
         "kind": "GlossaryTerm",
         "label": "ADR",
@@ -3548,6 +3735,14 @@
         "label": "Architecture",
         "metadata": {
           "term": "Architecture"
+        }
+      },
+      {
+        "id": "term:audit",
+        "kind": "GlossaryTerm",
+        "label": "Audit",
+        "metadata": {
+          "term": "Audit"
         }
       },
       {
@@ -3743,6 +3938,14 @@
         }
       },
       {
+        "id": "term:provenance",
+        "kind": "GlossaryTerm",
+        "label": "Provenance",
+        "metadata": {
+          "term": "Provenance"
+        }
+      },
+      {
         "id": "term:repository-contract",
         "kind": "GlossaryTerm",
         "label": "Repository Contract",
@@ -3756,6 +3959,14 @@
         "label": "Scaffolding",
         "metadata": {
           "term": "Scaffolding"
+        }
+      },
+      {
+        "id": "term:specification",
+        "kind": "GlossaryTerm",
+        "label": "Specification",
+        "metadata": {
+          "term": "Specification"
         }
       },
       {
@@ -4945,6 +5156,118 @@
         "rawTarget": "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
       },
       {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/_supersession.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/_supersession.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/_supersession.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/_template.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/_template.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/_template.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0004-architecture-principles.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0004-architecture-principles.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0004-architecture-principles.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0005-documentation-system-topology.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0005-documentation-system-topology.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0005-documentation-system-topology.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0006-governed-document-metadata.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0006-governed-document-metadata.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0006-governed-document-metadata.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0007-monorepo-structure.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0007-monorepo-structure.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0007-monorepo-structure.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0008-documentation-knowledge-graph.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0008-documentation-knowledge-graph.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0009-package-management.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0009-package-management.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0009-package-management.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0010-ci-governance.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0010-ci-governance.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0010-ci-governance.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/adr/index.md->doc:docs/architecture/adr/0011-documentation-ci-validation.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/architecture/adr/0011-documentation-ci-validation.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/architecture/adr/0011-documentation-ci-validation.md"
+      },
+      {
+        "id": "Downstream:doc:docs/architecture/index.md->doc:docs/architecture/adr/index.md",
+        "type": "Downstream",
+        "from": "doc:docs/architecture/index.md",
+        "to": "doc:docs/architecture/adr/index.md",
+        "sourcePath": "docs/architecture/index.md",
+        "rawTarget": "docs/architecture/adr/index.md"
+      },
+      {
         "id": "Downstream:doc:docs/architecture/index.md->doc:docs/architecture/ai-provider-agnostic-architecture.md",
         "type": "Downstream",
         "from": "doc:docs/architecture/index.md",
@@ -5105,6 +5428,86 @@
         "rawTarget": "docs/architecture/system-context.md"
       },
       {
+        "id": "Downstream:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0002_governed-header-block-rollout.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0002_governed-header-block-rollout.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0002_governed-header-block-rollout.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0003_governance.json-population.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0003_governance.json-population.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0003_governance.json-population.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0006-ci-constitutional-pipeline.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0006-ci-constitutional-pipeline.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/changeplans/cp-0008-governance-enforcement-engine.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/changeplans/cp-0008-governance-enforcement-engine.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+      },
+      {
+        "id": "Downstream:doc:docs/changeplans/index.md->doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "type": "Downstream",
+        "from": "doc:docs/changeplans/index.md",
+        "to": "doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "sourcePath": "docs/changeplans/index.md",
+        "rawTarget": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+      },
+      {
         "id": "Downstream:doc:docs/governance/index.md->doc:docs/governance/authority-map.md",
         "type": "Downstream",
         "from": "doc:docs/governance/index.md",
@@ -5161,6 +5564,14 @@
         "rawTarget": "docs/governance/governance-charter.md"
       },
       {
+        "id": "Downstream:doc:docs/governance/index.md->doc:docs/governance/legacy-docs-topology.md",
+        "type": "Downstream",
+        "from": "doc:docs/governance/index.md",
+        "to": "doc:docs/governance/legacy-docs-topology.md",
+        "sourcePath": "docs/governance/index.md",
+        "rawTarget": "docs/governance/legacy-docs-topology.md"
+      },
+      {
         "id": "Downstream:doc:docs/governance/index.md->doc:docs/governance/repository-contract.md",
         "type": "Downstream",
         "from": "doc:docs/governance/index.md",
@@ -5207,6 +5618,14 @@
         "to": "doc:docs/changeplans/index.md",
         "sourcePath": "docs/index.md",
         "rawTarget": "docs/changeplans/index.md"
+      },
+      {
+        "id": "Downstream:doc:docs/index.md->doc:docs/ci-constitutional-pipeline.md",
+        "type": "Downstream",
+        "from": "doc:docs/index.md",
+        "to": "doc:docs/ci-constitutional-pipeline.md",
+        "sourcePath": "docs/index.md",
+        "rawTarget": "docs/ci-constitutional-pipeline.md"
       },
       {
         "id": "Downstream:doc:docs/index.md->doc:docs/governance/index.md",
@@ -5263,6 +5682,14 @@
         "to": "doc:docs/standards/index.md",
         "sourcePath": "docs/index.md",
         "rawTarget": "docs/standards/index.md"
+      },
+      {
+        "id": "Downstream:doc:docs/index.md->doc:docs/work-packets/index.md",
+        "type": "Downstream",
+        "from": "doc:docs/index.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/index.md",
+        "rawTarget": "docs/work-packets/index.md"
       },
       {
         "id": "Downstream:doc:docs/lifecycle/index.md->doc:docs/lifecycle/branching-strategy.md",
@@ -5327,6 +5754,14 @@
         "to": "doc:docs/onboarding/documentation-system-guide.md",
         "sourcePath": "docs/onboarding/index.md",
         "rawTarget": "docs/onboarding/documentation-system-guide.md"
+      },
+      {
+        "id": "Downstream:doc:docs/onboarding/index.md->doc:docs/onboarding/documentation-system-mvp-v1.md",
+        "type": "Downstream",
+        "from": "doc:docs/onboarding/index.md",
+        "to": "doc:docs/onboarding/documentation-system-mvp-v1.md",
+        "sourcePath": "docs/onboarding/index.md",
+        "rawTarget": "docs/onboarding/documentation-system-mvp-v1.md"
       },
       {
         "id": "Downstream:doc:docs/onboarding/index.md->doc:docs/onboarding/glossary-quickref.md",
@@ -5807,6 +6242,14 @@
         "to": "doc:docs/planning/glossary.md",
         "sourcePath": "docs/planning/index.md",
         "rawTarget": "docs/planning/glossary.md"
+      },
+      {
+        "id": "Downstream:doc:docs/planning/index.md->doc:docs/planning/governance-bootstrap-change-plan-legacy-reference.md",
+        "type": "Downstream",
+        "from": "doc:docs/planning/index.md",
+        "to": "doc:docs/planning/governance-bootstrap-change-plan-legacy-reference.md",
+        "sourcePath": "docs/planning/index.md",
+        "rawTarget": "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
       },
       {
         "id": "Downstream:doc:docs/planning/index.md->doc:docs/planning/governance-charter.md",
@@ -6359,6 +6802,14 @@
         "to": "doc:docs/standards/documentation-standards.md",
         "sourcePath": "docs/standards/index.md",
         "rawTarget": "docs/standards/documentation-standards.md"
+      },
+      {
+        "id": "Downstream:doc:docs/standards/index.md->doc:docs/standards/documentation-verification-ci.md",
+        "type": "Downstream",
+        "from": "doc:docs/standards/index.md",
+        "to": "doc:docs/standards/documentation-verification-ci.md",
+        "sourcePath": "docs/standards/index.md",
+        "rawTarget": "docs/standards/documentation-verification-ci.md"
       },
       {
         "id": "Downstream:doc:docs/standards/index.md->doc:docs/standards/graph-schema-standards.md",
@@ -7265,6 +7716,46 @@
         "rawTarget": "Lifecycle"
       },
       {
+        "id": "GlossaryUsage:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->term:changeplan",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "term:changeplan",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "ChangePlan"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->term:cli",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "term:cli",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "CLI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->term:lifecycle",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "term:lifecycle",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "Lifecycle"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "term:verification",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "Verification"
+      },
+      {
         "id": "GlossaryUsage:doc:docs/changeplans/index.md->term:changeplan",
         "type": "GlossaryUsage",
         "from": "doc:docs/changeplans/index.md",
@@ -7465,6 +7956,38 @@
         "rawTarget": "Governance"
       },
       {
+        "id": "GlossaryUsage:doc:docs/governance/legacy-docs-topology.md->term:documentation-system",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "term:documentation-system",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
+        "rawTarget": "Documentation System"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/governance/legacy-docs-topology.md->term:governance",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "term:governance",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
+        "rawTarget": "Governance"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/governance/legacy-docs-topology.md->term:policy",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "term:policy",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
+        "rawTarget": "Policy"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/governance/legacy-docs-topology.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
         "id": "GlossaryUsage:doc:docs/governance/repository-contract.md->term:authority",
         "type": "GlossaryUsage",
         "from": "doc:docs/governance/repository-contract.md",
@@ -7663,6 +8186,14 @@
         "to": "term:verification",
         "sourcePath": "docs/onboarding/documentation-system-mvp-v1.md",
         "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/onboarding/glossary-quickref.md->term:documentation-system",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/onboarding/glossary-quickref.md",
+        "to": "term:documentation-system",
+        "sourcePath": "docs/onboarding/glossary-quickref.md",
+        "rawTarget": "Documentation System"
       },
       {
         "id": "GlossaryUsage:doc:docs/onboarding/glossary-quickref.md->term:onboarding",
@@ -9081,6 +9612,22 @@
         "rawTarget": "Scaffolding"
       },
       {
+        "id": "GlossaryUsage:doc:docs/specs/index.md->term:specification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/specs/index.md",
+        "to": "term:specification",
+        "sourcePath": "docs/specs/index.md",
+        "rawTarget": "Specification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/specs/index.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/specs/index.md",
+        "to": "term:verification",
+        "sourcePath": "docs/specs/index.md",
+        "rawTarget": "Verification"
+      },
+      {
         "id": "GlossaryUsage:doc:docs/standards/api-standards.md->term:api",
         "type": "GlossaryUsage",
         "from": "doc:docs/standards/api-standards.md",
@@ -9119,6 +9666,38 @@
         "to": "term:standard",
         "sourcePath": "docs/standards/documentation-standards.md",
         "rawTarget": "Standard"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/documentation-verification-ci.md->term:ci",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "term:ci",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
+        "rawTarget": "CI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/documentation-verification-ci.md->term:documentation-system",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "term:documentation-system",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
+        "rawTarget": "Documentation System"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/documentation-verification-ci.md->term:validation",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "term:validation",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
+        "rawTarget": "Validation"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/standards/documentation-verification-ci.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "term:verification",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
+        "rawTarget": "Verification"
       },
       {
         "id": "GlossaryUsage:doc:docs/standards/graph-schema-standards.md->term:knowledge-graph",
@@ -9214,6 +9793,222 @@
         "from": "doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
         "to": "term:work-packet",
         "sourcePath": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->term:changeplan",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "term:changeplan",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "ChangePlan"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->term:cli",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "term:cli",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "CLI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->term:cli",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "term:cli",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "CLI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->term:cli",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "term:cli",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "CLI"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->term:scaffolding",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "term:scaffolding",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "Scaffolding"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->term:audit",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "term:audit",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "Audit"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->term:provenance",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "term:provenance",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "Provenance"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "Work Packet"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->term:audit",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "term:audit",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "Audit"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->term:provenance",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "term:provenance",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "Provenance"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->term:repository-contract",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "term:repository-contract",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "Repository Contract"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->term:verification",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "term:verification",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "Verification"
+      },
+      {
+        "id": "GlossaryUsage:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->term:work-packet",
+        "type": "GlossaryUsage",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "term:work-packet",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "rawTarget": "Work Packet"
       },
       {
@@ -9577,6 +10372,14 @@
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
+        "id": "Governance:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
         "id": "Governance:doc:docs/changeplans/index.md->doc:docs/governance/documentation-governance.md",
         "type": "Governance",
         "from": "doc:docs/changeplans/index.md",
@@ -9646,6 +10449,14 @@
         "from": "doc:docs/governance/index.md",
         "to": "doc:docs/governance/documentation-governance.md",
         "sourcePath": "docs/governance/index.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/governance/legacy-docs-topology.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
@@ -10761,6 +11572,14 @@
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
+        "id": "Governance:doc:docs/specs/index.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/specs/index.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/specs/index.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
         "id": "Governance:doc:docs/standards/api-standards.md->doc:docs/governance/documentation-governance.md",
         "type": "Governance",
         "from": "doc:docs/standards/api-standards.md",
@@ -10782,6 +11601,14 @@
         "from": "doc:docs/standards/documentation-standards.md",
         "to": "doc:docs/governance/documentation-governance.md",
         "sourcePath": "docs/standards/documentation-standards.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/standards/documentation-verification-ci.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
@@ -10838,6 +11665,54 @@
         "from": "doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
         "to": "doc:docs/governance/documentation-governance.md",
         "sourcePath": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "docs/governance/documentation-governance.md"
+      },
+      {
+        "id": "Governance:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/governance/documentation-governance.md",
+        "type": "Governance",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/governance/documentation-governance.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
         "rawTarget": "docs/governance/documentation-governance.md"
       },
       {
@@ -10967,6 +11842,14 @@
         "to": "doc:docs/architecture/index.md",
         "sourcePath": "docs/architecture/adr/index.md",
         "rawTarget": "docs/architecture/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/architecture/adr/index.md->doc:docs/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/architecture/adr/index.md",
+        "to": "doc:docs/index.md",
+        "sourcePath": "docs/architecture/adr/index.md",
+        "rawTarget": "docs/index.md"
       },
       {
         "id": "Upstream:doc:docs/architecture/ai-provider-agnostic-architecture.md->doc:docs/architecture/index.md",
@@ -11145,6 +12028,22 @@
         "rawTarget": "docs/changeplans/index.md"
       },
       {
+        "id": "Upstream:doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md->doc:docs/planning/governance-bootstrap-change-plan-legacy-reference.md",
+        "type": "Upstream",
+        "from": "doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "to": "doc:docs/planning/governance-bootstrap-change-plan-legacy-reference.md",
+        "sourcePath": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "rawTarget": "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
+      },
+      {
+        "id": "Upstream:doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md->doc:docs/planning/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "to": "doc:docs/planning/index.md",
+        "sourcePath": "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md",
+        "rawTarget": "docs/planning/index.md"
+      },
+      {
         "id": "Upstream:doc:docs/changeplans/cp-0002_governed-header-block-rollout.md->doc:docs/changeplans/index.md",
         "type": "Upstream",
         "from": "doc:docs/changeplans/cp-0002_governed-header-block-rollout.md",
@@ -11185,6 +12084,14 @@
         "rawTarget": "docs/changeplans/index.md"
       },
       {
+        "id": "Upstream:doc:docs/changeplans/cp-0006-ci-constitutional-pipeline.md->doc:docs/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/changeplans/cp-0006-ci-constitutional-pipeline.md",
+        "to": "doc:docs/index.md",
+        "sourcePath": "docs/changeplans/cp-0006-ci-constitutional-pipeline.md",
+        "rawTarget": "docs/index.md"
+      },
+      {
         "id": "Upstream:doc:docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md->doc:docs/changeplans/index.md",
         "type": "Upstream",
         "from": "doc:docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md",
@@ -11198,6 +12105,14 @@
         "from": "doc:docs/changeplans/cp-0008-governance-enforcement-engine.md",
         "to": "doc:docs/changeplans/index.md",
         "sourcePath": "docs/changeplans/cp-0008-governance-enforcement-engine.md",
+        "rawTarget": "docs/changeplans/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/changeplans/cp-0009-foundry-init-stabilization.md->doc:docs/changeplans/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "to": "doc:docs/changeplans/index.md",
+        "sourcePath": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
         "rawTarget": "docs/changeplans/index.md"
       },
       {
@@ -11279,6 +12194,14 @@
         "to": "doc:docs/index.md",
         "sourcePath": "docs/governance/index.md",
         "rawTarget": "docs/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/governance/legacy-docs-topology.md->doc:docs/governance/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/governance/legacy-docs-topology.md",
+        "to": "doc:docs/governance/index.md",
+        "sourcePath": "docs/governance/legacy-docs-topology.md",
+        "rawTarget": "docs/governance/index.md"
       },
       {
         "id": "Upstream:doc:docs/governance/repository-contract.md->doc:docs/governance/index.md",
@@ -11374,6 +12297,14 @@
         "from": "doc:docs/onboarding/documentation-system-mvp-v1.md",
         "to": "doc:docs/onboarding/index.md",
         "sourcePath": "docs/onboarding/documentation-system-mvp-v1.md",
+        "rawTarget": "docs/onboarding/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/onboarding/glossary-quickref.md->doc:docs/onboarding/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/onboarding/glossary-quickref.md",
+        "to": "doc:docs/onboarding/index.md",
+        "sourcePath": "docs/onboarding/glossary-quickref.md",
         "rawTarget": "docs/onboarding/index.md"
       },
       {
@@ -12385,6 +13316,14 @@
         "rawTarget": "docs/platform/index.md"
       },
       {
+        "id": "Upstream:doc:docs/specs/index.md->doc:docs/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/specs/index.md",
+        "to": "doc:docs/index.md",
+        "sourcePath": "docs/specs/index.md",
+        "rawTarget": "docs/index.md"
+      },
+      {
         "id": "Upstream:doc:docs/standards/api-standards.md->doc:docs/standards/index.md",
         "type": "Upstream",
         "from": "doc:docs/standards/api-standards.md",
@@ -12406,6 +13345,14 @@
         "from": "doc:docs/standards/documentation-standards.md",
         "to": "doc:docs/standards/index.md",
         "sourcePath": "docs/standards/documentation-standards.md",
+        "rawTarget": "docs/standards/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/standards/documentation-verification-ci.md->doc:docs/standards/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/standards/documentation-verification-ci.md",
+        "to": "doc:docs/standards/index.md",
+        "sourcePath": "docs/standards/documentation-verification-ci.md",
         "rawTarget": "docs/standards/index.md"
       },
       {
@@ -12463,20 +13410,180 @@
         "to": "doc:docs/changeplans/index.md",
         "sourcePath": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
         "rawTarget": "docs/changeplans/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md->doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "to": "doc:docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "sourcePath": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "rawTarget": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md->doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "to": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "sourcePath": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "rawTarget": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/work-packets/index.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/work-packets/index.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/work-packets/index.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "id": "Upstream:doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md->doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "type": "Upstream",
+        "from": "doc:docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "to": "doc:docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "sourcePath": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "rawTarget": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
       }
     ]
   },
-  "graphBuildIssues": [],
+  "graphBuildIssues": [
+    {
+      "severity": "warning",
+      "code": "graph.unresolvedDocumentReference",
+      "message": "unresolved downstream reference: docs/specs/features/0001-example/spec.md",
+      "path": "docs/specs/index.md",
+      "field": "downstream"
+    }
+  ],
   "graphValidation": {
     "ok": true,
     "summary": {
-      "nodeCount": 239,
-      "edgeCount": 1083,
+      "nodeCount": 253,
+      "edgeCount": 1193,
       "errorCount": 0,
-      "warningCount": 0,
+      "warningCount": 1,
       "infoCount": 0
     },
-    "issues": []
+    "issues": [
+      {
+        "severity": "warning",
+        "code": "graph.unresolvedDocumentReference",
+        "message": "unresolved downstream reference: docs/specs/features/0001-example/spec.md",
+        "path": "docs/specs/index.md",
+        "field": "downstream"
+      }
+    ]
   },
   "adrValidation": {
     "ok": true,
@@ -12651,9 +13758,9 @@
   "glossaryValidation": {
     "ok": true,
     "summary": {
-      "glossaryTermCount": 37,
-      "quickrefTermCount": 12,
-      "referencedTermCount": 352,
+      "glossaryTermCount": 40,
+      "quickrefTermCount": 38,
+      "referencedTermCount": 395,
       "errorCount": 0,
       "warningCount": 0,
       "infoCount": 0
@@ -12686,6 +13793,13 @@
         "anchor": "architecture",
         "path": "docs/planning/glossary.md",
         "line": 21
+      },
+      {
+        "term": "Audit",
+        "normalizedTerm": "audit",
+        "anchor": "audit",
+        "path": "docs/planning/glossary.md",
+        "line": 169
       },
       {
         "term": "Audit Log",
@@ -12870,6 +13984,13 @@
         "line": 125
       },
       {
+        "term": "Provenance",
+        "normalizedTerm": "provenance",
+        "anchor": "provenance",
+        "path": "docs/planning/glossary.md",
+        "line": 161
+      },
+      {
         "term": "Repository Contract",
         "normalizedTerm": "repository contract",
         "anchor": "repository-contract",
@@ -12882,6 +14003,13 @@
         "anchor": "scaffolding",
         "path": "docs/planning/glossary.md",
         "line": 133
+      },
+      {
+        "term": "Specification",
+        "normalizedTerm": "specification",
+        "anchor": "specification",
+        "path": "docs/planning/glossary.md",
+        "line": 165
       },
       {
         "term": "Standard",
@@ -12928,81 +14056,263 @@
         "line": 9
       },
       {
+        "term": "AI Provider",
+        "normalizedTerm": "ai provider",
+        "anchor": "ai-provider",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 13
+      },
+      {
+        "term": "API",
+        "normalizedTerm": "api",
+        "anchor": "api",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 17
+      },
+      {
         "term": "Architecture",
         "normalizedTerm": "architecture",
         "anchor": "architecture",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 13
+        "line": 21
+      },
+      {
+        "term": "Audit",
+        "normalizedTerm": "audit",
+        "anchor": "audit",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 161
+      },
+      {
+        "term": "Audit Log",
+        "normalizedTerm": "audit log",
+        "anchor": "audit-log",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 25
+      },
+      {
+        "term": "Authority",
+        "normalizedTerm": "authority",
+        "anchor": "authority",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 29
       },
       {
         "term": "ChangePlan",
         "normalizedTerm": "changeplan",
         "anchor": "changeplan",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 17
+        "line": 33
+      },
+      {
+        "term": "CI",
+        "normalizedTerm": "ci",
+        "anchor": "ci",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 37
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "anchor": "cli",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 41
+      },
+      {
+        "term": "Code Linting",
+        "normalizedTerm": "code linting",
+        "anchor": "code-linting",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 45
+      },
+      {
+        "term": "Compliance",
+        "normalizedTerm": "compliance",
+        "anchor": "compliance",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 49
+      },
+      {
+        "term": "Contract",
+        "normalizedTerm": "contract",
+        "anchor": "contract",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 53
+      },
+      {
+        "term": "Dashboard",
+        "normalizedTerm": "dashboard",
+        "anchor": "dashboard",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 57
+      },
+      {
+        "term": "Documentation Engine",
+        "normalizedTerm": "documentation engine",
+        "anchor": "documentation-engine",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 61
       },
       {
         "term": "Documentation System",
         "normalizedTerm": "documentation system",
         "anchor": "documentation-system",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 21
+        "line": 65
+      },
+      {
+        "term": "Drift",
+        "normalizedTerm": "drift",
+        "anchor": "drift",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 69
       },
       {
         "term": "Governance",
         "normalizedTerm": "governance",
         "anchor": "governance",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 25
+        "line": 73
       },
       {
         "term": "Governed Metadata",
         "normalizedTerm": "governed metadata",
         "anchor": "governed-metadata",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 29
+        "line": 77
       },
       {
         "term": "Knowledge Graph",
         "normalizedTerm": "knowledge graph",
         "anchor": "knowledge-graph",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 33
+        "line": 81
       },
       {
         "term": "Lifecycle",
         "normalizedTerm": "lifecycle",
         "anchor": "lifecycle",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 37
+        "line": 85
+      },
+      {
+        "term": "Manifest",
+        "normalizedTerm": "manifest",
+        "anchor": "manifest",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 89
       },
       {
         "term": "Monorepo",
         "normalizedTerm": "monorepo",
         "anchor": "monorepo",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 41
+        "line": 93
+      },
+      {
+        "term": "Onboarding",
+        "normalizedTerm": "onboarding",
+        "anchor": "onboarding",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 97
+      },
+      {
+        "term": "Package Management",
+        "normalizedTerm": "package management",
+        "anchor": "package-management",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 101
+      },
+      {
+        "term": "Pipeline",
+        "normalizedTerm": "pipeline",
+        "anchor": "pipeline",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 105
+      },
+      {
+        "term": "Platform",
+        "normalizedTerm": "platform",
+        "anchor": "platform",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 109
+      },
+      {
+        "term": "Policy",
+        "normalizedTerm": "policy",
+        "anchor": "policy",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 113
+      },
+      {
+        "term": "Product",
+        "normalizedTerm": "product",
+        "anchor": "product",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 117
+      },
+      {
+        "term": "Provenance",
+        "normalizedTerm": "provenance",
+        "anchor": "provenance",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 153
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "anchor": "repository-contract",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 121
       },
       {
         "term": "Scaffolding",
         "normalizedTerm": "scaffolding",
         "anchor": "scaffolding",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 45
+        "line": 125
+      },
+      {
+        "term": "Specification",
+        "normalizedTerm": "specification",
+        "anchor": "specification",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 157
+      },
+      {
+        "term": "Standard",
+        "normalizedTerm": "standard",
+        "anchor": "standard",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 129
+      },
+      {
+        "term": "Toolchain",
+        "normalizedTerm": "toolchain",
+        "anchor": "toolchain",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 133
       },
       {
         "term": "Validation",
         "normalizedTerm": "validation",
         "anchor": "validation",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 49
+        "line": 137
       },
       {
         "term": "Verification",
         "normalizedTerm": "verification",
         "anchor": "verification",
         "path": "docs/onboarding/glossary-quickref.md",
-        "line": 53
+        "line": 141
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "anchor": "work-packet",
+        "path": "docs/onboarding/glossary-quickref.md",
+        "line": 145
       }
     ],
     "references": [
@@ -13337,6 +14647,16 @@
         "path": "docs/scaffolding/init/database-provider-architecture.md"
       },
       {
+        "term": "Audit",
+        "normalizedTerm": "audit",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "term": "Audit",
+        "normalizedTerm": "audit",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
         "term": "Audit Log",
         "normalizedTerm": "audit log",
         "path": "docs/scaffolding/init/provenance-and-audit.md"
@@ -13439,6 +14759,11 @@
       {
         "term": "ChangePlan",
         "normalizedTerm": "changeplan",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
+        "term": "ChangePlan",
+        "normalizedTerm": "changeplan",
         "path": "docs/changeplans/index.md"
       },
       {
@@ -13460,6 +14785,11 @@
         "term": "ChangePlan",
         "normalizedTerm": "changeplan",
         "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+      },
+      {
+        "term": "ChangePlan",
+        "normalizedTerm": "changeplan",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
       },
       {
         "term": "CI",
@@ -13552,6 +14882,16 @@
         "path": "docs/scaffolding/ci-verification.md"
       },
       {
+        "term": "CI",
+        "normalizedTerm": "ci",
+        "path": "docs/standards/documentation-verification-ci.md"
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
         "term": "CLI",
         "normalizedTerm": "cli",
         "path": "docs/planning/cli-spec.md"
@@ -13570,6 +14910,21 @@
         "term": "CLI",
         "normalizedTerm": "cli",
         "path": "docs/scaffolding/cli/foundry-cli-usage.md"
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+      },
+      {
+        "term": "CLI",
+        "normalizedTerm": "cli",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
       },
       {
         "term": "Code Linting",
@@ -13679,6 +15034,11 @@
       {
         "term": "Documentation System",
         "normalizedTerm": "documentation system",
+        "path": "docs/governance/legacy-docs-topology.md"
+      },
+      {
+        "term": "Documentation System",
+        "normalizedTerm": "documentation system",
         "path": "docs/index.md"
       },
       {
@@ -13700,6 +15060,11 @@
         "term": "Documentation System",
         "normalizedTerm": "documentation system",
         "path": "docs/onboarding/documentation-system-mvp-v1.md"
+      },
+      {
+        "term": "Documentation System",
+        "normalizedTerm": "documentation system",
+        "path": "docs/onboarding/glossary-quickref.md"
       },
       {
         "term": "Documentation System",
@@ -13907,6 +15272,11 @@
         "path": "docs/standards/documentation-standards.md"
       },
       {
+        "term": "Documentation System",
+        "normalizedTerm": "documentation system",
+        "path": "docs/standards/documentation-verification-ci.md"
+      },
+      {
         "term": "Drift",
         "normalizedTerm": "drift",
         "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
@@ -13985,6 +15355,11 @@
         "term": "Governance",
         "normalizedTerm": "governance",
         "path": "docs/governance/index.md"
+      },
+      {
+        "term": "Governance",
+        "normalizedTerm": "governance",
+        "path": "docs/governance/legacy-docs-topology.md"
       },
       {
         "term": "Governance",
@@ -14150,6 +15525,11 @@
         "term": "Lifecycle",
         "normalizedTerm": "lifecycle",
         "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+      },
+      {
+        "term": "Lifecycle",
+        "normalizedTerm": "lifecycle",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
       },
       {
         "term": "Lifecycle",
@@ -14479,6 +15859,11 @@
       {
         "term": "Policy",
         "normalizedTerm": "policy",
+        "path": "docs/governance/legacy-docs-topology.md"
+      },
+      {
+        "term": "Policy",
+        "normalizedTerm": "policy",
         "path": "docs/scaffolding/init/dependency-installation-policy.md"
       },
       {
@@ -14497,6 +15882,21 @@
         "path": "docs/product/foundry-core-operating-model.md"
       },
       {
+        "term": "Provenance",
+        "normalizedTerm": "provenance",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "term": "Provenance",
+        "normalizedTerm": "provenance",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/governance/legacy-docs-topology.md"
+      },
+      {
         "term": "Repository Contract",
         "normalizedTerm": "repository contract",
         "path": "docs/governance/repository-contract.md"
@@ -14507,9 +15907,29 @@
         "path": "docs/planning/repository-contract.md"
       },
       {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "term": "Repository Contract",
+        "normalizedTerm": "repository contract",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
         "term": "Scaffolding",
         "normalizedTerm": "scaffolding",
         "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+      },
+      {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
       },
       {
         "term": "Scaffolding",
@@ -14637,6 +16057,31 @@
         "path": "docs/scaffolding/scaffolding-strategy.md"
       },
       {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+      },
+      {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+      },
+      {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+      },
+      {
+        "term": "Scaffolding",
+        "normalizedTerm": "scaffolding",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "term": "Specification",
+        "normalizedTerm": "specification",
+        "path": "docs/specs/index.md"
+      },
+      {
         "term": "Standard",
         "normalizedTerm": "standard",
         "path": "docs/planning/standards-impact-analyzer.md"
@@ -14742,6 +16187,16 @@
         "path": "docs/planning/governance-compliance-validator.md"
       },
       {
+        "term": "Validation",
+        "normalizedTerm": "validation",
+        "path": "docs/standards/documentation-verification-ci.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+      },
+      {
         "term": "Verification",
         "normalizedTerm": "verification",
         "path": "docs/onboarding/documentation-system-mvp-v1.md"
@@ -14757,6 +16212,46 @@
         "path": "docs/scaffolding/contract-verification.md"
       },
       {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/specs/index.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/standards/documentation-verification-ci.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "term": "Verification",
+        "normalizedTerm": "verification",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+      },
+      {
         "term": "Work Packet",
         "normalizedTerm": "work packet",
         "path": "docs/work-packets/index.md"
@@ -14765,6 +16260,36 @@
         "term": "Work Packet",
         "normalizedTerm": "work packet",
         "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+      },
+      {
+        "term": "Work Packet",
+        "normalizedTerm": "work packet",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
       }
     ],
     "issues": []
@@ -14772,9 +16297,9 @@
   "changePlanValidation": {
     "ok": true,
     "summary": {
-      "changePlanCount": 8,
+      "changePlanCount": 9,
       "indexCount": 1,
-      "indexEntryCount": 8,
+      "indexEntryCount": 9,
       "legacyPlanningCount": 0,
       "errorCount": 0,
       "warningCount": 0,
@@ -14852,6 +16377,15 @@
         "status": "Draft",
         "documentType": "ChangePlan",
         "isLegacyPlanningPath": false
+      },
+      {
+        "number": "0009",
+        "pathNumber": "0009",
+        "title": "CP-0009: Foundry Init Stabilization",
+        "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+        "status": "Draft",
+        "documentType": "ChangePlan",
+        "isLegacyPlanningPath": false
       }
     ],
     "indexEntries": [
@@ -14860,56 +16394,63 @@
         "title": "Governance Bootstrap Change Plan",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 11
+        "line": 12
       },
       {
         "number": "0002",
         "title": "Governed Header Block Rollout",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 12
+        "line": 13
       },
       {
         "number": "0003",
         "title": "Governance JSON Population",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 13
+        "line": 14
       },
       {
         "number": "0004",
         "title": "Architecture JSON Architecture Graph Seed",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 14
+        "line": 15
       },
       {
         "number": "0005",
         "title": "Platform Capability Seed",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 15
+        "line": 16
       },
       {
         "number": "0006",
         "title": "CI Constitutional Pipeline",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 16
+        "line": 17
       },
       {
         "number": "0007",
         "title": "Drift Baseline JSON Cross Surface Baselines",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 17
+        "line": 18
       },
       {
         "number": "0008",
         "title": "Governance Enforcement Engine",
         "status": "Draft",
         "indexPath": "docs/changeplans/index.md",
-        "line": 18
+        "line": 19
+      },
+      {
+        "number": "0009",
+        "title": "Foundry Init Stabilization",
+        "status": "Draft",
+        "indexPath": "docs/changeplans/index.md",
+        "line": 11
       }
     ],
     "issues": []
@@ -14917,9 +16458,9 @@
   "workPacketValidation": {
     "ok": true,
     "summary": {
-      "workPacketCount": 1,
+      "workPacketCount": 7,
       "indexCount": 1,
-      "indexEntryCount": 1,
+      "indexEntryCount": 7,
       "legacyPathCount": 0,
       "errorCount": 0,
       "warningCount": 0,
@@ -14934,12 +16475,108 @@
         "status": "Draft",
         "documentType": "WorkPacket",
         "isLegacyPath": false
+      },
+      {
+        "number": "0003",
+        "pathNumber": "0003",
+        "title": "WP-0003: Stabilize Foundry Init MVP",
+        "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0004",
+        "pathNumber": "0004",
+        "title": "WP-0004: Add Init Workspace Smoke Fixture",
+        "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0005",
+        "pathNumber": "0005",
+        "title": "WP-0005: Fix Init Destination Path Handling",
+        "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0006",
+        "pathNumber": "0006",
+        "title": "WP-0006: Verify Generated Workspace Contract",
+        "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0007",
+        "pathNumber": "0007",
+        "title": "WP-0007: Require Init Provenance Audit Contract",
+        "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
+      },
+      {
+        "number": "0008",
+        "pathNumber": "0008",
+        "title": "WP-0008: Integrate Init MVP Verification Gate",
+        "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+        "status": "Draft",
+        "documentType": "WorkPacket",
+        "isLegacyPath": false
       }
     ],
     "indexEntries": [
       {
         "number": "0002",
         "title": "Add Foundry Init Workspace Initializer",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 17
+      },
+      {
+        "number": "0003",
+        "title": "Stabilize Foundry Init MVP",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 16
+      },
+      {
+        "number": "0004",
+        "title": "Add Init Workspace Smoke Fixture",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 15
+      },
+      {
+        "number": "0005",
+        "title": "Fix Init Destination Path Handling",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 14
+      },
+      {
+        "number": "0006",
+        "title": "Verify Generated Workspace Contract",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 13
+      },
+      {
+        "number": "0007",
+        "title": "Require Init Provenance Audit Contract",
+        "status": "Draft",
+        "indexPath": "docs/work-packets/index.md",
+        "line": 12
+      },
+      {
+        "number": "0008",
+        "title": "Integrate Init MVP Verification Gate",
         "status": "Draft",
         "indexPath": "docs/work-packets/index.md",
         "line": 11

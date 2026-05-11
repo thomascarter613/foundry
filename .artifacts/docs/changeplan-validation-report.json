@@ -1,9 +1,9 @@
 {
   "ok": true,
   "summary": {
-    "changePlanCount": 8,
+    "changePlanCount": 9,
     "indexCount": 1,
-    "indexEntryCount": 8,
+    "indexEntryCount": 9,
     "legacyPlanningCount": 0,
     "errorCount": 0,
     "warningCount": 0,
@@ -81,6 +81,15 @@
       "status": "Draft",
       "documentType": "ChangePlan",
       "isLegacyPlanningPath": false
+    },
+    {
+      "number": "0009",
+      "pathNumber": "0009",
+      "title": "CP-0009: Foundry Init Stabilization",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+      "status": "Draft",
+      "documentType": "ChangePlan",
+      "isLegacyPlanningPath": false
     }
   ],
   "indexEntries": [
@@ -89,56 +98,63 @@
       "title": "Governance Bootstrap Change Plan",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 11
+      "line": 12
     },
     {
       "number": "0002",
       "title": "Governed Header Block Rollout",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 12
+      "line": 13
     },
     {
       "number": "0003",
       "title": "Governance JSON Population",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 13
+      "line": 14
     },
     {
       "number": "0004",
       "title": "Architecture JSON Architecture Graph Seed",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 14
+      "line": 15
     },
     {
       "number": "0005",
       "title": "Platform Capability Seed",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 15
+      "line": 16
     },
     {
       "number": "0006",
       "title": "CI Constitutional Pipeline",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 16
+      "line": 17
     },
     {
       "number": "0007",
       "title": "Drift Baseline JSON Cross Surface Baselines",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 17
+      "line": 18
     },
     {
       "number": "0008",
       "title": "Governance Enforcement Engine",
       "status": "Draft",
       "indexPath": "docs/changeplans/index.md",
-      "line": 18
+      "line": 19
+    },
+    {
+      "number": "0009",
+      "title": "Foundry Init Stabilization",
+      "status": "Draft",
+      "indexPath": "docs/changeplans/index.md",
+      "line": 11
     }
   ],
   "issues": []

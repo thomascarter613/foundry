@@ -30,7 +30,8 @@ export const validDocumentTypes = new Set<DocumentType>([
   "Product",
   "Scaffolding",
   "WorkPacket",
-  "Idea"
+  "Idea",
+  "Spec"
 ]);
 
 export const requiredFrontmatterFields = [
@@ -105,6 +106,10 @@ export function expectedDocumentTypesForPath(relativePath: string): readonly Doc
     return ["Onboarding"];
   }
 
+  if (relativePath.startsWith("docs/planning/04-decisions/")) {
+    return ["Planning"];
+  }
+
   if (relativePath.startsWith("docs/planning/")) {
     return ["Planning"];
   }
@@ -123,6 +128,10 @@ export function expectedDocumentTypesForPath(relativePath: string): readonly Doc
 
   if (relativePath.startsWith("docs/standards/")) {
     return ["Standard"];
+  }
+
+  if (relativePath.startsWith("docs/specs/")) {
+    return ["Spec", "Planning"];
   }
 
   if (relativePath.startsWith("docs/.ideas/")) {

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "summary": {
-    "checkedDocuments": 204,
+    "checkedDocuments": 215,
     "errorCount": 0,
     "warningCount": 0,
     "infoCount": 0
@@ -192,6 +192,10 @@
       "issues": []
     },
     {
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md",
+      "issues": []
+    },
+    {
       "path": "docs/changeplans/index.md",
       "issues": []
     },
@@ -229,6 +233,10 @@
     },
     {
       "path": "docs/governance/index.md",
+      "issues": []
+    },
+    {
+      "path": "docs/governance/legacy-docs-topology.md",
       "issues": []
     },
     {
@@ -301,6 +309,10 @@
     },
     {
       "path": "docs/onboarding/system-overview.md",
+      "issues": []
+    },
+    {
+      "path": "docs/planning/04-decisions/ADR-00XX-native-spec-lifecycle-engine.md",
       "issues": []
     },
     {
@@ -784,6 +796,10 @@
       "issues": []
     },
     {
+      "path": "docs/specs/index.md",
+      "issues": []
+    },
+    {
       "path": "docs/standards/api-standards.md",
       "issues": []
     },
@@ -793,6 +809,10 @@
     },
     {
       "path": "docs/standards/documentation-standards.md",
+      "issues": []
+    },
+    {
+      "path": "docs/standards/documentation-verification-ci.md",
       "issues": []
     },
     {
@@ -817,6 +837,30 @@
     },
     {
       "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+      "issues": []
+    },
+    {
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
       "issues": []
     },
     {

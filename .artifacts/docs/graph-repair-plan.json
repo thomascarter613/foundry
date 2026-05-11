@@ -1,9 +1,41 @@
 {
   "ok": true,
   "write": false,
-  "checkedDocuments": 202,
-  "changedFiles": [],
-  "actionCount": 0,
-  "actions": [],
+  "checkedDocuments": 206,
+  "changedFiles": [
+    {
+      "path": "docs/standards/index.md",
+      "actionCount": 1
+    }
+  ],
+  "actionCount": 1,
+  "actions": [
+    {
+      "kind": "addReciprocalDownstream",
+      "path": "docs/standards/index.md",
+      "field": "downstream",
+      "before": [
+        "docs/standards/api-standards.md",
+        "docs/standards/coding-standards.md",
+        "docs/standards/documentation-standards.md",
+        "docs/standards/graph-schema-standards.md",
+        "docs/standards/markdown-standards.md",
+        "docs/standards/metadata-standards.md",
+        "docs/standards/testing-standards.md"
+      ],
+      "after": [
+        "docs/standards/api-standards.md",
+        "docs/standards/coding-standards.md",
+        "docs/standards/documentation-standards.md",
+        "docs/standards/graph-schema-standards.md",
+        "docs/standards/markdown-standards.md",
+        "docs/standards/metadata-standards.md",
+        "docs/standards/testing-standards.md",
+        "docs/standards/documentation-verification-ci.md"
+      ],
+      "description": "Added reciprocal downstream link from docs/standards/index.md to docs/standards/documentation-verification-ci.md.",
+      "willWrite": false
+    }
+  ],
   "messages": []
 }

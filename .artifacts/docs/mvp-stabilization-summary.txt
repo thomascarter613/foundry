@@ -11,9 +11,9 @@ status: 0
 
 docs verify	0
 ==> docs readiness
-status: 1
+status: 0
 
-docs readiness	1
+docs readiness	0
 ==> root docs verifier
 status: 0
 

@@ -34,6 +34,7 @@ const canonicalDirectories = [
   "docs/work-packets",
   "docs/lifecycle",
   "docs/standards",
+  "docs/specs",
   "docs/platform",
   "docs/onboarding"
 ] as const;
@@ -48,6 +49,7 @@ const requiredIndexFiles = [
   "docs/work-packets/index.md",
   "docs/lifecycle/index.md",
   "docs/standards/index.md",
+  "docs/specs/index.md",
   "docs/platform/index.md",
   "docs/onboarding/index.md"
 ] as const;

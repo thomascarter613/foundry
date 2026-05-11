@@ -1,9 +1,9 @@
 {
   "ok": true,
   "summary": {
-    "workPacketCount": 1,
+    "workPacketCount": 7,
     "indexCount": 1,
-    "indexEntryCount": 1,
+    "indexEntryCount": 7,
     "legacyPathCount": 0,
     "errorCount": 0,
     "warningCount": 0,
@@ -18,12 +18,108 @@
       "status": "Draft",
       "documentType": "WorkPacket",
       "isLegacyPath": false
+    },
+    {
+      "number": "0003",
+      "pathNumber": "0003",
+      "title": "WP-0003: Stabilize Foundry Init MVP",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    },
+    {
+      "number": "0004",
+      "pathNumber": "0004",
+      "title": "WP-0004: Add Init Workspace Smoke Fixture",
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    },
+    {
+      "number": "0005",
+      "pathNumber": "0005",
+      "title": "WP-0005: Fix Init Destination Path Handling",
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    },
+    {
+      "number": "0006",
+      "pathNumber": "0006",
+      "title": "WP-0006: Verify Generated Workspace Contract",
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    },
+    {
+      "number": "0007",
+      "pathNumber": "0007",
+      "title": "WP-0007: Require Init Provenance Audit Contract",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
+    },
+    {
+      "number": "0008",
+      "pathNumber": "0008",
+      "title": "WP-0008: Integrate Init MVP Verification Gate",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md",
+      "status": "Draft",
+      "documentType": "WorkPacket",
+      "isLegacyPath": false
     }
   ],
   "indexEntries": [
     {
       "number": "0002",
       "title": "Add Foundry Init Workspace Initializer",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 17
+    },
+    {
+      "number": "0003",
+      "title": "Stabilize Foundry Init MVP",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 16
+    },
+    {
+      "number": "0004",
+      "title": "Add Init Workspace Smoke Fixture",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 15
+    },
+    {
+      "number": "0005",
+      "title": "Fix Init Destination Path Handling",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 14
+    },
+    {
+      "number": "0006",
+      "title": "Verify Generated Workspace Contract",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 13
+    },
+    {
+      "number": "0007",
+      "title": "Require Init Provenance Audit Contract",
+      "status": "Draft",
+      "indexPath": "docs/work-packets/index.md",
+      "line": 12
+    },
+    {
+      "number": "0008",
+      "title": "Integrate Init MVP Verification Gate",
       "status": "Draft",
       "indexPath": "docs/work-packets/index.md",
       "line": 11

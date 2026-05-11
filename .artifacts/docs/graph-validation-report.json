@@ -1,11 +1,19 @@
 {
   "ok": true,
   "summary": {
-    "nodeCount": 239,
-    "edgeCount": 1083,
+    "nodeCount": 253,
+    "edgeCount": 1193,
     "errorCount": 0,
-    "warningCount": 0,
+    "warningCount": 1,
     "infoCount": 0
   },
-  "issues": []
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "graph.unresolvedDocumentReference",
+      "message": "unresolved downstream reference: docs/specs/features/0001-example/spec.md",
+      "path": "docs/specs/index.md",
+      "field": "downstream"
+    }
+  ]
 }

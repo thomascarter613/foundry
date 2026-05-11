@@ -1,9 +1,9 @@
 {
   "ok": true,
   "summary": {
-    "glossaryTermCount": 37,
-    "quickrefTermCount": 12,
-    "referencedTermCount": 352,
+    "glossaryTermCount": 40,
+    "quickrefTermCount": 38,
+    "referencedTermCount": 395,
     "errorCount": 0,
     "warningCount": 0,
     "infoCount": 0
@@ -36,6 +36,13 @@
       "anchor": "architecture",
       "path": "docs/planning/glossary.md",
       "line": 21
+    },
+    {
+      "term": "Audit",
+      "normalizedTerm": "audit",
+      "anchor": "audit",
+      "path": "docs/planning/glossary.md",
+      "line": 169
     },
     {
       "term": "Audit Log",
@@ -220,6 +227,13 @@
       "line": 125
     },
     {
+      "term": "Provenance",
+      "normalizedTerm": "provenance",
+      "anchor": "provenance",
+      "path": "docs/planning/glossary.md",
+      "line": 161
+    },
+    {
       "term": "Repository Contract",
       "normalizedTerm": "repository contract",
       "anchor": "repository-contract",
@@ -232,6 +246,13 @@
       "anchor": "scaffolding",
       "path": "docs/planning/glossary.md",
       "line": 133
+    },
+    {
+      "term": "Specification",
+      "normalizedTerm": "specification",
+      "anchor": "specification",
+      "path": "docs/planning/glossary.md",
+      "line": 165
     },
     {
       "term": "Standard",
@@ -278,81 +299,263 @@
       "line": 9
     },
     {
+      "term": "AI Provider",
+      "normalizedTerm": "ai provider",
+      "anchor": "ai-provider",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 13
+    },
+    {
+      "term": "API",
+      "normalizedTerm": "api",
+      "anchor": "api",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 17
+    },
+    {
       "term": "Architecture",
       "normalizedTerm": "architecture",
       "anchor": "architecture",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 13
+      "line": 21
+    },
+    {
+      "term": "Audit",
+      "normalizedTerm": "audit",
+      "anchor": "audit",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 161
+    },
+    {
+      "term": "Audit Log",
+      "normalizedTerm": "audit log",
+      "anchor": "audit-log",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 25
+    },
+    {
+      "term": "Authority",
+      "normalizedTerm": "authority",
+      "anchor": "authority",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 29
     },
     {
       "term": "ChangePlan",
       "normalizedTerm": "changeplan",
       "anchor": "changeplan",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 17
+      "line": 33
+    },
+    {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "anchor": "ci",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 37
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "anchor": "cli",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 41
+    },
+    {
+      "term": "Code Linting",
+      "normalizedTerm": "code linting",
+      "anchor": "code-linting",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 45
+    },
+    {
+      "term": "Compliance",
+      "normalizedTerm": "compliance",
+      "anchor": "compliance",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 49
+    },
+    {
+      "term": "Contract",
+      "normalizedTerm": "contract",
+      "anchor": "contract",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 53
+    },
+    {
+      "term": "Dashboard",
+      "normalizedTerm": "dashboard",
+      "anchor": "dashboard",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 57
+    },
+    {
+      "term": "Documentation Engine",
+      "normalizedTerm": "documentation engine",
+      "anchor": "documentation-engine",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 61
     },
     {
       "term": "Documentation System",
       "normalizedTerm": "documentation system",
       "anchor": "documentation-system",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 21
+      "line": 65
+    },
+    {
+      "term": "Drift",
+      "normalizedTerm": "drift",
+      "anchor": "drift",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 69
     },
     {
       "term": "Governance",
       "normalizedTerm": "governance",
       "anchor": "governance",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 25
+      "line": 73
     },
     {
       "term": "Governed Metadata",
       "normalizedTerm": "governed metadata",
       "anchor": "governed-metadata",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 29
+      "line": 77
     },
     {
       "term": "Knowledge Graph",
       "normalizedTerm": "knowledge graph",
       "anchor": "knowledge-graph",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 33
+      "line": 81
     },
     {
       "term": "Lifecycle",
       "normalizedTerm": "lifecycle",
       "anchor": "lifecycle",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 37
+      "line": 85
+    },
+    {
+      "term": "Manifest",
+      "normalizedTerm": "manifest",
+      "anchor": "manifest",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 89
     },
     {
       "term": "Monorepo",
       "normalizedTerm": "monorepo",
       "anchor": "monorepo",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 41
+      "line": 93
+    },
+    {
+      "term": "Onboarding",
+      "normalizedTerm": "onboarding",
+      "anchor": "onboarding",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 97
+    },
+    {
+      "term": "Package Management",
+      "normalizedTerm": "package management",
+      "anchor": "package-management",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 101
+    },
+    {
+      "term": "Pipeline",
+      "normalizedTerm": "pipeline",
+      "anchor": "pipeline",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 105
+    },
+    {
+      "term": "Platform",
+      "normalizedTerm": "platform",
+      "anchor": "platform",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 109
+    },
+    {
+      "term": "Policy",
+      "normalizedTerm": "policy",
+      "anchor": "policy",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 113
+    },
+    {
+      "term": "Product",
+      "normalizedTerm": "product",
+      "anchor": "product",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 117
+    },
+    {
+      "term": "Provenance",
+      "normalizedTerm": "provenance",
+      "anchor": "provenance",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 153
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "anchor": "repository-contract",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 121
     },
     {
       "term": "Scaffolding",
       "normalizedTerm": "scaffolding",
       "anchor": "scaffolding",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 45
+      "line": 125
+    },
+    {
+      "term": "Specification",
+      "normalizedTerm": "specification",
+      "anchor": "specification",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 157
+    },
+    {
+      "term": "Standard",
+      "normalizedTerm": "standard",
+      "anchor": "standard",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 129
+    },
+    {
+      "term": "Toolchain",
+      "normalizedTerm": "toolchain",
+      "anchor": "toolchain",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 133
     },
     {
       "term": "Validation",
       "normalizedTerm": "validation",
       "anchor": "validation",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 49
+      "line": 137
     },
     {
       "term": "Verification",
       "normalizedTerm": "verification",
       "anchor": "verification",
       "path": "docs/onboarding/glossary-quickref.md",
-      "line": 53
+      "line": 141
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "anchor": "work-packet",
+      "path": "docs/onboarding/glossary-quickref.md",
+      "line": 145
     }
   ],
   "references": [
@@ -687,6 +890,16 @@
       "path": "docs/scaffolding/init/database-provider-architecture.md"
     },
     {
+      "term": "Audit",
+      "normalizedTerm": "audit",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+    },
+    {
+      "term": "Audit",
+      "normalizedTerm": "audit",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+    },
+    {
       "term": "Audit Log",
       "normalizedTerm": "audit log",
       "path": "docs/scaffolding/init/provenance-and-audit.md"
@@ -789,6 +1002,11 @@
     {
       "term": "ChangePlan",
       "normalizedTerm": "changeplan",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
       "path": "docs/changeplans/index.md"
     },
     {
@@ -810,6 +1028,11 @@
       "term": "ChangePlan",
       "normalizedTerm": "changeplan",
       "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+    },
+    {
+      "term": "ChangePlan",
+      "normalizedTerm": "changeplan",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
     },
     {
       "term": "CI",
@@ -902,6 +1125,16 @@
       "path": "docs/scaffolding/ci-verification.md"
     },
     {
+      "term": "CI",
+      "normalizedTerm": "ci",
+      "path": "docs/standards/documentation-verification-ci.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+    },
+    {
       "term": "CLI",
       "normalizedTerm": "cli",
       "path": "docs/planning/cli-spec.md"
@@ -920,6 +1153,21 @@
       "term": "CLI",
       "normalizedTerm": "cli",
       "path": "docs/scaffolding/cli/foundry-cli-usage.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+    },
+    {
+      "term": "CLI",
+      "normalizedTerm": "cli",
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
     },
     {
       "term": "Code Linting",
@@ -1029,6 +1277,11 @@
     {
       "term": "Documentation System",
       "normalizedTerm": "documentation system",
+      "path": "docs/governance/legacy-docs-topology.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
       "path": "docs/index.md"
     },
     {
@@ -1050,6 +1303,11 @@
       "term": "Documentation System",
       "normalizedTerm": "documentation system",
       "path": "docs/onboarding/documentation-system-mvp-v1.md"
+    },
+    {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/onboarding/glossary-quickref.md"
     },
     {
       "term": "Documentation System",
@@ -1257,6 +1515,11 @@
       "path": "docs/standards/documentation-standards.md"
     },
     {
+      "term": "Documentation System",
+      "normalizedTerm": "documentation system",
+      "path": "docs/standards/documentation-verification-ci.md"
+    },
+    {
       "term": "Drift",
       "normalizedTerm": "drift",
       "path": "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
@@ -1335,6 +1598,11 @@
       "term": "Governance",
       "normalizedTerm": "governance",
       "path": "docs/governance/index.md"
+    },
+    {
+      "term": "Governance",
+      "normalizedTerm": "governance",
+      "path": "docs/governance/legacy-docs-topology.md"
     },
     {
       "term": "Governance",
@@ -1500,6 +1768,11 @@
       "term": "Lifecycle",
       "normalizedTerm": "lifecycle",
       "path": "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+    },
+    {
+      "term": "Lifecycle",
+      "normalizedTerm": "lifecycle",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
     },
     {
       "term": "Lifecycle",
@@ -1829,6 +2102,11 @@
     {
       "term": "Policy",
       "normalizedTerm": "policy",
+      "path": "docs/governance/legacy-docs-topology.md"
+    },
+    {
+      "term": "Policy",
+      "normalizedTerm": "policy",
       "path": "docs/scaffolding/init/dependency-installation-policy.md"
     },
     {
@@ -1847,6 +2125,21 @@
       "path": "docs/product/foundry-core-operating-model.md"
     },
     {
+      "term": "Provenance",
+      "normalizedTerm": "provenance",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+    },
+    {
+      "term": "Provenance",
+      "normalizedTerm": "provenance",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/governance/legacy-docs-topology.md"
+    },
+    {
       "term": "Repository Contract",
       "normalizedTerm": "repository contract",
       "path": "docs/governance/repository-contract.md"
@@ -1857,9 +2150,29 @@
       "path": "docs/planning/repository-contract.md"
     },
     {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+    },
+    {
+      "term": "Repository Contract",
+      "normalizedTerm": "repository contract",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+    },
+    {
       "term": "Scaffolding",
       "normalizedTerm": "scaffolding",
       "path": "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
     },
     {
       "term": "Scaffolding",
@@ -1987,6 +2300,31 @@
       "path": "docs/scaffolding/scaffolding-strategy.md"
     },
     {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+    },
+    {
+      "term": "Scaffolding",
+      "normalizedTerm": "scaffolding",
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+    },
+    {
+      "term": "Specification",
+      "normalizedTerm": "specification",
+      "path": "docs/specs/index.md"
+    },
+    {
       "term": "Standard",
       "normalizedTerm": "standard",
       "path": "docs/planning/standards-impact-analyzer.md"
@@ -2092,6 +2430,16 @@
       "path": "docs/planning/governance-compliance-validator.md"
     },
     {
+      "term": "Validation",
+      "normalizedTerm": "validation",
+      "path": "docs/standards/documentation-verification-ci.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/changeplans/cp-0009-foundry-init-stabilization.md"
+    },
+    {
       "term": "Verification",
       "normalizedTerm": "verification",
       "path": "docs/onboarding/documentation-system-mvp-v1.md"
@@ -2107,6 +2455,46 @@
       "path": "docs/scaffolding/contract-verification.md"
     },
     {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/specs/index.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/standards/documentation-verification-ci.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+    },
+    {
+      "term": "Verification",
+      "normalizedTerm": "verification",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
+    },
+    {
       "term": "Work Packet",
       "normalizedTerm": "work packet",
       "path": "docs/work-packets/index.md"
@@ -2115,6 +2503,36 @@
       "term": "Work Packet",
       "normalizedTerm": "work packet",
       "path": "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0003-stabilize-foundry-init-mvp.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0004-add-init-workspace-smoke-fixture.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0005-fix-init-destination-path-handling.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0006-verify-generated-workspace-contract.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0007-require-init-provenance-audit-contract.md"
+    },
+    {
+      "term": "Work Packet",
+      "normalizedTerm": "work packet",
+      "path": "docs/work-packets/WP-0008-integrate-init-mvp-verification-gate.md"
     }
   ],
   "issues": []
