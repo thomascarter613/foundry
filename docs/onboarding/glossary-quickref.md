@@ -7,6 +7,7 @@ governanceLevel: "Informational"
 documentType: "Onboarding"
 upstream:
   - "docs/planning/glossary.md"
+  - "docs/onboarding/index.md"
 downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"

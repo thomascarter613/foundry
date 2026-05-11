@@ -7,6 +7,7 @@ governanceLevel: "Required"
 documentType: "ChangePlan"
 upstream:
   - "docs/changeplans/index.md"
+  - "docs/index.md"
 downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"

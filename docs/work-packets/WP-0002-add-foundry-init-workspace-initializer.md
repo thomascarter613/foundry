@@ -7,6 +7,7 @@ governanceLevel: "Required"
 documentType: "WorkPacket"
 upstream:
   - "docs/changeplans/index.md"
+  - "docs/work-packets/index.md"
 downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"

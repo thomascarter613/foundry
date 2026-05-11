@@ -17,6 +17,7 @@ downstream:
   - "docs/governance/governance-charter.md"
   - "docs/governance/repository-contract.md"
   - "docs/governance/versioning-strategy.md"
+  - "docs/governance/legacy-docs-topology.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:

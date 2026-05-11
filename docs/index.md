@@ -18,6 +18,8 @@ downstream:
   - "docs/planning/index.md"
   - "docs/platform/index.md"
   - "docs/standards/index.md"
+  - "docs/ci-constitutional-pipeline.md"
+  - "docs/work-packets/index.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

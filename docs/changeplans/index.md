@@ -7,7 +7,16 @@ governanceLevel: "Required"
 documentType: "ChangePlan"
 upstream:
   - "docs/index.md"
-downstream: []
+downstream:
+  - "docs/changeplans/CP-0005_platform.json_Platform Capability Seed.md"
+  - "docs/changeplans/cp-0001-—-governance-bootstrap-change-plan.md"
+  - "docs/changeplans/cp-0002_governed-header-block-rollout.md"
+  - "docs/changeplans/cp-0003_governance.json-population.md"
+  - "docs/changeplans/cp-0004_architecture.json_architecture-graph-seed.md"
+  - "docs/changeplans/cp-0006-ci-constitutional-pipeline.md"
+  - "docs/changeplans/cp-0007_drift-baseline_json_cross-surface-baselines.md"
+  - "docs/changeplans/cp-0008-governance-enforcement-engine.md"
+  - "docs/work-packets/WP-0002-add-foundry-init-workspace-initializer.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

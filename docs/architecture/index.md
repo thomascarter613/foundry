@@ -28,6 +28,7 @@ downstream:
   - "docs/architecture/principles.md"
   - "docs/architecture/runtime-views.md"
   - "docs/architecture/system-context.md"
+  - "docs/architecture/adr/index.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks:

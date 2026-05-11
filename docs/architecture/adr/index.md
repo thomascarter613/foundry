@@ -7,7 +7,21 @@ governanceLevel: "Binding"
 documentType: "ADR"
 upstream:
   - "docs/architecture/index.md"
-downstream: []
+  - "docs/index.md"
+downstream:
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+  - "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+  - "docs/architecture/adr/0004-architecture-principles.md"
+  - "docs/architecture/adr/0005-documentation-system-topology.md"
+  - "docs/architecture/adr/0006-governed-document-metadata.md"
+  - "docs/architecture/adr/0007-monorepo-structure.md"
+  - "docs/architecture/adr/0008-documentation-knowledge-graph.md"
+  - "docs/architecture/adr/0009-package-management.md"
+  - "docs/architecture/adr/0010-ci-governance.md"
+  - "docs/architecture/adr/0011-documentation-ci-validation.md"
+  - "docs/architecture/adr/_supersession.md"
+  - "docs/architecture/adr/_template.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

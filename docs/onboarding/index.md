@@ -13,6 +13,7 @@ downstream:
   - "docs/onboarding/glossary-quickref.md"
   - "docs/onboarding/how-to-navigate-the-repo.md"
   - "docs/onboarding/system-overview.md"
+  - "docs/onboarding/documentation-system-mvp-v1.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

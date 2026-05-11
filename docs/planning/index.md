@@ -97,6 +97,7 @@ downstream:
   - "docs/planning/vision.md"
   - "docs/product/foundry-ai-operating-principles.md"
   - "docs/product/foundry-core-operating-model.md"
+  - "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []

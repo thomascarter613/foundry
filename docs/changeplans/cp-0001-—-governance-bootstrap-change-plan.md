@@ -7,6 +7,8 @@ governanceLevel: "Binding"
 documentType: "ChangePlan"
 upstream:
   - "docs/changeplans/index.md"
+  - "docs/planning/governance-bootstrap-change-plan-legacy-reference.md"
+  - "docs/planning/index.md"
 downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
