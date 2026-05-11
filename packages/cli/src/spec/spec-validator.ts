@@ -1,8 +1,8 @@
 import type {
   FoundrySpecFrontmatter,
   FoundrySpecKind,
+  FoundrySpecLifecycleStatus,
   FoundrySpecRiskLevel,
-  FoundrySpecStatus,
   ParsedFoundrySpec,
   SpecValidationIssue,
   SpecValidationResult,
@@ -14,10 +14,16 @@ const requiredFrontmatterFields: FoundrySpecFrontmatterField[] = [
   "id",
   "title",
   "status",
+  "specStatus",
   "kind",
+  "version",
   "created",
   "updated",
+  "lastUpdated",
+  "owner",
   "owners",
+  "governanceLevel",
+  "documentType",
   "related_adrs",
   "related_work_packets",
   "risk_level",
@@ -26,9 +32,10 @@ const requiredFrontmatterFields: FoundrySpecFrontmatterField[] = [
   "requires_api_change",
   "requires_security_review",
   "requires_migration",
+  "tags",
 ];
 
-const validStatuses: FoundrySpecStatus[] = [
+const validSpecStatuses: FoundrySpecLifecycleStatus[] = [
   "draft",
   "clarifying",
   "planned",
@@ -104,14 +111,14 @@ function validateFrontmatterValues(spec: ParsedFoundrySpec, issues: SpecValidati
   }
 
   if (
-    frontmatter.status !== undefined &&
-    !validStatuses.includes(frontmatter.status as FoundrySpecStatus)
+    frontmatter.specStatus !== undefined &&
+    !validSpecStatuses.includes(frontmatter.specStatus as FoundrySpecLifecycleStatus)
   ) {
     issues.push({
       severity: "error",
-      code: "invalid-status",
-      message: `Invalid spec status: ${String(frontmatter.status)}`,
-      field: "status",
+      code: "invalid-spec-status",
+      message: `Invalid spec lifecycle status: ${String(frontmatter.specStatus)}`,
+      field: "specStatus",
     });
   }
 
@@ -139,15 +146,41 @@ function validateFrontmatterValues(spec: ParsedFoundrySpec, issues: SpecValidati
     });
   }
 
+  validateStringField(frontmatter.title, "title", issues);
+  validateStringField(frontmatter.status, "status", issues);
+  validateStringField(frontmatter.version, "version", issues);
+  validateStringField(frontmatter.created, "created", issues);
+  validateStringField(frontmatter.updated, "updated", issues);
+  validateStringField(frontmatter.lastUpdated, "lastUpdated", issues);
+  validateStringField(frontmatter.owner, "owner", issues);
+  validateStringField(frontmatter.governanceLevel, "governanceLevel", issues);
+  validateStringField(frontmatter.documentType, "documentType", issues);
+
   validateArrayField(frontmatter.owners, "owners", issues);
   validateArrayField(frontmatter.related_adrs, "related_adrs", issues);
   validateArrayField(frontmatter.related_work_packets, "related_work_packets", issues);
+  validateArrayField(frontmatter.tags, "tags", issues);
 
   validateBooleanField(frontmatter.requires_ai, "requires_ai", issues);
   validateBooleanField(frontmatter.requires_database_change, "requires_database_change", issues);
   validateBooleanField(frontmatter.requires_api_change, "requires_api_change", issues);
   validateBooleanField(frontmatter.requires_security_review, "requires_security_review", issues);
   validateBooleanField(frontmatter.requires_migration, "requires_migration", issues);
+}
+
+function validateStringField(
+  value: unknown,
+  field: FoundrySpecFrontmatterField,
+  issues: SpecValidationIssue[],
+): void {
+  if (value !== undefined && typeof value !== "string") {
+    issues.push({
+      severity: "error",
+      code: "invalid-string-field",
+      message: `Frontmatter field must be a string: ${field}`,
+      field,
+    });
+  }
 }
 
 function validateArrayField(

@@ -177,3 +177,15 @@ A bounded implementation unit with scope, requirements, verification, and commit
 ## Change History
 
 - Regenerated controlled glossary vocabulary.
+
+## Provenance
+
+Machine-readable information that records how an artifact was produced, by which tool or process, with which inputs, and under which generated context.
+
+## Specification
+
+A structured statement of intended behavior, requirements, constraints, or acceptance criteria used to guide implementation and verification.
+
+## Audit
+
+A durable record of actions, generated artifacts, decisions, or state changes used to support accountability, inspection, traceability, and reproducibility.

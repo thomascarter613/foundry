@@ -168,3 +168,15 @@ A bounded implementation unit with scope, requirements, verification, and commit
 ## Change History
 
 - Regenerated glossary quickref from governed glossaryTerms references.
+
+## Provenance
+
+A concise reference to metadata describing how generated artifacts were produced.
+
+## Specification
+
+A quick reference term for structured requirements and acceptance criteria used to guide implementation.
+
+## Audit
+
+A quick reference term for durable action, artifact, and decision records used for accountability and verification.

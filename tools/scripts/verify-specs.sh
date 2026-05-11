@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 export FOUNDRY_WORKSPACE_CWD="$ROOT_DIR"
 
 ARTIFACT_DIR="$ROOT_DIR/.artifacts/foundry/spec-validation"
-VALID_SPEC="docs/specs/features/0001-example/spec.md"
+VALID_SPEC="packages/cli/fixtures/specs/0001-example/spec.md"
 INVALID_SPEC="$ARTIFACT_DIR/invalid-spec.md"
 
 cleanup() {
@@ -44,12 +44,18 @@ cat > "$INVALID_SPEC" <<'INVALID_SPEC_EOF'
 ---
 id: BAD-1
 title: Invalid Spec
-status: draft
+status: active
+specStatus: draft
 kind: feature
+version: 0.1.0
 created: 2026-05-11
 updated: 2026-05-11
+lastUpdated: 2026-05-11
+owner: project-owner
 owners:
   - project-maintainer
+governanceLevel: project
+documentType: spec
 related_adrs: []
 related_work_packets: []
 risk_level: low
@@ -58,6 +64,9 @@ requires_database_change: false
 requires_api_change: false
 requires_security_review: false
 requires_migration: false
+tags:
+  - spec
+  - invalid-fixture
 ---
 
 # Invalid Spec
