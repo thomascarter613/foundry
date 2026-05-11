@@ -63,7 +63,7 @@ export default class Manifest extends Command {
     const workspaceRoot = resolveWorkspaceRoot(args.workspace);
     const result = await readFoundryManifest({
       workspaceRoot,
-      manifestPath: flags.manifest
+      ...(flags.manifest ? { manifestPath: flags.manifest } : {})
     });
 
     if (flags.json) {
