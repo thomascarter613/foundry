@@ -1,4 +1,7 @@
-import { existsSync, readdirSync, statSync } from "node:fs";
+#!/usr/bin/env python3
+from pathlib import Path
+
+content = r'''import { existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
 import type { DocsValidationIssue } from "./types.js";
@@ -587,3 +590,7 @@ function createIssue(options: {
 
   return options.field ? { ...issue, field: options.field } : issue;
 }
+'''
+
+Path("packages/cli/src/docs/directory-validator.ts").write_text(content, encoding="utf-8")
+print("rewrote packages/cli/src/docs/directory-validator.ts")
