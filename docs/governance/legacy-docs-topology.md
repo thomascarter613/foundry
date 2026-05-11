@@ -7,11 +7,7 @@ governanceLevel: "Binding"
 documentType: "Governance"
 upstream:
   - "docs/governance/index.md"
-downstream:
-  - "docs/.ideas"
-  - "docs/adr"
-  - "docs/product"
-  - "docs/scaffolding"
+downstream: []
 governanceLinks:
   - "docs/governance/documentation-governance.md"
 adrLinks: []
