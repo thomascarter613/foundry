@@ -1,0 +1,62 @@
+name: Documentation Verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  docs-verification:
+    name: Docs verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck CLI
+        run: bun run --cwd packages/cli typecheck
+
+      - name: Build CLI
+        run: |
+          cd packages/cli
+          bun run build
+
+      - name: Run docs verification pipeline
+        run: node packages/cli/bin/run.js docs verify
+
+      - name: Generate docs readiness report
+        run: |
+          mkdir -p .artifacts/docs
+          node packages/cli/bin/run.js docs readiness \
+            --report-path .artifacts/docs/readiness-report.json
+
+      - name: Run docs MVP stabilization check
+        run: tools/scripts/check-docs-mvp.sh
+
+      - name: Print MVP stabilization summary
+        if: always()
+        run: |
+          if [ -f .artifacts/docs/mvp-stabilization-summary.json ]; then
+            cat .artifacts/docs/mvp-stabilization-summary.json
+          fi
+
+      - name: Upload docs verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-verification-artifacts
+          path: .artifacts/docs
+          if-no-files-found: warn
