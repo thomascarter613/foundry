@@ -17,6 +17,10 @@ INVALID_ERR="$ARTIFACT_DIR/invalid-spec.err"
 JSON_OUT="$ARTIFACT_DIR/json-spec.out"
 CREATE_OUT="$ARTIFACT_DIR/create-spec.out"
 CREATE_JSON_OUT="$ARTIFACT_DIR/create-spec-json.out"
+CLARIFY_OUT="$ARTIFACT_DIR/clarify-spec.out"
+CLARIFY_JSON_OUT="$ARTIFACT_DIR/clarify-spec-json.out"
+CLARIFY_FAIL_OUT="$ARTIFACT_DIR/clarify-fail-on-blocking.out"
+CLARIFY_FAIL_ERR="$ARTIFACT_DIR/clarify-fail-on-blocking.err"
 
 cleanup() {
   rm -rf "$ARTIFACT_DIR"
@@ -155,6 +159,7 @@ bash tools/scripts/foundry.sh spec create "Add Authentication" \
   >"$CREATE_OUT"
 
 GENERATED_SPEC="$CREATE_DIR/0001-add-authentication/spec.md"
+GENERATED_CLARIFICATIONS="$CREATE_DIR/0001-add-authentication/clarifications.md"
 
 if [[ ! -f "$GENERATED_SPEC" ]]; then
   echo "verify:specs: failed"
@@ -218,6 +223,151 @@ if ! grep -q "Foundry spec validation: passed" "$ARTIFACT_DIR/generated-spec-val
   echo ""
   echo "Output:"
   cat "$ARTIFACT_DIR/generated-spec-validation.out"
+  exit 1
+fi
+
+echo "verify:specs: clarifying generated spec"
+
+bash tools/scripts/foundry.sh spec clarify "$GENERATED_SPEC" >"$CLARIFY_OUT"
+
+if [[ ! -f "$GENERATED_CLARIFICATIONS" ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarification report to exist:"
+  echo "$GENERATED_CLARIFICATIONS"
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_OUT"
+  exit 1
+fi
+
+if ! grep -q "Foundry spec clarification report created." "$CLARIFY_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify output to confirm report creation."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_OUT"
+  exit 1
+fi
+
+if ! grep -q "Blocking questions:" "$CLARIFY_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify output to include blocking question count."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_OUT"
+  exit 1
+fi
+
+if ! grep -q "# Clarification Report: SPEC-0001" "$GENERATED_CLARIFICATIONS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarification report heading for SPEC-0001."
+  echo ""
+  echo "Report:"
+  cat "$GENERATED_CLARIFICATIONS"
+  exit 1
+fi
+
+if ! grep -q "## Blocking Questions" "$GENERATED_CLARIFICATIONS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarification report to include Blocking Questions section."
+  echo ""
+  echo "Report:"
+  cat "$GENERATED_CLARIFICATIONS"
+  exit 1
+fi
+
+if ! grep -q "## Non-Blocking Questions" "$GENERATED_CLARIFICATIONS"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarification report to include Non-Blocking Questions section."
+  echo ""
+  echo "Report:"
+  cat "$GENERATED_CLARIFICATIONS"
+  exit 1
+fi
+
+echo "verify:specs: validating clarify overwrite protection"
+
+set +e
+bash tools/scripts/foundry.sh spec clarify "$GENERATED_SPEC" >"$ARTIFACT_DIR/clarify-overwrite.out" 2>"$ARTIFACT_DIR/clarify-overwrite.err"
+CLARIFY_OVERWRITE_EXIT_CODE=$?
+set -e
+
+if [[ "$CLARIFY_OVERWRITE_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify to reject overwriting an existing report without --force."
+  echo ""
+  echo "Output:"
+  cat "$ARTIFACT_DIR/clarify-overwrite.out"
+  echo ""
+  echo "Error:"
+  cat "$ARTIFACT_DIR/clarify-overwrite.err"
+  exit 1
+fi
+
+echo "verify:specs: validating clarify JSON output"
+
+bash tools/scripts/foundry.sh spec clarify "$GENERATED_SPEC" \
+  --force \
+  --json \
+  >"$CLARIFY_JSON_OUT"
+
+if ! grep -q '"specId": "SPEC-0001"' "$CLARIFY_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify JSON output to include SPEC-0001."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"blockingQuestions"' "$CLARIFY_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify JSON output to include blockingQuestions."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_JSON_OUT"
+  exit 1
+fi
+
+if ! grep -q '"nonBlockingQuestions"' "$CLARIFY_JSON_OUT"; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify JSON output to include nonBlockingQuestions."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_JSON_OUT"
+  exit 1
+fi
+
+echo "verify:specs: validating clarify fail-on-blocking behavior"
+
+set +e
+bash tools/scripts/foundry.sh spec clarify "$GENERATED_SPEC" \
+  --force \
+  --fail-on-blocking \
+  >"$CLARIFY_FAIL_OUT" 2>"$CLARIFY_FAIL_ERR"
+CLARIFY_FAIL_EXIT_CODE=$?
+set -e
+
+if [[ "$CLARIFY_FAIL_EXIT_CODE" -eq 0 ]]; then
+  echo "verify:specs: failed"
+  echo ""
+  echo "Expected clarify --fail-on-blocking to exit non-zero for generated draft spec."
+  echo ""
+  echo "Output:"
+  cat "$CLARIFY_FAIL_OUT"
+  echo ""
+  echo "Error:"
+  cat "$CLARIFY_FAIL_ERR"
   exit 1
 fi
 
