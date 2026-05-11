@@ -5,11 +5,18 @@ owner: "Product Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Planning"
-upstream: []
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0002-monorepo-structure.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+glossaryTerms:
+  - "Planning"
+  - "Scaffolding"
+  - "Generator"
 ---
 
 scaffolding-generator.md

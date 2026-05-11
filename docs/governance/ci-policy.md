@@ -5,11 +5,16 @@ owner: "Governance"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "Governance"
-upstream: []
+upstream:
+  - "docs/governance/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Governance"
+  - "Policy"
 ---
 
 # CI Policy

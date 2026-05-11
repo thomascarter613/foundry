@@ -5,11 +5,14 @@ owner: "Documentation"
 lastUpdated: "2026-05-08"
 governanceLevel: "Informational"
 documentType: "Onboarding"
-upstream: []
+upstream:
+  - "docs/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Onboarding"
 ---
 
 # Documentation README

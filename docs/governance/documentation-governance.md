@@ -5,11 +5,14 @@ owner: "Governance"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "Governance"
-upstream: []
+upstream:
+  - "docs/governance/index.md"
 downstream: []
 governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Governance"
 ---
 
 # Documentation Governance

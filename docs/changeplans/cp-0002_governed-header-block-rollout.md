@@ -4,12 +4,21 @@ status: "Draft"
 owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "Lifecycle"
-upstream: []
+documentType: "ChangePlan"
+upstream:
+  - "docs/changeplans/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Lifecycle"
+  - "ChangePlan"
+  - "0002"
+  - "Governed"
+  - "Header"
+  - "Block"
+  - "Rollout"
 ---
 
 cp-0002_governed-header-block-rollout.md

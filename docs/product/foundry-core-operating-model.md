@@ -4,14 +4,21 @@ status: "Approved"
 owner: "Foundry Project"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "Planning"
-upstream: []
+documentType: "Product"
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Planning"
+  - "Foundry"
+  - "Core"
+  - "Operating"
+  - "Model"
+  - "Product"
 ---
-
 # Foundry Core Operating Model
 
 Foundry is a docs/spec-driven, AI-native software lifecycle CLI for creating, evolving, validating, auditing, and handing off serious software repositories.

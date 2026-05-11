@@ -5,11 +5,20 @@ owner: "Documentation"
 lastUpdated: "2026-05-08"
 governanceLevel: "Informational"
 documentType: "Onboarding"
-upstream: []
-downstream: []
-governanceLinks: []
+upstream:
+  - "docs/index.md"
+downstream:
+  - "docs/onboarding/README.md"
+  - "docs/onboarding/documentation-system-guide.md"
+  - "docs/onboarding/glossary-quickref.md"
+  - "docs/onboarding/glossary-quickreference.md"
+  - "docs/onboarding/how-to-navigate-the-repo.md"
+  - "docs/onboarding/system-overview.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Onboarding"
 ---
 
 # Onboarding Index

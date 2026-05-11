@@ -5,11 +5,19 @@ owner: "Foundry Project"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Architecture"
-upstream: []
+upstream:
+  - "docs/architecture/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0001-architecture-principles.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+glossaryTerms:
+  - "Architecture"
+  - "Provider"
+  - "Agnostic"
 ---
 
 # AI Provider-Agnostic Architecture

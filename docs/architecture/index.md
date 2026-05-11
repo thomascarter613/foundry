@@ -5,11 +5,36 @@ owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Architecture"
-upstream: []
-downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+upstream:
+  - "docs/index.md"
+downstream:
+  - "docs/architecture/ai-provider-agnostic-architecture.md"
+  - "docs/architecture/architecture-overview.md"
+  - "docs/architecture/component-diagram.md"
+  - "docs/architecture/constraints.md"
+  - "docs/architecture/container-diagram.md"
+  - "docs/architecture/data-flow.md"
+  - "docs/architecture/diagrams/docs-agent-flow.meta.md"
+  - "docs/architecture/diagrams/documentation-knowledge-graph.meta.md"
+  - "docs/architecture/diagrams/system-context.meta.md"
+  - "docs/architecture/diagrams/validation-pipeline.meta.md"
+  - "docs/architecture/documentation-agent-architecture.md"
+  - "docs/architecture/documentation-knowledge-graph.md"
+  - "docs/architecture/documentation-system-architecture.md"
+  - "docs/architecture/documentation-validation-architecture.md"
+  - "docs/architecture/foundry-lifecycle-engine.md"
+  - "docs/architecture/foundry-lifecycle-manifest.md"
+  - "docs/architecture/integration-map.md"
+  - "docs/architecture/principles.md"
+  - "docs/architecture/runtime-views.md"
+  - "docs/architecture/system-context.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0001-architecture-principles.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+glossaryTerms:
+  - "Architecture"
 ---
 
 # Architecture Index

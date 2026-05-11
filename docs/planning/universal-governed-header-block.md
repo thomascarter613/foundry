@@ -3,13 +3,20 @@ title: "Universal Governed Header Block"
 status: "Draft"
 owner: "Product Architecture"
 lastUpdated: "2026-05-08"
-governanceLevel: "Informational"
+governanceLevel: "Required"
 documentType: "Planning"
-upstream: []
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Planning"
+  - "Universal"
+  - "Governed"
+  - "Header"
+  - "Block"
 ---
 
 # Universal Governed Header Block

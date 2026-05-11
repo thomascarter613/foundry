@@ -4,12 +4,20 @@ status: "Draft"
 owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "Lifecycle"
-upstream: []
+documentType: "ChangePlan"
+upstream:
+  - "docs/changeplans/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Lifecycle"
+  - "ChangePlan"
+  - "0005"
+  - "Platform"
+  - "Capability"
+  - "Seed"
 ---
 
 CP-0005_platform.json_Platform Capability Seed.md

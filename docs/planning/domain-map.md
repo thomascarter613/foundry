@@ -3,13 +3,18 @@ title: "Domain Map"
 status: "Draft"
 owner: "Product Architecture"
 lastUpdated: "2026-05-08"
-governanceLevel: "Informational"
+governanceLevel: "Required"
 documentType: "Planning"
-upstream: []
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+glossaryTerms:
+  - "Planning"
+  - "Domain"
 ---
 
 # Domain Map

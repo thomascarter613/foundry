@@ -5,11 +5,20 @@ owner: "Foundry Project"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "ADR"
-upstream: []
+upstream:
+  - "docs/architecture/adr/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "ADR"
+  - "Architecture"
+  - "0002"
+  - "Adopt"
+  - "Expected"
+  - "Provider"
+  - "Agnostic"
 ---
 
 # ADR-0002: Adopt AI-Expected Provider-Agnostic Architecture

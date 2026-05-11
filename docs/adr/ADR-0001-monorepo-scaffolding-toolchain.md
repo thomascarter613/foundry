@@ -5,11 +5,18 @@ owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "ADR"
-upstream: []
+upstream:
+  - "docs/architecture/adr/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "ADR"
+  - "Scaffolding"
+  - "0001"
+  - "Monorepo"
+  - "Toolchain"
 ---
 
 # ADR-0001: Monorepo Scaffolding Toolchain

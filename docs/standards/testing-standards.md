@@ -5,11 +5,16 @@ owner: "Standards"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "Standard"
-upstream: []
+upstream:
+  - "docs/standards/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Standard"
+  - "Testing"
+  - "Standards"
 ---
 
 # Testing Standards

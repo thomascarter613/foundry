@@ -5,11 +5,22 @@ owner: "Standards"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "Standard"
-upstream: []
-downstream: []
-governanceLinks: []
+upstream:
+  - "docs/index.md"
+downstream:
+  - "docs/standards/api-standards.md"
+  - "docs/standards/coding-standards.md"
+  - "docs/standards/documentation-standards.md"
+  - "docs/standards/graph-schema-standards.md"
+  - "docs/standards/markdown-standards.md"
+  - "docs/standards/metadata-standards.md"
+  - "docs/standards/testing-standards.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Standard"
+  - "Standards"
 ---
 
 # Standards Index

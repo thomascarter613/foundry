@@ -4,14 +4,22 @@ status: "Approved"
 owner: "Foundry Project"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "Planning"
-upstream: []
+documentType: "Product"
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+glossaryTerms:
+  - "Planning"
+  - "Foundry"
+  - "Operating"
+  - "Principles"
+  - "Product"
 ---
-
 # Foundry AI Operating Principles
 
 Foundry is AI-expected, AI-native, AI-optional, provider-agnostic, model-agnostic, subscription-agnostic, and local-runtime-compatible.

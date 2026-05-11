@@ -3,13 +3,19 @@ title: "Implementation Sequencing"
 status: "Draft"
 owner: "Product Architecture"
 lastUpdated: "2026-05-08"
-governanceLevel: "Informational"
+governanceLevel: "Required"
 documentType: "Planning"
-upstream: []
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Planning"
+  - "Implementation"
+  - "Sequencing"
 ---
 
 # Implementation Sequencing

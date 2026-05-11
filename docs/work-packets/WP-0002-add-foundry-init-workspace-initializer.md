@@ -4,14 +4,22 @@ status: "Draft"
 owner: "Project Maintainer"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "ChangePlan"
-upstream: []
+documentType: "WorkPacket"
+upstream:
+  - "docs/changeplans/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "ChangePlan"
+  - "0002"
+  - "Foundry"
+  - "Init"
+  - "Workspace"
+  - "Initializer"
+  - "WorkPacket"
 ---
-
 # WP-0002: Add Foundry Init Workspace Initializer
 
 ## Status

@@ -4,12 +4,22 @@ status: "Draft"
 owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
-documentType: "Lifecycle"
-upstream: []
+documentType: "ChangePlan"
+upstream:
+  - "docs/changeplans/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Lifecycle"
+  - "Governance"
+  - "ChangePlan"
+  - "0001"
+  - "Bootstrap"
+  - "Change"
+  - "Plan"
 ---
 
 cp-0001-—-governance-bootstrap-change-plan.md

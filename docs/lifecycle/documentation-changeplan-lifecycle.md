@@ -5,11 +5,15 @@ owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Lifecycle"
-upstream: []
+upstream:
+  - "docs/lifecycle/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Lifecycle"
+  - "ChangePlan"
 ---
 
 # Documentation ChangePlan Lifecycle

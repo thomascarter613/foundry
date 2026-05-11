@@ -6,10 +6,23 @@ lastUpdated: "2026-05-08"
 governanceLevel: "Informational"
 documentType: "Onboarding"
 upstream: []
-downstream: []
-governanceLinks: []
+downstream:
+  - "docs/README.md"
+  - "docs/architecture/adr/index.md"
+  - "docs/architecture/index.md"
+  - "docs/changeplans/index.md"
+  - "docs/ci-constitutional-pipeline.md"
+  - "docs/governance/index.md"
+  - "docs/lifecycle/index.md"
+  - "docs/onboarding/index.md"
+  - "docs/planning/index.md"
+  - "docs/platform/index.md"
+  - "docs/standards/index.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Onboarding"
 ---
 
 # Documentation Index

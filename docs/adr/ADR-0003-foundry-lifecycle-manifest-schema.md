@@ -5,11 +5,19 @@ owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
 documentType: "ADR"
-upstream: []
+upstream:
+  - "docs/architecture/adr/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "ADR"
+  - "0003"
+  - "Foundry"
+  - "Lifecycle"
+  - "Manifest"
+  - "Schema"
 ---
 
 # ADR-0003: Foundry Lifecycle Manifest Schema

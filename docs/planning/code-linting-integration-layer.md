@@ -5,11 +5,18 @@ owner: "Product Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Planning"
-upstream: []
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Planning"
+  - "Code"
+  - "Linting"
+  - "Integration"
+  - "Layer"
 ---
 
 code-linting-integration-layer.md

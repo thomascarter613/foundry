@@ -4,12 +4,21 @@ status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
-documentType: "Architecture"
-upstream: []
+documentType: "ADR"
+upstream:
+  - "docs/architecture/adr/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0001-architecture-principles.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Architecture"
+  - "ADR"
+  - "0004"
+  - "Validation"
 ---
 
 # ADR 0004: Documentation CI Validation

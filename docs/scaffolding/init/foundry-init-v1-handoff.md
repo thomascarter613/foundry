@@ -4,12 +4,21 @@ status: "Approved"
 owner: "Platform"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
-documentType: "Platform"
-upstream: []
+documentType: "Scaffolding"
+upstream:
+  - "docs/platform/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0002-monorepo-structure.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+glossaryTerms:
+  - "Platform"
+  - "Scaffolding"
+  - "Foundry"
+  - "Init"
+  - "Handoff"
 ---
 
 # Foundry Init v1 Handoff

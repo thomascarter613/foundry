@@ -3,15 +3,20 @@ title: "Plugin Ideas"
 status: "Draft"
 owner: "Product Architecture"
 lastUpdated: "2026-05-08"
-governanceLevel: "Required"
-documentType: "Planning"
-upstream: []
+governanceLevel: "Informational"
+documentType: "Idea"
+upstream:
+  - "docs/planning/index.md"
 downstream: []
-governanceLinks: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Planning"
+  - "Plugin"
+  - "Ideas"
+  - "Idea"
 ---
-
 @foundry/plugin-postgres-drizzle
 @foundry/plugin-postgres-prisma
 @foundry/plugin-mongodb

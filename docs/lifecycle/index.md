@@ -5,11 +5,21 @@ owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Lifecycle"
-upstream: []
-downstream: []
-governanceLinks: []
+upstream:
+  - "docs/index.md"
+downstream:
+  - "docs/lifecycle/branching-strategy.md"
+  - "docs/lifecycle/change-management.md"
+  - "docs/lifecycle/development-lifecycle.md"
+  - "docs/lifecycle/documentation-changeplan-lifecycle.md"
+  - "docs/lifecycle/documentation-lifecycle.md"
+  - "docs/lifecycle/incident-response.md"
+  - "docs/lifecycle/release-lifecycle.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
 adrLinks: []
-glossaryTerms: []
+glossaryTerms:
+  - "Lifecycle"
 ---
 
 # Lifecycle Index

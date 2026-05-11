@@ -5,11 +5,17 @@ owner: "Engineering Productivity"
 lastUpdated: "2026-05-08"
 governanceLevel: "Required"
 documentType: "Lifecycle"
-upstream: []
+upstream:
+  - "docs/lifecycle/index.md"
 downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0004-ci-governance.md"
+glossaryTerms:
+  - "Lifecycle"
+  - "Incident"
+  - "Response"
 ---
 
 # Incident Response

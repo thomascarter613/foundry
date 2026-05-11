@@ -4,12 +4,31 @@ status: "Draft"
 owner: "Architecture"
 lastUpdated: "2026-05-08"
 governanceLevel: "Binding"
-documentType: "Architecture"
-upstream: []
-downstream: []
-governanceLinks: []
-adrLinks: []
-glossaryTerms: []
+documentType: "ADR"
+upstream:
+  - "docs/index.md"
+downstream:
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+  - "docs/adr/ADR-0002-ai-expected-provider-agnostic-architecture.md"
+  - "docs/adr/ADR-0003-foundry-lifecycle-manifest-schema.md"
+  - "docs/architecture/adr/0001-architecture-principles.md"
+  - "docs/architecture/adr/0001-documentation-system-topology.md"
+  - "docs/architecture/adr/0002-governed-document-metadata.md"
+  - "docs/architecture/adr/0002-monorepo-structure.md"
+  - "docs/architecture/adr/0003-documentation-knowledge-graph.md"
+  - "docs/architecture/adr/0003-package-management.md"
+  - "docs/architecture/adr/0004-ci-governance.md"
+  - "docs/architecture/adr/0004-documentation-ci-validation.md"
+  - "docs/architecture/adr/_supersession.md"
+  - "docs/architecture/adr/_template.md"
+governanceLinks:
+  - "docs/governance/documentation-governance.md"
+adrLinks:
+  - "docs/architecture/adr/0001-architecture-principles.md"
+  - "docs/adr/ADR-0001-monorepo-scaffolding-toolchain.md"
+glossaryTerms:
+  - "Architecture"
+  - "ADR"
 ---
 
 # ADR Index
